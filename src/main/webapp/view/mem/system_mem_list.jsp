@@ -101,7 +101,7 @@
 			<li class="has-dropdown"><a href="#"> 其他</a>
 				<ul class="sidebar-dropdown list-unstyled">
 					<li><a href="admin_login.html">登出</a></li>
-					<li><a href="<%=request.getContextPath()%>/mem/select_page.jsp">返回select Page</a></li>
+					<li><a href="<%=request.getContextPath()%>/view/mem/select_page.jsp">返回select Page</a></li>
 					<li><a href="index.html">回到前台首頁</a></li>
 				</ul></li>
 
@@ -167,7 +167,7 @@
 								<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/mem/MemServlet">
 									<input  type="hidden" name="mem_id" value="${memVO.mem_id}"> 
 									<input type="hidden" name="action" value="getOne_For_Display">
-									<a href="<%=request.getContextPath()%>/mem/system_mem_data.jsp">
+									<a href="<%=request.getContextPath()%>/view/mem/system_mem_data.jsp">
 										<button type="submit" class="btn btn-success">${memVO.mem_id} </button>										
 									</a>
 								</form>

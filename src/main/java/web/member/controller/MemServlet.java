@@ -29,7 +29,7 @@ public class MemServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-System.out.println("DDDDDDDD" + action + "DDDDDD");
+		
 if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -123,7 +123,6 @@ if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 	
-			System.out.println(111);
 			
 			
 			List<String> errorMsgs = new LinkedList<String>();

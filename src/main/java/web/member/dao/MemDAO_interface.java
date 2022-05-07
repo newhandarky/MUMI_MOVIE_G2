@@ -5,6 +5,7 @@ import java.util.List;
 import web.member.entity.MemVO;
 
 public interface MemDAO_interface {
+	public MemVO checkAccount(String mem_account);
 	public void insert(MemVO memVO);
 	public void update(MemVO memVO);
 	public void delete(Integer mem_id);

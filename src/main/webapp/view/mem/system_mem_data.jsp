@@ -96,7 +96,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 			<li class="has-dropdown"><a href="#"> 其他</a>
 				<ul class="sidebar-dropdown list-unstyled">
 					<li><a href="admin_login.html">登出</a></li>
-					<li><a href="<%=request.getContextPath()%>/mem/select_page.jsp">返回select Page</a></li>
+					<li><a href="<%=request.getContextPath()%>/view/mem/select_page.jsp">返回select Page</a></li>
 					<li><a href="index.html">回到前台首頁</a></li>
 				</ul></li>
 			<!-- <li class="">

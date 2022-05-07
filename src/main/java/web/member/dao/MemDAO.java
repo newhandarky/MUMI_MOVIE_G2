@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,9 @@ public class MemDAO implements MemDAO_interface{
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
 			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_id = ?";
 	
+	private static final String GET_ONE_ACCOUNT = 
+			"SELECT mem_id FROM mumi_member where mem_account = ?";
+	
 	private static final String DELETE = 
 			"DELETE FROM mumi_member where mem_id = ?";
 	
@@ -62,12 +66,16 @@ public class MemDAO implements MemDAO_interface{
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
+		
 
 		try {
 			
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			checkAccount(memVO.getMem_account());
 			
 			pstmt.setString(1, memVO.getMem_account());
 			pstmt.setString(2, memVO.getMem_name());
@@ -244,7 +252,6 @@ public class MemDAO implements MemDAO_interface{
 	public void updateState(Integer mem_id) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(mem_id);
 		
 		if(findByPrimaryKey(mem_id).getMem_state() == 1) {
 			
@@ -254,8 +261,6 @@ public class MemDAO implements MemDAO_interface{
 			updateOpen(findByPrimaryKey(mem_id));
 			
 		}
-		
-		
 		
 	}
 
@@ -429,6 +434,61 @@ public class MemDAO implements MemDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public MemVO checkAccount(String mem_account) {
+		MemVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_ACCOUNT);  // Anaturis@superrito.com
+			pstmt.setString(1, mem_account);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {				
+				if(rs.getRow() != 0) {
+					throw new Exception();
+				}
+			}
+			
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (Exception e) {
+			throw new RuntimeException("此帳號已有人使用"
+					+ e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
 	}
 
 	

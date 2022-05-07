@@ -374,24 +374,28 @@
                 <div class="col col-md-3 col-sm-6">
                     <h5>關注我們</h5>
                     <span class="focus_us">
-                        <a href="#"> 張志鵬</a>
+                        <a href="https://drive.google.com/drive/folders/1FvkVquqoKRgwpjlaPAfuDpjvcCElwwgF?usp=sharing"> 張志鵬</a>
                         <p>會員系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">郭家榮</a>
+                        <a href="https://drive.google.com/drive/folders/1Hu3MXljw2mPs8y4uqIq2coDHt4OiEwLV?usp=sharing">郭家榮</a>
                         <p>討論區</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">蕭仲威</a>
+                        <a href="https://drive.google.com/drive/folders/143UhfMZr6X_sGmmouBIsc_2DskIW7vHH">蕭仲威</a>
                         <p>電影系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">吳宗哲</a>
-                        <p>商城購物</p>
+                        <a href="https://drive.google.com/drive/folders/1sixqrgkXZrUoEDbod4Wi2mygZyp2dl0i?usp=sharing">吳宗哲</a>
+                        <p>影廳系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">徐浩鈞</a>
+                        <a href="https://drive.google.com/drive/folders/14u0F868uYrXT8pDRCgaNoy9M3Rep6ji6?usp=sharing">徐浩鈞</a>
                         <p>訂票系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1dJ3kpYDJpT8bTvJQEKBN8G5JJ5Vr8Xh5">陳鏡</a>
+                        <p>電影時刻表</p>
                     </span>
                 </div>
                 <div class="col col-md-3 col-sm-6">
