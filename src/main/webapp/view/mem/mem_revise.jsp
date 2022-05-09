@@ -289,8 +289,7 @@
         <div class="register">
         	
             <form METHOD="post" ACTION="<c:url value="/view/mem/MemServlet" />" enctype="multipart/form-data">
-                                    <input type="hidden" name="action" value="update">
-
+                                    
                 <h2>會員資料修改</h2>
 				
                 <div class="logo">
@@ -396,6 +395,7 @@
                     </a>
                     
 					<input type="hidden" name="mem_id" value="<%=memVO.getMem_id()%>">
+					<input type="hidden" name="action" value="update">
                     <button type="submit" class="btn btn-primary" id="commit" value="送出修改">確認送出</button>
 
                     <hr>

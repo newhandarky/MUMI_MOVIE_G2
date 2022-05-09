@@ -1,5 +1,7 @@
 package web.info.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +33,7 @@ public class InfoDAO implements InfoDAO_interface{
 	
 	
 	private static final String INSERT_STMT = 
-			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (?, ?, ?, ?, NOW(), ?)";
+			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (2, ?, ?, ?, NOW(), 0)";
 		private static final String GET_ALL_STMT = 
 			"SELECT info_id, emp_id, info_title, info_pic, info_des, info_date, info_state FROM information order by info_id";
 		private static final String GET_ONE_STMT = 
@@ -47,15 +49,17 @@ public class InfoDAO implements InfoDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try {
+			
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, infoVO.getEmp_id());
-			pstmt.setString(2, infoVO.getInfo_title());
-			pstmt.setBytes(3, infoVO.getInfo_pic());
-			pstmt.setString(4, infoVO.getInfo_des());
-			pstmt.setInt(5, infoVO.getInfo_state());
+//			pstmt.setInt(1, infoVO.getEmp_id());
+			pstmt.setString(1, infoVO.getInfo_title());
+			pstmt.setBytes(2, infoVO.getInfo_pic());
+			pstmt.setString(3, infoVO.getInfo_des());
+//			pstmt.setInt(5, infoVO.getInfo_state());
+			
 
 			pstmt.executeUpdate();
 

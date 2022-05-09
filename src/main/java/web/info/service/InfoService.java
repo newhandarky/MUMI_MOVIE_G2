@@ -14,15 +14,15 @@ public class InfoService {
 		dao = new InfoDAO();
 	}
 	
-	public InfoVO addInfo(Integer emp_id, String info_title, byte[] info_pic, String info_des, Integer info_state) {
+	public InfoVO addInfo(String info_title, byte[] info_pic, String info_des ) {  // Integer emp_id  Integer info_state
 
 		InfoVO infoVO = new InfoVO();
 
-		infoVO.setEmp_id(emp_id);
+//		infoVO.setEmp_id(emp_id);
 		infoVO.setInfo_title(info_title);
 		infoVO.setInfo_pic(info_pic);
 		infoVO.setInfo_des(info_des);
-		infoVO.setInfo_state(info_state);
+//		infoVO.setInfo_state(info_state);
 		
 		dao.insert(infoVO);
 
