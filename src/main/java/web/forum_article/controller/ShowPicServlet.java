@@ -48,7 +48,7 @@ public class ShowPicServlet extends HttpServlet {
 			} else {
 //				res.sendError(HttpServletResponse.SC_NOT_FOUND);
 				// 用預設圖來取代Error404
-				InputStream in = getServletContext().getResourceAsStream("/NoData/none.jpg");
+				InputStream in = getServletContext().getResourceAsStream("/view/forum_article/NoData/none.jpg");
 				byte[] b = new byte[in.available()];
 				in.read(b);
 				out.write(b);
@@ -59,7 +59,7 @@ public class ShowPicServlet extends HttpServlet {
 		} catch (Exception e) {
 //			System.out.println(e);
 			// 用預設圖來取代Error500
-			InputStream in = getServletContext().getResourceAsStream("/NoData/null.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/view/forum_article/NoData/null.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);

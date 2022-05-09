@@ -48,7 +48,7 @@ public class ForumArticleServlet extends HttpServlet {
 			String article_type = req.getParameter("article_type");
 			String article_subject = req.getParameter("article_subject");
 			String article_contain = req.getParameter("article_contain");
-			InputStream defaultPic = getServletContext().getResourceAsStream("/NoData/none3.jpg");
+			InputStream defaultPic = getServletContext().getResourceAsStream("/view/forum_article/NoData/none3.jpg");
 
 			byte[] article_pic = ((req.getPart("article_pic")).getInputStream()).readAllBytes();
 			if (article_pic.length == 0) {
