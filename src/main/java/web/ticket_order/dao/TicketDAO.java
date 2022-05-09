@@ -120,7 +120,7 @@ public class TicketDAO implements TicketDAO_interface{
 	}
 	
 	@Override
-	public void delete(Integer ticketno) {
+	public void delete(Integer ticket_orders_id) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -130,7 +130,7 @@ public class TicketDAO implements TicketDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, ticketno);
+			pstmt.setInt(1, ticket_orders_id);
 
 			pstmt.executeUpdate();
 

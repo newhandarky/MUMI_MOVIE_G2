@@ -1,15 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="web.ticket_order.entity.*"%>
+<%@ page import="web.ticket_list.entity.*"%>
 
 <%
-  TicketVO ticketVO = (TicketVO) request.getAttribute("ticketVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-// 			System.out.println(ticketVO);
+Ticket_listVO ticket_listVO = (Ticket_listVO) request.getAttribute("ticket_listVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+// 			System.out.println(ticket_listVO);
 %>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>購票訂單主檔修改 - update_ticket_input.jsp</title>
+<title>票券訂單明細修改 - update_ticket_list_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,7 +48,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>訂票資料修改 - update_ticket_input.jsp</h3>
+		 <h3>訂票資料修改 - update_ticket_list_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,34 +65,38 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket/TicketServlet" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_list/TicketServlet" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
-		<td>訂單編號:<font color=red><b>*</b></font></td>
-		<td><%=ticketVO.getTicket_orders_id()%></td>
+		<td>票券明細編號:<font color=red><b>*</b></font></td>
+		<td><%=ticket_listVO.getTicket_list_id()%></td>
 	</tr>
 	<tr>
-		<td>會員編號:</td>
-		<td><%=ticketVO.getMem_id()%></td>
+		<td>票券訂單編號:</td>
+		<td><%=ticket_listVO.getTicket_orders_id()%></td>
 	</tr>
 	<tr>
-		<td>購買日期:</td>
-		<td><input name="buyticket_date" id="buyticket_date" type="date" value="<%=ticketVO.getBuyticket_date()%>"></td>
+		<td>座位編號:</td>
+		<td><%=ticket_listVO.getTicket_orders_id()%></td>
 	</tr>
 	<tr>
-		<td>票券QR:</td>
-		<td><input type="file" name="ticket_qrcode" value="<%=ticketVO.getTicket_qrcode()%>"/></td>
+		<td>電影時刻編號:</td>
+		<td><%=ticket_listVO.getTicket_orders_id()%></td>
 	</tr>
 	<tr>
-		<td>訂單金額:</td>
-		<td><input type="TEXT" name="total_price" size="45" value="<%=ticketVO.getTotal_price()%>" /></td>
+		<td>票券數量:</td>
+		<td><%=ticket_listVO.getTicket_orders_id()%></td>
+	</tr>
+	<tr>
+		<td>票券價格:</td>
+		<td><input type="TEXT" name="ticket_price" size="45" value="<%=ticket_listVO.getTicket_price()%>" /></td>
 	</tr>
 
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="ticket_orders_id" value="<%=ticketVO.getTicket_orders_id()%>">
-<input type="hidden" name="mem_id" value="<%=ticketVO.getMem_id()%>">
+<input type="hidden" name="ticket_orders_id" value="<%=ticket_listVO.getTicket_list_id()%>">
+<input type="hidden" name="mem_id" value="<%=ticket_listVO.getTicket_orders_id()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -113,19 +117,4 @@
   }
 </style>
 
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=ticketVO.getBuyticket_date()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-         
-</script>
 </html>
