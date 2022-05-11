@@ -1,68 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="web.member.entity.*"%>
-<%@ page import="web.member.dao.*"%>
-<%@ page import="java.sql.*"%>
 
-<%
 
-  MemVO memVO = (MemVO) request.getAttribute("memVO");
 
-%>   
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MUMI MOVIE 吾映良影會員登入頁面</title>
     <!-- css檔連結記得修改 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/mem/css/mem_revise.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/index/css/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
     <!-- 頁首 -->
     <header>
-<%--     	<font color=red> ${account} </font> --%>
-    	<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color:red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="list-style:none">
-						<p style="color:red">${message}</p>  
-					</li>
-				</c:forEach>
-			</ul>
-		</c:if>	
-    
         <!-- 專題LOGO -->
-        <a class="link_index" href="<%=request.getContextPath()%>/view/mem/select_page.jsp">
-            <img class="team_logo" src="<%=request.getContextPath()%>/view/mem/image/others/mujilogo.png" alt="">
+        <a class="link_index" href="<%=request.getContextPath()%>/view/index/index.jsp">
+            <img class="team_logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
         </a>
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
             <!-- 搜尋欄位 -->
             <input id="search" type="text">
             <a id="a_loupe" href="#">
-                <img id="loupe" src="<%=request.getContextPath()%>/view/mem/image/icons/loupe.png" alt="">
+                <img id="loupe" src="<%=request.getContextPath()%>/view/index/image/icons/loupe.png" alt="">
             </a>
             <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
                 <span>
-                    <img id="sun" class="sunmoon" src="<%=request.getContextPath()%>/view/mem/image/icons/sun.png" alt="">
+                    <img id="sun" class="sunmoon" src="<%=request.getContextPath()%>/view/index/image/icons/sun.png" alt="">
                 </span>
             </button>
             <button type="button" class="btn btn-dark btn-ln -off" id="btn-dark">Dark
                 <span>
-                    <img id="moon" class="sunmoon -off" src="<%=request.getContextPath()%>/view/mem/image/icons/crescent-moon.png" alt="">
+                    <img id="moon" class="sunmoon -off" src="<%=request.getContextPath()%>/view/index/image/icons/crescent-moon.png" alt="">
                 </span>
             </button>
         </div>
-
-        <!-- 功能導覽列 -->
+        
+         <!-- 功能導覽列 -->
         <nav id="navi">
 
 
@@ -96,7 +77,7 @@
                         <a href="#">預售票</a>
                     </li>
                     <li class="nav_li">
-                        <a href="hell_seat_4dxA.html">確認劃位</a>
+                        <a href="hell_seat.html">確認劃位</a>
                     </li>
                 </ul>
             </div>
@@ -134,8 +115,21 @@
                     <li class="nav_li">
                         <a href="#">會員登入</a>
                     </li>
+                    
+                    
                     <li class="nav_li">
-                        <a href="#">修改資料</a>
+                    
+                    	<form form name='form1' action="<%=request.getContextPath()%>/view/member/MemServlet" method="post">                    
+	                    	<input type="hidden" name="mem_id" value="12347">
+	                    	<input type="hidden" name="action" value="getOne_For_Update">
+<!-- 	                    	<input type="submit"> -->
+	                    	
+	                    	<button type="submit" value="送出">	                    	
+		                        <a href=''>修改資料</a>  
+<!-- 		                        <a href="mem_revise.html" >修改資料</a>   -->
+	                    	</button>
+	                    	
+                        </form>
                     </li>
                     <li class="nav_li">
                         <a href="mem_shopping_sheet.html">歷史消費</a>
@@ -154,12 +148,15 @@
         <div class="">
             <a href="#"><img src="<%=request.getContextPath()%>/view/mem/image/icons/movie.png" alt="" class="hamberger_menu"></a>
         </div>
+        
+
+       
 
     </header>
     <!-- 空白top 100px -->
     <div class="underheader"></div>
 
-    <!-- 漢堡側邊攔位 -->
+	<!-- 漢堡側邊攔位 -->
     <div class="hide_menu -bye">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -172,18 +169,18 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="#">會員登入</a>
+                                <a href="login.html">會員登入</a>
                             </li>
                             <li>
                                 <a href="#">註冊會員</a>
                             </li>
                             <li>
-                                <a href="">修改資料</a>
+                                <a href="mem_revise.html">修改資料</a>
                             </li>
                             <li>
                                 <a href="mem_shopping_sheet.html">歷史消費</a>
                             </li>
-                            <li>
+                            <li class="nav_li">
                                 <a href="mem_mumipay.html">MUMIPAY</a>
                             </li>
                             <li>
@@ -205,7 +202,6 @@
                         <ul>
                             <li>
                                 <a href="">現正熱映</a>
-                	
                             </li>
                             <li>
                                 <a href="">即將上映</a>
@@ -237,7 +233,7 @@
                                 <a href="">預售票</a>
                             </li>
                             <li>
-                                <a href="hell_seat_4dxA.html">確認劃位</a>
+                                <a href="">確認劃位</a>
                             </li>
                         </ul>
 
@@ -282,131 +278,59 @@
             </div>
         </div>
     </div>
-
+	
 
 
     <!-- 主要工作區 -->
 
     <main>
-        <div class="register">
-        	
-            <form METHOD="post" ACTION="<c:url value="/view/mem/MemServlet" />" enctype="multipart/form-data">
-                                    
-                <h2>會員資料修改</h2>
-				
-                <div class="logo">
-                    <img src="DBGifReader4?mem_id=${memVO.mem_id}">
-                </div>
-                <div class="container">
-                    <div class="row row-cols-sm-1 row-cols-md-2">
 
-                        <div class="col-md-3">
-                            <p>會員帳號 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="text" placeholder="${memVO.getMem_account()} " aria-label="Disabled input example" disabled>
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>會員姓名 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="text" name="mem_name" value="<%= (memVO==null)? "會員姓名" : memVO.getMem_name()%>" aria-label="default input example">
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>會員暱稱 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="text" name="mem_nickname" value="<%= (memVO==null)? "會員暱稱" : memVO.getMem_nickname()%>" aria-label="default input example">
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>聯絡電話 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="text" name="mem_phone" value="<%= (memVO==null)? "聯絡電話" : memVO.getMem_phone()%>" aria-label="default input example" onkeyup="value=value.replace(/[^0-9]/g,'')" maxlength="10">
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>會員生日 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="date" name="mem_birthday" value="<%= (memVO==null)? "會員生日" : memVO.getMem_birthday()%>">
-                        </div>
-                        <div class="col-md-3">
-                            <p>會員照片 : </p>
-                        </div>
-                        <div class="col-md-9">
-                        	<input class="form-control" name="mem_pic" type="file">
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>會員性別 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="form-check col-6">
-                                    <input class="form-check-input radio" type="radio" id="flexRadioDefault1" name="mem_gender" value="0" <%=(memVO.getMem_gender()==0)? "checked": ""%> >
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        男
-                                    </label>
-                                </div>
-                                <div class="form-check col-6">
-                                    <input class="form-check-input radio" type="radio" id="flexRadioDefault2" name="mem_gender" value="1" <%=(memVO.getMem_gender()==1)? "checked": ""%> >
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        女
-                                    </label>
-                                </div>
+        <div class="loginarea">
+            <div class="register">
+            	<form action="<%=request.getContextPath()%>/view/member/LoginHandler" method="post">
+                    <div class="logo">
+                        <img src="<%=request.getContextPath()%>/view/index/image/others/mujilogo2.png" alt="">
+                    </div>
+                    <h2>會員登入頁面</h2>
+                    
+                    <%-- 錯誤表列 --%>
+					<c:if test="${not empty errorMsgs}">
+						<font style="color:red">請修正以下錯誤:</font>
+						<ul>
+							<c:forEach var="message" items="${errorMsgs}">
+								<li style="list-style:none">
+									<p style="color:red">${message}</p>  
+								</li>
+							</c:forEach>
+						</ul>
+					</c:if>
+                    
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+                            <div class="form-floating ">
+                                <input type="account" class="form-control" name="mem_account" id="floatingAccount" placeholder="name@example.com" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\@\.]/g,'')">
+                                <label for="floatingAccount">帳號</label>
+                            </div>
+                            <div class="form-floating ">
+                                <input type="password" class="form-control" name="mem_password" id="floatingConfirm" placeholder="Password">
+                                <label for="floatingConfirm">密碼</label>
                             </div>
                         </div>
-
-                        <div class="col-md-3 ">
-                            <p>帳號密碼 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="password"  name="mem_password" value="<%= (memVO==null)? "帳號密碼" : memVO.getMem_password()%>" aria-label="default input example">
-                        </div>
-
-                        <div class="col-md-3">
-                            <p>會員地址 : </p>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="text" name="mem_address" value="<%= (memVO==null)? "會員地址" : memVO.getMem_address()%>" aria-label="default input example">
-                        </div>
-
-                        <div class="col-md-3 mem-e-money">
-                            <p>電子錢包餘額 : </p>
-                        </div>
-                        <div class="col-md-5 col-sm-7 mem-e-money">
-                            <input class="form-control" type="text" value="${memVO.getMem_point()}" aria-label="Disabled input example" disabled readonly>
-                        </div>
-                        <div class="col-md-4 col-sm-5 mem-e-money">
-                            <a href="mem_mumipay.html">
-                                <button type="button" class="btn btn-success btn-charge">點我儲值</button>
-                            </a>
-                        </div>
-
-                      
-
                     </div>
-                </div>
-                <div class="announcement">
-                    <a class="alist" href="<%=request.getContextPath()%>/view/mem/select_page.jsp">
-                        <button type="button" class="btn btn-secondary" id="cancel">取消變更</button>
-                    </a>
-                    
-					<input type="hidden" name="mem_id" value="<%=memVO.getMem_id()%>">
-					<input type="hidden" name="action" value="update">
-                    <button type="submit" class="btn btn-primary" id="commit" value="送出修改">確認送出</button>
+                    <div class="announcement">
+                    	<input type="hidden" name="action" value="login">
+                        <button type="submit" id="btn_primary" class="btn btn-primary">登入</button>
+                        <button type="button" id="btn_secondary" class="btn btn-secondary">忘記密碼</button>
+                        <p>請注意 MUMI MOVIE 吾映良影 </p>
+                        <p>不會以任何理由要求您轉帳匯款</p>
+                        <p>嚴防詐騙 人人有責</p>
+                        <hr>
+                        <a class="loginlink" href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">還沒有帳號?點此前往加入會員</a>
+                    </div>
+                </form>
+            </div>
 
-                    <hr>
-                    <p>提醒您！ MUMI MOVIE 吾映良影不會以電話通知更改付款方式或要求改以ATM重新轉帳。 </p>
-                    <p>亦不會委託廠商以電話通知變更付款方式或要求提供ATM匯款帳號。 </p>
-                </div>
-            </form>
         </div>
-
 
     </main>
 
@@ -448,24 +372,28 @@
                 <div class="col col-md-3 col-sm-6">
                     <h5>關注我們</h5>
                     <span class="focus_us">
-                        <a href="#"> 張志鵬</a>
+                        <a href="https://drive.google.com/drive/folders/1FvkVquqoKRgwpjlaPAfuDpjvcCElwwgF?usp=sharing"> 張志鵬</a>
                         <p>會員系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">郭家榮</a>
+                        <a href="https://drive.google.com/drive/folders/1Hu3MXljw2mPs8y4uqIq2coDHt4OiEwLV?usp=sharing">郭家榮</a>
                         <p>討論區</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">蕭仲威</a>
+                        <a href="https://drive.google.com/drive/folders/143UhfMZr6X_sGmmouBIsc_2DskIW7vHH">蕭仲威</a>
                         <p>電影系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">吳宗哲</a>
-                        <p>商城購物</p>
+                        <a href="https://drive.google.com/drive/folders/1sixqrgkXZrUoEDbod4Wi2mygZyp2dl0i?usp=sharing">吳宗哲</a>
+                        <p>影廳系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="#">徐浩鈞</a>
+                        <a href="https://drive.google.com/drive/folders/14u0F868uYrXT8pDRCgaNoy9M3Rep6ji6?usp=sharing">徐浩鈞</a>
                         <p>訂票系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1dJ3kpYDJpT8bTvJQEKBN8G5JJ5Vr8Xh5">陳鏡</a>
+                        <p>電影時刻表</p>
                     </span>
                 </div>
                 <div class="col col-md-3 col-sm-6">
@@ -473,7 +401,7 @@
                     <ul>
                         <li>
                             <span>
-                                <img id="linerobot" src="<%=request.getContextPath()%>/view/mem/image/others/robot.png" alt="">
+                                <img id="linerobot" src="<%=request.getContextPath()%>/view/index/image/others/robot.png" alt="">
                             </span>
                         </li>
                     </ul>
@@ -489,12 +417,11 @@
     </footer>
 
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- JS檔連結記得修改 -->
-    <script src="<%=request.getContextPath()%>/view/mem/js/mem_revise.js"></script>
+    <script src="<%=request.getContextPath()%>/view/index/js/login.js"></script>
 </body>
 
 </html>

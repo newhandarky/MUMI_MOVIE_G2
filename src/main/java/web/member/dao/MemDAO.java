@@ -42,9 +42,6 @@ public class MemDAO implements MemDAO_interface{
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
 			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_id = ?";
 	
-	private static final String GET_ONE_ACCOUNT = 
-			"SELECT mem_id FROM mumi_member where mem_account = ?";
-	
 	private static final String DELETE = 
 			"DELETE FROM mumi_member where mem_id = ?";
 	
@@ -58,8 +55,17 @@ public class MemDAO implements MemDAO_interface{
 	private static final String UPDATE_STATE_OPEN = 
 			"UPDATE mumi_member set mem_state=1 where mem_id = ?";
 	
+	private static final String GET_ONE_ACCOUNT = 
+			"SELECT mem_id FROM mumi_member where mem_account = ?";
+	
+	private static final String LOGIN = 
+			"select mem_id from mumi_member where mem_account = ? and mem_password = ?";
+	
+	private static final String GET_ONE_VO = 
+			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
+			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_account = ?";
+	
 	private static final String pic = "C:\\TGA101_WebApp\\eclipse_WTP_workspace1\\MUMI_MOVIE\\src\\main\\webapp\\mem\\image\\icons\\user.png"; 
-
 	
 	@Override
 	public void insert(MemVO memVO) {
@@ -465,6 +471,128 @@ public class MemDAO implements MemDAO_interface{
 		} catch (Exception e) {
 			throw new RuntimeException("此帳號已有人使用"
 					+ e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemVO login(String mem_account, String mem_password) {
+		MemVO memVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(LOGIN); 
+			pstmt.setString(1, mem_account);
+			pstmt.setString(2, mem_password);
+			rs = pstmt.executeQuery();
+			
+			while (!rs.next()) {				
+					throw new Exception();
+			}
+			
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (Exception e) {
+			throw new RuntimeException("帳號密碼不正確, 請重新輸入"
+					+ e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return memVO;
+	}
+
+	@Override
+	public MemVO findByAccount(String mem_account) {
+		MemVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_VO);
+
+			pstmt.setString(1, mem_account);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				memVO = new MemVO();
+				memVO.setMem_id(rs.getInt("mem_id"));;
+				memVO.setMem_account(rs.getString("mem_account"));
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_phone(rs.getString("mem_phone"));
+				memVO.setMem_birthday(rs.getDate("mem_birthday"));;
+				memVO.setMem_gender(rs.getInt("mem_gender"));
+				memVO.setMem_address(rs.getString("mem_address"));
+				memVO.setMem_password(rs.getString("mem_password"));
+				memVO.setMem_nickname(rs.getString("mem_nickname"));
+				memVO.setMem_pic(rs.getBytes("mem_pic"));
+				memVO.setMem_register(rs.getDate("mem_register"));
+				memVO.setMem_update(rs.getTimestamp("mem_update"));
+				memVO.setMem_point(rs.getInt("mem_point"));
+				memVO.setMem_state(rs.getInt("mem_state"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {

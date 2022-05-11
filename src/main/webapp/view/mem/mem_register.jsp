@@ -278,12 +278,14 @@
              
              <h2>會員註冊頁面</h2>
              
-             <%-- 錯誤表列 --%>
+            <%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color:red">請修正以下錯誤:</font>
 				<ul>
 					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color:red">${message}</li>
+						<li style="list-style:none">
+							<p style="color:red">${message}</p>  
+						</li>
 					</c:forEach>
 				</ul>
 			</c:if>
