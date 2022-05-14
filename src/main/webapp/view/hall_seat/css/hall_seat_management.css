@@ -387,7 +387,7 @@ body {
 }
 
 
-/* main撌乩�� */
+/* main工作區 */
 
 .main {
     text-align: center;
@@ -411,7 +411,7 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* main撌乩�� */
+/* main工作區 */
 
 main.-dark {
     background-color: #111111;
@@ -428,13 +428,15 @@ main {
 main h1 {
     text-align: center;
     font-size: 60px;
-    font-family: "jf open 蝎�� 1.1";
+    font-family: "jf open 粉圓 1.1";
     margin-bottom: 30px;
+    color: white;
 }
 
 main h3 {
-	font-size: 36px;
-    font-family: "jf open 蝎�� 1.1";
+    text-align: center;
+    font-size: 36px;
+    font-family: "jf open 粉圓 1.1";
     position: relative;
     top: -47px;
     color: black;
@@ -450,128 +452,13 @@ main .hell {
     position: relative;
 }
 
-
-/* 摨找�牧���� */
-
-.hell .seat-info {
-    display: inline-block;
-    width: 40px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 15px 15px 0 0;
-}
-
-.seat-state {
-    text-align: center;
-}
-
-.seat-state p {
+main .container p {
     color: white;
-    display: inline-block;
-    font-size: 30px;
-    margin: 0 40px 0 0;
+    margin-top: 3px;
 }
 
-
-/* 摨找����� */
-
-.seat-info.used,
-.seat-row .seat.used {
-    background-color: red;
+main .container {
+    padding-bottom: 18px;
 }
 
-.seat-info.hold,
-.seat-row .seat.hold {
-    background-color: #ff0;
-}
-
-.seat-info.selected,
-.seat.selected {
-    background-color: lightskyblue;
-}
-
-
-/* 敶勗輒�撟� */
-
-.hell .screen {
-    height: 50px;
-    width: 90%;
-    /* 撠敶Ｙ�椰銝���敶Ｗ歇��０敶Ｘ��� */
-    border-color: #fff transparent transparent transparent;
-    border-style: solid solid solid solid;
-    border-width: 50px;
-  	margin-left: 50px;
-}
-
-.hell .seat {
-    display: inline-block;
-    width: 40px;
-    height: 30px;
-    background-color: white;
-    border-radius: 15px 15px 0 0;
-    position: relative;
-    margin: 0 5px 20px 5px;
-    font-weight: bold;
-}
-
-.hell .seat:hover {
-    cursor: pointer;
-}
-
-.seat p {
-    text-align: center;
-    top: 5px;
-    position: relative;
-    color: black;
-}
-
-/* .seat-row:first-child {
-    margin-left: 85px;
-} */
-
-.seat img {
-    width: 50px;
-}
-
-input.btn-danger {
-	float:right;
-	margin-right:25px;
-}
-
-input.btn-primary {
-	margin-left:10px;
-}
-
-
-/* 韏圈��(����) */
-
-/* .seat-row :nth-child(2) {
-    margin-right: 50px;
-} */
-
-
-/* 韏圈��(����) */
-
-/* .seat-row :nth-child(8) {
-    margin-right: 50px;
-} */
-
-
-/* 韏圈��(璈急��) */
-
-.aisle {
-    height: 30px;
-}
-
-
-/* �摨找�� */
-
-.selected-seats {
-    color: white;
-    text-align: center;
-    margin-top: 30px;
-    font-size: 40px;
-}
-
-
-/* main撌乩��蝯�� */
+/* main工作區結束 */
