@@ -9,7 +9,7 @@ Ticket_listVO ticket_listVO = (Ticket_listVO) request.getAttribute("ticket_listV
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>票券訂單明細修改 - update_ticket_list_input.jsp</title>
+<title>票券訂單明細修改 - update_ticket_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,7 +48,7 @@ Ticket_listVO ticket_listVO = (Ticket_listVO) request.getAttribute("ticket_listV
 
 <table id="table-1">
 	<tr><td>
-		 <h3>訂票資料修改 - update_ticket_list_input.jsp</h3>
+		 <h3>訂票資料修改 - update_ticket_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,7 +65,7 @@ Ticket_listVO ticket_listVO = (Ticket_listVO) request.getAttribute("ticket_listV
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_list/TicketServlet" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_list/Ticket_listServlet" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>票券明細編號:<font color=red><b>*</b></font></td>
@@ -81,10 +81,6 @@ Ticket_listVO ticket_listVO = (Ticket_listVO) request.getAttribute("ticket_listV
 	</tr>
 	<tr>
 		<td>電影時刻編號:</td>
-		<td><%=ticket_listVO.getTicket_orders_id()%></td>
-	</tr>
-	<tr>
-		<td>票券數量:</td>
 		<td><%=ticket_listVO.getTicket_orders_id()%></td>
 	</tr>
 	<tr>

@@ -60,7 +60,6 @@
 		<th>布ㄩ璹虫絪腹</th>
 		<th>畒絪腹</th>
 		<th>筿紇ㄨ絪腹</th>
-		<th>布ㄩ计秖</th>
 		<th>布ㄩ基</th>
 
 	</tr>
@@ -69,7 +68,6 @@
 		<td><%=ticket_listVO.getTicket_orders_id()%></td>
 		<td><%=ticket_listVO.getSeat_id()%></td>
 		<td><%=ticket_listVO.getMovie_time_id()%></td>
-		<td><%=ticket_listVO.getTicket_num()%></td>
 		<td><%=ticket_listVO.getTicket_price()%></td>
 	</tr>
 </table>

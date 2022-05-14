@@ -69,7 +69,7 @@ public class Ticket_listServlet extends HttpServlet{
 				
 				/***************************2.開始查詢資料*****************************************/
 				Ticket_listService ticket_listSvc = new Ticket_listService();
-				Ticket_listVO ticket_listVO = ticket_listSvc.getOneTicket_list(ticket_list_id);
+				Ticket_listVO ticket_listVO = ticket_listSvc.getOneTicket(ticket_list_id);
 				if (ticket_listVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -110,7 +110,7 @@ public class Ticket_listServlet extends HttpServlet{
 				
 				/***************************2.開始查詢資料****************************************/
 				Ticket_listService ticket_listSvc = new Ticket_listService();
-				Ticket_listVO ticket_listVO = ticket_listSvc.getOneTicket_list(ticket_list_id);
+				Ticket_listVO ticket_listVO = ticket_listSvc.getOneTicket(ticket_list_id);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("ticket_listVO", ticket_listVO);         // 資料庫取出的empVO物件,存入req
@@ -141,8 +141,7 @@ public class Ticket_listServlet extends HttpServlet{
 				Integer ticket_list_id = new Integer(req.getParameter("ticket_list_id").trim());				
 				Integer ticket_orders_id = new Integer(req.getParameter("ticket_orders_id").trim());				
 				Integer seat_id = new Integer(req.getParameter("seat_id").trim());
-				Integer movie_time_id = new Integer(req.getParameter("movie_time_id").trim());
-				Integer ticket_num = new Integer(req.getParameter("ticket_num").trim());				
+				Integer movie_time_id = new Integer(req.getParameter("movie_time_id").trim());				
 				Integer ticket_price = null;
 				try {
 					ticket_price = new Integer(req.getParameter("ticket_price").trim());
@@ -157,7 +156,6 @@ public class Ticket_listServlet extends HttpServlet{
 				ticket_listVO.setTicket_orders_id(ticket_orders_id);
 				ticket_listVO.setSeat_id(seat_id);
 				ticket_listVO.setMovie_time_id(movie_time_id);
-				ticket_listVO.setTicket_num(ticket_num);
 				ticket_listVO.setTicket_price(ticket_price);
 				
 				if (!errorMsgs.isEmpty()) {
@@ -170,7 +168,7 @@ public class Ticket_listServlet extends HttpServlet{
 				
 				/***************************2.開始修改資料*****************************************/
 				Ticket_listService ticket_listSvc = new Ticket_listService();
-				ticket_listVO = ticket_listSvc.updateTicket_list(ticket_list_id, ticket_orders_id, seat_id, movie_time_id, ticket_num, ticket_price);
+				ticket_listVO = ticket_listSvc.updateTicket(ticket_list_id, ticket_orders_id, seat_id, movie_time_id,ticket_price);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("ticket_listVO", ticket_listVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -182,7 +180,7 @@ public class Ticket_listServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/ticket_list/update_ticket_list_input.jsp");
+						.getRequestDispatcher("/ticket_list/update_ticket_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -220,16 +218,7 @@ public class Ticket_listServlet extends HttpServlet{
 					movie_time_id = 0;
 					errorMsgs.add("請輸入電影時刻編號 : ");
 				}
-				
-				Integer ticket_num = null;
-				try {
-					ticket_num = new Integer(req.getParameter("ticket_num").trim());
-				} catch (NumberFormatException e) {
-					ticket_num = 0;
-					errorMsgs.add("請輸入票券數量 : ");
-				}	
-				
-				
+							
 				Integer ticket_price = null;
 				try {
 					ticket_price = new Integer(req.getParameter("ticket_price").trim());
@@ -242,7 +231,6 @@ public class Ticket_listServlet extends HttpServlet{
 				ticket_listVO.setTicket_orders_id(ticket_orders_id);
 				ticket_listVO.setSeat_id(seat_id);
 				ticket_listVO.setMovie_time_id(movie_time_id);
-				ticket_listVO.setTicket_num(ticket_num);
 				ticket_listVO.setTicket_price(ticket_price);
 				
 				if (!errorMsgs.isEmpty()) {
@@ -254,8 +242,8 @@ public class Ticket_listServlet extends HttpServlet{
 									}
 				
 				/***************************2.開始新增資料***************************************/
-				Ticket_listService ticket_listVOSvc = new Ticket_listService();
-				ticket_listVO = ticket_listVOSvc.addTicket_list(ticket_orders_id, seat_id, movie_time_id, ticket_num, ticket_price);
+				Ticket_listService ticket_listSvc = new Ticket_listService();
+				ticket_listVO = ticket_listSvc.addTicket(ticket_orders_id, seat_id, movie_time_id, ticket_price);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/view/ticket_list/listAllTicket.jsp";
@@ -285,7 +273,7 @@ public class Ticket_listServlet extends HttpServlet{
 				/***************************2.開始刪除資料***************************************/
 
 				Ticket_listService ticket_listSvc = new Ticket_listService();
-				ticket_listSvc.deleteTicket_list(ticket_list_id);
+				ticket_listSvc.deleteTicket(ticket_list_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/view/ticket_list/listAllTicket.jsp";

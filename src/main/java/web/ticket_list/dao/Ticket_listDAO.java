@@ -1,16 +1,16 @@
 package web.ticket_list.dao;
 
 	import java.sql.Connection;
-	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-	import java.util.ArrayList;
-	import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-	import javax.naming.Context;
-	import javax.naming.InitialContext;
-	import javax.naming.NamingException;
-	import javax.sql.DataSource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import web.ticket_list.entity.Ticket_listVO;
 
@@ -27,15 +27,15 @@ import web.ticket_list.entity.Ticket_listVO;
 			}
 		}
 		private static final String INSERT_STMT =
-				"INSERT INTO ticket_list (ticket_orders_id,seat_id,movie_time_id,ticket_num,ticket_price) VALUES (?, ?, ?, ?)";	
+				"INSERT INTO ticket_list (ticket_orders_id,seat_id,movie_time_id,ticket_price) VALUES (?, ?, ?, ?)";	
 		private static final String GET_ALL_STMT = 	
-				"SELECT ticket_list_id,ticket_orders_id,seat_id,movie_time_id,ticket_num,ticket_price FROM ticket_list order by ticket_list_id";
+				"SELECT ticket_list_id,ticket_orders_id,seat_id,movie_time_id,ticket_price FROM ticket_list order by ticket_list_id";
 		private static final String GET_ONE_STMT = 
-				"SELECT ticket_list_id,ticket_orders_id,seat_id,movie_time_id,ticket_num,ticket_price FROM ticket_list where ticket_list_id = ?";
+				"SELECT ticket_list_id,ticket_orders_id,seat_id,movie_time_id,ticket_price FROM ticket_list where ticket_list_id = ?";
 		private static final String DELETE = 
 				"DELETE FROM ticket_list where ticket_list_id = ?";
 		private static final String UPDATE = 
-				"UPDATE ticket_list set ticket_orders_id=?,seat_id=?,movie_time_id,ticket_num=?,ticket_price=? where ticket_list_id=?";
+				"UPDATE ticket_list set ticket_orders_id=?,seat_id=?,movie_time_id,ticket_price=? where ticket_list_id=?";
 			
 		@Override
 		public void insert(Ticket_listVO ticket_listVO) {
@@ -51,8 +51,7 @@ import web.ticket_list.entity.Ticket_listVO;
 				pstmt.setInt(1, ticket_listVO.getTicket_orders_id());
 				pstmt.setInt(2, ticket_listVO.getSeat_id());
 				pstmt.setInt(3, ticket_listVO.getMovie_time_id());
-				pstmt.setInt(4, ticket_listVO.getTicket_num());
-				pstmt.setInt(5, ticket_listVO.getTicket_price());
+				pstmt.setInt(4, ticket_listVO.getTicket_price());
 
 				pstmt.executeUpdate();
 
@@ -93,9 +92,8 @@ import web.ticket_list.entity.Ticket_listVO;
 				pstmt.setInt(1, ticket_listVO.getTicket_orders_id());
 				pstmt.setInt(2, ticket_listVO.getSeat_id());
 				pstmt.setInt(3, ticket_listVO.getMovie_time_id());
-				pstmt.setInt(4, ticket_listVO.getTicket_num());
-				pstmt.setInt(5, ticket_listVO.getTicket_price());
-				pstmt.setInt(6, ticket_listVO.getTicket_list_id());
+				pstmt.setInt(4, ticket_listVO.getTicket_price());
+				pstmt.setInt(5, ticket_listVO.getTicket_list_id());
 
 				pstmt.executeUpdate();
 
@@ -185,7 +183,6 @@ import web.ticket_list.entity.Ticket_listVO;
 					ticket_listVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));
 					ticket_listVO.setSeat_id(rs.getInt("seat_id"));
 					ticket_listVO.setMovie_time_id(rs.getInt("movie_time_id"));
-					ticket_listVO.setTicket_num(rs.getInt("ticket_num"));
 					ticket_listVO.setTicket_price(rs.getInt("ticket_price"));
 				}
 
@@ -242,7 +239,6 @@ import web.ticket_list.entity.Ticket_listVO;
 					ticket_listVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));
 					ticket_listVO.setSeat_id(rs.getInt("seat_id"));
 					ticket_listVO.setMovie_time_id(rs.getInt("movie_time_id"));
-					ticket_listVO.setTicket_num(rs.getInt("ticket_num"));
 					ticket_listVO.setTicket_price(rs.getInt("ticket_price"));
 					list.add(ticket_listVO); // Store the row in the list
 				}

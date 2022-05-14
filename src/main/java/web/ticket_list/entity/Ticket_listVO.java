@@ -1,14 +1,11 @@
 package web.ticket_list.entity;
 
-import java.sql.Date;
-
 public class Ticket_listVO implements java.io.Serializable{
 
 		private Integer ticket_list_id;
 		private Integer ticket_orders_id;
 		private Integer seat_id;
 		private Integer movie_time_id;
-		private Integer ticket_num;
 		private Integer ticket_price;
 		
 		public Integer getTicket_list_id() {
@@ -34,12 +31,6 @@ public class Ticket_listVO implements java.io.Serializable{
 		}
 		public void setMovie_time_id(Integer movie_time_id) {
 			this.movie_time_id = movie_time_id;
-		}
-		public Integer getTicket_num() {
-			return ticket_num;
-		}
-		public void setTicket_num(Integer ticket_num) {
-			this.ticket_num = ticket_num;
 		}
 		public Integer getTicket_price() {
 			return ticket_price;
