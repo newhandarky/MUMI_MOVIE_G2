@@ -26,6 +26,30 @@ public class LoginHandler extends HttpServlet {
 
     // 【取得使用者 帳號(account) 密碼(password)】
     
+   
+    
+    
+    if("logout".equals(action)) {
+    	
+    	System.out.println("有來到登出這邊");
+    	
+    	try {
+    		HttpSession session = req.getSession();
+    		
+    		session.invalidate();
+			
+    		System.out.println("登出成功");
+    		
+    		res.sendRedirect(req.getContextPath()+"/view/index/index.jsp");
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+    	
+    	
+    	
+    }
+    
     if ("login".equals(action)) { // 來自select_page.jsp的請求
 
 		List<String> errorMsgs = new LinkedList<String>();
@@ -69,7 +93,7 @@ public class LoginHandler extends HttpServlet {
 				errorMsgs.add("很抱歉查無此帳號");
 			}else if(!password.equals(memVO.getMem_password())) {
 				
-				System.out.println("進入茶密碼");
+				System.out.println("進入查密碼");
 				
 				errorMsgs.add("密碼錯誤");
 			}
@@ -93,6 +117,10 @@ public class LoginHandler extends HttpServlet {
 		      
 		       try {                                                        
 		         String location = (String) session.getAttribute("location");
+		         
+		         System.out.println(session);
+		         System.out.println(location);
+		         
 		         if (location != null) {
 		           session.removeAttribute("location");   //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 		           res.sendRedirect(location);            

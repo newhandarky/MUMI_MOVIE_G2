@@ -24,6 +24,8 @@
         <a class="link_index" href="#">
             <img class="team_logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
         </a>
+        
+        
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
             <!-- 搜尋欄位 -->

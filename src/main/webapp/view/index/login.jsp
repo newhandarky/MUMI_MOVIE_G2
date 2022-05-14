@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="web.member.entity.*"%>
+<%@ page import="web.member.dao.*"%>
 
 
 <!DOCTYPE html>
@@ -24,6 +25,9 @@
         <a class="link_index" href="<%=request.getContextPath()%>/view/index/index.jsp">
             <img class="team_logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
         </a>
+        <p>${memVO.mem_id}</p>
+        
+        
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
             <!-- 搜尋欄位 -->
@@ -115,21 +119,8 @@
                     <li class="nav_li">
                         <a href="#">會員登入</a>
                     </li>
-                    
-                    
                     <li class="nav_li">
-                    
-                    	<form form name='form1' action="<%=request.getContextPath()%>/view/member/MemServlet" method="post">                    
-	                    	<input type="hidden" name="mem_id" value="12347">
-	                    	<input type="hidden" name="action" value="getOne_For_Update">
-<!-- 	                    	<input type="submit"> -->
-	                    	
-	                    	<button type="submit" value="送出">	                    	
-		                        <a href=''>修改資料</a>  
-<!-- 		                        <a href="mem_revise.html" >修改資料</a>   -->
-	                    	</button>
-	                    	
-                        </form>
+                        <a href="#">修改資料</a>
                     </li>
                     <li class="nav_li">
                         <a href="mem_shopping_sheet.html">歷史消費</a>
@@ -138,8 +129,16 @@
                         <a href="mem_mumipay.html" class="mumipay">MUMIPAY</a>
                     </li>
                     <li class="nav_li">
-                        <a href="login.html">會員登出</a>
-                    </li>
+<!--                 		<a href="/member/Logout">會員登出</a>   -->
+                    
+                    	<form action="<%=request.getContextPath()%>/view/member/LoginHandler" method="post">                 
+<!-- 	                    	<input type="hidden" name="session" value="session"> -->
+	                    	<input type="hidden" name="action" value="logout">
+	                    	<input type="submit" value="會員登出">
+<!-- 		                        <a href="javascript:document.form1.submit();">會員登出</a>   -->
+                        </form>   
+                        
+                    </li>                
                 </ul>
             </div>
         </nav>
@@ -318,6 +317,7 @@
                         </div>
                     </div>
                     <div class="announcement">
+                    	<input type="hidden" name="mem_account" value="${memVO.mem_account}">
                     	<input type="hidden" name="action" value="login">
                         <button type="submit" id="btn_primary" class="btn btn-primary">登入</button>
                         <button type="button" id="btn_secondary" class="btn btn-secondary">忘記密碼</button>

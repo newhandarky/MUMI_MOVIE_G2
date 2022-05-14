@@ -7,7 +7,7 @@
 
 <%
 
-  MemVO memVO = (MemVO) request.getAttribute("memVO");
+  MemVO memVO = (MemVO) session.getAttribute("memVO");
 
 %>   
 
