@@ -53,7 +53,7 @@
   <li>
     <FORM METHOD="post" ACTION="<c:url value="/view/ticket_list/TicketServlet"/>" > 
     
-        <b>輸入票券編號 (範例:1)</b>
+        <b>輸入票券明細編號 (範例:1)</b>
         <input type="text" name="ticket_list_id">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
@@ -77,7 +77,7 @@
   
   <li>
      <FORM METHOD="post" ACTION="<c:url value="/view/ticket_list/TicketServlet"/>" > 
-       <b>選擇員工姓名:</b>
+       <b>選擇票券訂單編號:</b>
        <select size="1" name="ticket_list_id">
          <c:forEach var="ticket_listVO" items="${ticket_listSvc.all}" > 
           <option value="${ticket_listVO.ticket_list_id}">${ticket_listVO.ticket_orders_id}
