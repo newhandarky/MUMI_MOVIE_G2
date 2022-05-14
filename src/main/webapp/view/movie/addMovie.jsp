@@ -5,7 +5,7 @@
 <%
   MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 %>
-	--<%= movieVO==null %>--${movieVO==null}--${empVO.deptno}
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -124,9 +124,87 @@
 		<td>輪播海報:</td>
 		<td><input type="FILE" name="movie_slide_poster"/></td>
 	</tr>
-	
+	 
 
 </table>
+<h5>選擇類型</h5>
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                動作片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                冒險片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                動畫片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                喜劇片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                懸疑片
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                科幻片
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                恐怖片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                警匪片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                武俠片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                倫理片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                戰爭片
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label">
+                                史詩片
+                            </label>
+                        </div>
+                    </div>
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>

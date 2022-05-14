@@ -1,4 +1,4 @@
-package web.releasing.dao;
+package web.movie_type.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import web.releasing.entity.ReleasingVO;
+import web.movie_type.entity.Movie_typeVO;
 
-public class ReleasingDAO implements ReleasingDAO_interface{
-	
+public class Movie_typeDAO implements Movie_typeDAO_interface{
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -24,19 +24,21 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 	
-	private static final String INSERT_STMT = "INSERT INTO RELEASING (movie_state) "
-			+ "VALUES (?)";
-	private static final String GET_ALL_STMT = "SELECT movie_state_id, movie_state "
-			+ "FROM RELEASING order by movie_state_id";
-	private static final String GET_ONE_STMT = "SELECT movie_state_id, movie_state "
-			+ "FROM RELEASING where movie_state_id = ?";
-	private static final String UPDATE = "UPDATE RELEASING set movie_state=? where movie_state_id = ?";
-	private static final String DELETE = "DELETE FROM RELEASING where movie_state_id = ?";
+	
+	private static final String INSERT_STMT = "INSERT INTO MOVIE_TYPE (movie_type_en, movie_type_ch) "
+			+ "VALUES (?, ?)";
+	private static final String GET_ALL_STMT = "SELECT movie_type_id, movie_type_en, movie_type_ch "
+			+ "FROM MOVIE_TYPE order by movie_type_id";
+	private static final String GET_ONE_STMT = "SELECT movie_type_id, movie_type_en, movie_type_ch "
+			+ "FROM MOVIE_TYPE where movie_type_id = ?";
+	private static final String UPDATE = "UPDATE MOVIE_TYPE set movie_type_en = ?, movie_type_ch = ? where movie_type_id = ?";
+	private static final String DELETE = "DELETE FROM MOVIE_TYPE where movie_type_id = ?";
+	
 	
 	@Override
-	public void insert(ReleasingVO releasingVO) {
+	public void insert(Movie_typeVO movie_typeVO) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -46,7 +48,8 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, releasingVO.getMovie_state());
+			pstmt.setString(1, movie_typeVO.getMovie_type_en());
+			pstmt.setString(2, movie_typeVO.getMovie_type_ch());
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -71,9 +74,8 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 		
 	}
 	
-	
 	@Override
-	public void update(ReleasingVO releasingVO) {
+	public void update(Movie_typeVO movie_typeVO) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -84,8 +86,9 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 
 			
 			
-			pstmt.setString(1, releasingVO.getMovie_state());
-			pstmt.setInt(2, releasingVO.getMovie_state_id());
+			pstmt.setString(1, movie_typeVO.getMovie_type_en());
+			pstmt.setString(2, movie_typeVO.getMovie_type_ch());
+			pstmt.setInt(3, movie_typeVO.getMovie_type_id());
 
 			
 			pstmt.executeUpdate();
@@ -111,7 +114,7 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 	}
 	
 	@Override
-	public void delete(Integer movie_state_id) {
+	public void delete(Integer movie_type_id) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -121,7 +124,7 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, movie_state_id);
+			pstmt.setInt(1, movie_type_id);
 
 			pstmt.executeUpdate();
 
@@ -147,10 +150,9 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 
 	}
 	
-	
 	@Override
-	public ReleasingVO findByPrimaryKey(Integer movie_state_id) {
-		ReleasingVO releasingVO = null;
+	public Movie_typeVO findByPrimaryKey(Integer movie_type_id) {
+		Movie_typeVO movie_typeVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -160,13 +162,14 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, movie_state_id);
+			pstmt.setInt(1, movie_type_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				releasingVO = new ReleasingVO();
-				releasingVO.setMovie_state_id(rs.getInt("movie_state_id"));
-				releasingVO.setMovie_state(rs.getString("movie_state"));
+				movie_typeVO = new Movie_typeVO();
+				movie_typeVO.setMovie_type_id(rs.getInt("movie_type_id"));
+				movie_typeVO.setMovie_type_en(rs.getString("movie_type_en"));
+				movie_typeVO.setMovie_type_ch(rs.getString("movie_type_ch"));
 			}
 
 		} catch (SQLException se) {
@@ -196,15 +199,14 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			}
 		}
 
-		return releasingVO;
+		return movie_typeVO;
 	}
 	
-	
 	@Override
-	public List<ReleasingVO> getAll(){
+	public List<Movie_typeVO> getAll(){
 		
-		List<ReleasingVO> list = new ArrayList<ReleasingVO>();
-		ReleasingVO releasingVO = null;
+		List<Movie_typeVO> list = new ArrayList<Movie_typeVO>();
+		Movie_typeVO movie_typeVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -218,10 +220,11 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				releasingVO = new ReleasingVO();
-				releasingVO.setMovie_state_id(rs.getInt("movie_state_id"));
-				releasingVO.setMovie_state(rs.getString("movie_state"));
-				list.add(releasingVO);
+				movie_typeVO = new Movie_typeVO();
+				movie_typeVO.setMovie_type_id(rs.getInt("movie_type_id"));
+				movie_typeVO.setMovie_type_en(rs.getString("movie_type_en"));
+				movie_typeVO.setMovie_type_ch(rs.getString("movie_type_ch"));
+				list.add(movie_typeVO);
 			}
 
 		} catch (SQLException se) {
@@ -251,7 +254,6 @@ public class ReleasingDAO implements ReleasingDAO_interface{
 			}
 		}
 		return list;
-		
 	}
-	
+
 }

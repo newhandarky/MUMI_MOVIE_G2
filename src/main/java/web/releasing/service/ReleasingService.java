@@ -28,6 +28,14 @@ public class ReleasingService {
 		dao.update(releasingVO);
 		return releasingVO;
 	}
+	
+	public void deleteReleasing(Integer movie_state_id) {
+		dao.delete(movie_state_id);
+	}
+	
+	public ReleasingVO getOneReleasing(Integer movie_state_id) {
+		return dao.findByPrimaryKey(movie_state_id);
+	}
 
 	public List<ReleasingVO> getAll(){
 		return dao.getAll();
