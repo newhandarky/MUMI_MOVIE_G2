@@ -1,10 +1,11 @@
 package web.hall_seat.entity;
 
+import java.sql.Date;
 
 public class Hall_SeatVO implements java.io.Serializable {
-	private String seat_id;
-	private Integer hall_id;
-	private String seat_state;
+	
+	private Integer seat_id;
+	private Integer seat_state;
 	private String seat_name;
 	private Integer seat_row;
 	private Integer seat_col;
@@ -12,24 +13,22 @@ public class Hall_SeatVO implements java.io.Serializable {
 	private Integer seat_right;
 	private Integer seat_row_aisle1;
 	private Integer seat_row_aisle2;
-	private String seat_no;
+	private Integer seat_no;
+	private Integer hall_id;
+	private String hall_seat_state_total;
+	private String hall_name;
+	private Date hall_update;
 	
-	public String getSeat_id() {
+	public Integer getSeat_id() {
 		return seat_id;
 	}
-	public void setSeat_id(String seat_id) {
+	public void setSeat_id(Integer seat_id) {
 		this.seat_id = seat_id;
 	}
-	public Integer getHall_id() {
-		return hall_id;
-	}
-	public void setHall_id(Integer hall_id) {
-		this.hall_id = hall_id;
-	}
-	public String getSeat_state() {
+	public Integer getSeat_state() {
 		return seat_state;
 	}
-	public void setSeat_state(String seat_state) {
+	public void setSeat_state(Integer seat_state) {
 		this.seat_state = seat_state;
 	}
 	public String getSeat_name() {
@@ -74,11 +73,35 @@ public class Hall_SeatVO implements java.io.Serializable {
 	public void setSeat_row_aisle2(Integer seat_row_aisle2) {
 		this.seat_row_aisle2 = seat_row_aisle2;
 	}
-	public String getSeat_no() {
+	public Integer getSeat_no() {
 		return seat_no;
 	}
-	public void setSeat_no(String seat_no) {
+	public void setSeat_no(Integer seat_no) {
 		this.seat_no = seat_no;
 	}
-
+	public Integer getHall_id() {
+		return hall_id;
+	}
+	public void setHall_id(Integer hall_id) {
+		this.hall_id = hall_id;
+	}
+	public String getHall_seat_state_total() {
+		return hall_seat_state_total;
+	}
+	public void setHall_seat_state_total(String hall_seat_state_total) {
+		this.hall_seat_state_total = hall_seat_state_total;
+	}
+	public String getHall_name() {
+		return hall_name;
+	}
+	public void setHall_name(String hall_name) {
+		this.hall_name = hall_name;
+	}
+	public Date getHall_update() {
+		return hall_update;
+	}
+	public void setHall_update(Date hall_update) {
+		this.hall_update = hall_update;
+	}
+	
 }

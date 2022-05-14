@@ -19,7 +19,7 @@ Hall_SeatVO hall_seatVO = (Hall_SeatVO) request.getAttribute("hall_seatVO");
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
-<link rel="stylesheet" href="css/system_show_one.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view/hall_seat/css/system_show_one.css">
 
 </head>
 
@@ -185,19 +185,7 @@ Hall_SeatVO hall_seatVO = (Hall_SeatVO) request.getAttribute("hall_seatVO");
 		<!-- 主要工作區 -->
 		<main>
 			<div class="main">
-				<h1>IMAX數位B廳</h1>
 				<div class="hell">
-					<div class="seat-state">
-						<div class="seat-info"></div>
-						<p>可選</p>
-						<div class="seat-info selected"></div>
-						<p>您的座位</p>
-						<div class="seat-info used"></div>
-						<p>已使用</p>
-						<div class="seat-info hold"></div>
-						<p>保留位</p>
-					</div>
-
 					<div class="screen">
 						<h3>(銀幕)吾 映 良 影 只 放 好 電 影(銀幕)</h3>
 					</div>
@@ -214,7 +202,7 @@ Hall_SeatVO hall_seatVO = (Hall_SeatVO) request.getAttribute("hall_seatVO");
 							<div style="opacity: 0" class="hall_row_aisle1" id="${hall_seatVO.seat_row_aisle1}"> </div>
 							<div style="opacity: 0" class="hall_row_aisle2" id="${hall_seatVO.seat_row_aisle2}"> </div>
 						</c:forEach>
-				 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/view/hall_seat/Hall_SeatServlet" style="margin-bottom: 0px;">
+				 		<form method="post" action="<%=request.getContextPath()%>/view/hall_seat/Hall_SeatServlet" style="margin-bottom: 0px;">
 						<c:forEach var="hall_seatVO" items="${list}">
 							<div class="seat" name="${hall_seatVO.seat_no}" style="opacity: 1" id="${hall_seatVO.seat_state}">
 							<p style="opacity: 1" id="${hall_seatVO.seat_id}">${hall_seatVO.seat_name}</p>
@@ -222,12 +210,22 @@ Hall_SeatVO hall_seatVO = (Hall_SeatVO) request.getAttribute("hall_seatVO");
 				     		<input id="seat_id" type="hidden" name="seat_id" value="${hall_seatVO.seat_id}" >
 							</div>
 						</c:forEach>
+			     			<a class="btn btn-secondary" href="select_page.jsp" role="button">取消</a>
 			     			<input type="hidden" name="action" value="update">
 			     			<input class="btn btn-primary" type="submit" value="修改">
-			     		</FORM>
-						</div>	
+			     			
+			     		</form>
+			     		<form method="post" action="<%=request.getContextPath()%>/view/hall_seat/Hall_SeatServlet" style="margin-bottom: 0px;">
+			     			<c:forEach var="hall_seatVO" items="${list}" begin="1" end="1" >
+			     			<input id="hall_id" type="hidden" name="hall_id" value="${hall_seatVO.hall_id}" >
+			     			<input type="hidden" name="action" value="delete">
+			     			<input class="btn btn-danger" type="submit" value="刪除影廳">
+			     			</c:forEach>
+			     		</form>
 						<!-- 走道 -->
 						<div class="aisle"></div>
+						<div class="aisle"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -243,7 +241,7 @@ Hall_SeatVO hall_seatVO = (Hall_SeatVO) request.getAttribute("hall_seatVO");
 		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="js/system_show_one.js"></script>
+	<script src="${pageContext.request.contextPath}/view/hall_seat/js/system_show_one.js"></script>
 	<script >$("input#seat_state").val(hall_seatVO.getSeat_state());</script>
     <script >$("input#seat_id").val(hall_seatVO.getSeat_id());</script>
     

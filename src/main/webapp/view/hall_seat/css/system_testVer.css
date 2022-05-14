@@ -533,6 +533,9 @@ main .hell {
     width: 50px;
 }
 
+input.btn-danger {
+	margin-bottom:20px;
+}
 
 /* 韏圈��(����) */
 
