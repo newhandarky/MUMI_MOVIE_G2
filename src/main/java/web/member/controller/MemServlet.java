@@ -277,9 +277,6 @@ if("updateState".equals(action)) {
 				
 				MemVO memVO = memSvc.getOneMem(mem_id);
 				
-					
-				
-				
 				memSvc.updateState(memVO.getMem_id());	
 				
 //				System.out.println(memSvc.updateState(memVO.getMem_id()));

@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MUMI MOVIE 吾映良影影城首頁</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/mem/css/index.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/index/css/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
     	  rel="stylesheet" 
     	  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
@@ -22,23 +22,25 @@
     <header>
         <!-- 專題LOGO -->
         <a class="link_index" href="#">
-            <img class="team_logo" src="<%=request.getContextPath()%>/view/mem/image/others/mujilogo.png" alt="">
+            <img class="team_logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
         </a>
+        
+        
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
             <!-- 搜尋欄位 -->
             <input id="search" type="text">
             <a id="a_loupe" href="#">
-                <img id="loupe" src="<%=request.getContextPath()%>/view/mem/image/icons/loupe.png" alt="">
+                <img id="loupe" src="<%=request.getContextPath()%>/view/index/image/icons/loupe.png" alt="">
             </a>
             <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
                 <span>
-                    <img id="sun" class="sunmoon" src="<%=request.getContextPath()%>/view/mem/image/icons/sun.png" alt="">
+                    <img id="sun" class="sunmoon" src="<%=request.getContextPath()%>/view/index/image/icons/sun.png" alt="">
                 </span>
             </button>
             <button type="button" class="btn btn-dark btn-ln -off" id="btn-dark">Dark
                 <span>
-                    <img id="moon" class="sunmoon -off" src="<%=request.getContextPath()%>/view/mem/image/icons/crescent-moon.png" alt="">
+                    <img id="moon" class="sunmoon -off" src="<%=request.getContextPath()%>/view/index/image/icons/crescent-moon.png" alt="">
                 </span>
             </button>
         </div>
@@ -75,6 +77,9 @@
                     <li class="nav_li">
                         <a href="hell_seat_4dxA.html">確認劃位</a>
                     </li>
+                    <li>
+                        <a href="">${memVO.getMem_nickname()}</a>
+                    </li>  
                 </ul>
             </div>
 
@@ -100,7 +105,7 @@
                 <ul class="nav_ul" id="member_ul">
                     <a href="#">會員專區</a>
                     <li class="nav_li">
-                        <a href="login.html">會員登入</a>
+                        <a href="<%=request.getContextPath()%>/view/index/login.jsp">會員登入</a>
                     </li>
                     <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
@@ -115,7 +120,7 @@
                         <a href="mem_mumipay.html" class="mumipay">MUMIPAY</a>
                     </li>
                     <li class="nav_li">
-                        <a href="login.html">會員登出</a>
+                        <a href="#">會員登出</a>
                     </li>
                 </ul>
             </div>
@@ -123,7 +128,7 @@
 
         <!-- 漢堡選單按鈕 -->
         <div class="">
-            <a href="#"><img src="<%=request.getContextPath()%>/view/mem/image/icons/movie.png" alt="" class="hamberger_menu"></a>
+            <a href="#"><img src="<%=request.getContextPath()%>/view/index/image/icons/movie.png" alt="" class="hamberger_menu"></a>
         </div>
 
     </header>
@@ -143,13 +148,13 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="login.html">會員登入</a>
+                                <a href="<%=request.getContextPath()%>/view/index/login.jsp">會員登入</a>
                             </li>
                             <li>
-                                <a href="mem_register.html">註冊會員</a>
+                                <a href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
                             </li>
                             <li>
-                                <a href="mem_revise.html">修改資料</a>
+                                <a href="<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
                             </li>
                             <li>
                                 <a href="mem_shopping_sheet.html">歷史消費</a>
@@ -158,7 +163,7 @@
                                 <a href="mem_mumipay.html">MUMIPAY</a>
                             </li>
                             <li>
-                                <a href="login.html">會員登出</a>
+                                <a href="#">會員登出</a>
                             </li>
                         </ul>
 
@@ -223,9 +228,9 @@
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul>
-                            <!-- <li>
-                                <a href=""></a>
-                            </li>                             -->
+<!--                             <li> -->
+<%--                                 <a href="">${memVO.getMem_nickname()}</a> --%>
+<!--                             </li>                              -->
                         </ul>
 
                     </div>
@@ -267,19 +272,19 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/carousel/JUJUTSU KAISEN ZERO_Poster_TW_1450x608.jpg" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/JUJUTSU KAISEN ZERO_Poster_TW_1450x608.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/carousel/60fe5d79c7bfb570c4b41fffb1468e3c.jpg" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/60fe5d79c7bfb570c4b41fffb1468e3c.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/carousel/3d24f9cb36fb47d89b4be3bc1614ea2a.jpg" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/3d24f9cb36fb47d89b4be3bc1614ea2a.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/carousel/8ad709b813e49f42da3809a494f1f0fc.jpg" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/8ad709b813e49f42da3809a494f1f0fc.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/carousel/27ca24800b7dbfbbe67f6279deb4bb89.jpg" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/27ca24800b7dbfbbe67f6279deb4bb89.jpg" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -304,49 +309,49 @@
             <div class="row" id="div_now">
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/1825.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/1825.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">咒術迴戰<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text">咒術迴戰<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/film_20220214007.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/film_20220214007.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">蝙蝠俠<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text">蝙蝠俠<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/GoddamnedAsura_180x270_Poster.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/GoddamnedAsura_180x270_Poster.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">阿修羅<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_18.png" class="mrs" alt=""></p>
+                            <p class="card-text">阿修羅<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_18.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/5JoLmuOv0wzXt2DbER0f-1080x1538.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/5JoLmuOv0wzXt2DbER0f-1080x1538.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">月球殞落<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_6.png" class="mrs" alt=""></p>
+                            <p class="card-text">月球殞落<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_6.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/Blacklight_180x270_Poster.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/Blacklight_180x270_Poster.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">黑光行動<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text">黑光行動<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/Ambulance_180x270_Poster.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/Ambulance_180x270_Poster.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">劫命救護<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_18.png" class="mrs" alt=""></p>
+                            <p class="card-text">劫命救護<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_18.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
@@ -354,49 +359,49 @@
             <div class="row -off" id="div_cs">
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/Fortress_Poster_TW (1).jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/Fortress_Poster_TW (1).jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">終極堡壘<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text">終極堡壘<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/hideandseekPOSTER.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/hideandseekPOSTER.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">詭迷藏<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_18.png" class="mrs" alt=""></p>
+                            <p class="card-text">詭迷藏<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_18.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/IdaRed_180x270_Poster.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/IdaRed_180x270_Poster.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">劫獄救援<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text">劫獄救援<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/KBW5d0AM3mVAOKbP0PJh-1280x1827.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/KBW5d0AM3mVAOKbP0PJh-1280x1827.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">秘境探險<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_0.png" class="mrs" alt=""></p>
+                            <p class="card-text">秘境探險<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_0.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/LostIllusions_180x270_Poster.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/LostIllusions_180x270_Poster.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">巴黎夢想家<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_12.png" class="mrs" alt=""></p>
+                            <p class="card-text">巴黎夢想家<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_12.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/mem/image/moviestand/sonic.jpg" class="card-img-top" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/sonic.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">音速小子2<img src="<%=request.getContextPath()%>/view/mem/image/icons/mrs_6.png" class="mrs" alt=""></p>
+                            <p class="card-text">音速小子2<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_6.png" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
@@ -417,7 +422,7 @@
                         <div id="fastbuy">
                             <h3>快速購票</h3>
                             <div>
-                                <img id="movieicon" src="<%=request.getContextPath()%>/view/mem/image/icons/movie-camera.png" alt="">
+                                <img id="movieicon" src="<%=request.getContextPath()%>/view/index/image/icons/movie-camera.png" alt="">
                                 <select name="fastmovie" id="moviebar">
                                     <option class="moviebar" value="0" name="fastmovie">請選擇影片</option>
                                     <option class="moviebar" value="1" name="fastmovie">咒術迴戰</option>
@@ -429,12 +434,12 @@
                             </div>
 
                             <div>
-                                <img id="dateicon" src="<%=request.getContextPath()%>/view/mem/image/icons/deadline.png" alt="">
+                                <img id="dateicon" src="<%=request.getContextPath()%>/view/index/image/icons/deadline.png" alt="">
                                 <input id="moviedate" type="date">
                             </div>
 
                             <div>
-                                <img id="timeicon" src="<%=request.getContextPath()%>/view/mem/image/icons/back-in-time.png" alt="">
+                                <img id="timeicon" src="<%=request.getContextPath()%>/view/index/image/icons/back-in-time.png" alt="">
                                 <select name="fastmovietime" id="movietimebar">
                                     <option value="1" name="fastmovie">請選擇場次</option>
                                     <option value="2" name="fastmovie">09:30 - 11:30</option>
@@ -447,7 +452,7 @@
                             </div>
 
                             <div>
-                                <img id="peopleicon" src="<%=request.getContextPath()%>/view/mem/image/icons/group.png" alt="">
+                                <img id="peopleicon" src="<%=request.getContextPath()%>/view/index/image/icons/group.png" alt="">
                                 <select name="fastmoviepeople" id="moviepeoplebar">
                                     <option value="1" name="fastmovie">請選擇人數</option>
                                     <option value="2" name="fastmovie">1</option>
@@ -487,7 +492,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 col-sm-12">
-                        <img id="infopic" src="<%=request.getContextPath()%>/view/mem/image/others/f_26003004_1.jpg" alt="">
+                        <img id="infopic" src="<%=request.getContextPath()%>/view/index/image/others/f_26003004_1.jpg" alt="">
                     </div>
                     <div class="col-6 info_p">
                         <h4>【禁止盜錄公告及詳情】</h4>
@@ -506,7 +511,7 @@
                         <h3 class="showinfo">請貴賓提高警覺避免受騙!!</h3>
                     </div>
                     <div class="col-md-5 col-sm-12">
-                        <img id="infopic2" src="<%=request.getContextPath()%>/view/mem/image/others/sagi2.png" alt="">
+                        <img id="infopic2" src="<%=request.getContextPath()%>/view/index/image/others/sagi2.png" alt="">
                     </div>
                 </div>
             </div>
@@ -582,7 +587,7 @@
                     <ul>
                         <li>
                             <span>
-                                <img id="linerobot" src="<%=request.getContextPath()%>/view/mem/image/others/robot.png" alt="">
+                                <img id="linerobot" src="<%=request.getContextPath()%>/view/index/image/others/robot.png" alt="">
                             </span>
                         </li>
                     </ul>
@@ -601,7 +606,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="<%=request.getContextPath()%>/view/mem/js/index.js"></script>
+    <script src="<%=request.getContextPath()%>/view/index/js/index.js"></script>
 </body>
 
 </html>
