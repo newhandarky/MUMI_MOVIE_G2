@@ -26,12 +26,10 @@ public class LoginHandler extends HttpServlet {
 
     // 【取得使用者 帳號(account) 密碼(password)】
     
-   
-    
+    System.out.println("有來到登出這邊");
     
     if("logout".equals(action)) {
     	
-    	System.out.println("有來到登出這邊");
     	
     	try {
     		HttpSession session = req.getSession();
@@ -43,11 +41,7 @@ public class LoginHandler extends HttpServlet {
     		res.sendRedirect(req.getContextPath()+"/view/index/index.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
-			
 		}
-    	
-    	
-    	
     }
     
     if ("login".equals(action)) { // 來自select_page.jsp的請求
