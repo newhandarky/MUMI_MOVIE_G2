@@ -45,7 +45,7 @@ if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/system_mem_list.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -58,7 +58,7 @@ if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/system_mem_list.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -71,7 +71,7 @@ if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/system_mem_list.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -85,7 +85,7 @@ if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/system_mem_list.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -199,9 +199,9 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				MemVO memVO = new MemVO();
 
 				memVO.setMem_name(mem_name);
-				memVO.setMem_nickname(mem_nickname);
 				memVO.setMem_phone(mem_phone);
 				memVO.setMem_password(mem_password);
+				memVO.setMem_nickname(mem_nickname);
 				memVO.setMem_address(mem_address);
 				memVO.setMem_birthday(mem_birthday);
 				
@@ -375,7 +375,7 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				memVO = memSvc.addMem(mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/mem/select_page.jsp";
+				String url = "/view/index/login.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				
 				successView.forward(req, res);

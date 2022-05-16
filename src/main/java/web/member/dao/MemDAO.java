@@ -61,6 +61,9 @@ public class MemDAO implements MemDAO_interface{
 	private static final String LOGIN = 
 			"select mem_id from mumi_member where mem_account = ? and mem_password = ?";
 	
+	private static final String CHANGE_PASSWORD = 
+			"UPDATE mumi_member set mem_password = ? where mem_account = ?";
+	
 	private static final String GET_ONE_VO = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
 			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_account = ?";
@@ -253,6 +256,9 @@ public class MemDAO implements MemDAO_interface{
 		}
 
 	}
+	
+	
+	
 	
 	@Override
 	public void updateState(Integer mem_id) {
@@ -619,6 +625,44 @@ public class MemDAO implements MemDAO_interface{
 		return memVO;
 	}
 
-	
+	@Override
+	public void changePWD(String mem_account, String mem_password) {
+		MemVO memVO = findByAccount(mem_account);
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CHANGE_PASSWORD);
+			
+			pstmt.setString(1, mem_password);
+			pstmt.setString(2, memVO.getMem_account());
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
 	
 }

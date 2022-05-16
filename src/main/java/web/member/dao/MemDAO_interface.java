@@ -12,6 +12,7 @@ public interface MemDAO_interface {
 	public void updateState(Integer mem_id);
 	public void updateClose(MemVO memVO);
 	public void updateOpen(MemVO memVO);
+	public void changePWD(String mem_account, String mem_password);
 	public MemVO findByPrimaryKey(Integer mem_id);
 	public MemVO findByAccount(String mem_account);
 	public List<MemVO> getAll();
