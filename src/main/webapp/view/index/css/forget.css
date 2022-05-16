@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 頁首 */
+
+header {
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    position: fixed;
+    z-index: 5;
+}
+
+
+/* LOGO */
+
+.team_logo {
+    position: absolute;
+    width: 170px;
+    left: 10px;
+}
+
+header .hide_item_out {
+    position: relative;
+    top: 130px;
+}
+
+.underheader {
+    height: 150px;
+}
+
+
+/* main工作區 */
+
+main {
+    width: 100%;
+    margin: 0 auto;
+    position: absolute; /* ★ */
+    top: 50%; /* ★ */
+    transform: translateY(-50%); /* ★ */
+
+}
+
+main .register {
+    max-width: 600px;
+    margin: 0 auto;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    border-radius: 15px;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.register .logo {
+    text-align: center;
+    height: 200px;
+    border-radius: 15px;
+}
+
+.logo img {
+    margin-top: 30px;
+    width: 400px;
+}
+
+.register h2 {
+    margin-top: 70px;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    margin-bottom: 30px;
+}
+
+
+/* main工作區結束 */
+
+@media (max-width: 768px) {
+    .nav-item {
+        display: none;
+    }
+    .hamberger_menu {
+        display: block;
+    }
+    .hide_menu {
+        display: block;
+    }
+}

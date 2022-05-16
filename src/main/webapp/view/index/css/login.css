@@ -267,6 +267,12 @@ ul li{
     display: block;
 }
 
+.forget{
+	font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
 
 /* main工作區結束 */
 
