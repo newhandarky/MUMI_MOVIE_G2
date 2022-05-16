@@ -37,7 +37,7 @@
                         <label for="floatingConfirm">密碼</label>
                     </div>
                 </div>
-                <a href="system_testVer01.html">
+                <a href="<%=request.getContextPath()%>/view/index/admin_index.jsp">
                     <button type="button" class="btn btn-primary btn_login" id="btn_login">登入</button>
                 </a>
                 <button type="button" class="btn btn-secondary btn_forget" id="btn_forget">忘記密碼</button>
