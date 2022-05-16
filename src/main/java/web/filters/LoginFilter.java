@@ -60,26 +60,7 @@ public class LoginFilter implements Filter {
 			res.sendRedirect(req.getContextPath() + "/view/index/login.jsp");
 			return;
 		} else {
-			System.out.println("這邊是在request進來做處理的地方");
-			
-			
-			if(memVO == null) {
-				System.out.println("null!!!!!!!!!!");
-			}else {
-				System.out.println("not null!!!!!!!!!!");
-				System.out.println(chain);
-				System.out.println(request);
-				System.out.println(response);
-				System.out.println(session);
-				System.out.println(account);
-				System.out.println(memVO);
-				System.out.println(mem_id);
-			}
-			
-			
 			chain.doFilter(request, response);
-			
-			System.out.println("這邊是在request出去做處理的地方");
 		}
 	}
 

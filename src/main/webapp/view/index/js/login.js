@@ -47,8 +47,11 @@ $(function() {
 
         console.log(e.keyCode)
             // if( 48 <= e.keyCode || 57 >= e.keycode || 65 <= e.keyCode || 98 >= e.keycode)
-    })
-
+    });
+    
+    $("#logout-a").on("click", function() {
+        console.log("test");
+    });
 
 
 });

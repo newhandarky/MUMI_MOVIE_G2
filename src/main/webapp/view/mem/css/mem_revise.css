@@ -221,11 +221,14 @@ main .register {
     width: 260px;
     border-radius: 50%;
     overflow: hidden;
+    
 }
 
 .logo img {
     /* margin-top: 20px; */
-    width: 260px;
+    width: 100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .register {
