@@ -104,7 +104,7 @@
                         <a href="mem_mumipay.html" class="mumipay">MUMIPAY</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#" class="checksession">登入/登出</a>
+                        <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
                     </li>
                 </ul>
             </div>
@@ -144,7 +144,7 @@
                                 <a href="mem_mumipay.html">MUMIPAY</a>
                             </li>
                             <li>
-								<a style="font-size: 14px" href="#" class="checksession" >登入/登出</a>
+								<a href="#" class="checksession" >登入/登出</a>
                             </li>
                         </ul>
 

@@ -266,8 +266,6 @@ if("updateState".equals(action)) {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			
-			
-			
 			try {
 			
 				Integer mem_id = new Integer(req.getParameter("mem_id").trim());
@@ -354,9 +352,9 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 					errorMsgs.add("請輸入日期!");
 				}
 				
-//				InputStream defaultPic = getServletContext().getResourceAsStream("/view/index/image/icons/user.png");
-//
-//				byte[] mem_pic = defaultPic.readAllBytes();
+				InputStream defaultPic = getServletContext().getResourceAsStream("/view/mem/image/icons/user.png");
+
+				byte[] mem_pic = defaultPic.readAllBytes();
 
 				MemVO memVO = new MemVO();
 				memVO.setMem_address(mem_account);
@@ -365,7 +363,7 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				memVO.setMem_password(mem_password);
 				memVO.setMem_nickname(mem_nickname);
 				memVO.setMem_register(mem_register);
-//				memVO.setMem_pic(mem_pic);
+				memVO.setMem_pic(mem_pic);
 				
 
 				// Send the use back to the form, if there were errors
@@ -379,7 +377,7 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				/*************************** 2.開始新增資料 ***************************************/
 				MemService memSvc = new MemService();
 				
-				memVO = memSvc.addMem(mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register);
+				memVO = memSvc.addMem(mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/view/index/login.jsp";
