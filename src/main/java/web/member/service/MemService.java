@@ -16,7 +16,7 @@ public class MemService {
 	}
 
 	public MemVO addMem(String mem_account, String mem_name, String mem_phone, String mem_password, String mem_nickname, 
-			Date mem_register) {
+			Date mem_register, byte[] mem_pic) {
 
 		MemVO memVO = new MemVO();
 
@@ -26,7 +26,7 @@ public class MemService {
 		memVO.setMem_password(mem_password);
 		memVO.setMem_nickname(mem_nickname);
 		memVO.setMem_register(mem_register);
-//		memVO.setMem_pic(mem_pic);
+		memVO.setMem_pic(mem_pic);
 
 		dao.insert(memVO);
 

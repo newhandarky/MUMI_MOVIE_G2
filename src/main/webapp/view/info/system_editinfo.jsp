@@ -192,10 +192,10 @@
                             <p>公告狀態</p>
                         </div>
                         <div class="col-9">
-<!--                             <select name="infostate" id=""> -->
-<%--                                 <option value="0" <%=(infoVO.getInfo_state() == 0)? "selected" : ""%> >已過期</option> --%>
-<%--                                 <option value="1" <%=(infoVO.getInfo_state() == 1)? "selected" : ""%> >發佈中</option> --%>
-<!--                             </select> -->
+                            <select name="infostate" id="">
+                                <option value="0" <%=(infoVO.getInfo_state() == 0)? "selected" : ""%> >已過期</option>
+                                <option value="1" <%=(infoVO.getInfo_state() == 1)? "selected" : ""%> >發佈中</option>
+                            </select>
                         </div>
 
                         <div class="col-3">
