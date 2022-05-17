@@ -1,20 +1,22 @@
 package web.movie.controller;
 
-import java.io.*;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import web.movie.service.MovieService;
 import web.movie.entity.MovieVO;
-import web.movie.dao.*;
+import web.movie.service.MovieService;
 
-@WebServlet(urlPatterns = {"/view/movie/MovieServlet"})
+@WebServlet(urlPatterns = { "/view/movie/MovieServlet" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class MovieServlet extends HttpServlet {
@@ -27,6 +29,7 @@ public class MovieServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -87,6 +90,43 @@ public class MovieServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("type_Update".equals(action)) { // 來自system_movie_update.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String[] movie_type_id = req.getParameterValues("movie_type_id");
+				Integer movie_tag_id = new Integer(req.getParameter("movie_tag_id"));
+//				for (int i = 0; i < movie_tag_id.length; i++) {
+//					Integer movie_id = new Integer(req.getParameter("movie_id"));
+//					MovieVO movieVO = new MovieVO();
+//					movieVO.setMovie_id(movie_id);
+//					movieVO.setMovie_tag_id(movie_tag_id);
+//					movieVO.setMovie_type_id(Integer.parseInt(movie_type_id[i]));
+//
+//				/*************************** 2.開始查詢資料 ****************************************/
+//					MovieService movieSvc = new MovieService();
+//					movieVO = movieSvc.updateType(movie_id, Integer.parseInt(movie_type_id[i]));
+//					req.setAttribute("movieVO", movieVO); // 資料庫取出的movieVO物件,存入req
+//				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				String url = "/view/movie/system_movie_listAll.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 system_movie_update.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_listAll.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllMovie.jsp的請求
 
@@ -105,19 +145,19 @@ public class MovieServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("movieVO", movieVO); // 資料庫取出的movieVO物件,存入req
-				String url = "/view/movie/update_movie_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_movie_input.jsp
+				String url = "/view/movie/system_movie_update.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 system_movie_update.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/listAllMovie.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_listAll.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // 來自update_movie_input.jsp的請求
+		if ("update".equals(action)) { // 來自system_movie_update.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -128,7 +168,7 @@ public class MovieServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				MovieVO movieVO = new MovieVO();
 				Integer movie_id = new Integer(req.getParameter("movie_id").trim());
-				
+
 				String movie_ch = req.getParameter("movie_ch");
 				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]+$";
 				if (movie_ch == null || movie_ch.trim().length() == 0) {
@@ -171,28 +211,29 @@ public class MovieServlet extends HttpServlet {
 					release_date = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
-				byte[] movie_poster  = ((req.getPart("movie_poster")).getInputStream()).readAllBytes();
-				if(movie_poster.length == 0) {
-				     MovieService movieSvc = new MovieService();
-				     movie_poster = movieSvc.getOneMovie(movie_id).getMovie_poster();     
-				    }else {     
-				     movieVO.setMovie_poster(movie_poster);
-				    }
 
-				byte[] movie_slide_poster  = ((req.getPart("movie_slide_poster")).getInputStream()).readAllBytes();
-				if(movie_slide_poster.length == 0) {
+				byte[] movie_poster = ((req.getPart("movie_poster")).getInputStream()).readAllBytes();
+				if (movie_poster.length == 0) {
 					MovieService movieSvc = new MovieService();
-					movie_slide_poster =  movieSvc.getOneMovie(movie_id).getMovie_slide_poster();     
-				    }else {     
-				     movieVO.setMovie_slide_poster(movie_slide_poster);
-				    }
-				
+					movie_poster = movieSvc.getOneMovie(movie_id).getMovie_poster();
+				} else {
+					movieVO.setMovie_poster(movie_poster);
+				}
+
+				byte[] movie_slide_poster = ((req.getPart("movie_slide_poster")).getInputStream()).readAllBytes();
+				if (movie_slide_poster.length == 0) {
+					MovieService movieSvc = new MovieService();
+					movie_slide_poster = movieSvc.getOneMovie(movie_id).getMovie_slide_poster();
+				} else {
+					movieVO.setMovie_slide_poster(movie_slide_poster);
+				}
+
 				String movie_intro = req.getParameter("movie_intro");
 //				String movie_introReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)(/.:,?!！\\=，。)]{1,}$";
 				if (movie_intro == null || movie_intro.trim().length() == 0) {
 					errorMsgs.add("電影簡介: 請勿空白");
-				} // else if (!movie_intro.trim().matches(movie_introReg)) { // 以下練習正則(規)表示式(regular-expression)
+				} // else if (!movie_intro.trim().matches(movie_introReg)) { //
+					// 以下練習正則(規)表示式(regular-expression)
 //					errorMsgs.add("電影簡介: 只能是中、英文字母、數字和_");
 //				}
 
@@ -200,7 +241,8 @@ public class MovieServlet extends HttpServlet {
 //				String castsReg = "^[(\u4e00-\u9fa5)(、)]+$";
 				if (casts == null || casts.trim().length() == 0) {
 					errorMsgs.add("演員名稱: 請勿空白");
-				}//	 else if (!casts.trim().matches(castsReg)) { // 以下練習正則(規)表示式(regular-expression)
+				} // else if (!casts.trim().matches(castsReg)) { //
+					// 以下練習正則(規)表示式(regular-expression)
 //					errorMsgs.add("演員名稱: 只能是中文");
 //				}
 
@@ -208,7 +250,8 @@ public class MovieServlet extends HttpServlet {
 //				String directorReg = "^[(\u4e00-\u9fa5)(、)]+$";
 				if (director == null || director.trim().length() == 0) {
 					errorMsgs.add("導演名稱: 請勿空白");
-				} // else if (!casts.trim().matches(directorReg)) { // 以下練習正則(規)表示式(regular-expression)
+				} // else if (!casts.trim().matches(directorReg)) { //
+					// 以下練習正則(規)表示式(regular-expression)
 //					errorMsgs.add("導演名稱: 只能是中文");
 //				}
 
@@ -220,17 +263,14 @@ public class MovieServlet extends HttpServlet {
 					// 以下練習正則(規)表示式(regular-expression)
 //					errorMsgs.add("預告: 只能是英文、數字");
 //				}
-				
+
 				Timestamp movie_updated_time;
 				try {
 					movie_updated_time = new Timestamp(System.currentTimeMillis());
 				} catch (Exception e) {
 					movie_updated_time = new java.sql.Timestamp(System.currentTimeMillis());
 				}
-			
-				
-			
-				
+
 				movieVO.setMovie_id(movie_id);
 				movieVO.setMovie_state_id(movie_state_id);
 				movieVO.setMovie_rating_id(movie_rating_id);
@@ -248,7 +288,7 @@ public class MovieServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("movieVO", movieVO); // 含有輸入格式錯誤的movieVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/update_movie_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_update.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -261,20 +301,25 @@ public class MovieServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("movieVO", movieVO); // 資料庫update成功後,正確的的movieVO物件,存入req
-				String url = "/view/movie/listOneMovie.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneMovie.jsp
+				
+				List<MovieVO> list = movieSvc.getType_New(movie_id);
+				
+				req.setAttribute("list", list);
+
+				String url = "/view/movie/system_movie_update_success.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交system_movie_update2.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/update_movie_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_update.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("insert".equals(action)) { // 來自addMovie.jsp的請求
-
+		if ("insert".equals(action)) { // 來自system_movie_add.jsp的請求
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -325,26 +370,23 @@ public class MovieServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 
-				
-				byte[] movie_poster  = ((req.getPart("movie_poster")).getInputStream()).readAllBytes();
-				if(movie_poster.length == 0) {
+				byte[] movie_poster = ((req.getPart("movie_poster")).getInputStream()).readAllBytes();
+				if (movie_poster.length == 0) {
 					movie_poster = null;
 					errorMsgs.add("請新增海報");
 				}
-				
+
 				byte[] movie_slide_poster = ((req.getPart("movie_slide_poster")).getInputStream()).readAllBytes();
-				if(movie_slide_poster.length == 0) {
+				if (movie_slide_poster.length == 0) {
 					movie_slide_poster = null;
 					errorMsgs.add("請新增輪播海報");
 				}
-				
-				
-				
+
 				String movie_intro = req.getParameter("movie_intro");
-			//	String movie_introReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)(/.:,?!！\\=，。)]{1,}$";
+				// String movie_introReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)(/.:,?!！\\=，。)]{1,}$";
 				if (movie_intro == null || movie_intro.trim().length() == 0) {
 					errorMsgs.add("電影簡介: 請勿空白");
-				} 
+				}
 //				else if (!movie_intro.trim().matches(movie_introReg)) { // 以下練習正則(規)表示式(regular-expression)
 //					errorMsgs.add("電影簡介: 只能是中、英文字母、數字和標點符號");
 //				}
@@ -372,7 +414,7 @@ public class MovieServlet extends HttpServlet {
 				} else if (!trailer.trim().matches(trailerReg)) { // 以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("預告: 只能是英文、數字");
 				}
-
+		
 				MovieVO movieVO = new MovieVO();
 				movieVO.setMovie_state_id(movie_state_id);
 				movieVO.setMovie_rating_id(movie_rating_id);
@@ -390,27 +432,62 @@ public class MovieServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("movieVO", movieVO); // 含有輸入格式錯誤的movieVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/addMovie.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_add.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+		
 				/*************************** 2.開始新增資料 ***************************************/
 				MovieService movieSvc = new MovieService();
 				movieVO = movieSvc.addMovie(movie_state_id, movie_rating_id, movie_ch, movie_en, movie_runtime,
 						release_date, movie_poster, movie_slide_poster, movie_intro, casts, director, trailer);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/movie/listAllMovie.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllMovie.jsp
+				String url = "/view/movie/system_movie_add2.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交system_movie_listAll.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
+				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/addMovie.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_add.jsp");
 				failureView.forward(req, res);
 			}
+		}
+
+		if ("type_insert".equals(action)) {
+	
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				
+				String[] movie_type_id = req.getParameterValues("movie_type_id");
+	
+				for (int i = 0; i < movie_type_id.length; i++) {
+					Integer movie_id = new Integer(req.getParameter("movie_id"));
+					MovieVO movieVO = new MovieVO();
+					movieVO.setMovie_id(movie_id);
+					movieVO.setMovie_type_id(Integer.parseInt(movie_type_id[i]));
+
+					/*************************** 2.開始新增資料 *****************************************/
+					MovieService movieSvc = new MovieService();
+					movieVO = movieSvc.insertType(movie_id, Integer.parseInt(movie_type_id[i]));
+				}
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/view/movie/system_movie_listAll.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交system_movie_tag_listAll.jsp
+				successView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("新增資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_listAll.jsp");
+				failureView.forward(req, res);
+			}
+
 		}
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp
@@ -429,14 +506,14 @@ public class MovieServlet extends HttpServlet {
 				movieSvc.deleteMovie(movie_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/movie/listAllMovie.jsp";
+				String url = "/view/movie/system_movie_listAll.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/listAllMovie.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_add2.jsp");
 				failureView.forward(req, res);
 			}
 		}

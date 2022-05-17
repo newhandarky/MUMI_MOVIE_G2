@@ -42,6 +42,40 @@ public class MovieService {
 	}
 
 	
+	
+	public MovieVO insertType(Integer movie_id, Integer movie_type_id) {
+
+		MovieVO movieVO = new MovieVO();
+
+		movieVO.setMovie_id(movie_id);
+		movieVO.setMovie_type_id(movie_type_id);
+		
+		dao.addType(movieVO);
+		
+		return movieVO;
+	}
+	
+	
+	public MovieVO updateType(Integer movie_id, Integer movie_type_id) {
+
+		MovieVO movieVO = new MovieVO();
+
+		movieVO.setMovie_id(movie_id);
+		movieVO.setMovie_type_id(movie_type_id);
+		
+		dao.updateType(movieVO);
+		
+		return movieVO;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //movie_state_id=?, movie_rating_id=?, movie_ch=?, movie_en=?, 
 //movie_runtime=?, release_date=?, movie_poster=?, movie_slide_poster=?, 
 //movie_intro=?, casts=?, director=?, trailer=? where movie_id = ?
@@ -84,7 +118,13 @@ public class MovieService {
 		return dao.getAll();
 	}
 	
+	public List<MovieVO> getMovie_New(){
+		return dao.getMovie_New();
+	}
 	
+	public List<MovieVO> getType_New(Integer movie_id){
+		return dao.getMovie_type(movie_id);
+	}
 	
 	
 	
