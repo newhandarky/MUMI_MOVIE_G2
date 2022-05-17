@@ -1,4 +1,4 @@
-package web.expect.dao;
+package web.expect.entity;
 
 import java.sql.Date;
 import java.util.Arrays;
