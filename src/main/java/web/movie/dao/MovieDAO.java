@@ -19,6 +19,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import web.movie.entity.MovieVO;
+import web.movie_tag.entity.Movie_tagVO;
 
 public class MovieDAO implements MovieDAO_interface {
 
@@ -40,6 +41,125 @@ public class MovieDAO implements MovieDAO_interface {
 			+ "casts, director, trailer, expect_num, sati_num, movie_likes, expect_total, sati_total FROM MOVIE where movie_id = ?";
 	private static final String DELETE = "DELETE FROM MOVIE where movie_id = ?";
 	private static final String UPDATE = "UPDATE MOVIE set movie_state_id=?, movie_rating_id=?, movie_ch=?, movie_en=?, movie_runtime=?, release_date=?, movie_poster=?, movie_slide_poster=?, movie_intro=?, casts=?, director=?, trailer=?, movie_updated_time=?  where movie_id = ?";
+	private static final String INSERT_TYPE = "INSERT INTO movie_tag (movie_id, movie_type_id) " + "VALUES (?, ?)";
+	private static final String GET_NEWONE_STMT = "SELECT movie_id FROM movie order by movie_id desc";
+	private static final String GET_TYPE_STMT = "select movie_tag_id, movie_id, movie_type_id from movie_tag where movie_id = ?";
+	private static final String UPDATE_TYPE = "UPDATE MOVIE_TAG set movie_id = ?, movie_type_id = ? where movie_tag_id = ?";
+	private static final String DELETE_TYPE = "DELETE FROM MOVIE_TAG where movie_id = ?";
+	
+	
+	
+	
+	
+	@Override
+	public List<MovieVO> getMovie_type(Integer movie_id) {
+		
+		List<MovieVO> list = new ArrayList<MovieVO>();
+		MovieVO movieVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_TYPE_STMT);
+			pstmt.setInt(1, movie_id);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				movieVO = new MovieVO();
+				movieVO.setMovie_tag_id(rs.getInt("movie_tag_id"));
+				movieVO.setMovie_id(rs.getInt("movie_id"));
+				movieVO.setMovie_type_id(rs.getInt("movie_type_id"));
+				
+				list.add(movieVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	
+	
+	@Override
+	public List<MovieVO> getMovie_New() {
+
+		List<MovieVO> list = new ArrayList<MovieVO>();
+		MovieVO movieVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_NEWONE_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				movieVO = new MovieVO();
+				movieVO.setMovie_id(rs.getInt("movie_id"));
+				list.add(movieVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+
+	}
 
 	@Override
 	public void insert(MovieVO movieVO) {
@@ -98,8 +218,6 @@ public class MovieDAO implements MovieDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			
-			
 			pstmt.setInt(1, movieVO.getMovie_state_id());
 			pstmt.setInt(2, movieVO.getMovie_rating_id());
 			pstmt.setString(3, movieVO.getMovie_ch());
@@ -114,8 +232,7 @@ public class MovieDAO implements MovieDAO_interface {
 			pstmt.setString(12, movieVO.getTrailer());
 			pstmt.setTimestamp(13, movieVO.getMovie_updated_time());
 			pstmt.setInt(14, movieVO.getMovie_id());
-			
-			
+
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -138,6 +255,47 @@ public class MovieDAO implements MovieDAO_interface {
 		}
 
 	}
+	
+	
+	@Override
+	public void getMovie_type_delete(Integer movie_id) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_TYPE);
+
+			pstmt.setInt(1, movie_id);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		
+		
+	}
+	
 
 	@Override
 	public void delete(Integer movie_id) {
@@ -314,23 +472,104 @@ public class MovieDAO implements MovieDAO_interface {
 		}
 		return list;
 	}
-	
-	public static byte[] pic(String pic1) {
 
-		File fi = new File(pic1);
+//	public static byte[] pic(String pic1) {
+//
+//		File fi = new File(pic1);
+//		try {
+//			FileInputStream fis = new FileInputStream(fi);
+//			byte[] bt = fis.readAllBytes();
+//			return bt;
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null; 
+//
+//	}
+
+	@Override
+	public void addType(MovieVO movieVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
 		try {
-			FileInputStream fis = new FileInputStream(fi);
-			byte[] bt = fis.readAllBytes();
-			return bt;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_TYPE);
+
+			pstmt.setInt(1, movieVO.getMovie_id());
+			pstmt.setInt(2, movieVO.getMovie_type_id());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
-		return null; 
 
 	}
+	
+	
+	
+	
+	@Override
+	public void updateType(MovieVO movieVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_TYPE);
+
+			pstmt.setInt(1, movieVO.getMovie_id());
+			pstmt.setInt(2, movieVO.getMovie_type_id());
+			pstmt.setInt(3, movieVO.getMovie_tag_id());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 
 }

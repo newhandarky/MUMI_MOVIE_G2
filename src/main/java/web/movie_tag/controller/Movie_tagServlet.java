@@ -19,7 +19,7 @@ public class Movie_tagServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doPut(req, res);
+		doPost(req, res);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
