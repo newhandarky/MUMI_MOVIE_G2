@@ -34,6 +34,13 @@
                         </div>
                     </div>
                 </form>
+                
+                <form id="checkaccount" METHOD="post" ACTION="<%=request.getContextPath()%>/member/SendEmail">
+                  	<input type="hidden" name="mem_account" value="${memVO.mem_account}">
+          			<input type="hidden" name="action" value="checkaccount">	
+                </form>
+                
+                
             </div>
         </div>
     </main>

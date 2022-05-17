@@ -2,10 +2,10 @@ package web.member.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class MemDAO implements MemDAO_interface{
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
 			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_account = ?";
 	
-	private static final String pic = "C:\\TGA101_WebApp\\eclipse_WTP_workspace1\\MUMI_MOVIE\\src\\main\\webapp\\mem\\image\\icons\\user.png"; 
+//	private static final String pic = "//view//index//image//icons//user.png"; 
 	
 	@Override
 	public void insert(MemVO memVO) {
@@ -76,11 +76,14 @@ public class MemDAO implements MemDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
+//		InputStream defaultPic = getServletContext().getResourceAsStream("/NoData/none3.jpg");
+//		byte[] article_pic = ((request.getPart("article_pic")).getInputStream()).readAllBytes();
+//				if (article_pic.length == 0) {
+//					article_pic = defaultPic.readAllBytes();
+//				}
 		
-
 		try {
 			
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
@@ -92,16 +95,17 @@ public class MemDAO implements MemDAO_interface{
 			pstmt.setString(4, memVO.getMem_password());
 			pstmt.setString(5, memVO.getMem_nickname());
 			pstmt.setDate(6, memVO.getMem_register());
+			pstmt.setBytes(7, null);
 			
-			try {
-				FileInputStream in = new FileInputStream(pic);
-				byte[] bt = in.readAllBytes();
-				pstmt.setBytes(7, bt);
-				in.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				FileInputStream in = new FileInputStream(pic);
+//				byte[] bt = in.readAllBytes();
+//				pstmt.setBytes(7, bt);
+//				in.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			pstmt.executeUpdate();
 

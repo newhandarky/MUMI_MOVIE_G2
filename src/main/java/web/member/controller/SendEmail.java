@@ -11,6 +11,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +33,7 @@ public class SendEmail extends HttpServlet {
 		
 		String action = req.getParameter("action");
 		String to = req.getParameter("mem_account");
+		String errMessage;
 		
 		MemDAO dao = new MemDAO();
 		String newPwd = genAuthCode();
@@ -81,6 +83,19 @@ public class SendEmail extends HttpServlet {
 				System.out.println("傳送失敗!");
 				e.printStackTrace();
 			}
+		}
+		
+		
+		if ("checkaccount".equals(action)) {
+			
+			try {
+				if (dao.checkAccount(to) == null) {
+					errMessage = "查無您的帳號!!";
+				} 
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
 
 	}

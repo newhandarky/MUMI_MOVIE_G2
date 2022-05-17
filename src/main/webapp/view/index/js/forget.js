@@ -8,3 +8,6 @@ $("#btnforget").on("click", function() {
 	    $("#forget").submit();
     }, 3000);
 });
+	
+	
+//$("#checkaccount").submit();

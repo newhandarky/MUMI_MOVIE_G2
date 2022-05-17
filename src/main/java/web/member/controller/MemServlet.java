@@ -1,6 +1,7 @@
 package web.member.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -352,6 +353,10 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 					mem_register = new Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
+				
+//				InputStream defaultPic = getServletContext().getResourceAsStream("/view/index/image/icons/user.png");
+//
+//				byte[] mem_pic = defaultPic.readAllBytes();
 
 				MemVO memVO = new MemVO();
 				memVO.setMem_address(mem_account);
@@ -360,6 +365,8 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				memVO.setMem_password(mem_password);
 				memVO.setMem_nickname(mem_nickname);
 				memVO.setMem_register(mem_register);
+//				memVO.setMem_pic(mem_pic);
+				
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
