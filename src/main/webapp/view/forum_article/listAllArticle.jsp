@@ -17,11 +17,11 @@ pageContext.setAttribute("list", list);
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>所有文章資料 - listAllArticle.jsp</title>
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	href="<%=request.getContextPath()%>/view/forum_article/vendors/bootstrap.css">
 <script
-	src="<%=request.getContextPath()%>/view/forum_article/vendors/jquery-3.6.0.min.js"></script>
+	src="<%=request.getContextPath()%>/view/forum_article/vendors/jquery-3.6.0.js"></script>
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	src="<%=request.getContextPath()%>/view/forum_article/vendors/bootstrap.bundle.js"></script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/forum_article/css/listAllArticle.css">
@@ -102,9 +102,8 @@ pageContext.setAttribute("list", list);
 						<td>
 							<div class="articleContain" style="display: none">
 								<div class="close_contain">X</div>
-								<div class="articleDetail">${articleVO.article_contain}</div>
+								<p class="articleDetail">${articleVO.article_contain}</p>
 							</div>
-
 						</td>
 					</tr>
 				</tbody>

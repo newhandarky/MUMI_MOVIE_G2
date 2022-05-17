@@ -60,21 +60,19 @@
 		<div class="row g-5">
 			<div class="col-md-9">
 				<div class="btn btn-success btn-sm" style="float: right">
-					<a
-						href="http://localhost:8080/movie_demo/view/forum_article/postArticle.jsp">發表文章</a>
+					<a href="postArticle.jsp" class="btn btn-sm">發表文章</a>
 				</div>
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a href="" class="nav-link">全部文章</a></li>
-					<li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="OneArticleDetail(${e.article_id})">綜合討論</a></li>
-					<li class="nav-item"><a href="" class="nav-link">電影心得</a></li>
-					<li class="nav-item"><a href="" class="nav-link">商城購物</a></li>
-					<li class="nav-item"><a href="" class="nav-link">影城討論</a></li>
+					<li class="nav-item"><a href="http://localhost:8080/movie_demo/view/forum_article/ForumIndex.html" class="nav-link">全部文章</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardDiscuss" class="nav-link" onclick="changeBoard(1)">綜合討論</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardMovie" class="nav-link" onclick="changeBoard(2)">電影心得</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardBuy" class="nav-link" onclick="changeBoard(3)">商城購物</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardTheater" class="nav-link" onclick="changeBoard(4)">影城討論</a></li>
 				</ul>
 				<br>
 				<article>
 					<!-- 全部文章 -->
-					<table id="tableAll" class="table table-bordered"
-						style="display: block;">
+					<table id="tableAll" class="table table-bordered" style="display: block;">
 						<thead style="background-color: lightgray; text-align: center;">
 							<tr>
 								<th class="col-1">分類</th>
@@ -88,32 +86,9 @@
 						<tbody id="boardAll" class="table">
 
 						</tbody>
-
+						
 					</table>
-
-					<!-- 單一文章 -->
-
-
-
-					<table id="tableDiscuss" class="table table-bordered"
-						style="display: none;">
-						<thead style="background-color: lightgray; text-align: center;">
-							<tr>
-								<th class="col-1">分類</th>
-								<th class="col-2">首圖</th>
-								<th class="col-5">標題</th>
-								<th class="col-2">互動／人氣</th>
-								<th class="col-2">最新回覆</th>
-							</tr>
-						</thead>
-
-						<tbody id="boardDiscuss" class="table">
-
-						</tbody>
-
-					</table>
-
-
+					
 				</article>
 
 
@@ -144,50 +119,75 @@
 	</main>
 
 	<script>
-    	// 全部文章
-        (() => {
-            const tbodyAll = document.querySelector('#boardAll');
-            window.addEventListener('load', () => {
-            	
-            	
-                const url = 'GetAllArticleServlet'; //網址
-                
-                // 綁click 傳參數
-                fetch(url)
-                    .then(resp => resp.json())
-                    .then(list => {
-                        for (let e of list) {
-                            if (e.article_updated == null) {
-                                e.article_updated = e.article_publish;
-                            }
-                            tbodyAll.insertAdjacentHTML('beforeend', `
-                            <tr>
-                                <td>
-                                    <p class="badge bg-light text-dark"><a href="">${e.article_board}</a><br><span>【${e.article_type}】</span></p>
-                                </td>
-                                <td>
-                                    <img src="ShowPicServlet?article_id=${e.article_id}" class="img-fluid">
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0)" onclick="OneArticleDetail(${e.article_id})">${e.article_subject}</a>
-                                </td>
-                                <td>
-                                    <p class="badge bg-light text-dark">${e.article_like_num}</p>
-                                    <span>／</span>
-                                    <p class="badge bg-light text-dark">${e.article_dislike_num}</p>
-                                </td>
-                                <td>${e.article_updated}</td>
-                            </tr>`);
-                        }
-                    });
-            });
-        })();
+		let url;
+		const tbodyAll = document.querySelector('#boardAll');
+		
+		// 轉換板塊文章
+		function changeBoard(board_num) {
+			history.pushState(null , null,"http://localhost:8080/movie_demo/view/forum_article/page=" + board_num);
+					
+			tbodyAll.innerHTML="";
+			$(document).find("#tableAll").attr("style" , "display: block");
+			$(document).find(".articleOne").attr("style" , "display: none");
+        	url = "http://localhost:8080/movie_demo/view/forum_article/GetBoardArticleServlet?page=" + board_num;  
+        	console.log("board_num=" + board_num);
+        	console.log("click#boardDiscuss="+ url);
+        	showBoardArticle(url);
+		}
+		
+    	// 網頁轉換觸發事件
+    	window.addEventListener('popstate', () => {  
+     	 　　changeBoard(board_num)
+     	});
+
+        
+    	// 網頁load後顯示全部文章
+  		window.addEventListener('load', () => {
+             			
+            if (url == null){	
+            	url = 'GetAllArticleServlet'; //網址
+            }	
+            console.log("window="+ url);    
+            showBoardArticle(url);
+
+        });
     	
-    	// 單一文章內容
+    	// 顯示板塊文章
+    	function showBoardArticle(url) {
+            fetch(url)
+            .then(resp => resp.json())
+            .then(list => {
+                for (let e of list) {
+                    if (e.article_updated == null) {
+                        e.article_updated = e.article_publish;
+                    }
+                    const tbodyAll = document.querySelector('#boardAll');
+                    tbodyAll.insertAdjacentHTML('beforeend', `
+                    <tr>
+                        <td>
+                            <p class="badge bg-light text-dark"><a href="">${e.article_board}</a><br><span>【${e.article_type}】</span></p>
+                        </td>
+                        <td>
+                            <img src="ShowPicServlet?article_id=${e.article_id}" class="img-fluid">
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" onclick="OneArticleDetail(${e.article_id})">${e.article_subject}</a>
+                        </td>
+                        <td>
+                            <p class="badge bg-light text-dark">${e.article_like_num}</p>
+                            <span>／</span>
+                            <p class="badge bg-light text-dark">${e.article_dislike_num}</p>
+                        </td>
+                        <td>${e.article_updated}</td>
+                    </tr>`);
+                }
+            });
+		}
+    	
+    	// 顯示單一文章內容
     	function OneArticleDetail(aID) {
     		
     		$(document).find("#tableAll").attr("style" , "display: none");
-    		$(document).find("#articleOne").attr("style" , "display: block");
     		const article = document.querySelector('article');
     		
     		const url = "http://localhost:8080/movie_demo/view/forum_article/GetOneArticleServlet?article_id=" + aID;
@@ -196,27 +196,33 @@
     	    .then(resp => resp.json())
     	    .then(detail => {
     	        console.log(detail);
-    	        article.insertAdjacentHTML('beforeend', `
-    					<div id="articleOne" style="display: block">
-							<h2 class="blog-post-title">
-								<span>【${detail.article_type}】</span>${detail.article_subject}
-							</h2>
-							<hr>
-							<p class="blog-post-meta">作者： ${detail.article_id}</p>
-							<p class="blog-post-meta">發表時間： ${detail.article_updated}</p>
-							<div>
-								<img src="ShowPicServlet?article_id=${detail.article_id}" class="img-fluid">
-								<p>${detail.article_contain}</p>
-							</div>
-						</div>`);
+//                 for (let e of detail) {
+                    if (detail.article_updated == null) {
+                    	detail.article_updated = detail.article_publish;
+                    }
+	    	        article.insertAdjacentHTML('beforeend', `
+	    					<div class="articleOne" style="display: block">
+								<h2 class="blog-post-title">
+									<span>【${detail.article_type}】</span>${detail.article_subject}
+								</h2>
+								<hr>
+								<p class="blog-post-meta">作者： ${detail.mem_id}</p>
+								<p class="blog-post-meta">發表時間： ${detail.article_updated}</p>
+								<div>
+									<img src="ShowPicServlet?article_id=${detail.article_id}" class="img-fluid">
+									<p>${detail.article_contain}</p>
+								</div>
+								<hr>
+								<div class="btn btn-success btn-sm" style="float: right">
+									<a href="#" class="btn btn-sm">回覆文章</a>
+								</div>
+							</div>`);
+//                 }
     	    });
-    		
-			
 		}
-
+    	
 
     </script>
-
 
 
 </body>

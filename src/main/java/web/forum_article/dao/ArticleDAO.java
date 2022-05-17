@@ -32,7 +32,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 	}
 
 	private static final String INSERT_STMT = "INSERT INTO forum_article(mem_id, article_board, article_type, article_subject, "
-			+ "article_contain, article_pic, article_publish, article_state, re_article_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "article_contain, article_pic, article_publish, article_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String DELETE = "DELETE FROM forum_article where article_id = ?";
 
@@ -40,13 +40,13 @@ public class ArticleDAO implements ArticleDAO_interface {
 			+ "article_pic = ?, article_updated = ?,article_state = ?  where article_id = ?";
 
 	private static final String GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_id";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_id desc";
 	
 	private static final String GET_ONE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_id = ?";
 
 	private static final String GET_BOARD_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? order by article_id";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? order by article_id desc";
 
 	private static final String GET_TYPE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_type = ? order by article_id";
@@ -74,7 +74,6 @@ public class ArticleDAO implements ArticleDAO_interface {
 			pstmt.setBytes(6, articleVO.getArticle_pic());
 			pstmt.setTimestamp(7, articleVO.getArticle_publish());
 			pstmt.setString(8, articleVO.getArticle_state());
-			pstmt.setInt(9, articleVO.getRe_article_id());
 			
 			pstmt.executeUpdate();
 

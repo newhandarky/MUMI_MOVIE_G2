@@ -16,7 +16,7 @@ public class ArticleService {
 	}
 
 	public ArticleVO addArticle(Integer mem_id, String article_board, String article_type, String article_subject,
-			String article_contain, byte[] article_pic, Timestamp article_publish, String article_state, Integer re_article_id) {
+			String article_contain, byte[] article_pic, Timestamp article_publish, String article_state) {
 
 		ArticleVO articleVO = new ArticleVO();
 
@@ -28,7 +28,6 @@ public class ArticleService {
 		articleVO.setArticle_pic(article_pic);
 		articleVO.setArticle_publish(article_publish);
 		articleVO.setArticle_state(article_state);
-		articleVO.setRe_article_id(re_article_id);
 		dao.insert(articleVO);
 
 		return articleVO;
