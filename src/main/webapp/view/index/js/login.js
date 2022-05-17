@@ -49,8 +49,12 @@ $(function() {
             // if( 48 <= e.keyCode || 57 >= e.keycode || 65 <= e.keyCode || 98 >= e.keycode)
     });
     
-    $("#logout-a").on("click", function() {
-        console.log("test");
+	
+	$("#btn_primary").on("click", function() {
+		Swal.fire('登入成功，感謝您的光臨');
+		setTimeout(function(){
+			$("#login").submit();
+		}, 2000);
     });
 
 

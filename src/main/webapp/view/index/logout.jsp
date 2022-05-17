@@ -24,7 +24,7 @@
 
         <div class="loginarea">
             <div class="register">
-                <form action="<%=request.getContextPath()%>/view/member/LoginHandler" method="post">
+                <form id="logoutform" action="<%=request.getContextPath()%>/view/member/LoginHandler" method="post">
                     <div class="logo">
                         <img src="<%=request.getContextPath()%>/view/index/image/others/mujilogo2.png" alt="">
                     </div>
@@ -36,7 +36,7 @@
                             <a href="#" id="goback">返回</a> 繼續使用
                         </p>
                         <input type="hidden" name="action" value="logout">
-                        <button type="submit" id="btn_primary" class="btn btn-primary">確定登出</button>
+                        <button type="button" id="btn_primary" class="btn btn-primary">確定登出</button>
                     </div>
                 </form>
             </div>
@@ -47,6 +47,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- JS檔連結記得修改 -->
     <script src="<%=request.getContextPath()%>/view/index/js/logout.js"></script>

@@ -19,7 +19,7 @@
     <main>
         <div class="loginarea">
             <div class="register">
-                <form METHOD="post" ACTION="<%=request.getContextPath()%>/member/SendEmail">
+                <form id="forget" METHOD="post" ACTION="<%=request.getContextPath()%>/member/SendEmail">
                     <div class="logo">
                         <img src="<%=request.getContextPath()%>/view/index/image/others/mujilogo2.png" alt="">
                     </div>
@@ -30,8 +30,7 @@
                         </div>
                         <div class="mb-3">
                     		<input type="hidden" name="action" value="forget">	
-<!--                             <button type="submit" class="btn btn-primary" id="sendmail">確認送出</button> -->
-                            <button type="submit" class="btn btn-primary">確認送出</button>
+                            <button type="button" id="btnforget" class="btn btn-primary">確認送出</button>
                         </div>
                     </div>
                 </form>

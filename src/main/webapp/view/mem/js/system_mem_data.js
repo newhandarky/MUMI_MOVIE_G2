@@ -91,16 +91,7 @@ $('.sidebar .close-aside').on('click', function() {
     wrapper.classList.remove('margin')
 })
 
-// 查看會員照片
-$(".btn-success").on("click", function() {
-    Swal.fire({
-        title: '會員編號001',
-        imageUrl: 'http://localhost:8081/MUMI_MOVIE/mem/image/others/48176.jpg',
-        imageWidth: 400,
-        imageHeight: 400,
-        imageAlt: 'Custom image',
-    })
-})
+
 
 if($(".memstate1").hasClass("memstate1")){
 	$(".memstate1").text("啟用");
@@ -112,48 +103,54 @@ if($(".memstate0").hasClass("memstate0")){
 
 
 // 會員帳號狀態按鈕
-//$(".btn-primary").on("click", function() {
-//    if (!$("#-on").hasClass("memstate0")) {
-//        Swal.fire({
-//            title: '確定要更動此會員的帳號狀態?',
-//            text: '請留意, 除非此會員違反影城規定, 否則此舉可能造成會員投訴',
-//            icon: 'warning',
-//            showCancelButton: true,
-//            confirmButtonColor: '#3085d6',
-//            cancelButtonColor: '#d33',
-//            confirmButtonText: 'Yes'
-//        }).then((result) => {
-//            if (result.isConfirmed) {
-//                Swal.fire(
-//                    '已停用!',
-//                    '此會員帳號已停用',
-//                    'success'
-//                )
-//                $("#-on").addClass('memstate0');   
-//                $("#-on").removeClass('memstate1');             
-//				$("#-on").text("停用");
-//                
-//            }
-//        })
-//    } 
-//
-//})
-//
-//
-//$(".btn-primary").on("click", function() {
-//    if ($("#-on").hasClass("memstate0")) {
-//        Swal.fire({
-//            icon: 'success',
-//            title: '已變更此會員帳號狀態',
-//            text: '此帳號已成功啟用!',
-//        })
-//
-//        $("#-on").removeClass('memstate0');
-//        $("#-on").addClass('memstate1');
-//		$("#-on").text("啟用");
-//    }
-//
-//})
+$(".btn-primary").on("click", function() {
+    if (!$("#-on").hasClass("memstate0")) {
+        Swal.fire({
+            title: '確定要更動此會員的帳號狀態?',
+            text: '請留意, 除非此會員違反影城規定, 否則此舉可能造成會員投訴',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    '已停用!',
+                    '此會員帳號已停用',
+                    'success'
+                )
+                $("#-on").addClass('memstate0');   
+                $("#-on").removeClass('memstate1');             
+				$("#-on").text("停用");
+				setTimeout(function(){
+					$("#updateState").submit();
+				}, 2000);
+                
+            }
+        })
+    } 
+
+})
+
+
+$(".btn-primary").on("click", function() {
+    if ($("#-on").hasClass("memstate0")) {
+        Swal.fire({
+            icon: 'success',
+            title: '已變更此會員帳號狀態',
+            text: '此帳號已成功啟用!',
+        })
+
+        $("#-on").removeClass('memstate0');
+        $("#-on").addClass('memstate1');
+		$("#-on").text("啟用");
+		setTimeout(function(){
+			$("#updateState").submit();
+		}, 2000);
+    }
+
+})
 
 // 會員性別判定
 if($("#mem_gender").hasClass("0")){

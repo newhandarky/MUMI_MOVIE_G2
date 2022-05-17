@@ -28,7 +28,7 @@
     <main>
         <div class="register">
         	
-            <form METHOD="post" ACTION="<c:url value="/view/mem/MemServlet" />" enctype="multipart/form-data">
+            <form id="register" METHOD="post" ACTION="<c:url value="/view/mem/MemServlet" />" enctype="multipart/form-data">
                                     
                 <h2>會員資料修改</h2>
 				
@@ -136,7 +136,7 @@
                     
 					<input type="hidden" name="mem_id" value="<%=memVO.getMem_id()%>">
 					<input type="hidden" name="action" value="update">
-                    <button type="submit" class="btn btn-primary" id="commit" value="送出修改">確認送出</button>
+                    <button type="button" class="btn btn-primary" id="commit" value="送出修改">確認送出</button>
 
                     <hr>
                     <p>提醒您！ MUMI MOVIE 吾映良影不會以電話通知更改付款方式或要求改以ATM重新轉帳。 </p>

@@ -42,24 +42,27 @@ $(function() {
     });
 
     // 送出資料
-//    $("#commit").on("click", function() {
-//        swal({
-//                title: "請確認資料是否填寫正確?",
-//                text: "Please confirm whether the information is filled in correctly!",
-//                icon: "warning",
-//                buttons: true,
-//                dangerMode: true,
-//            })
-//            .then((willDelete) => {
-//                if (willDelete) {
-//                    swal("資料修改完畢!!", {
-//                        icon: "success",
-//                    });
-//                } else {
-//                    swal("返回註冊頁面重新填寫");
-//                }
-//            });
-//    })
+    $("#commit").on("click", function() {
+        swal({
+                title: "請確認資料是否填寫正確?",
+                text: "Please confirm whether the information is filled in correctly!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("資料修改完畢!!", {
+                        icon: "success",
+                    });
+				    setTimeout(function(){
+					    $("#register").submit();
+				    }, 2000);
+                } else {
+                    swal("返回註冊頁面重新填寫");
+                }
+            });
+    })
 
 
 

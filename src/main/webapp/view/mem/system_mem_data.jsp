@@ -117,11 +117,11 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 					<button type="button" class="btn btn-secondary">返回會員列表</button>
 				</a>
 				
-				<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/mem/MemServlet" class="changestate">
+				<form id="updateState" METHOD="post" ACTION="<%=request.getContextPath()%>/view/mem/MemServlet" class="changestate">
 					<input type="hidden" name="mem_id" value="${memVO.mem_id}"> 
 					<input type="hidden" name="mem_state" value="${memVO.mem_state}">
 					<input type="hidden" name="action" value="updateState">
-					<button type="submit" class="btn btn-primary" value="送出修改">修改此會員狀態</button>							
+					<button type="button" class="btn btn-primary" value="送出修改">修改此會員狀態</button>							
 				</form>
 			</div>
 		</div>
