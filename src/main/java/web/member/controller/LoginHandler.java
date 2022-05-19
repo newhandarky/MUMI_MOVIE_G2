@@ -90,6 +90,11 @@ public class LoginHandler extends HttpServlet {
 				System.out.println("進入查密碼");
 				
 				errorMsgs.add("密碼錯誤");
+			}else if(memVO.getMem_state() == 0) {
+				
+				System.out.println("你帳號被ban惹辣!!");
+				
+				errorMsgs.add("很抱歉您的帳號已停止使用");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
