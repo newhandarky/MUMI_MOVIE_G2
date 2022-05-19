@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 
 <head>
-	<title>姆咪姆咪心動動</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-		crossorigin="anonymous"></script>
-	<style>
-		@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+<title>姆咪姆咪心動動</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+	crossorigin="anonymous"></script>
+<style>
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
-		* {
-			padding: 0px;
-			font-family: "cwTeXYen", sans-serif;
-			font-weight: bold;
-			font-size: 20px;
+* {
+	padding: 0px;
+	font-family: "cwTeXYen", sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
 
-		}
+.container {
+	padding-top: 100px;
+	background: url(/MUMI_MOVIE/view/ChatRoom/img/chatRoomS2.png);
+	width: 377px;
+	height: 737px;
+}
 
-		.container {
-			padding-top: 100px;
-			background: url(/MUMI_MOVIE/view/ChatRoom/img/chatRoomS2.png);
-			width: 377px;
-			height: 737px;
-		}
+#messagesArea {
+	margin-top: 50px;
+	background-color: transparent;
+	width: 347px;
+	height: 450px;
+	outline: 3px solid white;
+	box-sizing: border-box;
+	color: white;
+	overflow-y: scroll;
+}
 
-		#messagesArea {
-			margin-top: 50px;
-			background-color: transparent;
-			width: 347px;
-			height: 450px;
-			outline: 3px solid white;
-			box-sizing: border-box;
-			color: white;
-			overflow-y: scroll;
-		}
+#userName {
+	margin-top: 37px;
+	width: 250px;
+	box-sizing: border-box;
+}
 
-		#userName {
-			margin-top: 37px;
-			width: 250px;
-			box-sizing: border-box;
-		}
+#message {
+	width: 250px;
+	height: 35px;
+	display: inline;
+	box-sizing: border-box;
+}
 
-		#message {
-			width: 250px;
-			height: 35px;
-			display: inline;
-			box-sizing: border-box;
-		}
+#sendMessage {
+	margin-left: 0px;
+	border-radius: 20px
+}
 
-		#sendMessage {
-			margin-left: 0px;
-			border-radius: 20px
-		}
+.input-area {
+	width: 250px;
+	display: inline;
+	box-sizing: border-box;
+}
 
-		.input-area {
-			width: 250px;
-			display: inline;
-			box-sizing: border-box;
-		}
-
-		#model {
-			display: inline;
-
-		}
-	</style>
+#model {
+	display: inline;
+}
+</style>
 </head>
 
 <body onload="connect();" onunload="disconnect();">
@@ -75,29 +78,31 @@
 			<!-- <p>安妮雅 : <img src="./an/anyabanzai1.png" width="100px" alt=""></p> -->
 		</div>
 		<div class="panel input-area">
-			<input id="userName" class="text-field" type="text" placeholder="請輸入姓名" />
-			<input id="message" class="text-field" type="text" placeholder="請輸入訊息"
+			<input id="userName" class="text-field" type="text"
+				placeholder="請輸入姓名" /> <input id="message" class="text-field"
+				type="text" placeholder="請輸入訊息"
 				onkeydown="if (event.keyCode == 13) sendMessage();" />
 			<!-- <input type="button" id="connect" class="button" value="Connect" onclick="connect();" /> 
                 <input type="button" id="disconnect" class="button" value="Disconnect" onclick="disconnect();" /> -->
-			<button id="model" type="button" class="button btn-dark" data-bs-toggle="modal"
-				data-bs-target="#staticBackdrop">姆咪</button>
+			<button id="model" type="button" class="button btn-dark"
+				data-bs-toggle="modal" data-bs-target="#staticBackdrop">姆咪</button>
 		</div>
-		<input type="submit" id="sendMessage" class="button btn-dark" value="送出" onclick="sendMessage();" />
+		<input type="submit" id="sendMessage" class="button btn-dark"
+			value="送出" onclick="sendMessage();" />
 
 
 		<!-- Modal -->
-		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="staticBackdropLabel">挖苦挖苦</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
 					</div>
-					<div id="modal-body" class="modal-body">
-
-					</div>
+					<div id="modal-body" class="modal-body"></div>
 					<div class="modal-footer">
 						<button id="modalclose" type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
@@ -136,6 +141,12 @@
 			console.log("確認資料型別:" + jsonObj.type);
 			
 			if("chat" === jsonObj.type){
+				if(jsonObj.message === "開局送魔關羽"){
+					var html = `<p>${jsonObj.userName} : <img src="/MUMI_MOVIE/view/ChatRoom/img/an/開局送魔關羽.jpg" width="100px" alt=""></p>`;
+					messagesArea.insertAdjacentHTML('beforeend', html);
+					messagesArea.scrollTop = messagesArea.scrollHeight;
+					return
+				}
 				for (var i = 0; i < 26; i++){
 					if(jsonObj.message === `anyabanzai${i}`){
 						var html = `<p>${jsonObj.userName} : <img src="/MUMI_MOVIE/view/ChatRoom/img/an/anyabanzai${i}.png" width="100px" alt=""></p>`;
@@ -160,24 +171,24 @@
 					console.log(JSON.parse(msg[i]))
 				}
 				// var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-				for (var i = 0; i < 26; i++) {
-
-					if (arr[i].message === "anyabanzai1" || arr[i].message === "anyabanzai2" || arr[i].message === "anyabanzai3" || arr[i].message === "anyabanzai4" || arr[i].message === "anyabanzai5"
-						|| arr[i].message === "anyabanzai6" || arr[i].message === "anyabanzai7" || arr[i].message === "anyabanzai8" || arr[i].message === "anyabanzai9" || arr[i].message === "anyabanzai10"
-						|| arr[i].message === "anyabanzai11" || arr[i].message === "anyabanzai12" || arr[i].message === "anyabanzai13" || arr[i].message === "anyabanzai14" || arr[i].message === "anyabanzai15"
-						|| arr[i].message === "anyabanzai16" || arr[i].message === "anyabanzai17" || arr[i].message === "anyabanzai18" || arr[i].message === "anyabanzai19" || arr[i].message === "anyabanzai20"
-						|| arr[i].message === "anyabanzai21" || arr[i].message === "anyabanzai22" || arr[i].message === "anyabanzai23" || arr[i].message === "anyabanzai24" || arr[i].message === "anyabanzai25"
-						|| arr[i].message === "anyabanzai0") {
-						var html = `<p>${arr[i].userName} : <img src="/MUMI_MOVIE/view/ChatRoom/img/an/anyabanzai${i}.png" width="100px" alt=""></p>`;
+				for (var i = 0; i < arr.length; i++) {
+					
+					if (arr[i].message.includes("anyabanzai")) {
+						var html = `<p>${arr[i].userName} : <img src="/MUMI_MOVIE/view/ChatRoom/img/an/${arr[i].message}.png" width="100px" alt=""></p>`;
+						messagesArea.insertAdjacentHTML('beforeend', html);
+						messagesArea.scrollTop = messagesArea.scrollHeight;
+                    } else if (arr[i].message.includes("開局送魔關羽")){
+                        var html = `<p>${arr[i].userName} : <img src="/MUMI_MOVIE/view/ChatRoom/img/an/開局送魔關羽.jpg" width="100px" alt=""></p>`;
 						messagesArea.insertAdjacentHTML('beforeend', html);
 						messagesArea.scrollTop = messagesArea.scrollHeight;
 					} else {
 						var html = `<p>${arr[i].userName} : ${arr[i].message}</p>`;
 						messagesArea.insertAdjacentHTML('beforeend', html);
+					}
 
 						// messagesArea.value = messagesArea.value + message; //顯示在使用者的頁面上
 						messagesArea.scrollTop = messagesArea.scrollHeight;
-					}
+					
 
 
 				}
