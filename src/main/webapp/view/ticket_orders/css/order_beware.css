@@ -232,7 +232,7 @@ main .mumipay {
 }
 
 h4.hallname {
-    font-size: 36px;
+    font-size: 30 px;
     font-weight: bold;
     font-family: "jf open 粉圓 1.1";
     margin: 10px auto;
@@ -242,18 +242,16 @@ button.showtime {
     border: 0px;
     background-color: rgb(194, 121, 231);
     color: #fbfcdb;
-    margin: 10px 2px 10px;
+    margin: 20px 2px 20px;
     padding: 3px;
 }
 
-
-/* div.movieday {
+div.movieday {
     display: none;
-} */
+}
 
 div.forspan {
-    margin: 10px 2px;
-    display: inline-block;
+    margin: 30px 2px;
 }
 
 div.movieday.-on {
@@ -262,9 +260,8 @@ div.movieday.-on {
 
 div.forspan span {
     font-size: 30px;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
-    float: left;
 }
 
 div.forspan span.-on {
@@ -288,7 +285,6 @@ button.showtime.-on {
 }
 
 .mumipay img {
-    margin-top: 60px;
     width: 300px;
 }
 
@@ -301,9 +297,8 @@ button.showtime.-on {
 .moviedate {
     font-size: 24px;
     display: inline-block;
-    /* margin: 30px 3px 20px; */
+    margin: 30px 3px 20px;
 }
-
 
 .container .btn {
     width: 100%;
@@ -314,7 +309,18 @@ button.showtime.-on {
     margin: 10px 0;
 }
 
+main h2 {
+	color: red;
+	text-align: center;
+}
 
+main h3 {
+	color: #2f96ee;
+}
+
+main div.check_btn {
+	justify-content: center;
+}
 /* main工作區結束 */
 
 

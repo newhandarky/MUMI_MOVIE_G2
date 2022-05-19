@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.select_seat.entity.Select_SeatVO;
+import web.select_seat.service.Select_SeatService;
 import web.ticket_orders.entity.Ticket_OrdersVO;
 import web.ticket_orders.service.Ticket_OrdersService;
 
@@ -26,13 +28,53 @@ public class Ticket_OrdersServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		System.out.println(action);
+		
+		if ("addOrders".equals(action)) { // 來自select_page.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+					Integer mem_id = new Integer(req.getParameter("mem_id"));
+					
+					Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
+					ticket_ordersVO.setMem_id(mem_id);
+					System.out.println(mem_id);
+					
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {
+						req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/order_beware.jsp");
+						failureView.forward(req, res);
+						return;
+					}
+					
+					/*************************** 2.開始新增資料 ***************************************/
+					Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+					ticket_ordersVO = ticket_ordersSvc.addOrders(mem_id);			
+				
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/view/ticket_orders/choose_movie.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);
 
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/order_beware.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		if ("getOne_For_Choose".equals(action)) { // 來自select_page.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("movie_id");
@@ -162,40 +204,108 @@ public class Ticket_OrdersServlet extends HttpServlet {
 
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-//					Integer mem_id = new Integer(req.getParameter("mem_id"));
+					Integer mem_id = new Integer(req.getParameter("mem_id"));
 					Integer movie_time_id = new Integer(req.getParameter("movie_time_id"));
 					Integer ticket_number = new Integer(req.getParameter("ticket_number"));
 					
 					Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
 					
-//					ticket_ordersVO.setMem_id(mem_id);
+					ticket_ordersVO.setMem_id(mem_id);
 					ticket_ordersVO.setMovie_time_id(movie_time_id);
 					ticket_ordersVO.setTicket_number(ticket_number);
-//					System.out.println(mem_id);
+					System.out.println(mem_id);
 					System.out.println(movie_time_id);
 					System.out.println(ticket_number);
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
-						RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/addHall_Seat.jsp");
+						RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
 						failureView.forward(req, res);
 						return;
 					}
 					
 					/*************************** 2.開始新增資料 ***************************************/
-//					Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
-//					ticket_ordersVO = ticket_ordersSvc.addTime_Number(mem_id, movie_time_id, ticket_number);			
-				
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/hall_seat/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);
+					Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+					ticket_ordersVO = ticket_ordersSvc.addTime_Number(mem_id, movie_time_id, ticket_number);
+					List<Ticket_OrdersVO> list = ticket_ordersSvc.getSeat(movie_time_id);
+					if (list == null) {
+						errorMsgs.add("查無資料");
+					}
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
+						failureView.forward(req, res);
+						return;// 程式中斷
+					}
+
+					/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+					req.setAttribute("list", list); // 資料庫取出的hall_seatVO物件,存入req					
+					List<Ticket_OrdersVO> list_ticket = ticket_ordersSvc.getTicket_List_Id_Number(mem_id);
+					if (list_ticket == null) {
+						errorMsgs.add("查無資料");
+					}
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
+						failureView.forward(req, res);
+						return;// 程式中斷
+					}
+
+					/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+					req.setAttribute("list_ticket", list_ticket); // 資料庫取出的hall_seatVO物件,存入req
+					String url = "/view/ticket_orders/choose_seat.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+					successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("choose_seat".equals(action)) { // 來自update_emp_input.jsp的請求
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				Integer movie_time_id = new Integer(req.getParameter("movie_time_id"));
+				String[] seat_select_state = req.getParameterValues("seat_select_state");
+				String seat_select_state_all = new String();
+				Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
+				
+				for(int i = 0; i<seat_select_state.length; i++) {
+					String str = seat_select_state[i];
+					if(str.equals("1")) { 
+						seat_select_state_all += "2";
+					} else if (str.equals("0")){
+						seat_select_state_all += "0";
+					} else if (str.equals("2")){
+						seat_select_state_all += "2";
+					} else {
+						seat_select_state_all += "3";
+					}
+					System.out.println(seat_select_state_all);
+				}
+				ticket_ordersVO.setMovie_time_id(movie_time_id);
+				ticket_ordersVO.setSeat_select_state(seat_select_state_all);
+				
+				/*************************** 2.開始修改資料 *****************************************/
+				Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+				ticket_ordersVO = ticket_ordersSvc.choose_Seat(movie_time_id, seat_select_state_all);
+
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/view/select_seat/select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/select_seat/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

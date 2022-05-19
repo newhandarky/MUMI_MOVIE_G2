@@ -53,7 +53,7 @@
                 <ul class="nav_ul" id="ticket_ul">
                     <a href="#">訂票系統</a>
                     <li class="nav_li">
-                        <a href="<%=request.getContextPath()%>/view/ticket_orders/choose_movie.jsp">確認劃位</a>
+                        <a href="<%=request.getContextPath()%>/view/ticket_orders/order_beware.jsp">確認劃位</a>
                     </li>
                 </ul>
             </div>
@@ -181,7 +181,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="<%=request.getContextPath()%>/view/ticket_orders/choose_movie.jsp">確認劃位</a>
+                                <a href="<%=request.getContextPath()%>/view/ticket_orders/order_beware.jsp">確認劃位</a>
                             </li>
                         </ul>
 
