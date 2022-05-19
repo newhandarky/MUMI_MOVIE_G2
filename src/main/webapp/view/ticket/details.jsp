@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="web.member.entity.*"%>
 <%@ page import="web.member.dao.*"%>
+<%@ page import="web.movie.entity.*"%>
+<%@ page import="web.movie.dao.*"%>
+<%@ page import="web.movie.service.*"%>
+
+<%
+	MovieService movieSvc = new MovieService();
+	MovieVO movieVO = movieSvc.getOneMovie(2);
+%>   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +38,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="title">您所選擇的電影是 : 咒術迴戰</h2>
+                            <h2 class="title">您所選擇的電影是 : ${movieVO.getMovie_ch()}</h2>
                             <h3>請選擇日期與場次</h3>
                         </div>
                         <div class="col-md-6 col-sm-12">
