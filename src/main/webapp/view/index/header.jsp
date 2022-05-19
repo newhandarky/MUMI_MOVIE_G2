@@ -53,13 +53,7 @@
                 <ul class="nav_ul" id="ticket_ul">
                     <a href="#">訂票系統</a>
                     <li class="nav_li">
-                        <a href="#">快速購票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">預售票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="hell_seat_4dxA.html">確認劃位</a>
+                        <a href="<%=request.getContextPath()%>/view/ticket_orders/choose_movie.jsp">確認劃位</a>
                     </li>
                 </ul>
             </div>
@@ -187,13 +181,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="">快速購票</a>
-                            </li>
-                            <li>
-                                <a href="">預售票</a>
-                            </li>
-                            <li>
-                                <a href="hell_seat_4dxA.html">確認劃位</a>
+                                <a href="<%=request.getContextPath()%>/view/ticket_orders/choose_movie.jsp">確認劃位</a>
                             </li>
                         </ul>
 
