@@ -324,7 +324,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 
 
 							<br> <input type="hidden" name="action" value="insert">
-							<br> <input type="hidden" name="action" value="insert">
+							
 							
 							<input
 								type="submit" class="btn btn-primary" value="下一步">

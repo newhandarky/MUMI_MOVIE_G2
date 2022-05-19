@@ -110,6 +110,10 @@ public class MovieService {
 		dao.delete(movie_id);
 	}
 	
+	public void deleteType(Integer movie_id) {
+		dao.delete_movie_type(movie_id);
+	}
+	
 	public MovieVO getOneMovie(Integer movie_id) {
 		return dao.findByPrimaryKey(movie_id);
 	}

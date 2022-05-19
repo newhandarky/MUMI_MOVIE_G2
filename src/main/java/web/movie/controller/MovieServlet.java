@@ -29,6 +29,7 @@ public class MovieServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		String deType = req.getParameter("delete_type");
 		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
@@ -518,6 +519,38 @@ public class MovieServlet extends HttpServlet {
 			}
 		}
 
+		if("delete_type".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				Integer movie_id = new Integer(req.getParameter("movie_id"));
+				System.out.println("111");
+				/*************************** 2.開始刪除資料 ***************************************/
+				MovieService movieSvc = new MovieService();
+				movieSvc.deleteType(movie_id);
+
+				System.out.println("222");
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/view/movie/system_movie_add2.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				System.out.println("333");
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_update_success.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
+		
 	}
 
 }

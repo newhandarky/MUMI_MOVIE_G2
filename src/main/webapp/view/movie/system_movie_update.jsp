@@ -329,9 +329,10 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java
 
 							<img src="DBGifReader?movie_id=${movieVO.movie_id}"> <img
 								src="DBGifReader2?movie_id=${movieVO.movie_id}"> <br>
-							<input type="hidden" name="movie_updated_time"> <input
-								type="hidden" name="action" value="update"> <input
-								type="hidden" name="movie_id" value="<%=movieVO.getMovie_id()%>">
+							<input type="hidden" name="movie_updated_time">
+							<input type="hidden" name="action" value="update"> 
+
+							<input type="hidden" name="movie_id" value="<%=movieVO.getMovie_id()%>">
 							<input type="submit" class="btn btn-primary" value="¤U¤@¨B">
 						</form>
 
