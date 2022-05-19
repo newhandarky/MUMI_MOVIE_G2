@@ -258,7 +258,7 @@ public class MovieDAO implements MovieDAO_interface {
 	
 	
 	@Override
-	public void getMovie_type_delete(Integer movie_id) {
+	public void delete_movie_type(Integer movie_id) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -24,6 +24,6 @@ public interface MovieDAO_interface {
 
 	public List<MovieVO> getMovie_type(Integer movie_id);
 	
-	public void getMovie_type_delete(Integer movie_id);
+	public void delete_movie_type(Integer movie_id);
 
 }

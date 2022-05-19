@@ -16,7 +16,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/movie/css/system_movie_add.css">
+	href="<%=request.getContextPath()%>/view/movie/css/system_movie_update_success.css">
 
 </head>
 
@@ -205,19 +205,15 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 
 						<form method="post"
 							action="<%=request.getContextPath()%>/view/movie/MovieServlet"
-							name="form1" ENCTYPE="multipart/form-data">
-							
-							<div class="mb-3 row">
-							
-								<a class="btn btn-secondary" href='system_movie_update2.jsp'>修改電影類別</a>
-							
-							</div>
+							name="form1">
 
 
-							<br> <input type="hidden" name="action" value="insert">
-							
-							<input
-								type="submit" class="btn btn-primary" value="下一步">
+
+
+							<br> <input type="hidden" name="action" value="delete_type">
+							<input type="hidden" name="movie_id"
+								value="<%=movieVO.getMovie_id()%>"> <input type="submit"
+								class="btn btn-primary" value="下一步">
 						</form>
 
 
@@ -260,7 +256,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/view/movie/js/system_movie_add.js"></script>
+		src="<%=request.getContextPath()%>/view/movie/js/system_movie_update_success.js"></script>
 
 </body>
 
