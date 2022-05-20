@@ -10,4 +10,5 @@ public interface MovieDAO_interface {
 	public void delete(Integer movie_id);
 	public MovieVO findByPrimaryKey(Integer movie_id);
 	public List<MovieVO> getAll();
+	public List<MovieVO> getByState_id(Integer movie_id);
 }
