@@ -1,19 +1,27 @@
-package web.movie.controller;
+package web.movie_rating.controller;
 
-import java.io.*;
-import java.sql.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-@WebServlet(urlPatterns = "/view/movie/DBGifReader2")
 
-public class DBGifReader2 extends HttpServlet {
-
+@WebServlet("/view/movie_rating/DBGifReader")
+public class DBGifReader extends HttpServlet {
+	
 	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -23,14 +31,13 @@ public class DBGifReader2 extends HttpServlet {
 
 		try {
 			Statement stmt = con.createStatement();
-			String movie_id = req.getParameter("movie_id").trim();
-			System.out.println(movie_id);
-			ResultSet rs = stmt.executeQuery("select movie_slide_poster from movie where movie_id =" + movie_id);
+			String movie_rating_id = req.getParameter("movie_rating_id").trim();
+			ResultSet rs = stmt.executeQuery("select movie_rating_pic from movie_rating where movie_rating_id =" + movie_rating_id);
 
 			if (rs.next()) {
 //				InputStream in = rs.getBinaryStream("image");
 //				InputStream in = new BufferedInputStream(rs.getBinaryStream("image"));
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("movie_slide_poster"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("movie_rating_pic"));
 				if (in.available() == -1) {
 					InputStream on = getServletContext().getResourceAsStream("/NoData/none2.jpg");
 					byte[] b = new byte[in.available()];

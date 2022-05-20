@@ -36,7 +36,7 @@ public class DBGifReader extends HttpServlet {
 					out.write(b);
 					on.close();
 				}
-				byte[] buf = new byte[4 * 1024]; // 4K buffer
+				byte[] buf = new byte[4 * 1024 ]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
 					out.write(buf, 0, len);
