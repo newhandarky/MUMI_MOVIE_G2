@@ -48,6 +48,7 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 						<!-- 走道 -->
 						<div class="aisle"></div>
 						<div class="seat-start">
+				 		<form method="post" action="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet" style="margin-bottom: 0px;">
 						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
 						<c:forEach var="ticket_ordersVO" items="${list}" begin="1" end="1" >
 							<div style="opacity: 0" class="hall_row" id="${ticket_ordersVO.seat_row}"> </div>
@@ -56,18 +57,18 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 							<div style="opacity: 0" class="hall_right" id="${ticket_ordersVO.seat_right}"> </div>
 							<div style="opacity: 0" class="hall_row_aisle1" id="${ticket_ordersVO.seat_row_aisle1}"> </div>
 							<div style="opacity: 0" class="hall_row_aisle2" id="${ticket_ordersVO.seat_row_aisle2}"> </div>
+				     		<input id="movie_time_id" type="hidden" name="movie_time_id" value="${ticket_ordersVO.movie_time_id}" >
 						</c:forEach>
 						<c:forEach var="ticket_ordersVO" items="${list_ticket}" begin="0" end="1">
 						<input id="ticket_list_id" type="hidden" name="ticket_list_id" value="${ticket_ordersVO.ticket_list_id}">
 						<input id="ticket_number" type="hidden" name="ticket_number" value="${ticket_ordersVO.ticket_number}">
 						</c:forEach>
-				 		<form method="post" action="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet" style="margin-bottom: 0px;">
 						<c:forEach var="ticket_ordersVO" items="${list}" begin="0" step="1">
 							<div class="seat" name="${ticket_ordersVO.seat_no}" style="opacity: 1" id="${ticket_ordersVO.seat_state}">
 							<p style="opacity: 1" id="${ticket_ordersVO.seat_id}">${ticket_ordersVO.seat_name}</p>
 							<input id="seat_state" type="hidden" name="seat_state" value="${ticket_ordersVO.seat_state}">	
 				     		<input id="seat_id" type="hidden" name="seat_id" value="${ticket_ordersVO.seat_id}" >
-				     		<input id="movie_time_id" type="hidden" name="movie_time_id" value="${ticket_ordersVO.movie_time_id}" >
+				     		<input id="seat_name" type="hidden" name="seat_name" value="${ticket_ordersVO.seat_name}" >
 				     		<input id="seat_select_state" type="hidden" name="seat_select_state" value="${fn:substring(ticket_ordersVO.seat_select_state,(ticket_ordersVO.seat_no)-1,(ticket_ordersVO.seat_no))}" >
 							</div>
 						</c:forEach>

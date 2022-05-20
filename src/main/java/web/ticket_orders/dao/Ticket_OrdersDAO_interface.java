@@ -2,7 +2,6 @@ package web.ticket_orders.dao;
 
 import java.util.List;
 
-import web.select_seat.entity.Select_SeatVO;
 import web.ticket_orders.entity.Ticket_OrdersVO;
 
 public interface Ticket_OrdersDAO_interface {
@@ -10,6 +9,7 @@ public interface Ticket_OrdersDAO_interface {
           public void addTime_Number(Ticket_OrdersVO ticket_ordersVO);
           public List<Ticket_OrdersVO> getSeat(Integer movie_time_id);
           public List<Ticket_OrdersVO> getTicket_List_Id_Number(Integer mem_id);
+          public List<Ticket_OrdersVO> getList_Ticket_Price(Integer mem_id);
           public void choose_Seat(Ticket_OrdersVO ticket_ordersVO);
 //          public void update(Hall_SeatVO hall_seatVO);
 //          public void delete(Integer hall_id);
