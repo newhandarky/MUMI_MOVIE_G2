@@ -12,12 +12,17 @@
 <%
 MovieService movieSvc = new MovieService();
 List<MovieVO> list = movieSvc.getByState_id(1);
-pageContext.setAttribute("list", list);
 MovieVO vo1 = list.get(0);
 MovieVO vo2 = list.get(1);
 MovieVO vo3 = list.get(2);
 MovieVO vo4 = list.get(3);
 MovieVO vo5 = list.get(4);
+List<MovieVO> slist = movieSvc.getByState_id(2);
+MovieVO svo1 = slist.get(0);
+MovieVO svo2 = slist.get(1);
+MovieVO svo3 = slist.get(2);
+MovieVO svo4 = slist.get(3);
+MovieVO svo5 = slist.get(4);
 %>
 
 <!DOCTYPE html>
@@ -402,7 +407,7 @@ MovieVO vo5 = list.get(4);
                         <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo4.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
                             <h5 class="title_name"><%=vo4.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo3.getMovie_rating_id()%>" alt="" class="level">
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo4.getMovie_rating_id()%>" alt="" class="level">
                         </div>
                         <p class="en_title"><%=vo4.getMovie_en()%></p>
                         <div class="stars">
@@ -415,7 +420,7 @@ MovieVO vo5 = list.get(4);
                         <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo5.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
                             <h5 class="title_name"><%=vo5.getMovie_ch()%></h5>
-                            <img src=""<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo5.getMovie_rating_id()%>" alt="" class="level">
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo5.getMovie_rating_id()%>" alt="" class="level">
                         </div>
                         <p class="en_title"><%=vo5.getMovie_en()%></p>
                         <div class="stars">
@@ -451,12 +456,12 @@ MovieVO vo5 = list.get(4);
             <div class="container">
                 <div class="container1">
                     <div class="movie_info">
-                        <img src="./IMAGE/posters/咒術迴戰0(12+).jpg" alt="" class="img_poster">
+                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo1.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
-                            <h5 class="title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
+                            <h5 class="title_name"><%=svo1.getMovie_ch()%></h5>
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo1.getMovie_rating_id()%>" alt="" class="level">
                         </div>
-                        <p class="en_title">JUJUTSU KAISEN : ZERO</p>
+                        <p class="en_title"><%=svo1.getMovie_en()%></p>
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -465,12 +470,12 @@ MovieVO vo5 = list.get(4);
 
                     </div>
                     <div class="movie_info">
-                        <img src="./IMAGE/posters/蝙蝠俠(12+).jpg" alt="" class="img_poster">
+                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo2.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
-                            <h5 class="title_name">蝙蝠俠</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
+                            <h5 class="title_name"><%=svo2.getMovie_ch()%></h5>
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo2.getMovie_rating_id()%>" alt="" class="level">
                         </div>
-                        <p class="en_title">THE BATMAN</p>
+                        <p class="en_title"><%=svo2.getMovie_en()%></p>
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -478,12 +483,12 @@ MovieVO vo5 = list.get(4);
                         </div>
                     </div>
                     <div class="movie_info">
-                        <img src="./IMAGE/posters/該死的阿修羅(12+).jpg" alt="" class="img_poster">
+                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo3.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
-                            <h5 class="title_name">該死的阿修羅</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
+                            <h5 class="title_name"><%=svo3.getMovie_ch()%></h5>
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo3.getMovie_rating_id()%>" alt="" class="level">
                         </div>
-                        <p class="en_title">GODDAMNED ASURA</p>
+                        <p class="en_title"><%=svo3.getMovie_en()%></p>
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -491,12 +496,12 @@ MovieVO vo5 = list.get(4);
                         </div>
                     </div>
                     <div class="movie_info">
-                        <img src="./IMAGE/posters/月球隕落(0+).jpg" alt="" class="img_poster">
+                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo4.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
-                            <h5 class="title_name">月球隕落</h5>
-                            <img src="" alt="" class="level">
+                            <h5 class="title_name"><%=svo4.getMovie_ch()%></h5>
+                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo4.getMovie_rating_id()%>" alt="" class="level">
                         </div>
-                        <p class="en_title">MOONFALL</p>
+                        <p class="en_title"><%=svo4.getMovie_en()%></p>
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -504,12 +509,12 @@ MovieVO vo5 = list.get(4);
                         </div>
                     </div>
                     <div class="movie_info">
-                        <img src="./IMAGE/posters/黑光行動(12+).jpg" alt="" class="img_poster">
+                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo5.getMovie_id()%>" alt="" class="img_poster">
                         <div class="title_info">
-                            <h5 class="title_name">黑光行動</h5>
+                            <h5 class="title_name"><%=svo5.getMovie_ch()%></h5>
                             <img src="./IMAGE/posters/12+.png" alt="" class="level">
                         </div>
-                        <p class="en_title">BLACKLIGHT</p>
+                        <p class="en_title"><%=svo5.getMovie_en()%></p>
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
