@@ -24,6 +24,7 @@ public class DBGifReader2 extends HttpServlet {
 		try {
 			Statement stmt = con.createStatement();
 			String movie_id = req.getParameter("movie_id").trim();
+			System.out.println(movie_id);
 			ResultSet rs = stmt.executeQuery("select movie_slide_poster from movie where movie_id =" + movie_id);
 
 			if (rs.next()) {

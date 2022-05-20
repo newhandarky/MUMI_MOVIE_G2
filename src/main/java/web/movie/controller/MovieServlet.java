@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import web.movie.entity.MovieVO;
 import web.movie.service.MovieService;
 
+<<<<<<< HEAD
 @WebServlet(urlPatterns = { "/view/movie/MovieServlet" })
+=======
+@WebServlet(urlPatterns = {"/view/movie/MovieOverView"})
+>>>>>>> Jing
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class MovieServlet extends HttpServlet {

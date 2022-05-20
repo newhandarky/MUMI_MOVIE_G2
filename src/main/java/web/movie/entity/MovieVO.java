@@ -1,6 +1,7 @@
 package web.movie.entity;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class MovieVO implements java.io.Serializable{
 
@@ -138,6 +139,17 @@ public class MovieVO implements java.io.Serializable{
 	}
 	public Integer getSati_num() {
 		return sati_num;
+	}
+	@Override
+	public String toString() {
+		return "MovieVO [movie_id=" + movie_id + ", movie_state_id=" + movie_state_id + ", movie_rating_id="
+				+ movie_rating_id + ", emp_id=" + emp_id + ", movie_updated_time=" + movie_updated_time + ", movie_ch="
+				+ movie_ch + ", movie_en=" + movie_en + ", movie_runtime=" + movie_runtime + ", release_date="
+				+ release_date + ", movie_poster=" + Arrays.toString(movie_poster) + ", movie_slide_poster="
+				+ Arrays.toString(movie_slide_poster) + ", movie_intro=" + movie_intro + ", casts=" + casts
+				+ ", director=" + director + ", trailer=" + trailer + ", expect_num=" + expect_num + ", sati_num="
+				+ sati_num + ", movie_likes=" + movie_likes + ", expect_total=" + expect_total + ", sati_total="
+				+ sati_total + "]";
 	}
 	public void setSati_num(Integer sati_num) {
 		this.sati_num = sati_num;

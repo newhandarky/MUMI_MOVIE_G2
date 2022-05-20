@@ -19,6 +19,7 @@ public interface MovieDAO_interface {
 	public MovieVO findByPrimaryKey(Integer movie_id);
 
 	public List<MovieVO> getAll();
+<<<<<<< HEAD
 
 	public List<MovieVO> getMovie_New();
 
@@ -26,4 +27,7 @@ public interface MovieDAO_interface {
 	
 	public void delete_movie_type(Integer movie_id);
 
+=======
+	public List<MovieVO> getByState_id(Integer movie_id);
+>>>>>>> Jing
 }

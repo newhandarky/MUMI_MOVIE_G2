@@ -18,11 +18,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.jboss.jandex.Main;
+
+import web.hall_seat.dao.Hall_SeatDAO;
 import web.movie.entity.MovieVO;
 import web.movie_tag.entity.Movie_tagVO;
 
 public class MovieDAO implements MovieDAO_interface {
-
 	private static DataSource ds = null;
 	static {
 		try {
@@ -41,6 +43,7 @@ public class MovieDAO implements MovieDAO_interface {
 			+ "casts, director, trailer, expect_num, sati_num, movie_likes, expect_total, sati_total FROM MOVIE where movie_id = ?";
 	private static final String DELETE = "DELETE FROM MOVIE where movie_id = ?";
 	private static final String UPDATE = "UPDATE MOVIE set movie_state_id=?, movie_rating_id=?, movie_ch=?, movie_en=?, movie_runtime=?, release_date=?, movie_poster=?, movie_slide_poster=?, movie_intro=?, casts=?, director=?, trailer=?, movie_updated_time=?  where movie_id = ?";
+<<<<<<< HEAD
 	private static final String INSERT_TYPE = "INSERT INTO movie_tag (movie_id, movie_type_id) " + "VALUES (?, ?)";
 	private static final String GET_NEWONE_STMT = "SELECT movie_id FROM movie order by movie_id desc";
 	private static final String GET_TYPE_STMT = "select movie_tag_id, movie_id, movie_type_id from movie_tag where movie_id = ?";
@@ -160,6 +163,10 @@ public class MovieDAO implements MovieDAO_interface {
 		return list;
 
 	}
+=======
+	private static final String GET_BY_STATE_ID_STMT = "SELECT movie_id, movie_state_id, movie_rating_id, emp_id, movie_updated_time, movie_ch, movie_en, movie_runtime, release_date, movie_poster, movie_slide_poster, movie_intro, "
+			+ "casts, director, trailer, expect_num, sati_num, movie_likes, expect_total, sati_total FROM MOVIE where movie_state_id=? order by release_date desc";
+>>>>>>> Jing
 
 	@Override
 	public void insert(MovieVO movieVO) {
@@ -472,6 +479,11 @@ public class MovieDAO implements MovieDAO_interface {
 		}
 		return list;
 	}
+<<<<<<< HEAD
+=======
+
+	public static byte[] pic(String pic1) {
+>>>>>>> Jing
 
 //	public static byte[] pic(String pic1) {
 //
@@ -526,6 +538,10 @@ public class MovieDAO implements MovieDAO_interface {
 				}
 			}
 		}
+<<<<<<< HEAD
+=======
+		return null;
+>>>>>>> Jing
 
 	}
 	
@@ -572,4 +588,72 @@ public class MovieDAO implements MovieDAO_interface {
 	}
 	
 
+	@Override
+	public List<MovieVO> getByState_id(Integer  movie_state_id) {
+		List<MovieVO> list = new ArrayList<MovieVO>();
+		MovieVO movieVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_STATE_ID_STMT);
+			pstmt.setInt(1,  movie_state_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				movieVO = new MovieVO();
+				movieVO.setMovie_id(rs.getInt("movie_id"));
+				movieVO.setMovie_state_id(rs.getInt("movie_state_id"));
+				movieVO.setMovie_rating_id(rs.getInt("movie_rating_id"));
+				movieVO.setEmp_id(rs.getInt("emp_id"));
+				movieVO.setMovie_updated_time(rs.getTimestamp("movie_updated_time"));
+				movieVO.setMovie_ch(rs.getString("movie_ch"));
+				movieVO.setMovie_en(rs.getString("movie_en"));
+				movieVO.setMovie_runtime(rs.getInt("movie_runtime"));
+				movieVO.setRelease_date(rs.getDate("release_date"));
+				movieVO.setMovie_poster(rs.getBytes("movie_poster"));
+				movieVO.setMovie_slide_poster(rs.getBytes("movie_slide_poster"));
+				movieVO.setMovie_intro(rs.getString("movie_intro"));
+				movieVO.setCasts(rs.getString("casts"));
+				movieVO.setDirector(rs.getString("director"));
+				movieVO.setTrailer(rs.getString("trailer"));
+				movieVO.setExpect_num(rs.getInt("expect_num"));
+				movieVO.setSati_num(rs.getInt("sati_num"));
+				movieVO.setMovie_likes(rs.getInt("movie_likes"));
+				movieVO.setExpect_total(rs.getInt("expect_total"));
+				movieVO.setSati_total(rs.getInt("sati_total"));
+				list.add(movieVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 }
