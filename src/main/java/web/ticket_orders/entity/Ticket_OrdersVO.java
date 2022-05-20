@@ -31,6 +31,7 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	private String select_seat_name;	
 	private Integer ticket_price;
 	private Integer ticket_number;
+	private String movie_ch;
 	
 	public Integer getSeat_id() {
 		return seat_id;
@@ -193,6 +194,12 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	}
 	public void setTicket_number(Integer ticket_number) {
 		this.ticket_number = ticket_number;
+	}
+	public String getMovie_ch() {
+		return movie_ch;
+	}
+	public void setMovie_ch(String movie_ch) {
+		this.movie_ch = movie_ch;
 	}
 	
 }

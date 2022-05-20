@@ -278,7 +278,7 @@ public class Ticket_OrdersServlet extends HttpServlet {
 				for(int i = 0; i<seat_select_state.length; i++) {
 					String str = seat_select_state[i];
 					if(str.equals("1")) {
-						select_seat_name_all += (select_seat_name[i] + ",");
+						select_seat_name_all += (select_seat_name[i] + ", ");
 						seat_select_state_all += "2";
 					} else if (str.equals("0")){
 						seat_select_state_all += "0";
@@ -289,7 +289,7 @@ public class Ticket_OrdersServlet extends HttpServlet {
 					}
 					System.out.println(seat_select_state_all);
 				}
-				select_seat_name_all = select_seat_name_all.substring(0, select_seat_name_all.length()-1);
+				select_seat_name_all = select_seat_name_all.substring(0, select_seat_name_all.length()-2);
 				ticket_ordersVO.setMem_id(mem_id);
 				ticket_ordersVO.setMovie_time_id(movie_time_id);
 				ticket_ordersVO.setSeat_select_state(seat_select_state_all);
@@ -321,7 +321,7 @@ public class Ticket_OrdersServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("list_ticket_price", list_ticket_price); // 資料庫取出的hall_seatVO物件,存入req
-				String url = "/view/select_seat/select_page.jsp";
+				String url = "/view/ticket_orders/credit_card.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -329,6 +329,65 @@ public class Ticket_OrdersServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_seat.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("finish_orders".equals(action)) { // 來自select_page.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("mem_id");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入電影編號");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/credit_card.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				Integer mem_id = null;
+				try {
+					mem_id = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("電影編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/credit_card.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+				Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+				List<Ticket_OrdersVO> list_mem_order = ticket_ordersSvc.getMem_Order(mem_id);
+				if (list_mem_order == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/credit_card.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("list_mem_order", list_mem_order); // 資料庫取出的hall_seatVO物件,存入req
+				String url = "/view/ticket_orders/show_ticket.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/credit_card.jsp");
 				failureView.forward(req, res);
 			}
 		}

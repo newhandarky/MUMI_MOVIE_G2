@@ -10,6 +10,7 @@ public interface Ticket_OrdersDAO_interface {
           public List<Ticket_OrdersVO> getSeat(Integer movie_time_id);
           public List<Ticket_OrdersVO> getTicket_List_Id_Number(Integer mem_id);
           public List<Ticket_OrdersVO> getList_Ticket_Price(Integer mem_id);
+          public List<Ticket_OrdersVO> getMem_Order(Integer mem_id);
           public void choose_Seat(Ticket_OrdersVO ticket_ordersVO);
 //          public void update(Hall_SeatVO hall_seatVO);
 //          public void delete(Integer hall_id);

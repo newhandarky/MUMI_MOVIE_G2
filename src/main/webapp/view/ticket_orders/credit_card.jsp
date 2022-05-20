@@ -1,5 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.*"%>
+<%@ page import="web.ticket_orders.dao.*"%>
+<%@ page import="web.ticket_orders.entity.*"%>
+<%@ page import="web.ticket_orders.service.*"%>
+<%@ page import="web.member.entity.*"%>
+<%@ page import="web.member.dao.*"%>
+
+<%
+pageContext.getAttribute("list_ticket_price");
+MemVO memVO = (MemVO) session.getAttribute("memVO");
+Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket_ordersVO");
+%>
 
 
 <!DOCTYPE html>
@@ -21,17 +34,19 @@
 
     <main>
         <div class="mumipay">
-            <h3>歡迎來到MUMI PAY儲值頁面</h3>
+            <h3>歡迎來到MUMIMOVIE結帳頁面</h3>
             <img src="<%=request.getContextPath()%>/view/ticket_orders/images/others/mujilogo2.png" alt="">
-            <form action="">
+            <form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
 
                 <div class="container">
                     <div class="row">
-                        <div class="form-floating col-12">
-                            <h3>您的MUNI PAY餘額尚有 : </h3>
+                        <div class="form-floating col-6">
+                            <h3>您本次的結帳金額為 : </h3>
                         </div>
-                        <div class="form-floating col-12">
-                            <input class="form-control" type="text" value="0" readonly>
+                        <div class="form-floating col-6">
+                            <c:forEach var="ticket_ordersVO" items="${list_ticket_price}" begin="0" end="1" >
+				     		<h3 style="color:red">NT$ ${ticket_ordersVO.ticket_price} 元</h3>
+							</c:forEach>
                         </div>
                         <div class="form-floating col-12">
                             <p>信用卡卡號</p>
@@ -69,8 +84,9 @@
 
                         </div>
                         <div class="col-4">
-
-                            <button type="button" class="btn btn-primary" id="btn_primary">確認送出</button>
+                        	<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+                        	<input type="hidden" name="action" value="finish_orders">
+			     			<input class="btn btn-primary" type="submit" value="確認送出">  
                         </div>
                         <div class="col-4">
                             <a href="mem_shopping sheet.html">
