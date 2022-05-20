@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.select_seat.entity.Select_SeatVO;
-import web.select_seat.service.Select_SeatService;
 import web.ticket_orders.entity.Ticket_OrdersVO;
 import web.ticket_orders.service.Ticket_OrdersService;
 
@@ -41,7 +39,6 @@ public class Ticket_OrdersServlet extends HttpServlet {
 					
 					Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
 					ticket_ordersVO.setMem_id(mem_id);
-					System.out.println(mem_id);
 					
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
@@ -92,7 +89,7 @@ public class Ticket_OrdersServlet extends HttpServlet {
 				try {
 					movie_id = new Integer(str);
 				} catch (Exception e) {
-					errorMsgs.add("員工編號格式不正確");
+					errorMsgs.add("電影編號格式不正確");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -213,9 +210,6 @@ public class Ticket_OrdersServlet extends HttpServlet {
 					ticket_ordersVO.setMem_id(mem_id);
 					ticket_ordersVO.setMovie_time_id(movie_time_id);
 					ticket_ordersVO.setTicket_number(ticket_number);
-					System.out.println(mem_id);
-					System.out.println(movie_time_id);
-					System.out.println(ticket_number);
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -267,17 +261,24 @@ public class Ticket_OrdersServlet extends HttpServlet {
 		}
 		
 		if ("choose_seat".equals(action)) { // 來自update_emp_input.jsp的請求
-
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				Integer mem_id = new Integer(req.getParameter("mem_id"));
 				Integer movie_time_id = new Integer(req.getParameter("movie_time_id"));
+				Integer ticket_list_id = new Integer(req.getParameter("ticket_list_id"));
 				String[] seat_select_state = req.getParameterValues("seat_select_state");
+				String[] select_seat_name = req.getParameterValues("seat_name");
 				String seat_select_state_all = new String();
+				String select_seat_name_all = new String();
 				Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
 				
 				for(int i = 0; i<seat_select_state.length; i++) {
 					String str = seat_select_state[i];
-					if(str.equals("1")) { 
+					if(str.equals("1")) {
+						select_seat_name_all += (select_seat_name[i] + ",");
 						seat_select_state_all += "2";
 					} else if (str.equals("0")){
 						seat_select_state_all += "0";
@@ -288,15 +289,38 @@ public class Ticket_OrdersServlet extends HttpServlet {
 					}
 					System.out.println(seat_select_state_all);
 				}
+				select_seat_name_all = select_seat_name_all.substring(0, select_seat_name_all.length()-1);
+				ticket_ordersVO.setMem_id(mem_id);
 				ticket_ordersVO.setMovie_time_id(movie_time_id);
 				ticket_ordersVO.setSeat_select_state(seat_select_state_all);
+				ticket_ordersVO.setTicket_list_id(ticket_list_id);
+				ticket_ordersVO.setSelect_seat_name(select_seat_name_all);
 				
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_seat.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 				/*************************** 2.開始修改資料 *****************************************/
 				Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
-				ticket_ordersVO = ticket_ordersSvc.choose_Seat(movie_time_id, seat_select_state_all);
+				ticket_ordersVO = ticket_ordersSvc.choose_Seat(movie_time_id, seat_select_state_all, select_seat_name_all, ticket_list_id);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 資料庫update成功後,正確的的empVO物件,存入req
+//				req.setAttribute("ticket_ordersVO", ticket_ordersVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				List<Ticket_OrdersVO> list_ticket_price = ticket_ordersSvc.getList_Ticket_Price(mem_id);
+				if (list_ticket_price == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_seat.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("list_ticket_price", list_ticket_price); // 資料庫取出的hall_seatVO物件,存入req
 				String url = "/view/select_seat/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
@@ -304,8 +328,7 @@ public class Ticket_OrdersServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				e.printStackTrace();
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/select_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}

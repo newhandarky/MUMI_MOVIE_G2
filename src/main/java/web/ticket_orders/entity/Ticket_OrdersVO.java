@@ -28,7 +28,8 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	private Date buyticket_date;
 	private Integer total_price;
 	private Integer ticket_list_id;
-	private String select_seat_name;
+	private String select_seat_name;	
+	private Integer ticket_price;
 	private Integer ticket_number;
 	
 	public Integer getSeat_id() {
@@ -180,6 +181,12 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	}
 	public void setSelect_seat_name(String select_seat_name) {
 		this.select_seat_name = select_seat_name;
+	}
+	public Integer getTicket_price() {
+		return ticket_price;
+	}
+	public void setTicket_price(Integer ticket_price) {
+		this.ticket_price = ticket_price;
 	}
 	public Integer getTicket_number() {
 		return ticket_number;

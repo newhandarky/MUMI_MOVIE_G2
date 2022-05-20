@@ -75,7 +75,6 @@ $(function() {
 	//進入畫面 走道設置
 	$(document).ready(function() {
 		let row = parseInt($(".hall_row").attr("id"))
-		console.log(row);
 		//      let col = parseInt($(".hall_col").attr("id"))
 		let left = parseInt($(".hall_left").attr("id"))
 		let right = parseInt($(".hall_right").attr("id"))
@@ -99,40 +98,49 @@ $(function() {
 			};
 		});
 	});
-		
-		//使用者選座位
-	$(document).on("click", ".seat", function() {
-			if ($(this).find('input#seat_select_state').attr('value') == 0) {
-				$(this).find('input#seat_select_state').attr('value', '1');
-				$(this).attr('class', 'seat selected');
-			} else if ($(this).find('input#seat_select_state').attr('value') == 1) {
-				$(this).find('input#seat_select_state').attr('value', '0');
-				$(this).attr('class', 'seat');
-			} 
-		})
-		
-		//限制選擇座位數量
-		$(document).ready(function() {
-			$('.seat').each(function() {
-		console.log($(".selected").length);
-		console.log($("input#ticket_number").val());
-		if ($(".selected").length > $("input#ticket_number").val() && !$(this).hasClass("used") && !$(this).hasClass("hold") && !$(this).hasClass("disabled")) {
-            $(this).removeClass("selected");
-            if ($(".selected").length > $("input#ticket_number").val()) {
-                Swal.fire({
-                    icon: 'error',
-                    title: '很抱歉',
-                    text: '您所選的座位超過您預定的數量!',
-                    footer: '請先取消原有座位再進行選擇'
-                })
+//使用者選座位
+		//$(document).on("click", ".seat", function() {
+			//if ($(this).find('input#seat_select_state').attr('value') == 0) {
+				//$(this).find('input#seat_select_state').attr('value', '1');
+				//$(this).attr('class', 'seat selected');
+			//} else if ($(this).find('input#seat_select_state').attr('value') == 1) {
+			//	$(this).find('input#seat_select_state').attr('value', '0');
+				//$(this).attr('class', 'seat');
+			//} 
+		//});
+//使用者選座位限制
+$(document).on("click", ".seat", function() {
+            console.log($(".selected").length);
+            console.log($("input#ticket_number").val());
+            if ($(".selected").length > $("input#ticket_number").val() && !$(this).hasClass("used") && !$(this).hasClass("hold") && !$(this).hasClass("disabled")) {
+                $(this).removeClass("selected");
+                $(this).find('input#seat_select_state').attr('value', '0');
+                if ($(".selected").length > $("input#ticket_number").val()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '很抱歉',
+                        text: '您所選的座位超過您預定的數量!',
+                        footer: '請先取消原有座位再進行選擇'
+                    })
+                }
+            } else if ($(".selected").length == $("input#ticket_number").val() && !$(this).hasClass("used") && !$(this).hasClass("hold") && !$(this).hasClass("disabled")){
+                if ($(this).find('input#seat_select_state').attr('value') == 0) {
+                    $(this).find('input#seat_select_state').attr('value', '1');
+                    $(this).attr('class', 'seat selected');
+                } else if ($(this).find('input#seat_select_state').attr('value') == 1) {
+                    $(this).find('input#seat_select_state').attr('value', '0');
+                    $(this).attr('class', 'seat');
+                }
+            } else {
+                if ($(this).find('input#seat_select_state').attr('value') == 0) {
+                    $(this).find('input#seat_select_state').attr('value', '1');
+                    $(this).attr('class', 'seat selected');
+                } else if ($(this).find('input#seat_select_state').attr('value') == 1) {
+                    $(this).find('input#seat_select_state').attr('value', '0');
+                    $(this).attr('class', 'seat');
+                }
             }
-        } else {
-            if ($(this).hasClass("used") || $(this).hasClass("hold") || $(this).hasClass("disabled")) {} else {
-                $(this).toggleClass("selected");
-            }
-        }
         });
-       });
+    });
         // 選取位子提示
         //$("#selected-seats").text(`您所預訂的票券一共5張, 此為第 ${$(".selected").length -1} 個位子`);
-	});

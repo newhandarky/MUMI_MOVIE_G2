@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import web.select_seat.entity.Select_SeatVO;
 import web.ticket_orders.entity.Ticket_OrdersVO;
 
 public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
@@ -30,7 +29,7 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 	
 	private static final String INSERT_ORDERS = "INSERT INTO ticket_orders (mem_id, buyticket_date) VALUE (?, NOW())";
 	private static final String INSERT_TIME_NUMBER = "INSERT INTO ticket_list(ticket_orders_id,movie_time_id,ticket_number,ticket_price)"
-			+ 										 "VALUES ((SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1), ?, ?, ticket_number*220)";
+			+ 										 "VALUES ((SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1), ?, ?, ticket_number*250)";
 	private static final String GET_SEAT = "SELECT movie_time_id, mt.hall_id, movie_id, seat_select_state, showing, showing_date, seat_id, seat_state, seat_name, seat_row, seat_col, seat_left, seat_right, seat_row_aisle1, seat_row_aisle2, seat_no "
 			+ "FROM movie_time mt "
 			+ "JOIN ( "
@@ -44,8 +43,10 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			+ ") hs "
 			+ "ON mt.hall_id = hs.hall_id "
 			+ "WHERE movie_time_id = ?;";
-	private static final String CHOOSE_SEAT = "UPDATE movie_time set seat_select_state = ? where movie_time_id = ?";
-    private static final String GET_TICKET_LIST_ID_NUMBER = "SELECT ticket_list_id, ticket_number FROM ticket_list WHERE ticket_orders_id = (SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1)";
+	private static final String CHOOSE_SEAT = "UPDATE movie_time SET seat_select_state = ? WHERE movie_time_id = ?; ";
+	private static final String SAVE_TO_LIST = "UPDATE ticket_list set select_seat_name = ? WHERE ticket_list_id = ?;"; 
+	private static final String GET_TICKET_LIST_ID_NUMBER = "SELECT ticket_list_id, ticket_number FROM ticket_list WHERE ticket_orders_id = (SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1)";
+	private static final String GET_LIST_TICKET_PRICE = "SELECT ticket_price FROM ticket_list WHERE ticket_orders_id = (SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1);";
 //	private static final String GET_ONE_STMT = "SELECT seat_id,seat_state,seat_name FROM hall_seat where hall_id = ?";
 //	private static final String GET_HALL_NAME = "SELECT hall_id, hall_name FROM hall order by hall_id";
 	private static final String GET_MOVIE_TIME = "SELECT movie_time_id, showing, showing_date FROM movie_time WHERE movie_id = ?";
@@ -255,6 +256,59 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 	}
 	
 	@Override
+	public List<Ticket_OrdersVO> getList_Ticket_Price(Integer mem_id) {
+		List<Ticket_OrdersVO> list_ticket_price = new ArrayList<Ticket_OrdersVO>();
+		Ticket_OrdersVO ticket_ordersVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_LIST_TICKET_PRICE);
+			pstmt.setInt(1, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				ticket_ordersVO = new Ticket_OrdersVO();
+				ticket_ordersVO.setTicket_price(rs.getInt("ticket_price"));
+				list_ticket_price.add(ticket_ordersVO);
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list_ticket_price;
+	}
+	
+	@Override
 	public void choose_Seat(Ticket_OrdersVO ticket_ordersVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -265,6 +319,36 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt.setString(1, ticket_ordersVO.getSeat_select_state());
 			pstmt.setInt(2, ticket_ordersVO.getMovie_time_id());
 
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SAVE_TO_LIST);
+			pstmt.setString(1, ticket_ordersVO.getSelect_seat_name());
+			pstmt.setInt(2, ticket_ordersVO.getTicket_list_id());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors

@@ -2,7 +2,6 @@ package web.ticket_orders.service;
 
 import java.util.List;
 
-import web.select_seat.entity.Select_SeatVO;
 import web.ticket_orders.dao.Ticket_OrdersDAO;
 import web.ticket_orders.dao.Ticket_OrdersDAO_interface;
 import web.ticket_orders.entity.Ticket_OrdersVO;
@@ -42,11 +41,14 @@ public class Ticket_OrdersService {
 		return dao.getSeat(movie_time_id);
 	}
 	
-	public Ticket_OrdersVO choose_Seat(Integer movie_time_id, String seat_select_state) {
+	public Ticket_OrdersVO choose_Seat(Integer movie_time_id, String seat_select_state, String select_seat_name, Integer ticket_list_id) {
 
 		Ticket_OrdersVO ticket_ordersVO = new Ticket_OrdersVO();
 		ticket_ordersVO.setMovie_time_id(movie_time_id);
 		ticket_ordersVO.setSeat_select_state(seat_select_state);
+		ticket_ordersVO.setSelect_seat_name(select_seat_name);
+		ticket_ordersVO.setTicket_list_id(ticket_list_id);
+		
 		dao.choose_Seat(ticket_ordersVO);
 
 		return ticket_ordersVO;
@@ -54,6 +56,10 @@ public class Ticket_OrdersService {
 	
 	public List<Ticket_OrdersVO> getTicket_List_Id_Number(Integer mem_id) {
 		return dao.getTicket_List_Id_Number(mem_id);
+	}
+	
+	public List<Ticket_OrdersVO> getList_Ticket_Price(Integer mem_id) {
+		return dao.getList_Ticket_Price(mem_id);
 	}
 	
 //
