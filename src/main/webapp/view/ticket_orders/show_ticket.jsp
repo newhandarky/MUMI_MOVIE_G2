@@ -1,7 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.*"%>
+<%@ page import="web.ticket_orders.dao.*"%>
+<%@ page import="web.ticket_orders.entity.*"%>
+<%@ page import="web.ticket_orders.service.*"%>
+<%@ page import="web.member.entity.*"%>
+<%@ page import="web.member.dao.*"%>
 
-
+<%
+pageContext.getAttribute("list_mem_order");
+MemVO memVO = (MemVO) session.getAttribute("memVO");
+Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket_ordersVO");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,14 +36,14 @@
 
         <div class="showticket">
             <img src="image/others/mujilogo2.png" alt="">
-            <h3>XXX 您好, 這次您的訂票明細如下</h3>
-            <form action="">
-
+            <h3>${memVO.mem_name} 您好, 這次您的訂票明細如下</h3>
+            <form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+			<c:forEach var="ticket_ordersVO" items="${list_mem_order}" begin="0" end="1" >
                 <div class="container">
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8">
-                            <h4 class="order_number">訂單編號 : 45678</h4>
+                            <h4 class="order_number">訂單編號 : ${ticket_ordersVO.ticket_orders_id}</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -41,29 +52,33 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">電影名稱</th>
-                                        <th class="tableval" scope="col" colspan="3">咒術迴戰</th>
+                                        <th class="tableval" scope="col" colspan="3">${ticket_ordersVO.movie_ch}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <th scope="row">影城影廳</th>
-                                        <th class="tableval" scope="col" colspan="3">A廳 4DX豪華影廳</th>
+                                        <th class="tableval" scope="col" colspan="3">${ticket_ordersVO.hall_name}</th>
                                     </tr>
                                     <tr>
+                                    	<th scope="row">播放日期</th>
+                                    	<th class="tableval" scope="col" colspan="3">${ticket_ordersVO.showing_date}</th>
                                     </tr>
-                                    <th scope="row">電影場次</th>
-                                    <th class="tableval" scope="col" colspan="3">5/25 14:30</th>
+                                    <tr>
+                                    	<th scope="row">電影場次</th>
+                                    	<th class="tableval" id="movie_time" scope="col" colspan="3" value="${ticket_ordersVO.showing}"></th>
+                                    </tr>
                                     <tr>
                                         <th scope="row">票券張數</th>
-                                        <th class="tableval" scope="col" colspan="3">全票 3 張</th>
+                                        <th class="tableval" scope="col" colspan="3">全票 ${ticket_ordersVO.ticket_number} 張</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">場次座位</th>
-                                        <th class="tableval" scope="col" colspan="3">H5, H6, H7</th>
+                                        <th class="tableval" scope="col" colspan="3">${ticket_ordersVO.select_seat_name}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">合計金額</th>
-                                        <th class="tableval" scope="col" colspan="3">900</th>
+                                        <th class="tableval" scope="col" colspan="3">${ticket_ordersVO.ticket_price}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -74,20 +89,14 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-2">
-
-                        </div>
-                        <div class="col-4">
-
-                            <button type="button" class="btn btn-primary" id="btn_primary">確認送出</button>
-                        </div>
-                        <div class="col-4">
-                            <a href="mem_shopping sheet.html">
-                                <button type="button" class="btn btn-secondary">取消返回</button>
-                            </a>
+                        <div class="col-12">
+							<a href="<%=request.getContextPath()%>/view/index/index.jsp">
+                            <button type="button" class="btn btn-primary" id="btn_primary">確認</button>
+                        	</a>
                         </div>
                     </div>
                 </div>
+            </c:forEach>    
             </form>
         </div>
 

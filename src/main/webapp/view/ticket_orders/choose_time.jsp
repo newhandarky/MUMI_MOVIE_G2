@@ -54,12 +54,23 @@ pageContext.getAttribute("list");
 					</div>
 					<div class="col-md-6 col-sm-12">
 						<div class="col-12 forspan">
-							<c:forEach var="ticket_ordersVO" items="${list}">
-								<span class="day">${ticket_ordersVO.showing_date}</span>
-								<button class="showtime" value="${ticket_ordersVO.showing}"></button>
-								<input id="movie_time_id" type="hidden" name="" value="${ticket_ordersVO.movie_time_id}">
-								<hr>
-							</c:forEach>
+							<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status">
+        						<c:set var="timeAlreadyExists" value="${false}" />
+        						<c:if test="${(status.index - 1) >= 0}">
+            						<c:forEach var="previousDate" items="${list}" begin="0" end="${status.index - 1}" varStatus="inner">
+                						<c:if test="${ticket_ordersVO.showing_date == previousDate.showing_date}">
+                    						<c:set var="timeAlreadyExists" value="${true}" />
+                						</c:if>
+            						</c:forEach>
+        						</c:if>
+        						<c:if test="${not timeAlreadyExists}">
+        							<hr>
+            						<span class="day">${ticket_ordersVO.showing_date}</span>
+       							</c:if>
+            						<button class="showtime" value="${ticket_ordersVO.showing}"></button>
+            						<input id="movie_time_id" type="hidden" name="" value="${ticket_ordersVO.movie_time_id}">
+    						</c:forEach>
+    						<hr>
 						</div>
 						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
 					</div>

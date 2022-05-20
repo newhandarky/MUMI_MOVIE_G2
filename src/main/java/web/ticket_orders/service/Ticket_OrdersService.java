@@ -62,6 +62,10 @@ public class Ticket_OrdersService {
 		return dao.getList_Ticket_Price(mem_id);
 	}
 	
+	public List<Ticket_OrdersVO> getMem_Order(Integer mem_id) {
+		return dao.getMem_Order(mem_id);
+	}
+	
 //
 //	public Hall_SeatVO updateSeat_State(Integer seat_id, Integer seat_state) {
 //

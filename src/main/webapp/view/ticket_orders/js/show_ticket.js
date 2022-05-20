@@ -40,7 +40,26 @@ $(function() {
     $(".hamberger_menu").on("click", function() {
         $(".hide_menu").toggleClass("-bye");
     })
-
-
-
+	
 });
+
+// 場次數字轉時間
+	$(document).ready(function() {
+		$('th#movie_time').each(function() {
+			if($(this).attr('value') == 1){
+				$(this).text("8:30");
+			};
+			if($(this).attr('value') == 2){
+				$(this).text("11:30");
+			};
+			if($(this).attr('value') == 3){
+				$(this).text("14:30");
+			};
+			if($(this).attr('value') == 4){
+				$(this).text("17:30");
+			};
+			if($(this).attr('value') == 5){
+				$(this).text("20:30");
+			};
+		});
+	});

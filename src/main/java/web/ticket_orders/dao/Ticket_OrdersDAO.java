@@ -47,9 +47,38 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 	private static final String SAVE_TO_LIST = "UPDATE ticket_list set select_seat_name = ? WHERE ticket_list_id = ?;"; 
 	private static final String GET_TICKET_LIST_ID_NUMBER = "SELECT ticket_list_id, ticket_number FROM ticket_list WHERE ticket_orders_id = (SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1)";
 	private static final String GET_LIST_TICKET_PRICE = "SELECT ticket_price FROM ticket_list WHERE ticket_orders_id = (SELECT ticket_orders_id FROM ticket_orders WHERE mem_id = ? ORDER BY buyticket_date DESC LIMIT 1);";
-//	private static final String GET_ONE_STMT = "SELECT seat_id,seat_state,seat_name FROM hall_seat where hall_id = ?";
+	private static final String FINISH_ORDERS = "SELECT mem_id, ticket_orders_id, movie_ch, hall_name, showing_date, showing, ticket_number, select_seat_name, ticket_price, h.hall_id "
+			+ "FROM hall h "
+			+ "JOIN ( "
+			+ "	SELECT ticket_orders_id, mem_id, select_seat_name, ticket_price, ticket_number, movie_time_id, hall_id, m.movie_id, showing, showing_date, movie_ch "
+			+ "	FROM movie m "
+			+ "	JOIN ( "
+			+ "		SELECT ticket_orders_id, mem_id, select_seat_name, ticket_price, ticket_number, mt.movie_time_id, hall_id, movie_id, showing, showing_date "
+			+ "		FROM movie_time mt "
+			+ "		JOIN ( "
+			+ "			SELECT tko.ticket_orders_id, mem_id, select_seat_name, ticket_price, ticket_number, movie_time_id "
+			+ "			FROM ticket_orders tko "
+			+ "			JOIN( "
+			+ "				SELECT ticket_list_id, ticket_orders_id, select_seat_name, movie_time_id, ticket_price, ticket_number "
+			+ "				FROM ticket_list "
+			+ "				WHERE ticket_orders_id = ( "
+			+ "					SELECT ticket_orders_id "
+			+ "					FROM ticket_orders "
+			+ "					WHERE mem_id = ? "
+			+ "					ORDER BY buyticket_date "
+			+ "					DESC LIMIT 1 "
+			+ "					) "
+			+ "				) tl "
+			+ "			ON tko.ticket_orders_id = tl.ticket_orders_id "
+			+ "			WHERE mem_id = ? "
+			+ "			) t2 "
+			+ "		ON mt.movie_time_id = t2.movie_time_id "
+			+ "		) t3 "
+			+ "	ON m.movie_id = t3.movie_id "
+			+ "	) t4 "
+			+ "ON h.hall_id = t4.hall_id;";
 //	private static final String GET_HALL_NAME = "SELECT hall_id, hall_name FROM hall order by hall_id";
-	private static final String GET_MOVIE_TIME = "SELECT movie_time_id, showing, showing_date FROM movie_time WHERE movie_id = ?";
+	private static final String GET_MOVIE_TIME = "SELECT movie_time_id, showing, showing_date FROM movie_time WHERE movie_id = ? AND date_add(curdate(),INTERVAL 6 DAY) >= date(showing_date) AND date(showing_date) >= curdate() ORDER BY showing_date;";
 //	private static final String INSERT_HALL = "INSERT INTO hall (hall_name, hall_update) VALUES (?, now())";
 //	private static final String GET_HALL_NEW = "SELECT hall_id, hall_name FROM hall ORDER BY hall_update DESC LIMIT 1;";
 	
@@ -618,6 +647,70 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	
+	@Override
+	public List<Ticket_OrdersVO> getMem_Order(Integer mem_id) {
+		List<Ticket_OrdersVO> list_mem_order = new ArrayList<Ticket_OrdersVO>();
+		Ticket_OrdersVO ticket_ordersVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINISH_ORDERS);
+			pstmt.setInt(1, mem_id);
+			pstmt.setInt(2, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				ticket_ordersVO = new Ticket_OrdersVO();
+				ticket_ordersVO.setMem_id(rs.getInt("mem_id"));
+				ticket_ordersVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));
+				ticket_ordersVO.setMovie_ch(rs.getString("movie_ch"));
+				ticket_ordersVO.setHall_name(rs.getString("hall_name"));
+				ticket_ordersVO.setShowing_date(rs.getDate("showing_date"));
+				ticket_ordersVO.setShowing(rs.getInt("showing"));
+				ticket_ordersVO.setTicket_number(rs.getInt("ticket_number"));
+				ticket_ordersVO.setSelect_seat_name(rs.getString("select_seat_name"));
+				ticket_ordersVO.setTicket_price(rs.getInt("ticket_price"));
+				ticket_ordersVO.setHall_id(rs.getInt("hall_id"));
+				list_mem_order.add(ticket_ordersVO);
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list_mem_order;
 	}
 	
 //	@Override
