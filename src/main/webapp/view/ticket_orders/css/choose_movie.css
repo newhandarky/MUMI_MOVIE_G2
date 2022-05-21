@@ -373,6 +373,7 @@ footer h5 {
     font-weight: bold;
     text-align: left;
     padding-left: 30px;
+    color: white;
 }
 
 footer ul {
@@ -390,16 +391,21 @@ footer ul li a {
     font-size: 14px;
 }
 
-#ft_icons span img {
-    width: 30px;
-}
-
-#ft_icons {
+.focus_us {
+    display: block;
     text-align: left;
 }
 
-#ft_icons a {
+.focus_us p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: white;
+}
+
+.focus_us a {
     text-decoration: none;
+    color: antiquewhite;
+    margin-left: 30px;
 }
 
 footer .copyright {
@@ -415,8 +421,8 @@ footer .copyright a {
     color: white;
 }
 
-footer .copyright a:hover,
-footer .copyright a:active {
+footer a:hover,
+footer a:active {
     color: #ffc107;
 }
 
@@ -434,4 +440,3 @@ footer .copyright a:active {
     .hide_menu {
         display: block;
     }
-}

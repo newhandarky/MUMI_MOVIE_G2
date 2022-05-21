@@ -72,10 +72,23 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 				     		<input id="seat_select_state" type="hidden" name="seat_select_state" value="${fn:substring(ticket_ordersVO.seat_select_state,(ticket_ordersVO.seat_no)-1,(ticket_ordersVO.seat_no))}" >
 							</div>
 						</c:forEach>
-			     			<a class="btn btn-secondary" href="select_page.jsp" role="button">取消</a>
-			     			<input type="hidden" name="action" value="choose_seat">
-			     			<input class="btn btn-primary" type="submit" value="確定">     			
+						<div class="container">
+							<div class="row">
+							<div class="col-2"></div>
+							<div class="col-4">
+			     				<input type="hidden" name="action" value="choose_seat">
+			     				<input class="btn btn-primary" type="submit" value="確定">
+			     			</div>    			
 			     		</form>
+			     		<div class="col-4">
+			     			<form method="post" action="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet" style="margin-bottom: 0px;">
+			     				<input type="hidden" name="action" value="delete_orders">
+								<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+								<button type="submit" class="btn btn-secondary">取消返回</button>
+			     			</form>
+			     		</div>
+			     		</div>
+			     		</div>
 						<!-- 走道 -->
 						<div class="aisle"></div>
 						<div class="aisle"></div>

@@ -80,25 +80,23 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-2">
-
-                        </div>
+                        <div class="col-2"></div>
                         <div class="col-4">
                         	<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
                         	<input type="hidden" name="action" value="finish_orders">
 			     			<input class="btn btn-primary" type="submit" value="確認送出">  
                         </div>
-                        <div class="col-4">
-                            <a href="mem_shopping sheet.html">
-                                <button type="button" class="btn btn-secondary">取消返回</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </form>
-
-        </div>
-
+                        <div class="col-4">
+						<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+							<input type="hidden" name="action" value="delete_orders_and_seat">
+							<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+							<button type="submit" class="btn btn-secondary">取消返回</button>
+						</form>
+						</div>
+					</div>
+                </div>
+        	</div>
     </main>
 
     <!-- 主要工作區結束 -->

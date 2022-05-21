@@ -14,7 +14,6 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	private Integer seat_row_aisle1;
 	private Integer seat_row_aisle2;
 	private Integer seat_no;
-	private String hall_seat_state_total;
 	private String hall_name;
 	private Date hall_update;
 	private Integer movie_time_id;
@@ -26,12 +25,14 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	private Integer ticket_orders_id;
 	private Integer mem_id;
 	private Date buyticket_date;
-	private Integer total_price;
 	private Integer ticket_list_id;
 	private String select_seat_name;	
 	private Integer ticket_price;
 	private Integer ticket_number;
+	private Integer movie_rating_id;
 	private String movie_ch;
+	private String movie_en;
+	private byte[] movie_poster;
 	
 	public Integer getSeat_id() {
 		return seat_id;
@@ -92,12 +93,6 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	}
 	public void setSeat_no(Integer seat_no) {
 		this.seat_no = seat_no;
-	}
-	public String getHall_seat_state_total() {
-		return hall_seat_state_total;
-	}
-	public void setHall_seat_state_total(String hall_seat_state_total) {
-		this.hall_seat_state_total = hall_seat_state_total;
 	}
 	public String getHall_name() {
 		return hall_name;
@@ -165,12 +160,6 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	public void setBuyticket_date(Date buyticket_date) {
 		this.buyticket_date = buyticket_date;
 	}
-	public Integer getTotal_price() {
-		return total_price;
-	}
-	public void setTotal_price(Integer total_price) {
-		this.total_price = total_price;
-	}
 	public Integer getTicket_list_id() {
 		return ticket_list_id;
 	}
@@ -195,11 +184,28 @@ public class Ticket_OrdersVO implements java.io.Serializable {
 	public void setTicket_number(Integer ticket_number) {
 		this.ticket_number = ticket_number;
 	}
+	public Integer getMovie_rating_id() {
+		return movie_rating_id;
+	}
+	public void setMovie_rating_id(Integer movie_rating_id) {
+		this.movie_rating_id = movie_rating_id;
+	}
 	public String getMovie_ch() {
 		return movie_ch;
 	}
 	public void setMovie_ch(String movie_ch) {
 		this.movie_ch = movie_ch;
 	}
-	
+	public String getMovie_en() {
+		return movie_en;
+	}
+	public void setMovie_en(String movie_en) {
+		this.movie_en = movie_en;
+	}
+	public byte[] getMovie_poster() {
+		return movie_poster;
+	}
+	public void setMovie_poster(byte[] movie_poster) {
+		this.movie_poster = movie_poster;
+	}
 }

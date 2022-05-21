@@ -39,44 +39,51 @@ pageContext.getAttribute("list");
 	<div class="mumipay">
 		<img src="image/others/mujilogored.png" alt="">
 
-		<jsp:useBean id="ticket_ordersSvc" scope="page"
-			class="web.ticket_orders.service.Ticket_OrdersService" />
 		<form METHOD="post"
 			ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
 			<div class="container">
 				<div class="row">
-					<div class="col-12">
-						<h2 class="title">您所選擇的電影是 : 咒術迴戰</h2>
-						<h3>請選擇日期與場次</h3>
-					</div>
-					<div class="col-md-6 col-sm-12">
-						<img src="image/moviestand/1825.jpg" alt="">
-					</div>
+					<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status"
+						begin="0" end="0">
+						<div class="col-12">
+							<h2 class="title">您所選擇的電影是 : ${ticket_ordersVO.movie_ch}</h2>
+							<h3>請選擇日期與場次</h3>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<img src="image/moviestand/1825.jpg" alt="">
+						</div>
+					</c:forEach>
 					<div class="col-md-6 col-sm-12">
 						<div class="col-12 forspan">
-							<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status">
-        						<c:set var="timeAlreadyExists" value="${false}" />
-        						<c:if test="${(status.index - 1) >= 0}">
-            						<c:forEach var="previousDate" items="${list}" begin="0" end="${status.index - 1}" varStatus="inner">
-                						<c:if test="${ticket_ordersVO.showing_date == previousDate.showing_date}">
-                    						<c:set var="timeAlreadyExists" value="${true}" />
-                						</c:if>
-            						</c:forEach>
-        						</c:if>
-        						<c:if test="${not timeAlreadyExists}">
-        							<hr>
-            						<span class="day">${ticket_ordersVO.showing_date}</span>
-       							</c:if>
-            						<button class="showtime" value="${ticket_ordersVO.showing}"></button>
-            						<input id="movie_time_id" type="hidden" name="" value="${ticket_ordersVO.movie_time_id}">
-    						</c:forEach>
-    						<hr>
+							<c:forEach var="ticket_ordersVO" items="${list}"
+								varStatus="status">
+								<c:set var="timeAlreadyExists" value="${false}" />
+								<c:if test="${(status.index - 1) >= 0}">
+									<c:forEach var="previousDate" items="${list}" begin="0"
+										end="${status.index - 1}" varStatus="inner">
+										<c:if
+											test="${ticket_ordersVO.showing_date == previousDate.showing_date}">
+											<c:set var="timeAlreadyExists" value="${true}" />
+										</c:if>
+									</c:forEach>
+								</c:if>
+								<c:if test="${not timeAlreadyExists}">
+									<hr>
+									<span class="day">${ticket_ordersVO.showing_date}</span>
+								</c:if>
+								<button class="showtime" value="${ticket_ordersVO.showing}"></button>
+								<input id="movie_time_id" type="hidden" name=""
+									value="${ticket_ordersVO.movie_time_id}">
+							</c:forEach>
+							<hr>
 						</div>
-						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+						<input id="mem_id" type="hidden" name="mem_id"
+							value="${memVO.mem_id}">
 					</div>
 					<div class="col-2"></div>
 					<div class="col-8">
-						<select name="ticket_number" class="form-select" aria-label="Default select example">
+						<select name="ticket_number" class="form-select"
+							aria-label="Default select example">
 							<option selected>請選擇張數</option>
 							<option id="ticket_number" value="1">1</option>
 							<option id="ticket_number" value="2">2</option>
@@ -95,14 +102,16 @@ pageContext.getAttribute("list");
 						<input type="hidden" name="action" value="confirm_time_number">
 						<input class="btn btn-primary" type="submit" value="前往劃位">
 					</div>
-					<div class="col-4">
-						<a href="mem_shopping sheet.html">
-							<button type="button" class="btn btn-secondary">取消返回</button>
-						</a>
-					</div>
+		</form>
+				<div class="col-4">
+					<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+						<input type="hidden" name="action" value="delete_orders">
+						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+						<button type="submit" class="btn btn-secondary">取消返回</button>
+					</form>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 
 </main>

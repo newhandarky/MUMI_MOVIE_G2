@@ -66,6 +66,9 @@ public class Ticket_OrdersService {
 		return dao.getMem_Order(mem_id);
 	}
 	
+	public List<Ticket_OrdersVO> getOnline_Moive() {
+		return dao.getOnline_Moive();
+	}
 //
 //	public Hall_SeatVO updateSeat_State(Integer seat_id, Integer seat_state) {
 //
@@ -77,9 +80,13 @@ public class Ticket_OrdersService {
 //		return hall_seatVO;
 //	}
 //
-//	public void deleteHall(Integer hall_id) {
-//		dao.delete(hall_id);
-//	}
+	public void deleteOrders(Integer mem_id) {
+		dao.deleteOrders(mem_id);
+	}
+	
+	public void deleteOrdersSeat(Integer mem_id) {
+		dao.deleteOrdersSeat(mem_id);
+	}
 //
 //	public Hall_SeatVO getOneHall_Seat(Integer hall_id) {
 //		return dao.findByPrimaryKey(hall_id);

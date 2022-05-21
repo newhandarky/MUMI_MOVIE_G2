@@ -15,9 +15,9 @@
 // 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 MemVO memVO = (MemVO) session.getAttribute("memVO");
 Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket_ordersVO");
-MovieService movieSvc = new MovieService();
-List<MovieVO> list = movieSvc.getAll();
-pageContext.setAttribute("list", list);
+Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+List<Ticket_OrdersVO> list_online_movie = ticket_ordersSvc.getOnline_Moive();
+pageContext.setAttribute("list_online_movie", list_online_movie);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,44 +37,49 @@ pageContext.setAttribute("list", list);
 	crossorigin="anonymous">
 </head>
 
-<%@ include file="/view/index/header.jsp" %>
-	<!-- 主要工作區 -->
+<%@ include file="/view/index/header.jsp"%>
+<!-- 主要工作區 -->
 
-	<main>
-		<div class="main">
-
-
+<main>
+	<div class="main">
+		<div class="container">
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
-				<c:forEach var="movieVO" items="${list}">
-					<button type="submit" class="btn btn-success choose_movie">${movieVO.movie_ch}</button>		
-					<input id="movie_id" type="hidden" name="" value="${movieVO.movie_id}">
+				<c:forEach var="ticket_ordersVO" items="${list_online_movie}">
+					<button type="submit" class="btn btn-success choose_movie">${ticket_ordersVO.movie_ch}</button>
+					<input id="movie_id" type="hidden" name="" value="${ticket_ordersVO.movie_id}">
 					<input type="hidden" name="action" value="getOne_For_Choose">
 				</c:forEach>
-				<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
 			</form>
+			<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+				<div class="col-12">
+						<input type="hidden" name="action" value="delete_orders">
+						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+						<button type="submit" class="btn btn-secondary">取消返回</button>
+				</div>
+				<br>
+			</form>	
 		</div>
+	</div>
+</main>
+
+<!-- 主要工作區結束 -->
 
 
-	</main>
-
-	<!-- 主要工作區結束 -->
-
-
-	<!-- 頁尾 -->
-<%@ include file="/view/index/footer.jsp" %>
+<!-- 頁尾 -->
+<%@ include file="/view/index/footer.jsp"%>
 
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<!-- JS檔連結記得修改 -->
-	<script
-		src="${pageContext.request.contextPath}/view/ticket_orders/js/choose_movie.js"></script>
-	<script>
-		$("input#movie_id").val(ticket_ordersVO.getMovie_id());
-	</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- JS檔連結記得修改 -->
+<script
+	src="${pageContext.request.contextPath}/view/ticket_orders/js/choose_movie.js"></script>
+<script>
+	$("input#movie_id").val(ticket_ordersVO.getMovie_id());
+</script>
 
 </html>

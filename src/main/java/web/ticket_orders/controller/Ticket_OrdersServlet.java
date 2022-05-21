@@ -391,35 +391,63 @@ public class Ticket_OrdersServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-//
-//		if ("delete".equals(action)) { // 來自listAllEmp.jsp
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/*************************** 1.接收請求參數 ***************************************/
-//				Integer hall_id = new Integer(req.getParameter("hall_id"));
-//
-//				/*************************** 2.開始刪除資料 ***************************************/
-//				Hall_SeatService hall_seatSvc = new Hall_SeatService();
-//				hall_seatSvc.deleteHall(hall_id);
-//
-//				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-//				String url = "/view/hall_seat/select_page.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-//				successView.forward(req, res);
-//
-//				/*************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//		
+
+		if ("delete_orders".equals(action)) { // 來自listAllEmp.jsp
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				Integer mem_id = new Integer(req.getParameter("mem_id"));
+
+				/*************************** 2.開始刪除資料 ***************************************/
+				Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+				ticket_ordersSvc.deleteOrders(mem_id);
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/view/index/index.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("delete_orders_and_seat".equals(action)) { // 來自listAllEmp.jsp
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				Integer mem_id = new Integer(req.getParameter("mem_id"));
+
+				/*************************** 2.開始刪除資料 ***************************************/
+				Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
+				ticket_ordersSvc.deleteOrdersSeat(mem_id);
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/view/index/index.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/ticket_orders/choose_movie.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 //		if ("insert_hall".equals(action)) {
 //			List<String> errorMsgs = new LinkedList<String>();
 //			
