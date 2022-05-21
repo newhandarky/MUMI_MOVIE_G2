@@ -44,7 +44,7 @@ public class LoginHandler extends HttpServlet {
 		}
     }
     
-    if ("login".equals(action)) { // 來自select_page.jsp的請求
+    if ("login".equals(action)) { // 來自login.jsp的請求
 
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);

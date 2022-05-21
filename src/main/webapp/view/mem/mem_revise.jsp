@@ -130,8 +130,8 @@
                     </div>
                 </div>
                 <div class="announcement">
-                    <a class="alist" href="<%=request.getContextPath()%>/view/mem/select_page.jsp">
-                        <button type="button" class="btn btn-secondary" id="cancel">取消變更</button>
+                    <a class="alist" href="<%=request.getContextPath()%>/view/index/index.jsp">
+                        <button type="button" class="btn btn-secondary" id="cancel">取消變更, 返回首頁</button>
                     </a>
                     
 					<input type="hidden" name="mem_id" value="<%=memVO.getMem_id()%>">

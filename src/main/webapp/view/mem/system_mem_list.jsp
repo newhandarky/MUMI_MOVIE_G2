@@ -70,7 +70,8 @@
 					</c:forEach>
 				</table>
 				<%@ include file="page2.file" %>
-
+				
+				
 				<!-- 工作區結束 -->
 
 				<footer>
