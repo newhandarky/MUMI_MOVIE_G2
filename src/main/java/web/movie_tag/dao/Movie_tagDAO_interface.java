@@ -11,5 +11,8 @@ public interface Movie_tagDAO_interface {
 	public void delete(Integer movie_tag_id);
 	public Movie_tagVO findByPrimaryKey(Integer movie_tag_id);
 	public List<Movie_tagVO> getAll();
+	public List<Movie_tagVO> getAllCh();
+	public List<Movie_tagVO> getMovieCh(String movie_ch);
+	
 	
 }

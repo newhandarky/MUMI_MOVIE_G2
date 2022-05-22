@@ -1,9 +1,8 @@
 package web.movie.dao;
 
-import java.util.*;
+import java.util.List;
 
 import web.movie.entity.MovieVO;
-import web.movie_tag.entity.Movie_tagVO;
 
 public interface MovieDAO_interface {
 	public void insert(MovieVO movieVO);

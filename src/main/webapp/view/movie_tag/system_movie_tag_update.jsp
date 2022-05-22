@@ -214,22 +214,52 @@ Movie_tagVO movie_tagVO = (Movie_tagVO) request.getAttribute("movie_tagVO"); //M
 									<%=movie_tagVO.getMovie_tag_id()%>
 								</div>
 							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">電影編號：</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_id"
-										value="<%=movie_tagVO.getMovie_id()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">分類編號：</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_type_id"
-										value="<%=movie_tagVO.getMovie_type_id()%>"
-										aria-label="default input example">
-								</div>
-							</div>
+<!-- 							<div class="mb-3 row"> -->
+<!-- 								<label class="col-sm-2 col-form-label">電影編號：</label> -->
+<!-- 								<div class="col-sm-3"> -->
+<!-- 									<input class="form-control" type="text" name="movie_id" -->
+<%-- 										value="<%=movie_tagVO.getMovie_id()%>" --%>
+<!-- 										aria-label="default input example"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="mb-3 row"> -->
+<!-- 								<label class="col-sm-2 col-form-label">分類編號：</label> -->
+<!-- 								<div class="col-sm-3"> -->
+<!-- 									<input class="form-control" type="text" name="movie_type_id" -->
+<%-- 										value="<%=movie_tagVO.getMovie_type_id()%>" --%>
+<!-- 										aria-label="default input example"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+							
+							<table>
+							<jsp:useBean id="movie_typeSvc" scope="page" class="web.movie_type.service.Movie_typeService" /> 
+							<tr>
+								<td>電影分類編號:<font color=red><b>*</b></font></td>
+								<td><select size="1" name="movie_type_id" class="form-select">
+										<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}">
+											<option value="${Movie_typeVO.movie_type_id}">
+											${Movie_typeVO.movie_type_ch}
+									
+											
+												
+										</c:forEach>
+								</select></td>
+							</tr>
+							
+							<jsp:useBean id="movieSvc" scope="page"
+							class="web.movie.service.MovieService" /> 
+							<tr>
+								<td>電影編號:<font color=red><b>*</b></font></td>
+								<td><select size="1" name="movie_id" class="form-select">
+										<c:forEach var="MovieVO" items="${movieSvc.all}">
+											<option value="${MovieVO.movie_id}"
+												${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }>
+												${MovieVO.movie_ch}
+										</c:forEach>
+								</select></td>
+							</tr>
+							</table>
 
 							<br> <input type="hidden" name="action" value="update">
 							<input type="hidden" name="movie_tag_id"

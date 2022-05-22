@@ -9,7 +9,7 @@
 
 <%
 Movie_tagService movie_tagSvc = new Movie_tagService();
-List<Movie_tagVO> list = movie_tagSvc.getAll();
+List<Movie_tagVO> list = movie_tagSvc.getAllCh();
 pageContext.setAttribute("list", list);
 %>
 
@@ -214,7 +214,7 @@ pageContext.setAttribute("list", list);
 								<tr>
 									<th>標籤編號</th>
 									<th>電影編號</th>
-									<th>分類顛號</th>
+									<th>分類編號</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -224,8 +224,8 @@ pageContext.setAttribute("list", list);
 
 								<tr>
 									<td>${movie_tagVO.movie_tag_id}</td>
-									<td>${movie_tagVO.movie_id}</td>
-									<td>${movie_tagVO.movie_type_id}</td>
+									<td>${movie_tagVO.movie_ch}</td>
+									<td>${movie_tagVO.movie_type_ch}</td>
 									<td>
 										<FORM METHOD="post"
 											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"

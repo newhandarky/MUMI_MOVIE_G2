@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="web.movie_tag.dao.*"%>
-<%@ page import="web.movie_tag.entity.*"%>
+<%@ page import="web.movie_type.dao.*"%>
+<%@ page import="web.movie_type.entity.*"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/movie_tag/css/system_movie_tag_add.css">
+	href="<%=request.getContextPath()%>/view/movie_time/css/system_movie_time_add.css">
 
 </head>
 
@@ -178,12 +178,12 @@
 
 
 		<div class="main">
-			<h2>新增電影標籤</h2>
+			<h2>新增電影場次</h2>
 			<div class="card">
 				<div class="container">
 					<div col="12">
 						<div class="col-6">
-							<a class="btn btn-secondary" href='system_movie_tag_listAll.jsp'>所有電影標籤</a>
+							<a class="btn btn-secondary" href='system_movie_time_listAll.jsp'>所有電影時刻資料</a>
 							<br> <br>
 
 						</div>
@@ -198,101 +198,194 @@
 						</c:if>
 
 
-						<jsp:useBean id="movieSvc" scope="page"
-							class="web.movie.service.MovieService" />
-
-						<jsp:useBean id="movie_typeSvc" scope="page"
-							class="web.movie_type.service.Movie_typeService" />
-
-<!-- 						<FORM METHOD="post" -->
-<%-- 							ACTION="<c:url value="/view/movie/MovieServlet"/>" name="form1"> --%>
-<!-- 							<b>依電影名稱查詢分類:</b> <select size="1" name="movie_id"> -->
-<%-- 								<c:forEach var="movieVO" items="${movieSvc.all}"> --%>
-<%-- 									<option value="${movieVO.movie_id}">${movieVO.movie_ch} --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
-<!-- 							<input type="submit" value="送出"> -->
-<!-- 						</FORM> -->
-
-<!-- 						<FORM METHOD="post" -->
-<%-- 							ACTION="<c:url value="/view/movie_type/Movie_typeServlet"/>" --%>
-<!-- 							name="form1"> -->
-<!-- 							<b>依電影分類查詢電影名稱:</b> <select size="1" name="movie_type_id"> -->
-<%-- 								<c:forEach var="movie_typeVO" items="${movie_typeSvc.all}"> --%>
-<%-- 									<option value="${movie_typeVO.movie_type_id}">${movie_typeVO.movie_type_ch} --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
-<!-- 							<input type="submit" value="送出"> -->
-<!-- 						</FORM> -->
-
-
-
-
-
 						<form method="post"
-							action="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
+							action="<%=request.getContextPath()%>/view/movie_time/Movie_timeServlet"
 							name="form1">
-								
-								
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">電影分類編號:</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_type_id" class="form-select">
-											<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}">
-												<option value="${Movie_typeVO.movie_type_id}">
-													${Movie_typeVO.movie_type_ch}
-											</c:forEach>
+
+							<jsp:useBean id="movie_timeSvc" scope="page"
+								class="web.movie_time.service.Movie_timeService" />
+							<jsp:useBean id="movieSvc" scope="page"
+								class="web.movie.service.MovieService" />
+
+
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">上映日期:</label>
+								<div class="col-sm-3">
+									<input class="form-control" id="f_date1" type="date"
+										name="showing_date" aria-label="default input example">
+								</div>
+								<label class="col-sm-2 col-form-label">影廳:</label>
+								<div class="col-sm-3">
+									<select size="1" name="hall_id" class="form-select">
+
+										<option value="1">A廳</option>
+										<option value="2">B廳</option>
+										<option value="3">C廳</option>
+										<option value="4">D廳</option>
+										<option value="5">E廳</option>
+
 									</select>
-									</div>
-									<label class="col-sm-2 col-form-label">電影編號：</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_id" class="form-select">
-											<c:forEach var="MovieVO" items="${movieSvc.all}">
-												<option value="${MovieVO.movie_id}"
-													${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }>
-													${MovieVO.movie_ch}
-											</c:forEach>
+
+									<!-- 									<select size="1" name="hall_id" class="form-select"> -->
+									<%-- 										<c:forEach var="Movie_timeVO" items="${movie_timeSvc.all}"> --%>
+									<%-- 											<option value="${Movie_timeVO.hall_id}"> --%>
+									<%-- 												${Movie_timeVO.hall_id} --%>
+									<%-- 										</c:forEach> --%>
+									<!-- 									</select> -->
+								</div>
+							</div>
+
+
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">電影名稱:</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_id" class="form-select">
+										<option value="0">無</option>
+										<c:forEach var="Movie_timeVO"
+											items="${movie_timeSvc.releasingNowCh}">
+											<option value="${Movie_timeVO.movie_id}">
+												${Movie_timeVO.movie_ch}
+										</c:forEach>
 									</select>
-									</div>
+								</div>
+								<label class="col-sm-2 col-form-label">場次:</label>
+								<div class="col-sm-3">
+									<!-- 									<select size="1" name="showing" class="form-select" disabled> -->
+									<!-- 										<option value="1" selected>06:00</option> -->
+									<!-- 										<option value="2">09:30</option> -->
+									<!-- 										<option value="3">13:00</option> -->
+									<!-- 										<option value="4">16:30</option> -->
+									<!-- 										<option value="5">20:00</option> -->
+									<!-- 									</select> -->
+									<p>06:00</p>
+									<input type="hidden" name="showing" value="1">
+
 								</div>
 
-
-
-<!-- 								<tr> -->
-<!-- 									<td>電影分類編號:<font color=red><b>*</b></font></td> -->
-<!-- 									<td><select size="1" name="movie_type_id" class="form-select"> -->
-<%-- 											<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}"> --%>
-<%-- 												<option value="${Movie_typeVO.movie_type_id}"> --%>
-<%-- 													${Movie_typeVO.movie_type_ch} --%>
-<%-- 											</c:forEach> --%>
-<!-- 									</select></td> -->
-<!-- 								</tr> -->
-<!-- 								<tr> -->
-<!-- 									<td>電影編號:<font color=red><b>*</b></font></td> -->
-<!-- 									<td><select size="1" name="movie_id" class="form-select"> -->
-<%-- 											<c:forEach var="MovieVO" items="${movieSvc.all}"> --%>
-<%-- 												<option value="${MovieVO.movie_id}" --%>
-<%-- 													${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }> --%>
-<%-- 													${MovieVO.movie_ch} --%>
-<%-- 											</c:forEach> --%>
-<!-- 									</select></td> -->
-<!-- 								</tr> -->
-
-
-							
-							<input type="hidden" name="action" value="insert"> <input
-								type="submit" class="btn btn-primary" value="新增">
-						</form>
-
-
-
-
-
-
-
+							</div>
 					</div>
+					<div class="mb-3 row">
+
+						<label class="col-sm-2 col-form-label">電影名稱:</label>
+						<div class="col-sm-3">
+							<select size="1" name="movie_id" class="form-select">
+								<option value="0">無</option>
+								<c:forEach var="Movie_timeVO"
+									items="${movie_timeSvc.releasingNowCh}">
+									<option value="${Movie_timeVO.movie_id}">
+										${Movie_timeVO.movie_ch}
+								</c:forEach>
+							</select>
+						</div>
+						<label class="col-sm-2 col-form-label">場次:</label>
+						<div class="col-sm-3">
+							<!-- 							<select size="1" name="showing" class="form-select" disabled> -->
+							<!-- 								<option value="1">06:00</option> -->
+							<!-- 										<option value="2" selected>09:30</option> -->
+							<!-- 										<option value="3">13:00</option> -->
+							<!-- 										<option value="4">16:30</option> -->
+							<!-- 										<option value="5">20:00</option> -->
+							<!-- 							</select> -->
+							<p>09:30</p>
+							<input type="hidden" name="showing" value="2">
+						</div>
+					</div>
+					<div class="mb-3 row">
+
+						<label class="col-sm-2 col-form-label">電影名稱:</label>
+						<div class="col-sm-3">
+							<select size="1" name="movie_id" class="form-select">
+								<option value="0">無</option>
+								<c:forEach var="Movie_timeVO"
+									items="${movie_timeSvc.releasingNowCh}">
+									<option value="${Movie_timeVO.movie_id}">
+										${Movie_timeVO.movie_ch}
+								</c:forEach>
+							</select>
+						</div>
+
+						<label class="col-sm-2 col-form-label">場次:</label>
+						<div class="col-sm-3">
+							<!-- 							<select size="1" name="showing" class="form-select"  disabled> -->
+							<!-- 								<option value="1">06:00</option> -->
+							<!-- 										<option value="2">09:30</option> -->
+							<!-- 										<option value="3" selected>13:00</option> -->
+							<!-- 										<option value="4">16:30</option> -->
+							<!-- 										<option value="5">20:00</option> -->
+							<!-- 							</select> -->
+							<p>13:00</p>
+							<input type="hidden" name="showing" value="3">
+						</div>
+					</div>
+					<div class="mb-3 row">
+
+						<label class="col-sm-2 col-form-label">電影名稱:</label>
+						<div class="col-sm-3">
+							<select size="1" name="movie_id" class="form-select">
+								<option value="0">無</option>
+								<c:forEach var="Movie_timeVO"
+									items="${movie_timeSvc.releasingNowCh}">
+									<option value="${Movie_timeVO.movie_id}">
+										${Movie_timeVO.movie_ch}
+								</c:forEach>
+							</select>
+						</div>
+
+						<label class="col-sm-2 col-form-label">場次:</label>
+						<div class="col-sm-3">
+							<!-- 							<select size="1" name="showing" class="form-select"  disabled> -->
+							<!-- 								<option value="1">06:00</option> -->
+							<!-- 										<option value="2">09:30</option> -->
+							<!-- 										<option value="3">13:00</option> -->
+							<!-- 										<option value="4" selected>16:30</option> -->
+							<!-- 										<option value="5">20:00</option> -->
+							<!-- 							</select> -->
+							<p>16:30</p>
+							<input type="hidden" name="showing" value="4">
+						</div>
+					</div>
+					<div class="mb-3 row">
+
+						<label class="col-sm-2 col-form-label">電影名稱:</label>
+						<div class="col-sm-3">
+							<select size="1" name="movie_id" class="form-select">
+								<option value="0">無</option>
+								<c:forEach var="Movie_timeVO"
+									items="${movie_timeSvc.releasingNowCh}">
+									<option value="${Movie_timeVO.movie_id}">
+										${Movie_timeVO.movie_ch}
+								</c:forEach>
+							</select>
+						</div>
+						<label class="col-sm-2 col-form-label">場次:</label>
+						<div class="col-sm-3">
+							<!-- 							<select size="1" name="showing" class="form-select" > -->
+							<!-- 							<input type="hidden" name="showing" value="5"> -->
+							<!-- 								<option value="1">06:00</option> -->
+							<!-- 										<option value="2">09:30</option> -->
+							<!-- 										<option value="3">13:00</option> -->
+							<!-- 										<option value="4">16:30</option> -->
+							<!-- 										<option value="5" selected>20:00</option> -->
+							<!-- 							</select> -->
+							<p>20:00</p>
+							<input type="hidden" name="showing" value="5">
+
+						</div>
+					</div>
+
+					<input type="hidden" name="action" value="insert"> <input
+						type="hidden" name="action2" value="ifHad"> <input
+						type="submit" class="btn btn-primary" value="新增">
+					</form>
+
+
+
+
+
+
 				</div>
 			</div>
+		</div>
 
 
 
@@ -327,7 +420,7 @@
 	<script
 		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 	<script
-		src="<%=request.getContextPath()%>/view/movie_tag/js/system_movie_tag_add.js"></script>
+		src="<%=request.getContextPath()%>/view/movie_time/js/system_movie_time_add.js"></script>
 
 </body>
 
