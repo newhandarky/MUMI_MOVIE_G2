@@ -28,9 +28,10 @@ public class GetOneArticleServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		try {
+//		try {
 			//接收資料
 			String temp1 = request.getParameter("article_id");
+			
 //			Integer article_id = new Integer(request.getParameter("article_id"));
 			
 			
@@ -45,13 +46,40 @@ public class GetOneArticleServlet extends HttpServlet {
 					article_id = Integer.parseInt(temp1);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
-					errors.put("article_id", "ArticleId must be an integer");
+					errors.put("article_id", "Article Id must be an integer");
 				}
 			}
 			
 			ArticleService articleSvc = new ArticleService();
+			Integer re_article_id;
+			Integer article_like_num;
 			
 			ArticleVO articleVO = articleSvc.getOneArticle(article_id);
+			
+			System.out.println("測試有get到Article_id嗎?" + articleVO.getArticle_id());
+			System.out.println("測試有get到Re_article_id嗎?" + articleVO.getRe_article_id());
+			
+			// 修改re_article_id
+			if(articleVO.getRe_article_id() == 0 || articleVO.getRe_article_id() == null) {
+				re_article_id = articleVO.getArticle_id();
+				System.out.println("re_article_id是什麼?" + re_article_id);
+				articleVO.setRe_article_id(re_article_id);
+				articleVO = articleSvc.addReArticleId(article_id, re_article_id);
+				article_id = re_article_id;
+			}
+			
+			// 修改 article_like_num
+			article_like_num = articleVO.getArticle_like_num();
+			article_like_num = Integer.valueOf(article_like_num + 1);
+			System.out.println("article_like_num是什麼?" + article_like_num);
+			articleVO.setArticle_like_num(article_like_num);
+			articleVO = articleSvc.addAricleVisitCount(article_id, article_like_num);
+			System.out.println("增加到VisitCount的VO?" + articleVO);
+			
+					
+			articleVO = articleSvc.getOneArticle(article_id);
+			
+								
 			System.out.println("這是GetOne的articleVO=" + articleVO);
 			
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -60,9 +88,9 @@ public class GetOneArticleServlet extends HttpServlet {
 			out.println(detail);
 			System.out.println("這個article=" + detail);
 
-		} catch (Exception e) {
-			e.getMessage();
-		}
+//		} catch (Exception e) {
+//			e.getMessage();
+//		}
 	}
 
 

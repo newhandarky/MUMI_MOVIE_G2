@@ -34,13 +34,15 @@ public class PostArticleServlet extends HttpServlet {
 		String article_subject = request.getParameter("article_subject");
 		String article_contain = request.getParameter("article_contain");
 		InputStream defaultPic = getServletContext().getResourceAsStream("/view/forum_article/NoData/none3.jpg");
-		
+
 		byte[] article_pic = ((request.getPart("article_pic")).getInputStream()).readAllBytes();
 		if (article_pic.length == 0) {
 			article_pic = defaultPic.readAllBytes();
 		}
 		Timestamp article_publish = new Timestamp(System.currentTimeMillis());
 		String article_state = request.getParameter("article_state");
+		Integer re_article_id = new Integer(request.getParameter("re_article_id"));
+		
 	
 		
 		//驗證資料
@@ -59,12 +61,16 @@ public class PostArticleServlet extends HttpServlet {
 		articleVO.setArticle_pic(article_pic);
 		articleVO.setArticle_publish(article_publish);
 		articleVO.setArticle_state(article_state);
+		articleVO.setRe_article_id(re_article_id);
 		
 		System.out.println("articleVO=" + articleVO);
 		
 		ArticleService articleSvc = new ArticleService();
 		articleVO = articleSvc.addArticle(mem_id, article_board, article_type, article_subject, article_contain,
-				article_pic, article_publish, article_state);
+				article_pic, article_publish, article_state, re_article_id);
+		
+		System.out.println("PO文的articleVO=" + articleVO);
+		
 		
 		String url = request.getContextPath() + "/view/forum_article/ForumIndex.html";
 //		RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交

@@ -18,7 +18,7 @@ try {
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>回覆文章</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script
@@ -41,7 +41,7 @@ try {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>文章新增 - postArticle.jsp</h3>
+				<h3>文章回覆 - replyArticle.jsp</h3>
 			</td>
 			<td>
 				<h4>
@@ -65,41 +65,31 @@ try {
 	<form action="<c:url value="/PostArticleServlet" />" method="post" enctype="multipart/form-data">
 
 		<div class="comtainer" style="width: 700px">
-			<h2>發表文章 - postArticle</h2>
+			<h2>回覆文章 - ReplyArticle</h2>
+			<br>
 			<div>
-				<p>會員編號</p>
-				<input type="text" name="mem_id" value="<%= (articleVO==null) ? "12345" : articleVO.getMem_id()%>" />
+				<p>會員編號</p><input type="text" name="mem_id" value="<%= (articleVO==null) ? "12345" : articleVO.getMem_id()%>" />
+				<select name="article_board" id="choose-board" class="form-select">
+					<option value="" selected id="article_board_el"></option>
+				</select>
+				<select name="article_type" id="choose-type" class="form-select">
+					<option value="" selected id="article_type_el"></option>
+				</select>
 			</div>
-			<select name="article_board" id="choose-board" class="form-select">
-				<option value="" selected>請選擇文章板塊</option>
-				<option value="綜合討論" selected>綜合討論</option>
-				<option value="電影心得">電影心得</option>
-				<option value="商城購物">商城購物</option>
-				<option value="影城討論">影城討論</option>
-			</select> <select name="article_type" id="choose-type" class="form-select">
-				<option value="" selected>文章類型</option>
-				<option value="心得" selected>心得</option>
-				<option value="問題">問題</option>
-				<option value="討論">討論</option>
-				<option value="情報">情報</option>
-				<option value="分享">分享</option>
-			</select>
-			<p></p>
-			 <div>
+			<div>
                 <label for="p_file">文章封面圖:</label>
                 <input name="article_pic" type="file" id="p_file">
             </div>
-            <p></p>
+			<p></p>
 			<div>
-				<input type="text" name="article_subject" size="80" maxlength="20">
-				<p></p>
+				<h4>回覆: <span id="article_subject"></span></h4>
 				<textarea id="summernote" name="article_contain"></textarea>
 			</div>
 			<p></p>			
-			<input type="hidden" name="re_article_id" value="0"> 
+			<input type="hidden" id="re_article_id" name="re_article_id" value="">
+			<input type="hidden" id="article_subject_el" name="article_subject" value="">
 			<input type="hidden" name="article_publish"> 
-			<input type="hidden" name="article_state" value="會員已發表文章"> 
-			<input type="hidden" name="action" value="insert">
+			<input type="hidden" name="article_state" value="會員已發表文章">
 			<button type="submit" style="float: right" class="btn btn-success">送出</button>
 			<button style="float: right" class="btn btn-secondary">取消</button>
 
@@ -130,6 +120,29 @@ try {
 			]								
 		});
 	});
+	
+	window.addEventListener("load", function () {
+		
+		var re_article_subject = document.querySelector("#article_subject");
+		var re_article_subject_el = document.querySelector("#article_subject_el");
+		var re_article_board = document.querySelector("#article_board_el");
+		var re_article_type = document.querySelector("#article_type_el");
+		var re_article_id = document.querySelector("#re_article_id");
+		
+        // 取出sessionStorage資料後填入
+        var storage_data = JSON.parse(sessionStorage.getItem("reply_data"));
+        
+        console.log("reply_data: " + storage_data.re_article_subject); // 檢查用
+        re_article_subject.innerHTML = storage_data.re_article_subject;
+        re_article_subject_el.value = storage_data.re_article_subject;
+        re_article_board.value = storage_data.re_article_board;
+        re_article_board.innerHTML = storage_data.re_article_board;
+        re_article_type.value = storage_data.re_article_type;
+        re_article_type.innerHTML = storage_data.re_article_type;
+        re_article_id.value = storage_data.re_article_id;
+		
+	});
+	
 </script>
 
 

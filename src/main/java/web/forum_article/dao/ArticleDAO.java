@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import web.forum_article.entity.ArticleVO;
 
+
    
 
 public class ArticleDAO implements ArticleDAO_interface {
@@ -31,9 +32,14 @@ public class ArticleDAO implements ArticleDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO forum_article(mem_id, article_board, article_type, article_subject, "
-			+ "article_contain, article_pic, article_publish, article_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+	private static final String INSERT_STMT = "INSERT INTO forum_article(mem_id, article_board, article_type, article_subject, "
+			+ "article_contain, article_pic, article_publish, article_state, re_article_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	private static final String INSERT_RE_ARTICLE_ID_STMT = "UPDATE forum_article set re_article_id = ? where article_id = ?";
+	
+	private static final String ADD_ARTICLE_VISIT_COUNT_STMT = "UPDATE forum_article set article_like_num = ? where article_id = ?";
+	
 	private static final String DELETE = "DELETE FROM forum_article where article_id = ?";
 
 	private static final String UPDATE = "UPDATE forum_article set article_board = ?, article_type = ?, article_subject = ?, article_contain = ?, "
@@ -42,17 +48,28 @@ public class ArticleDAO implements ArticleDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_id desc";
 	
+	private static final String INDEX_GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' and re_article_id = 0 or re_article_id = article_id order by article_id desc";
+
+	private static final String GET_HOT_ALL = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' and re_article_id = 0 or re_article_id = article_id order by article_like_num desc limit 3";
+	
 	private static final String GET_ONE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_id = ?";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article  where article_id = ?";
 
 	private static final String GET_BOARD_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? order by article_id desc";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? and article_state != '會員已刪除' order by article_id desc";
 
+	private static final String CHANGE_STATE = "UPDATE forum_article set article_state = ?, article_updated = ? where article_id = ?";
+	
 	private static final String GET_TYPE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_type = ? order by article_id";
 
 	private static final String GET_STATE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state = ? order by article_id";
+
+
+
 
 	@Override
 	public void insert(ArticleVO articleVO) {
@@ -74,6 +91,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 			pstmt.setBytes(6, articleVO.getArticle_pic());
 			pstmt.setTimestamp(7, articleVO.getArticle_publish());
 			pstmt.setString(8, articleVO.getArticle_state());
+			pstmt.setInt(9, articleVO.getRe_article_id());
 			
 			pstmt.executeUpdate();
 
@@ -105,6 +123,81 @@ public class ArticleDAO implements ArticleDAO_interface {
 			}
 		}
 
+	}
+	
+	@Override
+	public void inserReArticleId(ArticleVO articleVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_RE_ARTICLE_ID_STMT);
+
+			pstmt.setInt(1, articleVO.getRe_article_id());
+			pstmt.setInt(2, articleVO.getArticle_id());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	
+
+	@Override
+	public void addAricleVisitCount(ArticleVO articleVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(ADD_ARTICLE_VISIT_COUNT_STMT);
+
+			pstmt.setInt(1, articleVO.getArticle_like_num());
+			pstmt.setInt(2, articleVO.getArticle_id());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -158,6 +251,44 @@ public class ArticleDAO implements ArticleDAO_interface {
 		}
 
 	}
+	
+	@Override
+	public void changeArticleState(ArticleVO articleVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CHANGE_STATE);
+
+			pstmt.setString(1, articleVO.getArticle_state());
+			pstmt.setTimestamp(2, articleVO.getArticle_updated());
+			pstmt.setInt(3, articleVO.getArticle_id());
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+	}
+	
 
 	@Override
 	public void delete(Integer article_id) {
@@ -198,6 +329,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 
 	@Override
 	public List<ArticleVO> getAll() {
+//	public Optional<ArticleVO> getAll() {
 		
 		List<ArticleVO> list = new ArrayList<ArticleVO>();
 		ArticleVO articleVO = null;
@@ -215,6 +347,138 @@ public class ArticleDAO implements ArticleDAO_interface {
 
 			while (rs.next()) {
 
+				articleVO = new ArticleVO();				
+				articleVO.setArticle_id(rs.getInt("article_id"));
+				articleVO.setMem_id(rs.getInt("mem_id"));
+				articleVO.setEmp_id(rs.getInt("emp_id"));
+				articleVO.setArticle_board(rs.getString("article_board"));
+				articleVO.setArticle_type(rs.getString("article_type"));
+				articleVO.setArticle_subject(rs.getString("article_subject"));
+				articleVO.setArticle_contain(rs.getString("article_contain"));			
+				articleVO.setArticle_pic(rs.getBytes("article_pic"));
+				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
+				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
+				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
+				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_state(rs.getString("article_state"));
+				articleVO.setRe_article_id(rs.getInt("re_article_id"));
+
+				list.add(articleVO);// Store the row in the list
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}		
+		}
+		return list;
+	}
+	
+	public List<ArticleVO> indexGetAll(){
+		
+		List<ArticleVO> list = new ArrayList<ArticleVO>();
+		ArticleVO articleVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INDEX_GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				articleVO = new ArticleVO();				
+				articleVO.setArticle_id(rs.getInt("article_id"));
+				articleVO.setMem_id(rs.getInt("mem_id"));
+				articleVO.setEmp_id(rs.getInt("emp_id"));
+				articleVO.setArticle_board(rs.getString("article_board"));
+				articleVO.setArticle_type(rs.getString("article_type"));
+				articleVO.setArticle_subject(rs.getString("article_subject"));
+				articleVO.setArticle_contain(rs.getString("article_contain"));			
+				articleVO.setArticle_pic(rs.getBytes("article_pic"));
+				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
+				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
+				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
+				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_state(rs.getString("article_state"));
+				articleVO.setRe_article_id(rs.getInt("re_article_id"));
+
+				list.add(articleVO);// Store the row in the list
+			}
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}		
+		}
+		return list;
+	}
+	
+	
+	
+	@Override
+	public List<ArticleVO> getHotAll() {
+		List<ArticleVO> list = new ArrayList<ArticleVO>();
+		ArticleVO articleVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_HOT_ALL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
 				articleVO = new ArticleVO();				
 				articleVO.setArticle_id(rs.getInt("article_id"));
 				articleVO.setMem_id(rs.getInt("mem_id"));
@@ -410,7 +674,6 @@ public class ArticleDAO implements ArticleDAO_interface {
 		}
 		return articleVO;
 	}
-	
 	
 
 }
