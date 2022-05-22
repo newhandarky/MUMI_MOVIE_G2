@@ -57,8 +57,7 @@ public class MovieBean {
 		return "MovieBean [movie_id=" + movie_id + ", movie_rating_id=" + movie_rating_id + ", movie_state_id="
 				+ movie_state_id + ", emp_id=" + emp_id + ", movie_updated_time=" + movie_updated_time + ", movie_ch="
 				+ movie_ch + ", movie_en=" + movie_en + ", movie_runtime=" + movie_runtime + ", release_date="
-				+ release_date + ", movie_poster=" + Arrays.toString(movie_poster) + ", movie_slide_poster="
-				+ Arrays.toString(movie_slide_poster) + ", movie_intro=" + movie_intro + ", casts=" + casts
+				+ release_date + ", movie_intro=" + movie_intro + ", casts=" + casts
 				+ ", director=" + director + ", trailer=" + trailer + ", expect_num=" + expect_num + ", expect_total="
 				+ expect_total + ", sati_num=" + sati_num + ", sati_total=" + sati_total + ", movie_likes="
 				+ movie_likes + "]";

@@ -1,5 +1,24 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*"%>
+<%@ page import="web.movie.dao.*"%>
+<%@ page import="web.movie.entity.*"%>
+<%@ page import="web.movie.service.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.sql.Timestamp"%>
+
+
+<%
+MovieService movieSvc = new MovieService();
+List<MovieVO> list = movieSvc.getByState_id(1);
+pageContext.setAttribute("list", list);
+
+%>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -7,16 +26,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- css檔連結記得修改 -->
-    <link rel="stylesheet" href="CSS/movie_overview_now.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+     <style>
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+    * {
+	font-family: "cwTeXYen", sans-serif;
+	font-weight: bold;
+	}
+	
+	body{
+	background-image: url("<%=request.getContextPath() %>/view/Movie_overview/MUMI.png");
+
+	}
+    </style>
 </head>
 
 <body>
-    <!-- 頁首 -->
+   <!-- 頁首 -->
     <header>
         <!-- 專題LOGO -->
         <a href="#">
@@ -319,6 +350,8 @@
                 </div>
             </div>
         </div>
+        
+
 
 
         <div class="jumbotron">
@@ -330,219 +363,34 @@
         <hr>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
+        	<c:forEach var="movieVO" items="${list}">
             <div class="col">
                 <div class="card h-100">
-                    <img src="./IMAGE/posters/咒術迴戰0(12+).jpg" class="card-img-top">
+                    <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=${movieVO.movie_id}" class="card-img-top">
                     <div class="card-body">
                         <div class="title_info">
-                            <h5 class="card-title title_name">咒術迴戰0</h5>
+                            <h5 class="card-title title_name">${movieVO.movie_ch}</h5>
                             <img src="./IMAGE/posters/12+.png" alt="" class="level">
                         </div>
-                        <h5 class="card-title">JUJUTSU KAISEN : ZERO</h5>
+                        <h5 class="card-title">${movieVO.movie_en}</h5>
                        
                     </div>
                     <div class="card-footer">
                         <div class="stars">
                             <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
-                            <button type="button" class="btn btn-outline-primary btn_info">電影資訊介紹</button>
+                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
+                            	<button type="submit" name="movie_id" value="${movieVO.movie_id}" class="btn_info">電影資訊介紹</button>
+                            	<input type="hidden" name="now" value="now">
+                            </form>
                         </div>
                        
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="./IMAGE/posters/蝙蝠俠(12+).jpg" class="card-img-top">
-                    <div class="card-body">
-                        <div class="title_info">
-                            <h5 class="card-title title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <h5 class="card-title">JUJUTSU KAISEN : ZERO</h5>
-                        
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button type="button" class="btn btn-outline-primary btn_info">電影資訊介紹</button>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="./IMAGE/posters/該死的阿修羅(12+).jpg" class="card-img-top">
-                    <div class="card-body">
-                        <div class="title_info">
-                            <h5 class="card-title title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <h5 class="card-title">JUJUTSU KAISEN : ZERO</h5>
-                       
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button type="button" class="btn btn-outline-primary btn_info">電影資訊介紹</button>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="./IMAGE/posters/該死的阿修羅(12+).jpg" class="card-img-top">
-                    <div class="card-body">
-                        <div class="title_info">
-                            <h5 class="card-title title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <h5 class="card-title">JUJUTSU KAISEN : ZERO</h5>
-                       
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button type="button" class="btn btn-outline-primary btn_info">電影資訊介紹</button>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="./IMAGE/posters/該死的阿修羅(12+).jpg" class="card-img-top">
-                    <div class="card-body">
-                        <div class="title_info">
-                            <h5 class="card-title title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <h5 class="card-title">JUJUTSU KAISEN : ZERO</h5>
-                       
-                    </div>
-                    <div class="card-footer">
-                        <div class="stars">
-                            <p class="star ">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button type="button" class="btn btn-outline-primary btn_info">電影資訊介紹</button>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
+
         </div>
-
-
-        <!-- <div class="jumbotron">
-
-            <div class="container">
-                <div class="container1">
-                    <div class="movie_info">
-                        <img src="./IMAGE/posters/咒術迴戰0(12+).jpg" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name">咒術迴戰0</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <p class="en_title">JUJUTSU KAISEN : ZERO</p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button class="btn_info">電影資訊介紹</button>
-                        </div>
-
-                    </div>
-                    <div class="movie_info">
-                        <img src="./IMAGE/posters/蝙蝠俠(12+).jpg" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name">蝙蝠俠</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <p class="en_title">THE BATMAN</p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button class="btn_info">電影資訊介紹</button>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="./IMAGE/posters/該死的阿修羅(12+).jpg" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name">該死的阿修羅</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <p class="en_title">GODDAMNED ASURA</p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button class="btn_info">電影資訊介紹</button>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="./IMAGE/posters/月球隕落(0+).jpg" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name">月球隕落</h5>
-                            <img src="" alt="" class="level">
-                        </div>
-                        <p class="en_title">MOONFALL</p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button class="btn_info">電影資訊介紹</button>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="./IMAGE/posters/黑光行動(12+).jpg" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name">黑光行動</h5>
-                            <img src="./IMAGE/posters/12+.png" alt="" class="level">
-                        </div>
-                        <p class="en_title">BLACKLIGHT</p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <button class="btn_info">電影資訊介紹</button>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </main>
 
@@ -563,10 +411,10 @@
                             <a href="#">快速訂票</a>
                         </li>
                         <li>
-                            <a href="#">討論區</a>
+                            <a href="#">討論區</a>
                         </li>
                         <li>
-                            <a href="#">周邊商城</a>
+                            <a href="#">周邊商城</a>
                         </li>
                     </ul>
                 </div>
@@ -630,7 +478,7 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- JS檔連結記得修改 -->
-    <script src="JS/movie_overview_now.js"></script>
+    <script src="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
 </body>
 

@@ -43,6 +43,9 @@ private Movie_tagDAO_interface dao;
 		return dao.getAll();
 	}
 	
+	public List<Movie_tagVO> findBYMovieID(Integer movie_id){
+		return dao.findByMovieID(movie_id);
+	}
 	
 	
 	
