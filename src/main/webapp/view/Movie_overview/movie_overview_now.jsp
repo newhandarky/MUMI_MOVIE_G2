@@ -12,21 +12,13 @@
 <%
 MovieService movieSvc = new MovieService();
 List<MovieVO> list = movieSvc.getByState_id(1);
-MovieVO vo1 = list.get(0);
-MovieVO vo2 = list.get(1);
-MovieVO vo3 = list.get(2);
-MovieVO vo4 = list.get(3);
-MovieVO vo5 = list.get(4);
-List<MovieVO> slist = movieSvc.getByState_id(2);
-MovieVO svo1 = slist.get(0);
-MovieVO svo2 = slist.get(1);
-MovieVO svo3 = slist.get(2);
-MovieVO svo4 = slist.get(3);
-MovieVO svo5 = slist.get(4);
+pageContext.setAttribute("list", list);
+
 %>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -34,13 +26,13 @@ MovieVO svo5 = slist.get(4);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- css檔連結記得修改 -->
-    <link rel="stylesheet" href="movie_overview.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <style>
+     <style>
     @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
     * {
 	font-family: "cwTeXYen", sans-serif;
@@ -55,7 +47,7 @@ MovieVO svo5 = slist.get(4);
 </head>
 
 <body>
-    <!-- 頁首 -->
+   <!-- 頁首 -->
     <header>
         <!-- 專題LOGO -->
         <a href="#">
@@ -360,238 +352,45 @@ MovieVO svo5 = slist.get(4);
         </div>
         
 
+
+
         <div class="jumbotron">
             <div class="container">
                 <h1 class="title">現正熱映</h1>
-                <div class="d-grid gap-2 d-flex justify-content-end">
-                    <button id="moreNow" type="button" class="btn btn-outline-primary">更多現正熱映電影</button>
-                </div>
             </div>
         </div>
 
         <hr>
 
-        <div class="jumbotron">
-
-            <div class="container">
-                <div class="container1">
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo1.getMovie_id()%>" alt="" class="img_poster">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        	<c:forEach var="movieVO" items="${list}">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=${movieVO.movie_id}" class="card-img-top">
+                    <div class="card-body">
                         <div class="title_info">
-                            <h5 class="title_name"><%=vo1.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo1.getMovie_rating_id()%>"  class="level">
-                        </div>
-                        <p class="en_title"><%=vo1.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=vo1.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="now" value="now">
-                            </form>
-                        </div>
-
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo2.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=vo2.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo2.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=vo2.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=vo2.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="now" value="now">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo3.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=vo3.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo3.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=vo3.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=vo3.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="now" value="now">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo4.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=vo4.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo4.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=vo4.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=vo4.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="now" value="now">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo5.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=vo5.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo5.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=vo5.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">4.5</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=vo5.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="now" value="now">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-
-
-
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="title">即將上映</h1>
-                <div class="d-grid gap-2 d-flex justify-content-end">
-                    <button id="moreHistory" type="button" class="btn btn-outline-primary">更多即將上映電影</button>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-
-        <div class="jumbotron">
-
-            <div class="container">
-                <div class="container1">
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo1.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=svo1.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo1.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=svo1.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=svo1.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="soon" value="soon">
-                            </form>
-                        </div>
-
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo2.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=svo2.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo2.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=svo2.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=svo2.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="soon" value="soon">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo3.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=svo3.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo3.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=svo3.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=svo3.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="soon" value="soon">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo4.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=svo4.getMovie_ch()%></h5>
-                            <img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo4.getMovie_rating_id()%>" alt="" class="level">
-                        </div>
-                        <p class="en_title"><%=svo4.getMovie_en()%></p>
-                        <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=svo4.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="soon" value="soon">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="movie_info">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo5.getMovie_id()%>" alt="" class="img_poster">
-                        <div class="title_info">
-                            <h5 class="title_name"><%=svo5.getMovie_ch()%></h5>
+                            <h5 class="card-title title_name">${movieVO.movie_ch}</h5>
                             <img src="./IMAGE/posters/12+.png" alt="" class="level">
                         </div>
-                        <p class="en_title"><%=svo5.getMovie_en()%></p>
+                        <h5 class="card-title">${movieVO.movie_en}</h5>
+                       
+                    </div>
+                    <div class="card-footer">
                         <div class="stars">
-                            <p class="star">45%</p>
+                            <p class="star">4.5</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
-                            	<button type="submit" name="movie_id" value="<%=svo5.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
-                            	<input type="hidden" name="soon" value="soon">
+                            	<button type="submit" name="movie_id" value="${movieVO.movie_id}" class="btn_info">電影資訊介紹</button>
+                            	<input type="hidden" name="now" value="now">
                             </form>
                         </div>
+                       
                     </div>
                 </div>
-
-
-
             </div>
+            </c:forEach>
+
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </main>
 
@@ -612,10 +411,10 @@ MovieVO svo5 = slist.get(4);
                             <a href="#">快速訂票</a>
                         </li>
                         <li>
-                            <a href="#">討論區</a>
+                            <a href="#">討論區</a>
                         </li>
                         <li>
-                            <a href="#">周邊商城</a>
+                            <a href="#">周邊商城</a>
                         </li>
                     </ul>
                 </div>
@@ -679,21 +478,8 @@ MovieVO svo5 = slist.get(4);
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- JS檔連結記得修改 -->
-    <script src="<%=request.getContextPath() %>/view/Movie_overview/movie_overview.js"></script>
+    <script src="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
-    <script>
-    $("#moreNow").on('click',function(){
-        location.href='<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.jsp';
-
-    })
-    
-    $("#moreHistory").on('click',function(){
-        location.href='<%=request.getContextPath() %>/view/Movie_overview/movie_overview_soon.jsp';
-
-    })
-    
-    
-    </script>
 </body>
 
 </html>
