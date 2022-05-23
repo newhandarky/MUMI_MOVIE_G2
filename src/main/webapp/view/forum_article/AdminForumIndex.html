@@ -151,12 +151,8 @@
 		<!-- 主要工作區 -->
 	    <div class="jumbotron">
 	        <ul class="nav nav-tabs">
-	            <li class="nav-item"><a href="AdminForumIndex.jsp" class="nav-link">全部文章</a></li>
+	            <li class="nav-item"><a href="AdminForumIndex.html" class="nav-link">全部文章</a></li>
 	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link">全部文章(不含自刪)</a></li>
-	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="changeBoard(1)">綜合討論</a></li>
-	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="changeBoard(2)">電影心得</a></li>
-	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="changeBoard(3)">商城購物</a></li>
-	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="changeBoard(4)">影城討論</a></li>
 	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="">全部檢舉文章</a></li>
 	            <li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="">未處理檢舉文章</a></li>
 	        </ul>
@@ -229,7 +225,12 @@
 		                        <td>${e.article_state}</td>
 		                        <td><button type="button" class="btn_contain">內文</button></td>
 		                        <td><button type="button" class="btn_state">修改狀態</button></td>
-		                        <td><button type="button" class="btn_entirelyDelete">完全刪除</button></td>
+		                        <td>
+		                        	<form action="DeleteArticleServlet" method="post">
+		                        		<input type="hidden" name="article_id" value="${e.article_id}"></input>
+		                      			<button type="submoit" class="btn_entirelyDelete">完全刪除</button>
+		                      			</form>
+		                      	</td>
 		                        <td>
 									<div class="articleContain" style="display: none">
 										<div class="close_contain">X</div>

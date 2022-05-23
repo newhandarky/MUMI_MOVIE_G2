@@ -288,8 +288,8 @@
 								<th class="col-1">分類</th>
 								<th class="col-2">首圖</th>
 								<th class="col-5">標題</th>
-								<th class="col-2">互動／人氣</th>
-								<th class="col-2">最新回覆</th>
+								<th class="col-2">人氣指數</th>
+								<th class="col-2">最近更新</th>
 							</tr>
 						</thead>
 
@@ -308,18 +308,13 @@
 			<div class="col-md-3">
 				<div class="position-sticky" style="top: 2rem; border: 1px solid;">
 					<div class="p-4 mb-3 bg-light rounded" style="border: 1px solid;">
-						<h4 class="fst-italic">Profil??</h4>
-						<p class="mb-0">XXXXXXXXXXX</p>
+						<p class="mb-0">會員ID: </p>
+						<p class="mb-0">會員暱稱: </p>
 					</div>
 
 					<div class="p-4" style="border: 1px solid;">
-						<h4 class="fst-italic">Archives</h4>
-						<ol class="list-unstyled mb-0">
-							<li><a href="#">March 2021</a></li>
-							<li><a href="#">February 2021</a></li>
-							<li><a href="#">January 2021</a></li>
+						<h4 class="fst-italic">這裡是群聊</h4>
 
-						</ol>
 					</div>
 
 				</div>
@@ -481,14 +476,11 @@
             .then(resp => resp.json())
             .then(list => {
                 for (let e of list) {
-                    if (e.article_updated == null) {
-                        e.article_updated = e.article_publish;
-                    }
                     const tbodyAll = document.querySelector('#boardAll');
                     tbodyAll.insertAdjacentHTML('beforeend', `
                     <tr>
                         <td>
-                            <p class="badge bg-light text-dark"><a href="">${e.article_board}</a><br><span>【${e.article_type}】</span></p>
+                            <p class="badge bg-light text-dark">${e.article_board}<br><span>【${e.article_type}】</span></p>
                         </td>
                         <td>
                             <img src="ShowPicServlet?article_id=${e.article_id}" class="img-fluid">
@@ -498,8 +490,6 @@
                         </td>
                         <td>
                             <p class="badge bg-light text-dark">${e.article_like_num}</p>
-                            <span>／</span>
-                            <p class="badge bg-light text-dark">${e.article_dislike_num}</p>
                         </td>
                         <td>${e.article_updated}</td>
                     </tr>`);
@@ -525,9 +515,6 @@
     	        
     	        
 //                 for (let e of detail) {
-                    if (detail.article_updated == null) {
-                    	detail.article_updated = detail.article_publish;
-                    }
 	    	        article.insertAdjacentHTML('beforeend', `
 	    					<div class="articleOne" style="display: block">
 								<h2 class="blog-post-title">

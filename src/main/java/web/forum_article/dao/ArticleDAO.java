@@ -46,25 +46,22 @@ public class ArticleDAO implements ArticleDAO_interface {
 			+ "article_pic = ?, article_updated = ?,article_state = ?  where article_id = ?";
 
 	private static final String GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_id desc";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_updated desc";
 	
 	private static final String INDEX_GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' and re_article_id = 0 or re_article_id = article_id order by article_id desc";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_updated desc";
 
 	private static final String GET_HOT_ALL = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' and re_article_id = 0 or re_article_id = article_id order by article_like_num desc limit 3";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_like_num desc limit 3";
 	
 	private static final String GET_ONE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article  where article_id = ?";
 
 	private static final String GET_BOARD_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? and article_state != '會員已刪除' order by article_id desc";
+			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? and article_state != '會員已刪除' order by article_updated desc";
 
 	private static final String CHANGE_STATE = "UPDATE forum_article set article_state = ?, article_updated = ? where article_id = ?";
 	
-	private static final String GET_TYPE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_type = ? order by article_id";
-
 	private static final String GET_STATE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
 			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state = ? order by article_id";
 
