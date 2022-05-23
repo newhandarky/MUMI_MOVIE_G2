@@ -9,7 +9,7 @@
 
 <%
 Movie_tagService movie_tagSvc = new Movie_tagService();
-List<Movie_tagVO> list = movie_tagSvc.getAll();
+List<Movie_tagVO> list = movie_tagSvc.getAllCh();
 pageContext.setAttribute("list", list);
 %>
 
@@ -189,15 +189,41 @@ pageContext.setAttribute("list", list);
 		<div class="main">
 			<h2>電影標籤</h2>
 
+
+			<jsp:useBean id="movieSvc" scope="page"
+				class="web.movie.service.MovieService" />
+
+			<jsp:useBean id="movie_typeSvc" scope="page"
+				class="web.movie_type.service.Movie_typeService" />
+
+			<jsp:useBean id="movie_tagSvc2" scope="page"
+				class="web.movie_tag.service.Movie_tagService" />
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
+						<div class="mb-3 row">
 
-							<a class="btn btn-secondary" href='system_movie_tag_add.jsp'>新增電影標籤</a>
-							<br> <br>
-
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
+								style="margin-bottom: 0px;">
+								<label class="col-sm-2 col-form-label">電影編號：</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_id" class="form-select ">
+										<c:forEach var="movie_tagVO" items="${movie_tagSvc2.movieCh}">
+											<option value="${movie_tagVO.movie_id}">
+												${movie_tagVO.movie_ch}
+										</c:forEach>
+									</select>
+										<input type="submit" value="搜尋" class="btn btn-danger">
+										<input type="hidden" name="action" value="getType_By_Movie">
+								</div>
+							</FORM>
 						</div>
+
+<!-- 						<div class="d-grid gap-2 d-flex justify-content-end"> -->
+<!-- 							<a class="btn btn-secondary" href='system_movie_tag_add.jsp'>新增電影標籤</a> -->
+<!-- 						</div> -->
+<!-- 						<br> <br> -->
 
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
@@ -213,8 +239,8 @@ pageContext.setAttribute("list", list);
 							<thead class="table-light">
 								<tr>
 									<th>標籤編號</th>
-									<th>電影編號</th>
-									<th>分類顛號</th>
+									<th>電影名稱</th>
+									<th>分類編號</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -224,16 +250,16 @@ pageContext.setAttribute("list", list);
 
 								<tr>
 									<td>${movie_tagVO.movie_tag_id}</td>
-									<td>${movie_tagVO.movie_id}</td>
-									<td>${movie_tagVO.movie_type_id}</td>
+									<td>${movie_tagVO.movie_ch}</td>
+									<td>${movie_tagVO.movie_type_ch}</td>
 									<td>
 										<FORM METHOD="post"
 											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
 											style="margin-bottom: 0px;">
-											<input type="submit" value="修改" class="btn btn-success">
+											<input type="submit" value="刪除" class="btn btn-danger">
 											<input type="hidden" name="movie_tag_id"
 												value="${movie_tagVO.movie_tag_id}"> <input
-												type="hidden" name="action" value="getOne_For_Update">
+												type="hidden" name="action" value="delete">
 										</FORM>
 									</td>
 
