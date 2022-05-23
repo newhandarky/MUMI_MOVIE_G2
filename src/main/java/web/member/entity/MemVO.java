@@ -18,6 +18,15 @@ public class MemVO implements java.io.Serializable{
 	private Timestamp mem_update;
 	private Integer mem_point;
 	private Integer mem_state;
+	private Integer ticket_orders_id;
+	private Date showing_date;
+	private Integer showing;
+	private String movie_ch;
+	private String hall_name;
+	private String select_seat_name;
+	private Integer ticket_price;
+	private Date buyticket_date;
+	
 	
 	
 	public Integer getMem_id() {
@@ -103,6 +112,54 @@ public class MemVO implements java.io.Serializable{
 	}
 	public void setMem_state(Integer mem_state) {
 		this.mem_state = mem_state;
+	}
+	public Integer getTicket_orders_id() {
+		return ticket_orders_id;
+	}
+	public void setTicket_orders_id(Integer ticket_orders_id) {
+		this.ticket_orders_id = ticket_orders_id;
+	}
+	public Date getShowing_date() {
+		return showing_date;
+	}
+	public void setShowing_date(Date showing_date) {
+		this.showing_date = showing_date;
+	}
+	public Integer getShowing() {
+		return showing;
+	}
+	public void setShowing(Integer showing) {
+		this.showing = showing;
+	}
+	public String getMovie_ch() {
+		return movie_ch;
+	}
+	public void setMovie_ch(String movie_ch) {
+		this.movie_ch = movie_ch;
+	}
+	public String getHall_name() {
+		return hall_name;
+	}
+	public void setHall_name(String hall_name) {
+		this.hall_name = hall_name;
+	}
+	public String getSelect_seat_name() {
+		return select_seat_name;
+	}
+	public void setSelect_seat_name(String select_seat_name) {
+		this.select_seat_name = select_seat_name;
+	}
+	public Integer getTicket_price() {
+		return ticket_price;
+	}
+	public void setTicket_price(Integer ticket_price) {
+		this.ticket_price = ticket_price;
+	}
+	public Date getBuyticket_date() {
+		return buyticket_date;
+	}
+	public void setBuyticket_date(Date buyticket_date) {
+		this.buyticket_date = buyticket_date;
 	}
 	
 
