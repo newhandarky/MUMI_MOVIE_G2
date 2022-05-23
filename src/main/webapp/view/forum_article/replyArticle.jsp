@@ -68,7 +68,7 @@ try {
 			<h2>回覆文章 - ReplyArticle</h2>
 			<br>
 			<div>
-				<p>會員編號</p><input type="text" name="mem_id" value="<%= (articleVO==null) ? "12345" : articleVO.getMem_id()%>" />
+				<p>會員編號: <span id="post_mem_id"></span></p>
 				<select name="article_board" id="choose-board" class="form-select">
 					<option value="" selected id="article_board_el"></option>
 				</select>
@@ -87,6 +87,7 @@ try {
 			</div>
 			<p></p>			
 			<input type="hidden" id="re_article_id" name="re_article_id" value="">
+			<input type="hidden" id="post_mem_id_el" name="mem_id" value="">
 			<input type="hidden" id="article_subject_el" name="article_subject" value="">
 			<input type="hidden" name="article_publish"> 
 			<input type="hidden" name="article_state" value="會員已發表文章">
@@ -141,6 +142,14 @@ try {
         re_article_type.innerHTML = storage_data.re_article_type;
         re_article_id.value = storage_data.re_article_id;
 		
+    	var post_mem_id = document.querySelector("#post_mem_id");
+    	var post_mem_id_el = document.querySelector("#post_mem_id_el");
+    	
+        var storage_data2 = JSON.parse(sessionStorage.getItem("mem_data"));
+        console.log("mem_data: " + storage_data); // 檢查用
+        post_mem_id.innerHTML = storage_data2.memId;
+        post_mem_id_el.value = storage_data2.memId;
+        
 	});
 	
 </script>

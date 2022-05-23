@@ -70,6 +70,10 @@ public class GetOneArticleServlet extends HttpServlet {
 			
 			// 修改 article_like_num
 			article_like_num = articleVO.getArticle_like_num();
+			if(article_like_num == null) {
+				article_like_num = 0;
+			}		
+			System.out.println(article_like_num);
 			article_like_num = Integer.valueOf(article_like_num + 1);
 			System.out.println("article_like_num是什麼?" + article_like_num);
 			articleVO.setArticle_like_num(article_like_num);

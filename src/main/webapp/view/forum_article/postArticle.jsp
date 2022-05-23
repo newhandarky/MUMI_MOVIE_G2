@@ -67,8 +67,7 @@ try {
 		<div class="comtainer" style="width: 700px">
 			<h2>發表文章 - postArticle</h2>
 			<div>
-				<p>會員編號</p>
-				<input type="text" name="mem_id" value="<%= (articleVO==null) ? "12345" : articleVO.getMem_id()%>" />
+				<p>會員編號: <span id="post_mem_id"></span></p>
 			</div>
 			<select name="article_board" id="choose-board" class="form-select">
 				<option value="" selected>請選擇文章板塊</option>
@@ -98,6 +97,7 @@ try {
 			<p></p>			
 			<input type="hidden" name="re_article_id" value="0"> 
 			<input type="hidden" name="article_publish"> 
+			<input type="hidden" id="post_mem_id_el" name="mem_id" value="">	
 			<input type="hidden" name="article_state" value="會員已發表文章"> 
 			<input type="hidden" name="action" value="insert">
 			<button type="submit" style="float: right" class="btn btn-success">送出</button>
@@ -130,6 +130,15 @@ try {
 			]								
 		});
 	});
+	
+	var post_mem_id = document.querySelector("#post_mem_id");
+	var post_mem_id_el = document.querySelector("#post_mem_id_el");
+	
+    var storage_data = JSON.parse(sessionStorage.getItem("mem_data"));
+    console.log("mem_data: " + storage_data); // 檢查用
+    post_mem_id.innerHTML = storage_data.memId;
+    post_mem_id_el.value = storage_data.memId;
+	
 </script>
 
 
