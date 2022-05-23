@@ -31,8 +31,8 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_state, mem_point) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, 1, 0)";
+			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_address, mem_state, mem_point) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, '請輸入地址',1, 0)";
 	
 	private static final String GET_ALL_STMT = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "

@@ -95,9 +95,6 @@
                         <a href="mem_shopping_sheet.html">歷史消費</a>
                     </li>
                     <li class="nav_li">
-                        <a href="mem_mumipay.html" class="mumipay">MUMIPAY</a>
-                    </li>
-                    <li class="nav_li">
                         <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
                     </li>
                 </ul>
@@ -133,9 +130,6 @@
                             </li>
                             <li>
                                 <a href="mem_shopping_sheet.html">歷史消費</a>
-                            </li>
-                            <li class="nav_li">
-                                <a href="mem_mumipay.html">MUMIPAY</a>
                             </li>
                             <li>
 								<a href="#" class="checksession" >登入/登出</a>
