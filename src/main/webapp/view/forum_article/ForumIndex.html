@@ -3,54 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <title>Mumi Movie - 討論區</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- <link rel="stylesheet" href="css/forum_index.css"> -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-
-
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+    	  rel="stylesheet">	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<link rel="stylesheet" href="css/index.css">
 
 </head>
 
 <body>
+	    <header>
+        <!-- 專題LOGO -->
+        <a class="link_index" href="#">
+            <img class="team_logo" src="image/others/mujilogo.png" alt="">
+        </a>
+        
+        
+        <!-- 背景亮度按鈕 -->
+        <div id="lightbtn">
+            <!-- 搜尋欄位 -->
+            <input id="search" type="text">
+            <a id="a_loupe" href="#">
+                <img id="loupe" src="image/icons/loupe.png" alt="">
+            </a>
+            <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
+                <span>
+                    <img id="sun" class="sunmoon" src="image/icons/sun.png" alt="">
+                </span>
+            </button>
+            <button type="button" class="btn btn-dark btn-ln -off" id="btn-dark">Dark
+                <span>
+                    <img id="moon" class="sunmoon -off" src="image/icons/crescent-moon.png" alt="">
+                </span>
+            </button>
+        </div>
+        <nav id="navi">
+
+
+            <div class="nav-item">
+                <ul class="nav_ul" id="movie_ul">
+                    <a href="#">電影資訊</a>
+                    <li class="nav_li">
+                        <a href="#">現正熱映</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">即將上映</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">二輪上映</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">歷史上映</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-item">
+                <ul class="nav_ul" id="ticket_ul">
+                    <a href="#">訂票系統</a>
+                    <li class="nav_li">
+                        <a href="#">快速購票</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">預售票</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="hell_seat_4dxA.html">確認劃位</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-item">
+                <ul class="nav_ul" id="forum_ul">
+                    <a href="#">討論區</a>
+                    <li class="nav_li">
+                        <a href="">保留區</a>
+                    </li>
+                    <li >
+                        <a href="">保留區</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-item">
+                <ul class="nav_ul" id="goods_ul">
+                    <a href="#">電影商城</a>
+                    <li class="nav_li">
+                        <a href="#">餐飲類別</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">周邊商品</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-item">
+                <ul class="nav_ul" id="member_ul">
+                    <a href="#">會員專區</a>
+                    <li class="nav_li">
+                        <a href="#">註冊會員</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">修改資料</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#">歷史消費</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#" class="mumipay">MUMIPAY</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="#" class="checksession">登入/登出</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 漢堡選單按鈕 -->
+        <div class="">
+            <a href="#"><img src="image/icons/movie.png" alt="" class="hamberger_menu"></a>
+        </div>
+
+    </header>
+    <!-- 空白top 100px -->
+    <div class="underheader"></div>
+
+    <!-- 漢堡側邊攔位 -->
+    <div class="hide_menu -bye">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        會員專區
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>
+                                <a href="#<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
+                            </li>
+                            <li>
+                                <a href="#<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
+                            </li>
+                            <li>
+                                <a href="#mem_shopping_sheet.html">歷史消費</a>
+                            </li>
+                            <li class="nav_li">
+                                <a href="#mem_mumipay.html">MUMIPAY</a>
+                            </li>
+                            <li>
+								<a style="font-size: 14px" href="#" class="checksession" >登入/登出</a>
+                            </li>
+                        </ul>
+                        
+                        
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        電影資訊
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>
+                                <a href="">現正熱映</a>
+                            </li>
+                            <li>
+                                <a href="">即將上映</a>
+                            </li>
+                            <li>
+                                <a href="">二輪上映</a>
+                            </li>
+                            <li>
+                                <a href="">歷史上映</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        訂票系統
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>
+                                <a href="">快速購票</a>
+                            </li>
+                            <li>
+                                <a href="">預售票</a>
+                            </li>
+                            <li>
+                                <a href="hell_seat_4dxA.html">確認劃位</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        討論區
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                        	<li>
+                                <a href="">保留區</a>
+                            </li>
+                            <li>
+                                <a href="">保留區</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        電影商城
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>
+                                <a href="">餐飲類別</a>
+                            </li>
+                            <li>
+                                <a href="">周邊商品</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
 	<!-- 熱門文章 -->
 	<div class="container px-4 py-5" id="featured-3">
 		<h5 class="pb-2 border-bottom">熱門文章</h5>
-		<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-			<div class="feature col">
-				<div class="feature-icon bg-primary bg-gradient"></div>
-				<h2>熱門1</h2>
-				<a href="#" class="icon-link"> Call to action <svg class="bi"
-						width="1em" height="1em">
-                        <use xlink:href="#chevron-right" />
-                    </svg>
-				</a>
-			</div>
-			<div class="feature col">
-				<div class="feature-icon bg-primary bg-gradient"></div>
-				<h2>熱門2</h2>
-				<a href="#" class="icon-link"> Call to action <svg class="bi"
-						width="1em" height="1em">
-                        <use xlink:href="#chevron-right" />
-                    </svg>
-				</a>
-			</div>
-			<div class="feature col">
-				<div class="feature-icon bg-primary bg-gradient"></div>
-				<h2>熱門3</h2>
-				<a href="#" class="icon-link"> Call to action <svg class="bi"
-						width="1em" height="1em">
-                        <use xlink:href="#chevron-right" />
-                    </svg>
-				</a>
-			</div>
+		<div id="hotAricle" class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+		
+		
 		</div>
 	</div>
 
@@ -59,61 +266,34 @@
 
 		<div class="row g-5">
 			<div class="col-md-9">
-				<div class="btn btn-success btn-sm" style="float: right">
-					<a
-						href="http://localhost:8080/movie_demo/view/forum_article/postArticle.jsp">發表文章</a>
-				</div>
+					<a href="postArticle.jsp" class="btn btn-success btn-sm" style="float: right">發表文章</a>
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a href="" class="nav-link">全部文章</a></li>
-					<li class="nav-item"><a href="javascript:void(0)" class="nav-link" onclick="OneArticleDetail(${e.article_id})">綜合討論</a></li>
-					<li class="nav-item"><a href="" class="nav-link">電影心得</a></li>
-					<li class="nav-item"><a href="" class="nav-link">商城購物</a></li>
-					<li class="nav-item"><a href="" class="nav-link">影城討論</a></li>
+					<li class="nav-item"><a href="ForumIndex.html" class="nav-link">全部文章</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardDiscuss" class="nav-link" onclick="changeBoard(1)">綜合討論</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardMovie" class="nav-link" onclick="changeBoard(2)">電影心得</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardBuy" class="nav-link" onclick="changeBoard(3)">商城購物</a></li>
+					<li class="nav-item"><a href="javascript:void(0)" id="boardTheater" class="nav-link" onclick="changeBoard(4)">影城討論</a></li>
 				</ul>
 				<br>
 				<article>
 					<!-- 全部文章 -->
-					<table id="tableAll" class="table table-bordered"
-						style="display: block;">
+					<table id="tableAll" class="table table-bordered" style="display: block;">
 						<thead style="background-color: lightgray; text-align: center;">
 							<tr>
 								<th class="col-1">分類</th>
 								<th class="col-2">首圖</th>
 								<th class="col-5">標題</th>
-								<th class="col-2">互動／人氣</th>
-								<th class="col-2">最新回覆</th>
+								<th class="col-2">人氣指數</th>
+								<th class="col-2">最近更新</th>
 							</tr>
 						</thead>
 
 						<tbody id="boardAll" class="table">
 
 						</tbody>
-
+						
 					</table>
-
-					<!-- 單一文章 -->
-
-
-
-					<table id="tableDiscuss" class="table table-bordered"
-						style="display: none;">
-						<thead style="background-color: lightgray; text-align: center;">
-							<tr>
-								<th class="col-1">分類</th>
-								<th class="col-2">首圖</th>
-								<th class="col-5">標題</th>
-								<th class="col-2">互動／人氣</th>
-								<th class="col-2">最新回覆</th>
-							</tr>
-						</thead>
-
-						<tbody id="boardDiscuss" class="table">
-
-						</tbody>
-
-					</table>
-
-
+					
 				</article>
 
 
@@ -122,101 +302,340 @@
 
 			<div class="col-md-3">
 				<div class="position-sticky" style="top: 2rem; border: 1px solid;">
-					<div class="p-4 mb-3 bg-light rounded" style="border: 1px solid;">
-						<h4 class="fst-italic">Profil??</h4>
-						<p class="mb-0">XXXXXXXXXXX</p>
+					<div id="mem_info" class="p-4 mb-3 bg-light rounded" style="border: 1px solid;">
+						<p class="mb-0" id="mem_mail"></p>
+						<p class="mb-0" id="mem_name"></p>
 					</div>
 
 					<div class="p-4" style="border: 1px solid;">
-						<h4 class="fst-italic">Archives</h4>
-						<ol class="list-unstyled mb-0">
-							<li><a href="#">March 2021</a></li>
-							<li><a href="#">February 2021</a></li>
-							<li><a href="#">January 2021</a></li>
+						<h4 class="fst-italic">這裡是群聊</h4>
 
-						</ol>
 					</div>
 
 				</div>
 			</div>
 		</div>
-
+		<br>
 	</main>
+	
+	<footer>
+        <div class="container">
+            <div class="row row-cols-2">
+                <div class="col col-md-3 col-sm-6">
+                    <h5>服務</h5>
+                    <ul>
+                        <li>
+                            <a href="#">電影導覽</a>
+                        </li>
+                        <li>
+                            <a href="#">快速訂票</a>
+                        </li>
+                        <li>
+                            <a href="#">討論區</a>
+                        </li>
+                        <li>
+                            <a href="#">周邊商城</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col col-md-3 col-sm-6">
+                    <h5>幫助</h5>
+                    <ul>
+                        <li>
+                            <a href="#">導覽</a>
+                        </li>
+                        <li>
+                            <a href="#">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col col-md-3 col-sm-6">
+                    <h5>關注我們</h5>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1FvkVquqoKRgwpjlaPAfuDpjvcCElwwgF?usp=sharing"> 張志鵬</a>
+                        <p>會員系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1Hu3MXljw2mPs8y4uqIq2coDHt4OiEwLV?usp=sharing">郭家榮</a>
+                        <p>討論區</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/143UhfMZr6X_sGmmouBIsc_2DskIW7vHH">蕭仲威</a>
+                        <p>電影系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1sixqrgkXZrUoEDbod4Wi2mygZyp2dl0i?usp=sharing">吳宗哲</a>
+                        <p>影廳系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/14u0F868uYrXT8pDRCgaNoy9M3Rep6ji6?usp=sharing">徐浩鈞</a>
+                        <p>訂票系統</p>
+                    </span>
+                    <span class="focus_us">
+                        <a href="https://drive.google.com/drive/folders/1dJ3kpYDJpT8bTvJQEKBN8G5JJ5Vr8Xh5">陳鏡</a>
+                        <p>電影時刻表</p>
+                    </span>
+                </div>
+                <div class="col col-md-3 col-sm-6">
+                    <h5>加入好友</h5>
+                    <ul>
+                        <li>
+                            <span>
+                                <img id="linerobot" src="image/others/robot.png" alt="">
+                            </span>
+                        </li>
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+        <div class="copyright">
+            Copyright © 2022 MUMI MOVIE 吾映良影 Co. 保留所有權利。
+            <a href="#">隱私政策</a>
+            <a href="#">使用條款</a>
+        </div>
+    </footer>
+    
+    <div class="hiddenform" style="display:none;">
+    	<form id="submitcheck" action="member/Logout" method="post">
+        	<input type="hidden" name="action" value="logout">
+            <button type="submit" id="btn-primary" class="btn btn-primary">確定登出</button>
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="js/index.js"></script>
+    
 	<script>
-    	// 全部文章
-        (() => {
-            const tbodyAll = document.querySelector('#boardAll');
-            window.addEventListener('load', () => {
-            	
-            	
-                const url = 'GetAllArticleServlet'; //網址
-                
-                // 綁click 傳參數
-                fetch(url)
-                    .then(resp => resp.json())
-                    .then(list => {
-                        for (let e of list) {
-                            if (e.article_updated == null) {
-                                e.article_updated = e.article_publish;
-                            }
-                            tbodyAll.insertAdjacentHTML('beforeend', `
-                            <tr>
-                                <td>
-                                    <p class="badge bg-light text-dark"><a href="">${e.article_board}</a><br><span>【${e.article_type}】</span></p>
-                                </td>
-                                <td>
-                                    <img src="ShowPicServlet?article_id=${e.article_id}" class="img-fluid">
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0)" onclick="OneArticleDetail(${e.article_id})">${e.article_subject}</a>
-                                </td>
-                                <td>
-                                    <p class="badge bg-light text-dark">${e.article_like_num}</p>
-                                    <span>／</span>
-                                    <p class="badge bg-light text-dark">${e.article_dislike_num}</p>
-                                </td>
-                                <td>${e.article_updated}</td>
-                            </tr>`);
-                        }
-                    });
+		let url;
+		let hotUrl;
+		let OneArticleUrl;
+		let memInfoUrl;
+		let memId;
+		let mem_mail;
+		
+		const tbodyAll = document.querySelector('#boardAll');
+		const checkSession = document.querySelector('.checksession');
+		const submitcCheck = document.querySelector('#submitcCheck');
+		const mem_name = document.querySelector('#mem_name');
+		
+		// 轉換板塊文章
+		function changeBoard(board_num) {
+			history.pushState(null , null,"http://localhost:8080/test/view/forum_article/page=" + board_num);
+					
+			tbodyAll.innerHTML="";
+			$(document).find("#tableAll").attr("style" , "display: block");
+			$(document).find(".articleOne").attr("style" , "display: none");
+        	url = "GetBoardArticleServlet?page=" + board_num;  
+        	console.log("board_num=" + board_num);
+        	console.log("click#boardDiscuss="+ url);
+        	showBoardArticle(url);
+		}
+		
+//     	// 網頁轉換觸發事件
+//     	window.addEventListener('popstate', () => {  
+//      	 　　changeBoard(board_num)
+//      	});
+
+		// 會員資訊
+
+		
+		function showMemInfo(memInfoUrl) {
+    		fetch(memInfoUrl)
+    		.then(resp => resp.json())
+            .then(memInfo => {
+            	mem_name.textContent = memInfo.mem_name;
+    	    	var mem_data_obj = {
+    		    		memId: memInfo.mem_id,
+    		    	};    	            
+    		    	console.log(mem_data_obj);
+    		    	sessionStorage.setItem("mem_data", JSON.stringify(mem_data_obj));
+
             });
-        })();
+		};
+
+    	 	
+    	// 顯示熱門文章
+    	function showHotArticle(hotUrl) {
+    		fetch(hotUrl)
+    		.then(resp => resp.json())
+            .then(hotAllList => {
+            	for (let h of hotAllList){
+            		const hotAricle = document.querySelector('#hotAricle');
+            		hotAricle.insertAdjacentHTML('beforeend', `
+            			<div class="feature col">
+            				<img src="ShowPicServlet?article_id=${h.article_id}" class="img-fluid col-md-4 col-sea">
+            				<h2>${h.article_subject}</h2>
+            				<a href="#" class="icon-link">點我看更多^^</a>
+            			</div>	
+            		`)
+            	}
+            });
+		}
     	
-    	// 單一文章內容
+    	
+    	// 顯示板塊文章
+    	function showBoardArticle(url) {
+    		fetch(url)
+            .then(resp => resp.json())
+            .then(list => {
+                for (let e of list) {
+                    const tbodyAll = document.querySelector('#boardAll');
+                    tbodyAll.insertAdjacentHTML('beforeend', `
+                    <tr>
+                        <td>
+                            <p class="badge bg-light text-dark">${e.article_board}<br><span>【${e.article_type}】</span></p>
+                        </td>
+                        <td>
+                            <img src="ShowPicServlet?article_id=${e.article_id}" class="img-fluid">
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" onclick="OneArticleDetail(${e.article_id})">${e.article_subject}</a>
+                        </td>
+                        <td>
+                            <p class="badge bg-light text-dark">${e.article_like_num}</p>
+                        </td>
+                        <td>${e.article_updated}</td>
+                    </tr>`);
+                }
+            });
+		}
+
+    	// 顯示單一文章內容
     	function OneArticleDetail(aID) {
     		
-    		$(document).find("#tableAll").attr("style" , "display: none");
-    		$(document).find("#articleOne").attr("style" , "display: block");
     		const article = document.querySelector('article');
     		
-    		const url = "http://localhost:8080/movie_demo/view/forum_article/GetOneArticleServlet?article_id=" + aID;
     		
-    	    fetch(url)
+    		$(document).find("#tableAll").attr("style" , "display: none");
+    		OneArticleUrl = "GetOneArticleServlet?article_id=" + aID;
+    		console.log("顯示單一文章內容的URL=" + OneArticleUrl);
+    		
+    	    fetch(OneArticleUrl)
     	    .then(resp => resp.json())
     	    .then(detail => {
     	        console.log(detail);
-    	        article.insertAdjacentHTML('beforeend', `
-    					<div id="articleOne" style="display: block">
-							<h2 class="blog-post-title">
-								<span>【${detail.article_type}】</span>${detail.article_subject}
-							</h2>
-							<hr>
-							<p class="blog-post-meta">作者： ${detail.article_id}</p>
-							<p class="blog-post-meta">發表時間： ${detail.article_updated}</p>
-							<div>
-								<img src="ShowPicServlet?article_id=${detail.article_id}" class="img-fluid">
-								<p>${detail.article_contain}</p>
-							</div>
-						</div>`);
+	    	        article.insertAdjacentHTML('beforeend', `
+	    					<div class="articleOne" style="display: block">
+								<h2 class="blog-post-title">
+									<span>【${detail.article_type}】</span>${detail.article_subject}
+								</h2>
+								<hr>
+								<p class="blog-post-meta">作者： ${detail.mem_id}</p>
+								<p class="blog-post-meta">發表時間： ${detail.article_updated}</p>
+								<div>
+									<img src="ShowPicServlet?article_id=${detail.article_id}" class="img-fluid">
+									<p>${detail.article_contain}</p>
+								</div>
+								<form action="ChangeArticleStateServlet" method="post">
+									<input type="hidden" name="article_id" value="${detail.article_id}"></input>
+									<input type="hidden" name="state" value="0"></input>
+									<button type="submit" class="btn btn-danger btn-sm" style="float: right">刪除</button>
+								</form>
+								<button id="report" class="btn btn-warning btn-sm" style="float: right">檢舉</button>
+								<div id="report_choose">
+									<p>請選擇檢舉原因: </p>
+								    <div>
+								      <input type="radio" id="reason1" name="report_article_reason" value="檢舉1" checked>
+								      <label for="reason1">檢舉1</label>
+								    </div>
+								    <div>
+								      <input type="radio" id="reason2" name="report_article_reason" value="檢舉2">
+								      <label for="reason1">檢舉2</label>
+								    </div>
+								    <div>
+								      <input type="radio" id="reason3" name="report_article_reason" value="檢舉3">
+								      <label for="reason1">檢舉3</label>
+								    </div>
+								    <div>
+								    	<button id="report_submit" class="btn btn-warning btn-sm" style="float: right">送出檢舉</button>
+								    <div>
+								</div>
+								<button id="btn_reply_submit" class="btn btn-success btn-sm" style="float: right">回覆</button>
+								<form action="UpdateArticleServlet" method="post">
+									<input type="hidden" name="article_id" value="${detail.article_id}"></input>
+									<input type="hidden" name="action" value="getOne_For_Update"></input>								
+									<button type="submit" class="btn btn-primary btn-sm" style="float: right">修改</button>
+								</form>
+							</div>`);
+	    	        
+	    	        // 回覆文章
+	    	        var btn_reply_submit_data = document.querySelector("#btn_reply_submit");
+	    	        btn_reply_submit_data.addEventListener("click", function () {
+	    	            var data_obj = {
+	    	                    re_article_subject: detail.article_subject,
+	    	                    re_article_board: detail.article_board,
+	    	                    re_article_type: detail.article_type,
+	    	                    re_article_bord: detail.article_bord,
+	    	                    re_article_id: detail.re_article_id
+	    	                };
+	    	            
+	    	            console.log(data_obj);
+	    	            sessionStorage.setItem("reply_data", JSON.stringify(data_obj));
+	    	            location.href = "replyArticle.jsp";
+	    	        });
+	    	        
+//                 }
     	    });
-    		
 			
-		}
+    	
+    	
+    	}
+    	
+//     	function test() {
+//     		fetch("UpdateArticleServlet?action=getOne_For_Update", {
+//     			method:"POST",
+//     			body: JSON.stringify(form_data)		
+//     		})
+//     		.then(articleVO =>{ window.location.href = "http://localhost:8080/test/view/forum_article/updateArticle.jsp"})	
+//     	}
+    	
+    	//修改文章
+    	function updateArticle(aID){
+    		var update_url = "UpdateArticleServlet?article_id=" + aID;
+    		console.log("修改文章的URL=" + update_url );
+    		fetch(update_url); 		
+    	}
+    	
+    	// 網頁load後顯示全部文章
+  		window.addEventListener('load', () => {
+  			
+  			checkSession.addEventListener("click", function (){
+	        	console.log("XXXXX");
+	        	document.querySelector('#submitcCheck').submit();
+  			});
+  			
+  			hotUrl = 'GetAllHotArticleServlet';
+  			
+            if (url == null){	
+            	url = 'IndexGetAllArticleServlet'; //網址
+            }	
+            console.log("url="+ url);
+            console.log("hotUrl="+ hotUrl);
+            
+            
+            // 取出sessionStorage資料
+            var storage_data = JSON.parse(sessionStorage.getItem("login_data"));
+            
+            console.log("login_data: " + storage_data.login_mail); // 檢查用
+            mem_mail = storage_data.login_mail;		
+    		
+            memInfoUrl = "ForumMemInfoServlet?mem_account=" + mem_mail;
+            
+                 
+            showHotArticle(hotUrl);          
+            showBoardArticle(url);
+            showMemInfo(memInfoUrl);
+            
+            console.log("memId02"+memId);
 
+
+        });
+    	
 
     </script>
-
 
 
 </body>

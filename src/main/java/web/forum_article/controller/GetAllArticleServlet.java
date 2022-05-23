@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.forum_article.entity.ArticleVO;
-import web.forum_article.service.ArticleService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import web.forum_article.entity.ArticleVO;
+import web.forum_article.service.ArticleService;
 
 @WebServlet(urlPatterns = { "/view/forum_article/GetAllArticleServlet" })
 public class GetAllArticleServlet extends HttpServlet {
@@ -24,9 +25,11 @@ public class GetAllArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		response.setContentType("text/html;charset=UTF-8");
-		// 對Post中文參數進行解碼
 		request.setCharacterEncoding("UTF-8");
+
 		ArticleService articleSvc = new ArticleService();
+		
+		//呼叫方法回傳到view
 		List<ArticleVO> list = articleSvc.getAll();
 		
 		System.out.println("有執行getAll()查詢");
@@ -39,10 +42,6 @@ public class GetAllArticleServlet extends HttpServlet {
 		out.println(getAllList);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

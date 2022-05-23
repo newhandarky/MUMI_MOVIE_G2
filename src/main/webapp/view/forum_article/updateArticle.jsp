@@ -5,6 +5,7 @@
 
 <%
 	ArticleVO articleVO = (ArticleVO) request.getAttribute("articleVO");
+	pageContext.setAttribute("articleVO", articleVO);
 	System.out.println("updateArticle.jsp的articleVO=" + articleVO);
 	Timestamp article_updated = null;
 	try {
@@ -45,7 +46,7 @@
 			</td>
 			<td>
 				<h4>
-					<a href="select_page.jsp">回首頁</a>
+					<a href="ForumIndex.html">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -62,26 +63,26 @@
 	</c:if>
 
 
-	<form action="<c:url value="/view/forum_article/forumArticle.do" />" method="post" enctype="multipart/form-data">
+	<form action="UpdateArticleServlet" method="post" enctype="multipart/form-data">
 
 		<div class="comtainer" style="width: 700px">
 		<table>
 			<tr>
-				<td>文章編號:<font color=red><b>*</b></font></td>
-				<td><%=articleVO.getArticle_id()%></td>
-			</tr>
-			<tr>
 				<td>會員編號:<font color=red><b>*</b></font></td>
 				<td><%=articleVO.getMem_id()%></td>
 			</tr>
-			
+
+			<!-- 放會員暱稱 -->
 <%-- 			<jsp:useBean id="articleSvc" scope="page" class="com.forum_article.model.ArticleService" /> --%>
+			<tr>
+				<td>文章編號:<font color=red><b>*</b></font></td>
+				<td><%=articleVO.getArticle_id()%></td>
+			</tr>
+			
 			<tr>
 				<td>
 					<select size="1" name="article_board" id="choose-board" class="form-select">
-<%-- 						<c:forEach var="articleVO" items="${articleSvc.all}"> --%>
-						<option value="${articleVO.article_board}" ${(articleVO.article_id == articleVO.article_id)?'selected':'' }>${articleVO.article_board}
-<%-- 						</c:forEach> --%>
+						<option value="${articleVO.article_board}" ${(articleVO.article_id == articleVO.article_id)?'selected':'' }>${articleVO.article_board}</option>
 						<option value="綜合討論">綜合討論</option>
 						<option value="電影心得">電影心得</option>
 						<option value="商城購物">商城購物</option>
@@ -92,7 +93,8 @@
 			<tr>
 				<td>
 					<select name="article_type" id="choose-type" class="form-select">
-						<option value="心得" selected>心得</option>
+						<option value="${articleVO.article_type}" ${(articleVO.article_type == articleVO.article_type)?'selected':'' }>${articleVO.article_type}</option>
+						<option value="心得">心得</option>
 						<option value="問題">問題</option>
 						<option value="討論">討論</option>
 						<option value="情報">情報</option>
@@ -108,18 +110,18 @@
         </div>
         <p></p>
 		<div>
-			<input type="text" name="article_subject" size="80" maxlength="20">
+			<input type="text" name="article_subject" size="80" maxlength="20" value="<%=articleVO.getArticle_subject()%>">
 			<p></p>
-			<textarea id="summernote" name="article_contain"></textarea>
+			<textarea id="summernote" name="article_contain" value="<%=articleVO.getArticle_contain()%>"></textarea>
 		</div>
 		<p></p>
-		<input type="hidden" name="article_updated">
-		<input type="hidden" name="article_state" value="會員已修改文章">
 		<input type="hidden" name="action" value="update">
 		<input type="hidden" name="article_id" value="<%=articleVO.getArticle_id()%>">			
-		<input type="hidden" name="mem_id" value="<%=articleVO.getMem_id()%>">			
+		<input type="hidden" name="mem_id" value="<%=articleVO.getMem_id()%>">				
+		<input type="hidden" name="article_updated">
+		<input type="hidden" name="article_state" value="會員已修改文章">
 		<button type="submit" style="float: right" class="btn btn-success">送出</button>
-		<button style="float: right" class="btn btn-secondary">取消</button>
+<!-- 		<button style="float: right" class="btn btn-secondary">取消</button> -->
 
 		</div>
 	</form>
