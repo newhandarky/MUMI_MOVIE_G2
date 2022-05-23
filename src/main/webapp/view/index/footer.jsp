@@ -17,9 +17,6 @@
                         <li>
                             <a href="#">討論區</a>
                         </li>
-                        <li>
-                            <a href="#">周邊商城</a>
-                        </li>
                     </ul>
                 </div>
                 <div class="col col-md-3 col-sm-6">

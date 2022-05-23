@@ -12,11 +12,6 @@
         
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
-            <!-- 搜尋欄位 -->
-            <input id="search" type="text">
-            <a id="a_loupe" href="#">
-                <img id="loupe" src="<%=request.getContextPath()%>/view/index/image/icons/loupe.png" alt="">
-            </a>
             <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
                 <span>
                     <img id="sun" class="sunmoon" src="<%=request.getContextPath()%>/view/index/image/icons/sun.png" alt="">
@@ -35,16 +30,13 @@
                 <ul class="nav_ul" id="movie_ul">
                     <a href="#">電影資訊</a>
                     <li class="nav_li">
+                        <a href="#">電影總覽</a>
+                    </li>
+                    <li class="nav_li">
                         <a href="#">現正熱映</a>
                     </li>
                     <li class="nav_li">
                         <a href="#">即將上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">二輪上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">歷史上映</a>
                     </li>
                 </ul>
             </div>
@@ -66,18 +58,6 @@
                     </li>
                     <li >
                         <a href="">保留區</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-item">
-                <ul class="nav_ul" id="goods_ul">
-                    <a href="#">電影商城</a>
-                    <li class="nav_li">
-                        <a href="#">餐飲類別</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">周邊商品</a>
                     </li>
                 </ul>
             </div>
@@ -148,17 +128,14 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul>
+                        	<li class="nav_li">
+		                        <a href="#">電影總攬</a>
+		                    </li>
                             <li>
                                 <a href="">現正熱映</a>
                             </li>
                             <li>
                                 <a href="">即將上映</a>
-                            </li>
-                            <li>
-                                <a href="">二輪上映</a>
-                            </li>
-                            <li>
-                                <a href="">歷史上映</a>
                             </li>
                         </ul>
 
@@ -199,25 +176,6 @@
                             </li>
                         </ul>
 
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        電影商城
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>
-                                <a href="">餐飲類別</a>
-                            </li>
-                            <li>
-                                <a href="">周邊商品</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
