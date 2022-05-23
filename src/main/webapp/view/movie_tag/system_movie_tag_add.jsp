@@ -182,11 +182,11 @@
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
+						<div class="d-grid gap-2 d-flex justify-content-end">
 							<a class="btn btn-secondary" href='system_movie_tag_listAll.jsp'>所有電影標籤</a>
-							<br> <br>
 
 						</div>
+						<br> <br>
 
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
@@ -204,26 +204,26 @@
 						<jsp:useBean id="movie_typeSvc" scope="page"
 							class="web.movie_type.service.Movie_typeService" />
 
-<!-- 						<FORM METHOD="post" -->
-<%-- 							ACTION="<c:url value="/view/movie/MovieServlet"/>" name="form1"> --%>
-<!-- 							<b>依電影名稱查詢分類:</b> <select size="1" name="movie_id"> -->
-<%-- 								<c:forEach var="movieVO" items="${movieSvc.all}"> --%>
-<%-- 									<option value="${movieVO.movie_id}">${movieVO.movie_ch} --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
-<!-- 							<input type="submit" value="送出"> -->
-<!-- 						</FORM> -->
+						<!-- 						<FORM METHOD="post" -->
+						<%-- 							ACTION="<c:url value="/view/movie/MovieServlet"/>" name="form1"> --%>
+						<!-- 							<b>依電影名稱查詢分類:</b> <select size="1" name="movie_id"> -->
+						<%-- 								<c:forEach var="movieVO" items="${movieSvc.all}"> --%>
+						<%-- 									<option value="${movieVO.movie_id}">${movieVO.movie_ch} --%>
+						<%-- 								</c:forEach> --%>
+						<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
+						<!-- 							<input type="submit" value="送出"> -->
+						<!-- 						</FORM> -->
 
-<!-- 						<FORM METHOD="post" -->
-<%-- 							ACTION="<c:url value="/view/movie_type/Movie_typeServlet"/>" --%>
-<!-- 							name="form1"> -->
-<!-- 							<b>依電影分類查詢電影名稱:</b> <select size="1" name="movie_type_id"> -->
-<%-- 								<c:forEach var="movie_typeVO" items="${movie_typeSvc.all}"> --%>
-<%-- 									<option value="${movie_typeVO.movie_type_id}">${movie_typeVO.movie_type_ch} --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
-<!-- 							<input type="submit" value="送出"> -->
-<!-- 						</FORM> -->
+						<!-- 						<FORM METHOD="post" -->
+						<%-- 							ACTION="<c:url value="/view/movie_type/Movie_typeServlet"/>" --%>
+						<!-- 							name="form1"> -->
+						<!-- 							<b>依電影分類查詢電影名稱:</b> <select size="1" name="movie_type_id"> -->
+						<%-- 								<c:forEach var="movie_typeVO" items="${movie_typeSvc.all}"> --%>
+						<%-- 									<option value="${movie_typeVO.movie_type_id}">${movie_typeVO.movie_type_ch} --%>
+						<%-- 								</c:forEach> --%>
+						<!-- 							</select> <input type="hidden" name="action" value="get_movie_ch"> -->
+						<!-- 							<input type="submit" value="送出"> -->
+						<!-- 						</FORM> -->
 
 
 
@@ -232,54 +232,54 @@
 						<form method="post"
 							action="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
 							name="form1">
-								
-								
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">電影分類編號:</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_type_id" class="form-select">
-											<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}">
-												<option value="${Movie_typeVO.movie_type_id}">
-													${Movie_typeVO.movie_type_ch}
-											</c:forEach>
+
+
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">電影編號：</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_id" class="form-select">
+										<c:forEach var="MovieVO" items="${movieSvc.all}">
+											<option value="${MovieVO.movie_id}"
+												${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }>
+												${MovieVO.movie_ch}
+										</c:forEach>
 									</select>
-									</div>
-									<label class="col-sm-2 col-form-label">電影編號：</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_id" class="form-select">
-											<c:forEach var="MovieVO" items="${movieSvc.all}">
-												<option value="${MovieVO.movie_id}"
-													${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }>
-													${MovieVO.movie_ch}
-											</c:forEach>
-									</select>
-									</div>
 								</div>
+								<label class="col-sm-2 col-form-label">電影分類編號:</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_type_id" class="form-select">
+										<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}">
+											<option value="${Movie_typeVO.movie_type_id}">
+												${Movie_typeVO.movie_type_ch}
+										</c:forEach>
+									</select>
+								</div>
+							</div>
 
 
 
-<!-- 								<tr> -->
-<!-- 									<td>電影分類編號:<font color=red><b>*</b></font></td> -->
-<!-- 									<td><select size="1" name="movie_type_id" class="form-select"> -->
-<%-- 											<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}"> --%>
-<%-- 												<option value="${Movie_typeVO.movie_type_id}"> --%>
-<%-- 													${Movie_typeVO.movie_type_ch} --%>
-<%-- 											</c:forEach> --%>
-<!-- 									</select></td> -->
-<!-- 								</tr> -->
-<!-- 								<tr> -->
-<!-- 									<td>電影編號:<font color=red><b>*</b></font></td> -->
-<!-- 									<td><select size="1" name="movie_id" class="form-select"> -->
-<%-- 											<c:forEach var="MovieVO" items="${movieSvc.all}"> --%>
-<%-- 												<option value="${MovieVO.movie_id}" --%>
-<%-- 													${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }> --%>
-<%-- 													${MovieVO.movie_ch} --%>
-<%-- 											</c:forEach> --%>
-<!-- 									</select></td> -->
-<!-- 								</tr> -->
+							<!-- 								<tr> -->
+							<!-- 									<td>電影分類編號:<font color=red><b>*</b></font></td> -->
+							<!-- 									<td><select size="1" name="movie_type_id" class="form-select"> -->
+							<%-- 											<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}"> --%>
+							<%-- 												<option value="${Movie_typeVO.movie_type_id}"> --%>
+							<%-- 													${Movie_typeVO.movie_type_ch} --%>
+							<%-- 											</c:forEach> --%>
+							<!-- 									</select></td> -->
+							<!-- 								</tr> -->
+							<!-- 								<tr> -->
+							<!-- 									<td>電影編號:<font color=red><b>*</b></font></td> -->
+							<!-- 									<td><select size="1" name="movie_id" class="form-select"> -->
+							<%-- 											<c:forEach var="MovieVO" items="${movieSvc.all}"> --%>
+							<%-- 												<option value="${MovieVO.movie_id}" --%>
+							<%-- 													${(movie_tagVO.movie_id==MovieVO.movie_id)? 'selected':'' }> --%>
+							<%-- 													${MovieVO.movie_ch} --%>
+							<%-- 											</c:forEach> --%>
+							<!-- 									</select></td> -->
+							<!-- 								</tr> -->
 
 
-							
+
 							<input type="hidden" name="action" value="insert"> <input
 								type="submit" class="btn btn-primary" value="新增">
 						</form>

@@ -12,7 +12,7 @@ public interface Movie_tagDAO_interface {
 	public Movie_tagVO findByPrimaryKey(Integer movie_tag_id);
 	public List<Movie_tagVO> getAll();
 	public List<Movie_tagVO> getAllCh();
-	public List<Movie_tagVO> getMovieCh(String movie_ch);
-	
+	public List<Movie_tagVO> getMovieCh();
+	public List<Movie_tagVO> getTagByMovie(Integer movie_id);
 	
 }

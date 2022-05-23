@@ -1,16 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="web.movie_time.dao.*"%>
-<%@ page import="web.movie_time.entity.*"%>
-<%@ page import="web.movie_time.service.*"%>
+<%@ page import="web.movie_tag.dao.*"%>
+<%@ page import="web.movie_tag.entity.*"%>
+<%@ page import="web.movie_tag.service.*"%>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-Movie_timeService movie_timeSvc = new Movie_timeService();
-List<Movie_timeVO> list = movie_timeSvc.getAllCh();
-pageContext.setAttribute("list", list);
+// pageContext.getAttribute("list");
+// Movie_tagVO movie_tagVO = (Movie_tagVO) request.getAttribute("movie_tagVO");
+
 %>
 
 <html>
@@ -22,7 +22,7 @@ pageContext.setAttribute("list", list);
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/movie_time/css/system_movie_time_listAll.css">
+	href="<%=request.getContextPath()%>/view/movie_tag/css/system_movie_tag_searchByMovie.css">
 
 </head>
 
@@ -187,15 +187,26 @@ pageContext.setAttribute("list", list);
 
 		<!-- 主要工作區 -->
 		<div class="main">
-			<h2>電影分類</h2>
+			<h2>電影標籤</h2>
 
+
+			<jsp:useBean id="movieSvc" scope="page"
+				class="web.movie.service.MovieService" />
+
+			<jsp:useBean id="movie_typeSvc" scope="page"
+				class="web.movie_type.service.Movie_typeService" />
+
+			<jsp:useBean id="movie_tagSvc2" scope="page"
+				class="web.movie_tag.service.Movie_tagService" />
 			<div class="card">
 				<div class="container">
 					<div col="12">
+
+
 						<div class="d-grid gap-2 d-flex justify-content-end">
-							<a class="btn btn-secondary" href='system_movie_time_add.jsp'>新增電影時刻</a>
+							<a class="btn btn-secondary" href='system_movie_tag_listAll.jsp'>所有電影標籤</a>
 						</div>
-						<br>
+						<br> <br>
 
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
@@ -207,55 +218,40 @@ pageContext.setAttribute("list", list);
 							</ul>
 						</c:if>
 
+
 						<table class="table table-striped table-bordered table-sm">
 							<thead class="table-light">
 								<tr>
-									<th>時刻編號</th>
-									<th>影廳名稱</th>
+									<th>標籤編號</th>
 									<th>電影名稱</th>
-									<th>電影場次</th>
-									<th>電影時刻</th>
+									<th>分類</th>
 									<th></th>
 								</tr>
 							</thead>
-							<%@ include file="page1.file"%>
-							<c:forEach var="movie_timeVO" items="${list}"
-								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 							<%@ include file="page1.file"%> --%>
+							<c:forEach var="movie_tagVO" items="${list}"
+								>
+<%-- 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" --%>
 
 								<tr>
-									<td>${movie_timeVO.movie_time_id}</td>
-									<td>${movie_timeVO.hall_name}</td>
-									<td>${movie_timeVO.movie_ch}</td>
-									<td class="showing${movie_timeVO.showing}">${movie_timeVO.showing}</td>
-									<td>${movie_timeVO.showing_date}</td>
-
+									<td>${movie_tagVO.movie_tag_id}</td>
+									<td>${movie_tagVO.movie_ch}</td>
+									<td>${movie_tagVO.movie_type_ch}</td>
 									<td>
-										<div class="btn-group" role="group"
-											aria-label="Basic mixed styles example">
-											<FORM METHOD="post"
-												ACTION="<%=request.getContextPath()%>/view/movie_time/Movie_timeServlet"
-												style="margin-bottom: 0px;">
-												<input type="submit" value="修改" class="btn btn-success">
-												<input type="hidden" name="movie_time_id"
-													value="${movie_timeVO.movie_time_id}"><input
-													type="hidden" name="action" value="getOne_For_Update">
-											</FORM>
-
-											<FORM METHOD="post"
-												ACTION="<%=request.getContextPath()%>/view/movie_time/Movie_timeServlet"
-												style="margin-bottom: 0px;">
-												<input type="submit" value="刪除" class="btn btn-danger">
-												<input type="hidden" name="movie_time_id"
-													value="${movie_timeVO.movie_time_id}"> <input
-													type="hidden" name="action" value="delete">
-											</FORM>
-										</div>
+										<FORM METHOD="post"
+											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
+											style="margin-bottom: 0px;">
+											<input type="submit" value="刪除" class="btn btn-danger">
+											<input type="hidden" name="movie_tag_id"
+												value="${movie_tagVO.movie_tag_id}"> <input
+												type="hidden" name="action" value="delete">
+										</FORM>
 									</td>
 
 								</tr>
 							</c:forEach>
 						</table>
-						<%@ include file="page2.file"%>
+<%-- 						<%@ include file="page2.file"%> --%>
 
 					</div>
 				</div>
@@ -276,9 +272,7 @@ pageContext.setAttribute("list", list);
 	<script
 		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/view/movie_time/js/system_movie_time_listAll.js"></script>
+		src="<%=request.getContextPath()%>/view/movie_tag/js/system_movie_tag_searchByMovie.js"></script>
 
 </body>
 

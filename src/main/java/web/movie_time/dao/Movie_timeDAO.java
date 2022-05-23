@@ -35,8 +35,9 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 	private static final String DELETE = "delete from movie_time where movie_time_id=?";
 	private static final String GET_ALL_STMT = "select movie_time_id, hall_id, movie_id, showing, showing_date "
 			+ "from movie_time order by movie_time_id";
-	private static final String GET_ONE_STMT = "select movie_time_id, hall_id, movie_id, showing, showing_date "
-			+ "from movie_time " + "where movie_time_id = ? ";
+	private static final String GET_ONE_STMT = "select a.movie_time_id, a.hall_id, b.hall_name, a.movie_id, a.showing, a.showing_date "
+			+ "from movie_time as a join hall as b "
+			+ "where a.hall_id = b.hall_id and movie_time_id = ?";
 	private static final String GET_REPEAT_STMT = "SELECT hall_id, showing, showing_date from movie_time "
 			+ "where hall_id = ? and showing = ? and showing_date = ?";
 	private static final String GET_RELEASING_NOW_STMT = "select movie_id, movie_ch from movie "
@@ -47,6 +48,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 			+ "(select a.movie_time_id, b.movie_ch, a.showing, a.showing_date "
 			+ "from movie_time as a join movie as b " + "where a.movie_id = b.movie_id) as d "
 			+ "where c.movie_time_id = d.movie_time_id";
+	private static final String GET_HALL_NAME = "SELECT hall_id, hall_name FROM hall order by hall_id";
 
 	@Override
 	public void insert(Movie_timeVO movie_timeVO) {
@@ -165,8 +167,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 
 	}
 
-//	"select movie_time_id, hall_id, movie_id, showing, showing_date "
-//	+ "from movie_time " + "where movie_time_id = ? "	
+	
 
 	@Override
 	public Movie_timeVO findByPrimaryKey(Integer movie_time_id) {
@@ -189,6 +190,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 				movie_timeVO = new Movie_timeVO();
 				movie_timeVO.setMovie_time_id(rs.getInt("movie_time_id"));
 				movie_timeVO.setHall_id(rs.getInt("hall_id"));
+				movie_timeVO.setHall_name(rs.getString("hall_name"));
 				movie_timeVO.setMovie_id(rs.getInt("movie_id"));
 				movie_timeVO.setShowing(rs.getInt("showing"));
 				movie_timeVO.setShowing_date(rs.getDate("showing_date"));
@@ -279,6 +281,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 		return list;
 	}
 
+	@Override
 	public Movie_timeVO findIfAlreadyHad(Integer hall_id, Integer showing, java.sql.Date showing_date) {
 
 		Movie_timeVO movie_timeVO = null;
@@ -334,6 +337,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 		return movie_timeVO;
 	}
 
+	@Override
 	public List<Movie_timeVO> getNowCh() {
 
 		List<Movie_timeVO> list = new ArrayList<Movie_timeVO>();
@@ -387,6 +391,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 
 	}
 
+	@Override
 	public List<Movie_timeVO> getAllCh() {
 
 		List<Movie_timeVO> list = new ArrayList<Movie_timeVO>();
@@ -443,6 +448,59 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 		}
 		return list;
 
+	}
+
+	@Override
+	public List<Movie_timeVO> getHall_Name() {
+		List<Movie_timeVO> list = new ArrayList<Movie_timeVO>();
+		Movie_timeVO movie_timeVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_HALL_NAME);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				movie_timeVO = new Movie_timeVO();
+				movie_timeVO.setHall_id(rs.getInt("hall_id"));
+				movie_timeVO.setHall_name(rs.getString("hall_name"));
+
+				list.add(movie_timeVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }

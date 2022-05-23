@@ -182,11 +182,10 @@
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
+						<div class="d-grid gap-2 d-flex justify-content-end">
 							<a class="btn btn-secondary" href='system_movie_time_listAll.jsp'>所有電影時刻資料</a>
-							<br> <br>
-
 						</div>
+						<br>
 
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
@@ -209,7 +208,7 @@
 
 
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">上映日期:</label>
+								<label class="col-sm-2 col-form-label">播放日期:</label>
 								<div class="col-sm-3">
 									<input class="form-control" id="f_date1" type="date"
 										name="showing_date" aria-label="default input example">
@@ -217,21 +216,13 @@
 								<label class="col-sm-2 col-form-label">影廳:</label>
 								<div class="col-sm-3">
 									<select size="1" name="hall_id" class="form-select">
-
-										<option value="1">A廳</option>
-										<option value="2">B廳</option>
-										<option value="3">C廳</option>
-										<option value="4">D廳</option>
-										<option value="5">E廳</option>
-
+										<c:forEach var="Movie_timeVO"
+											items="${movie_timeSvc.hall_Name}">
+											<option value="${Movie_timeVO.hall_id}">
+												${Movie_timeVO.hall_name}
+										</c:forEach>
 									</select>
 
-									<!-- 									<select size="1" name="hall_id" class="form-select"> -->
-									<%-- 										<c:forEach var="Movie_timeVO" items="${movie_timeSvc.all}"> --%>
-									<%-- 											<option value="${Movie_timeVO.hall_id}"> --%>
-									<%-- 												${Movie_timeVO.hall_id} --%>
-									<%-- 										</c:forEach> --%>
-									<!-- 									</select> -->
 								</div>
 							</div>
 

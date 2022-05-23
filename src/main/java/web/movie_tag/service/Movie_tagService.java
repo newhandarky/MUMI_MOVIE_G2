@@ -47,8 +47,12 @@ private Movie_tagDAO_interface dao;
 		return dao.getAllCh();
 	}
 	
-	public List<Movie_tagVO> getMovieCh(String movie_ch){
-		return dao.getMovieCh(movie_ch);
+	public List<Movie_tagVO> getMovieCh(){
+		return dao.getMovieCh();
+	}
+	
+	public List<Movie_tagVO> getTagByMovie(Integer movie_id){
+		return dao.getTagByMovie(movie_id);
 	}
 	
 	

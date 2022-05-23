@@ -22,4 +22,5 @@ public interface Movie_timeDAO_interface {
 	
 	public List<Movie_timeVO> getAllCh();
 
+	public List<Movie_timeVO> getHall_Name();
 }

@@ -44,15 +44,19 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 			+ "from movie_tag as a join movie_type as b "
 			+ "where a.movie_type_id = b.movie_type_id) as d "
 			+ "where c.movie_tag_id = d.movie_tag_id";
-	private static final String GET_MOVIE_CH_STMT = "select c.movie_tag_id, c.movie_ch, d.movie_type_ch "
-			+ "from (select a.movie_tag_id, b.movie_ch "
-			+ "from movie_tag as a join movie as b "
-			+ "where a.movie_id = b.movie_id) as c, "
-			+ "(select a.movie_tag_id, b.movie_type_ch "
-			+ "from movie_tag as a join movie_type as b "
-			+ "where a.movie_type_id = b.movie_type_id) as d "
-			+ "where c.movie_tag_id = d.movie_tag_id "
-			+ "and movie_ch = ?";
+	private static final String GET_MOVIE_CH_STMT = "select a.movie_id, b.movie_ch "
+			+ " from (select distinct movie_id from movie_tag) as a "
+			+ " join movie as b "
+			+ " where a.movie_id = b.movie_id";
+	private static final String SEARCH_BY_MOVIE = "select c.movie_tag_id, c.movie_id, c.movie_ch, d.movie_type_ch "
+			+ "	from (select a.movie_tag_id, b.movie_ch, b.movie_id "
+			+ "	from movie_tag as a join movie as b "
+			+ "	where a.movie_id = b.movie_id) as c join "
+			+ "	(select a.movie_tag_id, b.movie_type_ch "
+			+ "	from movie_tag as a join movie_type as b "
+			+ "	where a.movie_type_id = b.movie_type_id) as d "
+			+ "	where c.movie_tag_id = d.movie_tag_id and movie_id = ?";
+	
 	
 	
 	
@@ -334,10 +338,8 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 		
 	}
 	
-	
-	
 	@Override
-	public List<Movie_tagVO> getMovieCh(String movie_ch){
+	public List<Movie_tagVO> getTagByMovie(Integer movie_id){
 		
 		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
 		Movie_tagVO movie_tagVO = null;
@@ -349,16 +351,74 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_MOVIE_CH_STMT);
+			pstmt = con.prepareStatement(SEARCH_BY_MOVIE);
 
-			pstmt.setString(1, movie_ch);
+			pstmt.setInt(1, movie_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				movie_tagVO = new Movie_tagVO();
 				movie_tagVO.setMovie_tag_id(rs.getInt("movie_tag_id"));
+				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
 				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
 				movie_tagVO.setMovie_type_ch(rs.getString("movie_type_ch"));
+				list.add(movie_tagVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return list;
+		
+		
+	}
+	
+	
+	@Override
+	public List<Movie_tagVO> getMovieCh(){
+		
+		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
+		Movie_tagVO movie_tagVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {	
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MOVIE_CH_STMT);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				movie_tagVO = new Movie_tagVO();
+				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
+				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
+				
 				list.add(movie_tagVO);
 			}
 

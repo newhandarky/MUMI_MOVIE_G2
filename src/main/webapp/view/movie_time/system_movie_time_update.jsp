@@ -181,7 +181,7 @@ Movie_timeVO movie_timeVO = (Movie_timeVO) request.getAttribute("movie_timeVO");
 
 		<!-- 主要工作區 -->
 		<div class="main">
-			<h2>修改電影標籤</h2>
+			<h2>修改電影時刻</h2>
 
 			<div class="card">
 				<div class="container">
@@ -209,10 +209,7 @@ Movie_timeVO movie_timeVO = (Movie_timeVO) request.getAttribute("movie_timeVO");
 						<form method="post"
 							action="<%=request.getContextPath()%>/view/movie_time/Movie_timeServlet"
 							name="form1">
-								
-								<div><%=movie_timeVO.getMovie_time_id()%></div>
-								
-								
+
 							<div class="mb-3 row">
 								<label class="col-sm-2 col-form-label">上映日期:</label>
 								<div class="col-sm-3">
@@ -227,7 +224,7 @@ Movie_timeVO movie_timeVO = (Movie_timeVO) request.getAttribute("movie_timeVO");
 								<label class="col-sm-2 col-form-label">影廳:</label>
 								<div class="col-sm-3">
 									<input class="form-control" type="text"
-										value="<%=movie_timeVO.getHall_id()%>" disabled> <input
+										value="<%=movie_timeVO.getHall_name()%>" disabled> <input
 										type="hidden" name="hall_id"
 										value="<%=movie_timeVO.getHall_id()%>">
 								</div>
