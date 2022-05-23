@@ -22,7 +22,7 @@ import web.member.service.MemService;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(
-		urlPatterns = {"/view/mem/mem_revise.jsp"}
+		urlPatterns = {"/view/mem/mem_revise.jsp", "/view/ticket_orders/order_beware.jsp"}
 )
 public class LoginFilter implements Filter {
 
@@ -51,6 +51,7 @@ public class LoginFilter implements Filter {
 		Object account = session.getAttribute("account");
 		MemVO memVO = (MemVO)session.getAttribute("memVO");
 		Integer mem_id = (Integer)session.getAttribute("mem_id");
+		String mem_nickname = (String)session.getAttribute("mem_nickname");
 		
 		if (account == null) {
 			

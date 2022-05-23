@@ -113,6 +113,7 @@ public class LoginHandler extends HttpServlet {
 		      session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
 		      session.setAttribute("memVO", memVO);
 		      session.setAttribute("mem_id", memVO.getMem_id());
+		      session.setAttribute("mem_nickname", memVO.getMem_nickname());
 		      
 		       try {                                                        
 		         String location = (String) session.getAttribute("location");
