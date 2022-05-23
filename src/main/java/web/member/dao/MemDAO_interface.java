@@ -17,6 +17,7 @@ public interface MemDAO_interface {
 	public MemVO findByAccount(String mem_account);
 	public List<MemVO> getAll();
 	public MemVO login(String mem_account, String mem_password);
+	public List<MemVO> getSheet(Integer mem_id);
 
 
 //  public List<MemVO> getAll(Map<String, String[]> map); 

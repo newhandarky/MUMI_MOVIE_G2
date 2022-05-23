@@ -101,5 +101,9 @@ public class MemService {
 		
 		return memVO;
 	}
+	
+	public List<MemVO> getSheet(Integer mem_id) {
+		return dao.getSheet(mem_id);
+	}
 
 }

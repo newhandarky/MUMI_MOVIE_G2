@@ -68,6 +68,31 @@ public class MemDAO implements MemDAO_interface{
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
 			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_account = ?";
 	
+	private static final String GET_SHEET = "SELECT ticket_orders_id, showing_date, showing, movie_ch, hall_name, select_seat_name, ticket_price, buyticket_date, h.hall_id "
+			+ "FROM hall h "
+			+ "JOIN ( "
+			+ "	SELECT ticket_orders_id, mem_id, buyticket_date, select_seat_name, movie_time_id, ticket_price, hall_id, m.movie_id, showing, showing_date, movie_ch "
+			+ "	FROM movie m "
+			+ "	JOIN ( "
+			+ "		SELECT ticket_orders_id, mem_id, buyticket_date, select_seat_name, mt.movie_time_id, ticket_price, hall_id, movie_id, showing, showing_date "
+			+ "		FROM movie_time mt "
+			+ "		JOIN ( "
+			+ "			SELECT tl.ticket_orders_id, mem_id, buyticket_date, select_seat_name, movie_time_id, ticket_price "
+			+ "			FROM ticket_list tl "
+			+ "			JOIN ( "
+			+ "				SELECT ticket_orders_id, mem_id, buyticket_date "
+			+ "				FROM ticket_orders "
+			+ "				WHERE mem_id = ? "
+			+ "				) toi "
+			+ "			ON tl.ticket_orders_id = toi.ticket_orders_id "
+			+ "			) tl2 "
+			+ "		ON mt.movie_time_id = tl2.movie_time_id "
+			+ "		) mt2 "
+			+ "	ON m.movie_id = mt2.movie_id "
+			+ "    ) m2 "
+			+ "ON h.hall_id = m2.hall_id "
+			+ "ORDER BY buyticket_date "
+			+ "DESC ;";
 	
 	@Override
 	public void insert(MemVO memVO) {
@@ -650,6 +675,69 @@ public class MemDAO implements MemDAO_interface{
 				}
 			}
 		}
+	}
+	
+	
+	@Override
+	public List<MemVO> getSheet(Integer mem_id) {
+		List<MemVO> listSheet = new ArrayList<MemVO>();
+		MemVO memVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_SHEET);
+			pstmt.setInt(1, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+
+				memVO = new MemVO();
+				memVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));;
+				memVO.setShowing_date(rs.getDate("showing_date"));
+				memVO.setShowing(rs.getInt("showing"));
+				memVO.setMovie_ch(rs.getString("movie_ch"));
+				memVO.setHall_name(rs.getString("hall_name"));;
+				memVO.setSelect_seat_name(rs.getString("select_seat_name"));
+				memVO.setTicket_price(rs.getInt("ticket_price"));
+				memVO.setBuyticket_date(rs.getDate("buyticket_date"));
+				listSheet.add(memVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listSheet;
 	}
 	
 }
