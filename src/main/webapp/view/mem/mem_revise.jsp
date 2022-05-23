@@ -113,17 +113,17 @@
                             <input class="form-control" type="text" name="mem_address" value="<%= (memVO==null)? "會員地址" : memVO.getMem_address()%>" aria-label="default input example">
                         </div>
 
-                        <div class="col-md-3 mem-e-money">
-                            <p>電子錢包餘額 : </p>
-                        </div>
-                        <div class="col-md-5 col-sm-7 mem-e-money">
-                            <input class="form-control" type="text" value="${memVO.getMem_point()}" aria-label="Disabled input example" disabled readonly>
-                        </div>
-                        <div class="col-md-4 col-sm-5 mem-e-money">
-                            <a href="mem_mumipay.html">
-                                <button type="button" class="btn btn-success btn-charge">點我儲值</button>
-                            </a>
-                        </div>
+<!--                         <div class="col-md-3 mem-e-money"> -->
+<!--                             <p>電子錢包餘額 : </p> -->
+<!--                         </div> -->
+<!--                         <div class="col-md-5 col-sm-7 mem-e-money"> -->
+<%--                             <input class="form-control" type="text" value="${memVO.getMem_point()}" aria-label="Disabled input example" disabled readonly> --%>
+<!--                         </div> -->
+<!--                         <div class="col-md-4 col-sm-5 mem-e-money"> -->
+<!--                             <a href="mem_mumipay.html"> -->
+<!--                                 <button type="button" class="btn btn-success btn-charge">點我儲值</button> -->
+<!--                             </a> -->
+<!--                         </div> -->
 
                       
 
