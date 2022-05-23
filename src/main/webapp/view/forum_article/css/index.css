@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    /* background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    position: fixed;
+    z-index: 5;
+}
+
+
+/* LOGO */
+
+.team_logo {
+    position: absolute;
+    width: 170px;
+    left: 10px;
+}
+
+header .hide_item_out {
+    position: relative;
+    top: 130px;
+}
+
+.underheader {
+    height: 100px;
+}
+
+
+/* 搜尋欄位 */
+
+#search {
+    display: inline-block;
+    position: absolute;
+    right: 130px;
+    top: 15px;
+    background-color: rgb(182, 212, 223);
+    border-radius: 15px;
+    border: 0px;
+    width: 150px;
+}
+
+#loupe {
+    position: absolute;
+    width: 20px;
+    right: 140px;
+    top: 17px;
+}
+
+
+/* 導覽選單 */
+
+#navi {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    top: 66px;
+}
+
+.nav-item {
+    display: inline-block;
+    top: 5px;
+}
+
+.nav-item ul li {
+    display: none;
+    padding-top: 5px;
+    background: black;
+    opacity: 0.7;
+    text-align: center;
+}
+
+.nav_ul {
+    list-style: none;
+    padding: 10px;
+    left: 0;
+    top: 0;
+}
+
+.nav_ul li {
+    display: none;
+}
+
+.nav_ul a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav_ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav_ul a.mumipay {
+    font-size: 12px;
+}
+
+
+/* 漢堡選單 */
+
+.hamberger_menu {
+    position: absolute;
+    width: 30px;
+    right: 20px;
+    top: 60px;
+    display: none;
+}
+
+.hide_menu {
+    position: fixed;
+    z-index: 10;
+    background-color: gray;
+    width: 400px;
+    display: none;
+}
+
+.accordion-button {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.accordion-body {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
+.hide_menu.-bye {
+    left: -400px;
+}
+
+.hide_menu .accordion-body ul li {
+    list-style: none;
+}
+
+.hide_menu .accordion-body ul li a {
+    text-decoration: none;
+    color: #537895;
+}
+
+
+/* 下拉選單 */
+
+.nav-item ul li a:link,
+.nav-item ul li a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item ul li:hover {
+    background: #555;
+}
+
+.nav-item ul a:hover,
+.nav-item ul li a:hover,
+.nav-item ul li a:active {
+    color: rgb(0, 255, 98);
+}
+
+.nav-item .nav_ul .switchDisplay {
+    background: #ff0;
+}
+
+ul.switchDisplay li {
+    display: block;
+}
+
+
+/* 輪播背景 */
+
+.picouter.-dark {
+    background-color: #111111;
+}
+
+#picouter.-dark {
+    background-color: #111111;
+}
+
+#app {
+    margin: 0 auto;
+    max-width: 1000px;
+    background-size: contain;
+}
+
+
+/* 背景亮度按鈕 */
+
+#lightbtn {
+    display: inline-block;
+    height: 50px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+#btn-dark {
+    color: yellow;
+}
+
+.sunmoon {
+    width: 30px;
+}
+
+#btn-light.-off {
+    display: none;
+}
+
+#btn-dark.-off {
+    display: none;
+}
+
+
+/* 電影區 */
+
+#movies {
+    min-height: 400px;
+    text-align: center;
+}
+
+#movies .btn {
+    margin: 10px;
+}
+
+
+/* 放大鎖定在當前區域 */
+
+.card-img-top {
+    height: 250px;
+}
+
+#movies .card .card-img-top {
+    transform: scale(1, 1);
+    transition: all 0.4s ease-out;
+}
+
+#movies .card .card-img-top:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.card {
+    margin: 0 auto;
+}
+
+#movies .-off {
+    display: none;
+}
+
+.mrs {
+    width: 30px;
+}
+
+
+/* main */
+
+#mainouter.-dark {
+    background-color: #111111;
+    color: white;
+}
+
+.fullbody.-dark {
+    background-color: #111111;
+}
+
+.main_left {
+    margin-top: 15px;
+}
+
+iframe.video {
+    display: none;
+}
+
+iframe.-show {
+    display: block;
+}
+
+
+/* 快速購票 */
+
+#app2.row {
+    max-height: 450px;
+}
+
+#fastbuy {
+    max-width: 400px;
+    /* max-height: 300px; */
+    height: 300px;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #2660AA;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+#fastbuy h3 {
+    color: white;
+    text-align: center;
+}
+
+
+/* 快速購票icon */
+
+#movieicon {
+    width: 20px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+#dateicon {
+    width: 20px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+#timeicon {
+    width: 20px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+#peopleicon {
+    width: 20px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+#fastbuy div select {
+    width: 90%;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#fastbuy input {
+    width: 90%;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#fastbtn {
+    text-align: center;
+}
+
+#fastbtn span {
+    margin-top: 30px;
+    width: 40%;
+    color: white;
+    background-color: lightblue;
+    display: inline-block;
+}
+
+#fastbtn span a {
+    text-decoration: none;
+    color: #09203f;
+}
+
+#fastbtn span:hover,
+#fastbtn span:active {
+    background-color: white;
+}
+
+
+/* youtube嵌入 */
+
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    height: 300px;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    width: 100%;
+    height: 56.25%;
+}
+
+.main_right {
+    margin-top: 15px;
+}
+
+.main_p {
+    text-align: center;
+}
+
+div.card {
+    margin-top: 30px;
+}
+
+h3.movietitle {
+    text-align: center;
+}
+
+span.mrs_12 {
+    font-size: 8px;
+    background-color: #ffc107;
+    margin-left: 3px;
+}
+
+.linkbtn {
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+/* 影城公告 */
+
+#info_h1 {
+    text-align: center;
+    font-size: 40px;
+    margin: 30px;
+    /* color: #09203f; */
+}
+
+#info_h1.dark {
+    color: yellow;
+}
+
+#infopic {
+    width: 100%;
+}
+
+#infopic2 {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.info .info_p {
+    text-align: center;
+    margin: auto;
+}
+
+.info .info_p h4,
+.info .info_p h3,
+.info .info_p h5 {
+    margin-top: 20px;
+}
+
+.info .info_p .redinfo {
+    color: red;
+}
+
+.info .info_p p {
+    margin-top: 30px;
+}
+
+.info .info_p .zh {
+    font: bold;
+}
+
+.info .firstinfo {
+    margin-top: 30px;
+}
+
+
+/* Google地圖 */
+
+#map_h1 {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 30px;
+    margin-bottom: 0;
+}
+
+#map_h1.-dark {
+    background-color: #111111;
+    color: white;
+}
+
+.map_rwd {
+    position: relative;
+    padding-bottom: 50%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.map_rwd.-dark {
+    background-color: #111111;
+}
+
+.map_rwd iframe {
+    position: absolute;
+    bottom: -1px;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    text-align: center;
+    position: relative;
+}
+
+footer h5 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+    color: white;
+}
+
+footer ul {
+    text-align: left;
+    list-style: none;
+}
+
+footer ul li {
+    text-align: left;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 14px;
+}
+
+.focus_us {
+    display: block;
+    text-align: left;
+}
+
+.focus_us p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: white;
+}
+
+.focus_us a {
+    text-decoration: none;
+    color: antiquewhite;
+    margin-left: 30px;
+}
+
+footer .copyright {
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    bottom: 0;
+    color: white;
+    width: 100%;
+    font-size: 12px;
+}
+
+footer .copyright a {
+    text-decoration: none;
+    color: white;
+}
+
+footer a:hover,
+footer a:active {
+    color: #ffc107;
+}
+
+#linerobot {
+    width: 150px;
+}
+
+
+/* RWD調整 */
+
+@media (max-width: 768px) {
+    .info .info_p .showinfo,
+    .info_p h5,
+    .info_p h4,
+    .info_p h3 {
+        display: none;
+    }
+    .nav-item {
+        display: none;
+    }
+    .hamberger_menu {
+        display: block;
+    }
+    .hide_menu {
+        display: block;
+    }
+}
+
+@media (max-width: 992px) {
+    #youtube_in {
+        display: none;
+    }
+}

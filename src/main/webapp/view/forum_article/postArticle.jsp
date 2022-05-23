@@ -45,7 +45,7 @@ try {
 			</td>
 			<td>
 				<h4>
-					<a href="select_page.jsp">回首頁</a>
+					<a href="ForumIndex.html">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -62,20 +62,21 @@ try {
 	</c:if>
 
 
-	<form action="<c:url value="/view/forum_article/forumArticle.do" />" method="post" enctype="multipart/form-data">
+	<form action="<c:url value="/PostArticleServlet" />" method="post" enctype="multipart/form-data">
 
 		<div class="comtainer" style="width: 700px">
 			<h2>發表文章 - postArticle</h2>
 			<div>
-				<p>會員編號</p>
-				<input type="text" name="mem_id" value="<%= (articleVO==null) ? "12345" : articleVO.getMem_id()%>" />
+				<p>會員編號: <span id="post_mem_id"></span></p>
 			</div>
 			<select name="article_board" id="choose-board" class="form-select">
+				<option value="" selected>請選擇文章板塊</option>
 				<option value="綜合討論" selected>綜合討論</option>
 				<option value="電影心得">電影心得</option>
 				<option value="商城購物">商城購物</option>
 				<option value="影城討論">影城討論</option>
 			</select> <select name="article_type" id="choose-type" class="form-select">
+				<option value="" selected>文章類型</option>
 				<option value="心得" selected>心得</option>
 				<option value="問題">問題</option>
 				<option value="討論">討論</option>
@@ -93,10 +94,12 @@ try {
 				<p></p>
 				<textarea id="summernote" name="article_contain"></textarea>
 			</div>
-			<p></p>
-			<input type="hidden" name="article_publish"> <input
-				type="hidden" name="article_state" value="會員已發表文章"> <input
-				type="hidden" name="action" value="insert">
+			<p></p>			
+			<input type="hidden" name="re_article_id" value="0"> 
+			<input type="hidden" name="article_publish"> 
+			<input type="hidden" id="post_mem_id_el" name="mem_id" value="">	
+			<input type="hidden" name="article_state" value="會員已發表文章"> 
+			<input type="hidden" name="action" value="insert">
 			<button type="submit" style="float: right" class="btn btn-success">送出</button>
 			<button style="float: right" class="btn btn-secondary">取消</button>
 
@@ -127,6 +130,15 @@ try {
 			]								
 		});
 	});
+	
+	var post_mem_id = document.querySelector("#post_mem_id");
+	var post_mem_id_el = document.querySelector("#post_mem_id_el");
+	
+    var storage_data = JSON.parse(sessionStorage.getItem("mem_data"));
+    console.log("mem_data: " + storage_data); // 檢查用
+    post_mem_id.innerHTML = storage_data.memId;
+    post_mem_id_el.value = storage_data.memId;
+	
 </script>
 
 
