@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="web.employee.entity.*"%>
+<%
+  EmployeeVO empVO = (EmployeeVO) session.getAttribute("empVO");
+%>   
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +22,7 @@
 
         <!-- 主要工作區 -->
         <div class="main">
-            <h2>工作區</h2>
+            <h2>${empVO.emp_id}</h2>
 
 
 

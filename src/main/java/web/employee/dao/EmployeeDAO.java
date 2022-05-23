@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import web.employee.entity.EmployeeVO;
+import web.member.entity.MemVO;
 
 
 public class EmployeeDAO implements EmployeeDAO_interface{
@@ -32,6 +33,8 @@ public class EmployeeDAO implements EmployeeDAO_interface{
 	private static final String GET_ONE = "SELECT emp_id,emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate FROM employee where emp_id = ?";
 //	private static final String DELETE = "DELETE FROM emp_list where emp_id = ?";
 	private static final String UPDATE = "UPDATE employee set emp_account=?, emp_name=?, emp_password=?, emp_nickname=?, emp_phone=?, emp_hiredate=? where emp_id = ?";
+	private static final String GET_ONE_VO = "SELECT emp_id, promission_id, emp_account, emp_name, emp_password, emp_nickname, "
+											+ "emp_phone, emp_hiredate FROM employee where emp_account = ?";
 	
 	@Override
 	public void insert(EmployeeVO employeeVO) {
@@ -279,6 +282,61 @@ public class EmployeeDAO implements EmployeeDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public EmployeeVO findByAccount(String emp_account) {
+		EmployeeVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_VO);  // Anaturis@superrito.com
+			pstmt.setString(1, emp_account);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {				
+				if(rs.getRow() != 0) {
+					throw new Exception();
+				}
+			}
+			
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (Exception e) {
+			throw new RuntimeException("此帳號已有人使用"
+					+ e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empVO;
 	}
 	
 	

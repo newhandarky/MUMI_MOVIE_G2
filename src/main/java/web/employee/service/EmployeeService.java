@@ -5,6 +5,7 @@ import java.util.List;
 import web.employee.dao.EmployeeDAO;
 import web.employee.dao.EmployeeDAO_interface;
 import web.employee.entity.EmployeeVO;
+import web.member.entity.MemVO;
 
 public class EmployeeService {
 
@@ -53,6 +54,10 @@ public class EmployeeService {
 //
 	public EmployeeVO getOneEmployee(Integer emp_id) {
 		return dao.findByPrimaryKey(emp_id);
+	}
+	
+	public EmployeeVO getOneEmpByAccount(String emp_account) {
+		return dao.findByAccount(emp_account);
 	}
 	
 	public List<EmployeeVO> getAll() {

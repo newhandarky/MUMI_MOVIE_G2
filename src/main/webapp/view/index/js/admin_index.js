@@ -86,54 +86,7 @@ document.querySelector('.sidebar .close-aside').addEventListener('click', functi
 // 工作區JS 要用jquery記得在html檔插入
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-$('.sidebar .close-aside').addEventListener('click', function() {
+$('.sidebar .close-aside').on('click', function() {
     $(`#${this.dataset.close}`).classList.add('show-sidebar')
     wrapper.classList.remove('margin')
-})
-
-// 查看會員照片
-$(".btn-success").addEventListener("click", function() {
-    Swal.fire({
-        title: '會員編號001',
-        imageUrl: '../IMAGE/others/48176.png',
-        imageWidth: 400,
-        imageHeight: 400,
-        imageAlt: 'Custom image',
-    })
-})
-
-
-// 會員帳號狀態按鈕
-$(".btn-primary").addEventListener("click", function() {
-    if (!$("#-on").hasClass("-stop")) {
-        Swal.fire({
-            title: '確定要更動此會員的帳號狀態?',
-            text: '請留意, 除非此會員違反影城規定, 否則此舉可能造成會員投訴',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    '已停用!',
-                    '此會員帳號已停用',
-                    'success'
-                )
-                $(".mem-state-on").addClass('-stop');
-                $(".mem-state-off").removeClass('-stop');
-            }
-        })
-    } else {
-        Swal.fire({
-            icon: 'success',
-            title: '已變更此會員帳號狀態',
-            text: '此帳號已成功啟用!',
-        })
-
-        $(".mem-state-on").removeClass('-stop');
-        $(".mem-state-off").addClass('-stop');
-    }
-
 })

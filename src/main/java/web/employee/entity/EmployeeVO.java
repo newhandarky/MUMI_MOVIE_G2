@@ -11,6 +11,7 @@ public class EmployeeVO implements java.io.Serializable{
 	private String emp_nickname;
 	private String emp_phone;
 	private Date emp_hiredate;
+	private Integer emp_state;
 	
 	
 	public Integer getEmp_id() {
@@ -55,5 +56,12 @@ public class EmployeeVO implements java.io.Serializable{
 	public void setEmp_hiredate(Date emp_hiredate) {
 		this.emp_hiredate = emp_hiredate;
 	}
+	public Integer getEmp_state() {
+		return emp_state;
+	}
+	public void setEmp_state(Integer emp_state) {
+		this.emp_state = emp_state;
+	}
+	
 
 }
