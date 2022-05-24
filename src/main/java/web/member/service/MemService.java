@@ -72,7 +72,6 @@ public class MemService {
 		memVO.setMem_state(1);
 		
 		dao.updateOpen(memVO);
-		
 		return memVO;
 	}
 		
@@ -104,6 +103,14 @@ public class MemService {
 	
 	public List<MemVO> getSheet(Integer mem_id) {
 		return dao.getSheet(mem_id);
+	}
+	
+	public void memLoginCount(String mem_account) {
+		dao.loginCount(mem_account);
+	};
+	
+	public void memCleanCount(String mem_account) {
+		dao.cleanCount(mem_account);
 	}
 
 }

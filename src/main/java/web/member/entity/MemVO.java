@@ -16,8 +16,8 @@ public class MemVO implements java.io.Serializable{
 	private byte[] mem_pic;
 	private Date mem_register;
 	private Timestamp mem_update;
-	private Integer mem_point;
 	private Integer mem_state;
+	private Integer login_count;
 	private Integer ticket_orders_id;
 	private Date showing_date;
 	private Integer showing;
@@ -101,17 +101,17 @@ public class MemVO implements java.io.Serializable{
 	public void setMem_update(Timestamp mem_update) {
 		this.mem_update = mem_update;
 	}
-	public Integer getMem_point() {
-		return mem_point;
-	}
-	public void setMem_point(Integer mem_point) {
-		this.mem_point = mem_point;
-	}
 	public Integer getMem_state() {
 		return mem_state;
 	}
 	public void setMem_state(Integer mem_state) {
 		this.mem_state = mem_state;
+	}
+	public Integer getLogin_count() {
+		return login_count;
+	}
+	public void setLogin_count(Integer login_count) {
+		this.login_count = login_count;
 	}
 	public Integer getTicket_orders_id() {
 		return ticket_orders_id;
