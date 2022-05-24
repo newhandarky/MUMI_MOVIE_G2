@@ -266,11 +266,6 @@ body {
 }
 
 
-/** --------------------------------
-    -- Please don't do that in real-world projects!
-    -- overwrite Bootstrap variables instead.
--------------------------------- */
-
 .navbar {
     background-color: var(--navbar-bg-color) !important;
     border: none !important;
@@ -384,17 +379,54 @@ body {
     .navbar .navbar-toggle:hover {
         background-color: transparent !important
     }
+    i.show-side-btn {
+        display: none;
+    }
 }
 
-
-/* main撌乩�� */
-
-.main {
+div.main {
     text-align: center;
+    min-height: 850px;
 }
 
-.main h2 {
+.title-h5 {
     color: white;
+}
+
+.img-logo {
+    width: 100px;
+}
+
+.showtable {
+	min-height: 1000px;
+}
+.showtable h2 {
+    color: white;
+    font-size: 60px;
+    margin: 30px auto;
+}
+
+.showtable {
+	position: relative;
+}
+
+.showtable table {
+    margin: 50px 100px;
+}
+
+#search{
+	color:black;
+}
+
+.showtable table,
+.showtable th,
+.showtable td {
+    border: 1px solid white;
+    color: white;
+    font-size: 24px;
+    overflow: auto;
+    white-space: nowrap;
+	text-align: center;
 }
 
 ::-webkit-scrollbar {
@@ -411,7 +443,42 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* main撌乩�� */
+.change-state {
+    margin: 30px auto;
+}
+
+a.alink{
+	text-decoration: none;
+    color: orange;
+}
+
+.showtable .memstate0 {
+    background-color: cornflowerblue;
+}
+
+/* footer */
+
+footer {
+	margin-top:50px;
+	position: fixed;
+}
+
+footer .copyright {
+    width: 100%;
+    background-color: #6f6486;
+	position: fixed;
+	bottom:0;
+	text-align: center;
+    color: white;
+    font-size: 12px;
+}
+
+footer a {
+    text-decoration: none;
+    color: orange;
+}
+
+/* main工作區開始 */
 
 main.-dark {
     background-color: #111111;
@@ -440,20 +507,15 @@ main h3 {
     color: black;
 }
 
-main .hell {
+main .hall {
     margin: 0 auto 100px;
-    /* width: 800px; */
-    /* height: 900px; */
     background-color: #09203f;
     border-radius: 30px;
     padding-top: 30px;
     position: relative;
 }
 
-
-/* 摨找�牧���� */
-
-.hell .seat-info {
+.hall .seat-info {
     display: inline-block;
     width: 40px;
     height: 30px;
@@ -472,9 +534,6 @@ main .hell {
     margin: 0 40px 0 0;
 }
 
-
-/* 摨找����� */
-
 .seat-info.used,
 .seat-row .seat.used {
     background-color: red;
@@ -490,20 +549,16 @@ main .hell {
     background-color: lightskyblue;
 }
 
-
-/* 敶勗輒�撟� */
-
-.hell .screen {
+.hall .screen {
     height: 50px;
     width: 90%;
-    /* 撠敶Ｙ�椰銝���敶Ｗ歇��０敶Ｘ��� */
     border-color: #fff transparent transparent transparent;
     border-style: solid solid solid solid;
     border-width: 50px;
   	margin-left: 50px;
 }
 
-.hell .seat {
+.hall .seat {
     display: inline-block;
     width: 40px;
     height: 30px;
@@ -514,7 +569,7 @@ main .hell {
     font-weight: bold;
 }
 
-.hell .seat:hover {
+.hall .seat:hover {
     cursor: pointer;
 }
 
@@ -525,10 +580,6 @@ main .hell {
     color: black;
 }
 
-/* .seat-row:first-child {
-    margin-left: 85px;
-} */
-
 .seat img {
     width: 50px;
 }
@@ -537,28 +588,9 @@ input.btn-danger {
 	margin-bottom:20px;
 }
 
-/* 韏圈��(����) */
-
-/* .seat-row :nth-child(2) {
-    margin-right: 50px;
-} */
-
-
-/* 韏圈��(����) */
-
-/* .seat-row :nth-child(8) {
-    margin-right: 50px;
-} */
-
-
-/* 韏圈��(璈急��) */
-
 .aisle {
     height: 40px;
 }
-
-
-/* �摨找�� */
 
 .selected-seats {
     color: white;
@@ -567,4 +599,4 @@ input.btn-danger {
     font-size: 40px;
 }
 
-/* main撌乩��蝯�� */
+/* main工作區結束 */

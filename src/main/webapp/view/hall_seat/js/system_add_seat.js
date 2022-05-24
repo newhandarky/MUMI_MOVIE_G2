@@ -83,10 +83,6 @@ document.querySelector('.sidebar .close-aside').addEventListener('click', functi
 	wrapper.classList.remove('margin')
 })
 
-// 工作區JS 要用jquery記得在html檔插入
-// <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
 $(function() {
 	// 設定總座位數
 	$(".seat_rc_btn").click(function() {

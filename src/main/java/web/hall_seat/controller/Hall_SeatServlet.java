@@ -25,25 +25,21 @@ public class Hall_SeatServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println(action);
 
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				/*************************** 1.接收請求參數 **********************/
 				String str = req.getParameter("hall_id");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入影廳編號");
 				}
-				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
 				Integer hall_id = null;
@@ -52,81 +48,47 @@ public class Hall_SeatServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.add("影廳編號格式不正確");
 				}
-				// Send the use back to the form, if there were errors
+				
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				Hall_SeatService hall_seatSvc = new Hall_SeatService();
 				List<Hall_SeatVO> list = hall_seatSvc.getSeatInfo(hall_id);
-//				System.out.println(hall_seatVO.get(1).getSeat_name());
 				if (list == null) {
 					errorMsgs.add("查無資料");
 				}
-				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("list", list); // 資料庫取出的hall_seatVO物件,存入req
-				String url = "/view/hall_seat/listOneHall_Seat.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				req.setAttribute("list", list);
+				String url = "/view/hall_seat/system_show_one_hall.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+		if ("update".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.接收請求參數 ****************************************/
-				Integer hall_id = new Integer(req.getParameter("hall_id"));
-
-				/*************************** 2.開始查詢資料 ****************************************/
-				Hall_SeatService hall_seatSvc = new Hall_SeatService();
-				Hall_SeatVO hall_seatVO = hall_seatSvc.getOneHall_Seat(hall_id);
-
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("hall_seatVO", hall_seatVO); // 資料庫取出的empVO物件,存入req
-				String url = "/view/hall_seat/update_hallseat_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-				successView.forward(req, res);
-
-				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				e.printStackTrace();
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
-				failureView.forward(req, res);
-			}
-		}
-
-		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
-				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				/*************************** 1.接收請求參數 **********************/
 				
 				String[] seat_id = req.getParameterValues("seat_id");
 				String[] seat_state = req.getParameterValues("seat_state");
@@ -141,25 +103,22 @@ public class Hall_SeatServlet extends HttpServlet {
 				}
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-//				req.setAttribute("hall_seatVO", hall_seatVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/view/hall_seat/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				String url = "/view/hall_seat/system_hall_seat.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("insert".equals(action)) { // 來自addHall_Seat.jsp的請求
+		if ("insert".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -167,7 +126,6 @@ public class Hall_SeatServlet extends HttpServlet {
 				String[] seat_name = req.getParameterValues("seat_name");
 				String[] seat_state = req.getParameterValues("seat_state");
 				String[] seat_no = req.getParameterValues("seat_no");
-//				String[] hall_seat_state_total = new String[seat_name.length];
 				for (int i = 0; i<seat_name.length; i++) {
 					Integer hall_id = new Integer(req.getParameter("hall_id"));
 					Integer seat_row = new Integer(req.getParameter("seat_row"));
@@ -189,12 +147,10 @@ public class Hall_SeatServlet extends HttpServlet {
 					hall_seatVO.setSeat_row_aisle1(seat_row_aisle1);
 					hall_seatVO.setSeat_row_aisle2(seat_row_aisle2);
 					hall_seatVO.setSeat_no(Integer.parseInt(seat_no[i]));
-					
-//					hall_seat_state_total[i] = (seat_state[i]);
-					// Send the use back to the form, if there were errors
+
 					if (!errorMsgs.isEmpty()) {
-						req.setAttribute("hall_seatVO", hall_seatVO); // 含有輸入格式錯誤的empVO物件,也存入req
-						RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/addHall_Seat.jsp");
+						req.setAttribute("hall_seatVO", hall_seatVO);
+						RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_add_seat.jsp");
 						failureView.forward(req, res);
 						return;
 					}
@@ -204,30 +160,22 @@ public class Hall_SeatServlet extends HttpServlet {
 					hall_seatVO = hall_seatSvc.addHall_Seat(hall_id, Integer.parseInt(seat_state[i]), seat_name[i], seat_row, seat_col, seat_left, seat_right, seat_row_aisle1, seat_row_aisle2, Integer.parseInt(seat_no[i]));
 				}
 				
-//				Hall_SeatVO hall_seatVO = new Hall_SeatVO();
-//				hall_seatVO.setHall_seat_state_total(hall_seat_state_total);
-//				Hall_SeatService hall_seatSvc = new Hall_SeatService();
-//				hall_seatVO = hall_seatSvc.addHall_Seat_State_Total(hall_seat_state_total);
-				
-				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/hall_seat/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				String url = "/view/hall_seat/system_hall_seat.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -239,15 +187,15 @@ public class Hall_SeatServlet extends HttpServlet {
 				hall_seatSvc.deleteHall(hall_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/hall_seat/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				String url = "/view/hall_seat/system_hall_seat.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -258,20 +206,11 @@ public class Hall_SeatServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				/*********************** 1.接收請求參數 *************************/
 				
 					String hall_name = new String(req.getParameter("hall_name"));
 					Hall_SeatVO hall_seatVO = new Hall_SeatVO();
 					hall_seatVO.setHall_name(hall_name);
-					
-					
-					// Send the use back to the form, if there were errors
-//					if (!errorMsgs.isEmpty()) {
-//						req.setAttribute("hallVO", hallVO); // 含有輸入格式錯誤的empVO物件,也存入req
-//						RequestDispatcher failureView = req.getRequestDispatcher("/view/hall/addHall.jsp");
-//						failureView.forward(req, res);
-//						return;
-//					}
 					
 					/*************************** 2.開始新增資料 ***************************************/
 					Hall_SeatService hall_seatSvc = new Hall_SeatService();
@@ -279,15 +218,15 @@ public class Hall_SeatServlet extends HttpServlet {
 				
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/hall_seat/addHall_Seat.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				String url = "/view/hall_seat/system_add_seat.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/hall_seat/system_hall_seat.jsp");
 				failureView.forward(req, res);
 			}
 		}
