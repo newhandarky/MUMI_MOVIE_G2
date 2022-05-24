@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    /* font-family: "jf open 粉圓 1.1"; */
 }
 
 
@@ -246,11 +245,6 @@ button.showtime {
     padding: 3px;
 }
 
-
-/* div.movieday {
-    display: none;
-} */
-
 div.forspan {
     margin: 10px 2px;
     display: inline-block;
@@ -301,7 +295,6 @@ button.showtime.-on {
 .moviedate {
     font-size: 24px;
     display: inline-block;
-    /* margin: 30px 3px 20px; */
 }
 
 

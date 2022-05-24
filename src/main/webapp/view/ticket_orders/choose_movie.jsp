@@ -7,12 +7,9 @@
 <%@ page import="web.ticket_orders.service.*"%>
 <%@ page import="web.member.entity.*"%>
 <%@ page import="web.member.dao.*"%>
-<%@ page import="web.movie.entity.*"%>
-<%@ page import="web.movie.dao.*"%>
-<%@ page import="web.movie.service.*"%>
+
 
 <%
-// 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 MemVO memVO = (MemVO) session.getAttribute("memVO");
 Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket_ordersVO");
 Ticket_OrdersService ticket_ordersSvc = new Ticket_OrdersService();
@@ -26,7 +23,7 @@ pageContext.setAttribute("list_online_movie", list_online_movie);
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>MUMI MOVIE 吾映良影 - 訂票系統</title>
 <!-- css檔連結記得修改 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/view/ticket_orders/css/choose_movie.css">
@@ -44,20 +41,31 @@ pageContext.setAttribute("list_online_movie", list_online_movie);
 	<div class="main">
 		<div class="container">
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
-				<c:forEach var="ticket_ordersVO" items="${list_online_movie}">
-					<button type="submit" class="btn btn-success choose_movie">${ticket_ordersVO.movie_ch}</button>
-					<input id="movie_id" type="hidden" name="" value="${ticket_ordersVO.movie_id}">
-					<input type="hidden" name="action" value="getOne_For_Choose">
-				</c:forEach>
+				<div class="row">
+					<c:forEach var="ticket_ordersVO" items="${list_online_movie}">
+						<div class="col-md-2 col-sm-6">
+							<div class="card choose_movie">
+								<img src="DBGifReaderTicketOrders?movie_id=${ticket_ordersVO.movie_id}">
+								<div class="card-body">
+									<p class="card-title">${ticket_ordersVO.movie_ch}</p>
+									<input type="hidden" id="movie_id" name="" value="${ticket_ordersVO.movie_id}">
+									<input type="hidden" name="action" value="getOne_For_Choose">
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</form>
 			<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
-				<div class="col-12">
+				<div class="col-12 back">
+					<div class="col-2">
 						<input type="hidden" name="action" value="delete_orders">
-						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+						<input type="hidden" id="mem_id" name="mem_id" value="${memVO.mem_id}">
 						<button type="submit" class="btn btn-secondary">取消返回</button>
+					</div>
 				</div>
 				<br>
-			</form>	
+			</form>
 		</div>
 	</div>
 </main>

@@ -21,11 +21,6 @@ $(function() {
         $(this).toggleClass('switchDisplay').siblings().toggleClass('switchDisplay');
     });
 
-    // 停止導覽列的標頭預設行為
-    // $(".nav_ul").on("click", function(e) {
-    //     e.preventDefault();
-    // });
-
     // 搜尋欄位放大鏡停止預設行為
     $("#a_loupe").on("click", function(event) {
         event.preventDefault();
@@ -76,44 +71,4 @@ $(function() {
 			};
 		});
 	});
-
-    // 選票完畢送出前判斷
-    $("#btn_primary").on("click", function() {
-
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
-
-        swalWithBootstrapButtons.fire({
-            title: '確認票券內容都無誤嗎?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: '前往選位頁面!',
-            cancelButtonText: '返回重新選擇!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                setTimeout(function() {
-
-                }, 2000);
-                swalWithBootstrapButtons.fire(
-                    '請稍後',
-                    '系統將為您導向選位頁面!',
-                    'success'
-                )
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                    '取消此操作',
-                    '返回選取日期場次頁面',
-                    'info'
-                )
-            }
-        })
-    })
 });

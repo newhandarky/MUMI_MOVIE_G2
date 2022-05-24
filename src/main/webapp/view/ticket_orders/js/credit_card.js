@@ -21,11 +21,6 @@ $(function() {
         $(this).toggleClass('switchDisplay').siblings().toggleClass('switchDisplay');
     });
 
-    // 停止導覽列的標頭預設行為
-    // $(".nav_ul").on("click", function(e) {
-    //     e.preventDefault();
-    // });
-
     // 搜尋欄位放大鏡停止預設行為
     $("#a_loupe").on("click", function(event) {
         event.preventDefault();

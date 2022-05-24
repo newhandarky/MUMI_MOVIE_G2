@@ -72,7 +72,7 @@ $(function() {
 		});
 	});
 	
-	//進入畫面 走道設置
+//進入畫面 走道設置
 	$(document).ready(function() {
 		let row = parseInt($(".hall_row").attr("id"))
 		//      let col = parseInt($(".hall_col").attr("id"))
@@ -98,20 +98,9 @@ $(function() {
 			};
 		});
 	});
-//使用者選座位
-		//$(document).on("click", ".seat", function() {
-			//if ($(this).find('input#seat_select_state').attr('value') == 0) {
-				//$(this).find('input#seat_select_state').attr('value', '1');
-				//$(this).attr('class', 'seat selected');
-			//} else if ($(this).find('input#seat_select_state').attr('value') == 1) {
-			//	$(this).find('input#seat_select_state').attr('value', '0');
-				//$(this).attr('class', 'seat');
-			//} 
-		//});
+
 //使用者選座位限制
 $(document).on("click", ".seat", function() {
-            console.log($(".selected").length);
-            console.log($("input#ticket_number").val());
             if ($(".selected").length > $("input#ticket_number").val() && !$(this).hasClass("used") && !$(this).hasClass("hold") && !$(this).hasClass("disabled")) {
                 $(this).removeClass("selected");
                 $(this).find('input#seat_select_state').attr('value', '0');
@@ -142,5 +131,3 @@ $(document).on("click", ".seat", function() {
             }
         });
     });
-        // 選取位子提示
-        //$("#selected-seats").text(`您所預訂的票券一共5張, 此為第 ${$(".selected").length -1} 個位子`);
