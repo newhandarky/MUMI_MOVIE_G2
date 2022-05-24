@@ -1,4 +1,4 @@
-package web.forum_article.controller;
+package web.forum_article_report.controller;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -28,8 +28,8 @@ public class ReportArticleDaoImpl implements ReportArticleDao {
 
 	private static final String INSERT_REPORT_STMT = "INSERT INTO forum_article_report(mem_id, article_id, report_article_reason, report_article_state) VALUES (?, ?, ?, ?)";
 	
-	private static final String GET_ALL_REPORT_STMT = "SELECT FAR.report_article_id FAR.mem_id, FAR.article_id, FAR.report_article_reason, FAR.report_article_state, "
-												+ "FA.article_subject, FA.article_board, FA.article_type, FA.article_contain, FA.article_state, FA.article_like_num "
+	private static final String GET_ALL_REPORT_STMT = "SELECT FAR.report_article_id, FAR.mem_id, FAR.article_id, FAR.report_article_reason, FAR.report_article_state, FAR.emp_id, FAR.report_article_time, FAR.report_update_time, "
+												+ "FA.article_subject, FA.article_board, FA.article_type, FA.article_contain, FA.article_state, FA.article_visit_count "
 												+ "FROM forum_article_report FAR JOIN forum_article FA "
 												+ "on FAR.article_id = FA.article_id "
 												+ "ORDER BY FAR.report_update_time desc";
@@ -115,9 +115,11 @@ public class ReportArticleDaoImpl implements ReportArticleDao {
 				reportArticle.setArticle_board(rs.getString("article_board"));			
 				reportArticle.setArticle_type(rs.getString("article_type"));
 				reportArticle.setArticle_subject(rs.getString("article_subject"));
-				reportArticle.setArticle_like_num(rs.getInt("article_like_num"));
+				reportArticle.setArticle_visit_count(rs.getInt("article_visit_count"));
 				reportArticle.setArticle_contain(rs.getString("article_contain"));
 				reportArticle.setArticle_state(rs.getString("article_state"));
+				reportArticle.setReport_article_time(rs.getTimestamp("report_article_time"));
+				reportArticle.setReport_update_time(rs.getTimestamp("report_update_time"));
 ;
 
 				list.add(reportArticle);// Store the row in the list

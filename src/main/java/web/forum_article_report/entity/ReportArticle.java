@@ -25,7 +25,9 @@ public class ReportArticle {
 	private String article_subject;
 	private String article_contain;
 	private String article_state;
-	private Integer article_like_num;
+	private Integer article_visit_count;
+	
+
 	
 	@Override
 	public String toString() {
@@ -34,9 +36,8 @@ public class ReportArticle {
 				+ ", report_article_time=" + report_article_time + ", report_article_state=" + report_article_state
 				+ ", report_update_time=" + report_update_time + ", article_board=" + article_board + ", article_type="
 				+ article_type + ", article_subject=" + article_subject + ", article_contain=" + article_contain
-				+ ", article_state=" + article_state + ", article_like_num=" + article_like_num + "]";
+				+ ", article_state=" + article_state + ", article_visit_count=" + article_visit_count + "]";
 	}
-	
 	public Integer getReport_article_id() {
 		return report_article_id;
 	}
@@ -115,12 +116,16 @@ public class ReportArticle {
 	public void setArticle_state(String article_state) {
 		this.article_state = article_state;
 	}
-	public Integer getArticle_like_num() {
-		return article_like_num;
+
+	public Integer getArticle_visit_count() {
+		return article_visit_count;
 	}
-	public void setArticle_like_num(Integer article_like_num) {
-		this.article_like_num = article_like_num;
+
+	public void setArticle_visit_count(Integer article_visit_count) {
+		this.article_visit_count = article_visit_count;
 	}
+	
+	
 
 
 }
