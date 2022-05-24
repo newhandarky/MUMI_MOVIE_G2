@@ -1,18 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="web.movie_rating.dao.*"%>
-<%@ page import="web.movie_rating.entity.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="web.movie_tag.dao.*"%>
+<%@ page import="web.movie_tag.entity.*"%>
+<%@ page import="web.movie_tag.service.*"%>
+
+<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
+
+<%
+// pageContext.getAttribute("list");
+// Movie_tagVO movie_tagVO = (Movie_tagVO) request.getAttribute("movie_tagVO");
+
+%>
+
 <html>
 <head>
 <meta charset="UTF-8">
-<title>å½±åŸå¾Œå°ç®¡ç†ç³»çµ±</title>
+<title>¼v«°«á¥xºŞ²z¨t²Î</title>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/movie_rating/css/system_movie_rating_add.css">
+	href="<%=request.getContextPath()%>/view/movie_tag/css/system_movie_tag_searchByMovie.css">
 
 </head>
 
@@ -26,14 +36,14 @@
 		<div
 			class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
 
-			<!-- å¤§é ­ç…§è¨­å®š -->
+			<!-- ¤jÀY·Ó³]©w -->
 			<img class="rounded-pill img-fluid" width="80"
 				src="./IMAGE/icons/clapperboard.png" alt="">
 			<div class="ms-2">
 				<h5 class="fs-6 mb-0">
-					<a class="text-decoration-none" href="#">Tibameå½±åŸ</a>
+					<a class="text-decoration-none" href="#">Tibame¼v«°</a>
 				</h5>
-				<p class="mt-1 mb-0">å¾Œè‡ºç®¡ç†ç³»çµ±</p>
+				<p class="mt-1 mb-0">«á»OºŞ²z¨t²Î</p>
 			</div>
 		</div>
 
@@ -44,13 +54,13 @@
 		</div>
 
 
-		<!-- å·¦é‚Šå´é‚Šæ¬„åŠŸèƒ½åˆ— -->
+		<!-- ¥ªÃä°¼ÃäÄæ¥\¯à¦C -->
 		<ul class="categories list-unstyled">
 			<li class="has-dropdown"><i class="uil-estate fa-fw"></i><a
-				href="#"> æœƒå“¡ç®¡ç†</a>
+				href="#"> ·|­ûºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">æœƒå“¡è³‡æ–™æŸ¥è©¢</a></li>
-					<li><a href="#">ä¿®æ”¹æœƒå“¡è³‡æ–™</a></li>
+					<li><a href="#">·|­û¸ê®Æ¬d¸ß</a></li>
+					<li><a href="#">­×§ï·|­û¸ê®Æ</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
@@ -59,65 +69,65 @@
                 <i class="uil-folder"></i><a href="#"> File manager</a>
             </li> -->
 			<li class="has-dropdown"><i class="uil-calendar-alt"></i><a
-				href="#"> é›»å½±ç®¡ç†</a>
+				href="#"> ¹q¼vºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">é›»å½±ä¸Šæ¶</a></li>
-					<li><a href="#">é›»å½±ä¸‹æ¶</a></li>
-					<li><a href="#">è‡ªå‹•æ’ç¨‹è¨­å®š</a></li>
+					<li><a href="#">¹q¼v¤W¬[</a></li>
+					<li><a href="#">¹q¼v¤U¬[</a></li>
+					<li><a href="#">¦Û°Ê±Æµ{³]©w</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-envelope-download fa-fw"></i><a
-				href="#"> å•†å“ç®¡ç†</a>
+				href="#"> °Ó«~ºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">å•†å“ä¸Šæ¶</a></li>
-					<li><a href="#">å•†å“ä¸‹æ¶</a></li>
+					<li><a href="#">°Ó«~¤W¬[</a></li>
+					<li><a href="#">°Ó«~¤U¬[</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-shopping-cart-alt"></i><a
-				href="#"> è¨è«–å€ç®¡ç†</a>
+				href="#"> °Q½×°ÏºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">ç•™è¨€æª¢èˆ‰æ©Ÿåˆ¶</a></li>
+					<li><a href="#">¯d¨¥ÀËÁ|¾÷¨î</a></li>
 					<li><a href="#">ipsum dolor</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-bag"></i><a href="#">
-					ç¥¨åˆ¸ç®¡ç†</a>
+					²¼¨éºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">è‡ªå‹•æ’ç¨‹</a></li>
-					<li><a href="#">å¯„ä¿¡æé†’</a></li>
+					<li><a href="#">¦Û°Ê±Æµ{</a></li>
+					<li><a href="#">±H«H´£¿ô</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-setting"></i><a href="#">
-					åº§ä½ç®¡ç†</a>
+					®y¦ìºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">å½±å»³åº§ä½è¨­å®š</a></li>
-					<li><a href="#">ä¿ç•™ä½è¨­å®š</a></li>
+					<li><a href="#">¼vÆU®y¦ì³]©w</a></li>
+					<li><a href="#">«O¯d¦ì³]©w</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-chart-pie-alt"></i><a
-				href="#"> å“¡å·¥ç®¡ç†</a>
+				href="#"> ­û¤uºŞ²z</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">å“¡å·¥æŸ¥è©¢</a></li>
-					<li><a href="#">æ–°å¢å“¡å·¥</a></li>
+					<li><a href="#">­û¤u¬d¸ß</a></li>
+					<li><a href="#">·s¼W­û¤u</a></li>
 					<li><a href="#">dolor ipsum</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
 			<li class="has-dropdown"><i class="uil-panel-add"></i><a
-				href="#"> å…¶ä»–</a>
+				href="#"> ¨ä¥L</a>
 				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="admin_login.html">åˆ‡æ›å¸³è™Ÿ</a></li>
-					<li><a href="admin_login.html">ç™»å‡º</a></li>
-					<li><a href="index.html">å›åˆ°å‰å°é¦–é </a></li>
+					<li><a href="admin_login.html">¤Á´«±b¸¹</a></li>
+					<li><a href="admin_login.html">µn¥X</a></li>
+					<li><a href="index.html">¦^¨ì«e¥x­º­¶</a></li>
 					<li><a href="#">amet consectetur</a></li>
 					<li><a href="#">ipsum dolor sit</a></li>
 				</ul></li>
@@ -137,7 +147,7 @@
 						aria-label="Toggle navigation">
 						<i class="uil-bars text-white"></i>
 					</button>
-					<a class="navbar-brand" href="#">å½±åŸå¾Œå°ç®¡ç†ç³»çµ±</a>
+					<a class="navbar-brand" href="#">¼v«°«á¥xºŞ²z¨t²Î</a>
 				</div>
 				<div class="collapse navbar-collapse" id="toggle-navbar">
 					<ul class="navbar-nav ms-auto">
@@ -175,23 +185,32 @@
 
 
 
-		<!-- ä¸»è¦å·¥ä½œå€ -->
-
-
+		<!-- ¥D­n¤u§@°Ï -->
 		<div class="main">
-			<h2>æ–°å¢é›»å½±æ¨™ç±¤</h2>
+			<h2>¹q¼v¼ĞÅÒ</h2>
+
+
+			<jsp:useBean id="movieSvc" scope="page"
+				class="web.movie.service.MovieService" />
+
+			<jsp:useBean id="movie_typeSvc" scope="page"
+				class="web.movie_type.service.Movie_typeService" />
+
+			<jsp:useBean id="movie_tagSvc2" scope="page"
+				class="web.movie_tag.service.Movie_tagService" />
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
-							<a class="btn btn-secondary"
-								href='system_movie_rating_listAll.jsp'>æ‰€æœ‰é›»å½±åˆ†ç´š</a> <br> <br>
-							<jsp:useBean id="movie_ratingSvc" scope="page"
-								class="web.movie_rating.service.Movie_ratingService" />
-						</div>
 
+
+						<div class="d-grid gap-2 d-flex justify-content-end">
+							<a class="btn btn-secondary" href='system_movie_tag_listAll.jsp'>©Ò¦³¹q¼v¼ĞÅÒ</a>
+						</div>
+						<br> <br>
+
+						<%-- ¿ù»~ªí¦C --%>
 						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+							<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
 							<ul>
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
@@ -199,38 +218,40 @@
 							</ul>
 						</c:if>
 
-						<form method="post"
-							action="<%=request.getContextPath()%>/view/movie_rating/Movie_ratingServlet"
-							name="form1" ENCTYPE="multipart/form-data">
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">ä¸­æ–‡åˆ†ç´šï¼š</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_rating_ch"
-										aria-label="default input example">
-								</div>
-								<label class="col-sm-2 col-form-label">è‹±æ–‡åˆ†ç´šï¼š</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_rating_en"
-										aria-label="default input example">
-								</div>
-							</div>
 
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">åˆ†ç´šåœ–ï¼š</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="file" name="movie_rating_pic"
-										aria-label="default input example">
-								</div>
-							</div>
+						<table class="table table-striped table-bordered table-sm">
+							<thead class="table-light">
+								<tr>
+									<th>¼ĞÅÒ½s¸¹</th>
+									<th>¹q¼v¦WºÙ</th>
+									<th>¤ÀÃş</th>
+									<th></th>
+								</tr>
+							</thead>
+<%-- 							<%@ include file="page1.file"%> --%>
+							<c:forEach var="movie_tagVO" items="${list}"
+								>
+<%-- 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" --%>
 
+								<tr>
+									<td>${movie_tagVO.movie_tag_id}</td>
+									<td>${movie_tagVO.movie_ch}</td>
+									<td>${movie_tagVO.movie_type_ch}</td>
+									<td>
+										<FORM METHOD="post"
+											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
+											style="margin-bottom: 0px;">
+											<input type="submit" value="§R°£" class="btn btn-danger">
+											<input type="hidden" name="movie_tag_id"
+												value="${movie_tagVO.movie_tag_id}"> <input
+												type="hidden" name="action" value="delete">
+										</FORM>
+									</td>
 
-
-
-
-							<input type="hidden" name="action" value="insert"> <input
-								type="submit" class="btn btn-primary" value="æ–°å¢">
-						</form>
-
+								</tr>
+							</c:forEach>
+						</table>
+<%-- 						<%@ include file="page2.file"%> --%>
 
 					</div>
 				</div>
@@ -239,27 +260,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 
-		<!-- å·¥ä½œå€çµæŸ -->
+		<!-- ¤u§@°Ïµ²§ô -->
 
 
 	</section>
@@ -269,7 +272,7 @@
 	<script
 		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 	<script
-		src="<%=request.getContextPath()%>/view/movie_rating/js/system_movie_rating_add.js"></script>
+		src="<%=request.getContextPath()%>/view/movie_tag/js/system_movie_tag_searchByMovie.js"></script>
 
 </body>
 

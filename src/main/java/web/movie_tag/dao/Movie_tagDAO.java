@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import web.movie.entity.MovieVO;
 import web.movie_tag.entity.Movie_tagVO;
 
 
@@ -35,7 +36,30 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 			+ "FROM MOVIE_TAG where movie_tag_id = ?";
 	private static final String UPDATE = "UPDATE MOVIE_TAG set movie_id = ?, movie_type_id = ? where movie_tag_id = ?";
 	private static final String DELETE = "DELETE FROM MOVIE_TAG where movie_tag_id = ?";
-	private static final String FIND_BY_MOVIEID = "SELECT * FROM MOVIE_TAG WHERE MOVIE_ID =?";
+	private static final String GET_CH_STMT = "select c.movie_tag_id, c.movie_ch, d.movie_type_ch "
+			+ "from (select a.movie_tag_id, b.movie_ch "
+			+ "from movie_tag as a join movie as b "
+			+ "where a.movie_id = b.movie_id) as c, "
+			+ "(select a.movie_tag_id, b.movie_type_ch "
+			+ "from movie_tag as a join movie_type as b "
+			+ "where a.movie_type_id = b.movie_type_id) as d "
+			+ "where c.movie_tag_id = d.movie_tag_id";
+	private static final String GET_MOVIE_CH_STMT = "select a.movie_id, b.movie_ch "
+			+ " from (select distinct movie_id from movie_tag) as a "
+			+ " join movie as b "
+			+ " where a.movie_id = b.movie_id";
+	private static final String SEARCH_BY_MOVIE = "select c.movie_tag_id, c.movie_id, c.movie_ch, d.movie_type_ch "
+			+ "	from (select a.movie_tag_id, b.movie_ch, b.movie_id "
+			+ "	from movie_tag as a join movie as b "
+			+ "	where a.movie_id = b.movie_id) as c join "
+			+ "	(select a.movie_tag_id, b.movie_type_ch "
+			+ "	from movie_tag as a join movie_type as b "
+			+ "	where a.movie_type_id = b.movie_type_id) as d "
+			+ "	where c.movie_tag_id = d.movie_tag_id and movie_id = ?";
+	
+	
+	
+	
 	
 	@Override
 	public void insert(Movie_tagVO movie_tagVO) {
@@ -256,21 +280,79 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 		}
 		return list;
 	}
-
+	
+	
 	@Override
-	public List<Movie_tagVO> findByMovieID(Integer movie_id) {
+	public List<Movie_tagVO> getAllCh(){
+		
+		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
+		Movie_tagVO movie_tagVO= null;
+		
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CH_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				movie_tagVO = new Movie_tagVO();
+				movie_tagVO.setMovie_tag_id(rs.getInt("movie_tag_id"));
+				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
+				movie_tagVO.setMovie_type_ch(rs.getString("movie_type_ch"));
+				list.add(movie_tagVO);
+			}
+
+		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+		
+	}
+	
+	@Override
+	public List<Movie_tagVO> getTagByMovie(Integer movie_id){
+		
 		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
 		Movie_tagVO movie_tagVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(FIND_BY_MOVIEID);
+			pstmt = con.prepareStatement(SEARCH_BY_MOVIE);
+
 			pstmt.setInt(1, movie_id);
 			rs = pstmt.executeQuery();
 
@@ -278,7 +360,8 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 				movie_tagVO = new Movie_tagVO();
 				movie_tagVO.setMovie_tag_id(rs.getInt("movie_tag_id"));
 				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
-				movie_tagVO.setMovie_type_id(rs.getInt("movie_type_id"));	
+				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
+				movie_tagVO.setMovie_type_ch(rs.getString("movie_type_ch"));
 				list.add(movie_tagVO);
 			}
 
@@ -308,15 +391,68 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 				}
 			}
 		}
+
 		return list;
+		
+		
 	}
 	
 	
-	
-	
-	
-	
-	
+	@Override
+	public List<Movie_tagVO> getMovieCh(){
+		
+		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
+		Movie_tagVO movie_tagVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {	
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MOVIE_CH_STMT);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				movie_tagVO = new Movie_tagVO();
+				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
+				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
+				
+				list.add(movie_tagVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return list;
+		
+		
+	}
 	
 	
 	

@@ -175,7 +175,7 @@ public class MovieServlet extends HttpServlet {
 				Integer movie_id = new Integer(req.getParameter("movie_id").trim());
 
 				String movie_ch = req.getParameter("movie_ch");
-				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]+$";
+				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\s)]+$";
 				if (movie_ch == null || movie_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文名稱: 請勿空白");
 				} else if (!movie_ch.trim().matches(movie_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -344,7 +344,7 @@ public class MovieServlet extends HttpServlet {
 //				}
 
 				String movie_ch = req.getParameter("movie_ch");
-				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]+$";
+				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\s:)]+$";
 				if (movie_ch == null || movie_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文名稱: 請勿空白");
 				} else if (!movie_ch.trim().matches(movie_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -384,7 +384,7 @@ public class MovieServlet extends HttpServlet {
 				byte[] movie_slide_poster = ((req.getPart("movie_slide_poster")).getInputStream()).readAllBytes();
 				if (movie_slide_poster.length == 0) {
 					movie_slide_poster = null;
-					errorMsgs.add("請新增輪播海報");
+//					errorMsgs.add("請新增輪播海報");
 				}
 
 				String movie_intro = req.getParameter("movie_intro");
@@ -467,14 +467,14 @@ public class MovieServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			MovieVO movieVO= null;
 			try {
 				
 				String[] movie_type_id = req.getParameterValues("movie_type_id");
 	
 				for (int i = 0; i < movie_type_id.length; i++) {
 					Integer movie_id = new Integer(req.getParameter("movie_id"));
-					MovieVO movieVO = new MovieVO();
+					movieVO = new MovieVO();
 					movieVO.setMovie_id(movie_id);
 					movieVO.setMovie_type_id(Integer.parseInt(movie_type_id[i]));
 
@@ -489,7 +489,7 @@ public class MovieServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add("新增資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_listAll.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie/system_movie_add2.jsp");
 				failureView.forward(req, res);
 			}
 

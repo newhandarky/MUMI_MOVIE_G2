@@ -84,11 +84,84 @@ public class Movie_tagServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
+				e.printStackTrace();
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie_type/system_movie_tag_add.jsp");
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		
+		if ("getType_By_Movie".equals(action)) { // 來自select_page.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("movie_id");
+				System.out.println("111");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入電影標籤編號");
+				}
+				System.out.println("222");
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/view/movie_tag/system_movie_tag_listAll.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				System.out.println("333");
+				Integer movie_id = null;
+				try {
+					movie_id = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("電影標籤編號格式不正確");
+				}
+				System.out.println("444");
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("555");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/view/movie_tag/system_movie_tag_listAll.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				
+				/*************************** 2.開始查詢資料 *****************************************/
+				System.out.println("666");
+				Movie_tagService movie_tagSvc = new Movie_tagService();
+				List<Movie_tagVO> list = movie_tagSvc.getTagByMovie(movie_id);
+//				if (movie_tagVO == null) {
+//					errorMsgs.add("查無資料");
+//				}
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					System.out.println("777");
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/view/movie_tag/system_movie_tag_listAll.jsp");
+//					failureView.forward(req, res);
+//					return;// 程式中斷
+//				}
+				System.out.println(list);
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("list", list); // 資料庫取出的movie_tagVO物件,存入req
+				String url = "/view/movie_tag/system_movie_tag_searchByMovie.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 system_movie_tag_listOne.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/view/movie_tag/system_movie_tag_listAll.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		
 		if ("getOne_For_Update".equals(action)) { // 來自system_movie_tag_listAll.jsp的請求
 

@@ -72,7 +72,7 @@
                         <a href="<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
                     </li>
                     <li class="nav_li">
-                        <a href="mem_shopping_sheet.html">歷史消費</a>
+                        <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                     </li>
                     <li class="nav_li">
                         <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
@@ -109,7 +109,7 @@
                                 <a href="<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
                             </li>
                             <li>
-                                <a href="mem_shopping_sheet.html">歷史消費</a>
+                                <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                             </li>
                             <li>
 								<a href="#" class="checksession" >登入/登出</a>

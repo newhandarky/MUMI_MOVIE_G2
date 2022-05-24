@@ -1,0 +1,408 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* font-family: "jf open 粉圓 1.1"; */
+}
+
+
+/* 頁首 */
+
+header {
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    position: fixed;
+    z-index: 5;
+}
+
+
+/* LOGO */
+
+.team_logo {
+    position: absolute;
+    width: 170px;
+    left: 10px;
+}
+
+
+/* 搜尋欄位 */
+
+#search {
+    display: inline-block;
+    position: absolute;
+    right: 130px;
+    top: 15px;
+    background-color: rgb(182, 212, 223);
+    border-radius: 15px;
+    border: 0px;
+    width: 150px;
+}
+
+#loupe {
+    position: absolute;
+    width: 20px;
+    right: 140px;
+    top: 17px;
+}
+
+
+/* 導覽選單 */
+
+#navi {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    top: 66px;
+}
+
+.nav-item {
+    display: inline-block;
+    top: 5px;
+}
+
+.nav-item ul li {
+    display: none;
+    padding-top: 5px;
+    background: black;
+    opacity: 0.7;
+    text-align: center;
+}
+
+.nav_ul {
+    list-style: none;
+    padding: 10px;
+    left: 0;
+    top: 0;
+}
+
+.nav_ul li {
+    display: none;
+}
+
+.nav_ul a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav_ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav_ul a.mumipay {
+    font-size: 12px;
+}
+
+.underheader {
+    height: 100px;
+}
+
+
+/* 漢堡選單 */
+
+.hamberger_menu {
+    position: absolute;
+    width: 30px;
+    right: 20px;
+    top: 60px;
+    display: none;
+}
+
+.hide_menu {
+    position: fixed;
+    z-index: 10;
+    background-color: gray;
+    width: 400px;
+    display: none;
+}
+
+.accordion-button {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.accordion-body {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
+.hide_menu.-bye {
+    left: -400px;
+}
+
+.hide_menu .accordion-body ul li {
+    list-style: none;
+}
+
+.hide_menu .accordion-body ul li a {
+    text-decoration: none;
+    color: #537895;
+}
+
+
+/* 下拉選單 */
+
+.nav-item ul li a:link,
+.nav-item ul li a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item ul li:hover {
+    background: #555;
+}
+
+.nav-item ul a:hover,
+.nav-item ul li a:hover,
+.nav-item ul li a:active {
+    color: rgb(0, 255, 98);
+}
+
+.nav-item .nav_ul .switchDisplay {
+    background: #ff0;
+}
+
+ul.switchDisplay li {
+    display: block;
+}
+
+
+/* 背景亮度按鈕 */
+
+#lightbtn {
+    display: inline-block;
+    height: 50px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+#btn-dark {
+    color: yellow;
+}
+
+.sunmoon {
+    width: 30px;
+}
+
+#btn-light.-off {
+    display: none;
+}
+
+#btn-dark.-off {
+    display: none;
+}
+
+
+/* main工作區 */
+
+main.-dark {
+    background-color: #111111;
+    color: white;
+}
+
+main {
+    padding-top: 100px;
+    width: 100%;
+}
+
+main .mumipay {
+    max-width: 800px;
+    min-height: 500px;
+    margin: 0 auto 100px;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    border-radius: 15px;
+    text-align: center;
+    padding: 0 10px 50px 10px;
+}
+
+.mumipay h2 {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    font-size: 48px;
+    font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
+}
+
+.mumipay h3 {
+    margin-bottom: 10px;
+    padding-top: 15px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
+}
+
+h4.hallname {
+    font-size: 30 px;
+    font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
+    margin: 10px auto;
+}
+
+button.showtime {
+    border: 0px;
+    background-color: rgb(194, 121, 231);
+    color: #fbfcdb;
+    margin: 20px 2px 20px;
+    padding: 3px;
+}
+
+div.movieday {
+    display: none;
+}
+
+div.forspan {
+    margin: 30px 2px;
+}
+
+div.movieday.-on {
+    display: block;
+}
+
+div.forspan span {
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+div.forspan span.-on {
+    color: black;
+    background-color: rgb(232, 172, 223);
+    transform: scale(1.3, 1.3);
+    transition: all 0.4s ease-out;
+}
+
+button.showtime:hover,
+button.showtime:active {
+    color: black;
+    background-color: rgb(224, 240, 11);
+    transform: scale(1.3, 1.3);
+    transition: all 0.2s ease-out;
+}
+
+button.showtime.-on {
+    color: black;
+    background-color: rgb(224, 240, 11);
+}
+
+.mumipay img {
+    width: 300px;
+}
+
+.form-floating p,
+.form-floating h3 {
+    text-align: left;
+    color: black;
+}
+
+.moviedate {
+    font-size: 24px;
+    display: inline-block;
+    margin: 30px 3px 20px;
+}
+
+.container .btn {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.form-floating {
+    margin: 10px 0;
+}
+
+main h2 {
+	color: red;
+	text-align: center;
+}
+
+main h3 {
+	color: #2f96ee;
+}
+
+main div.check_btn {
+	justify-content: center;
+}
+/* main工作區結束 */
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    text-align: center;
+    position: relative;
+}
+
+footer h5 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+    color: white;
+}
+
+footer ul {
+    text-align: left;
+    list-style: none;
+}
+
+footer ul li {
+    text-align: left;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 14px;
+}
+
+.focus_us {
+    display: block;
+    text-align: left;
+}
+
+.focus_us p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: white;
+}
+
+.focus_us a {
+    text-decoration: none;
+    color: antiquewhite;
+    margin-left: 30px;
+}
+
+footer .copyright {
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
+    bottom: 0;
+    color: white;
+    width: 100%;
+    font-size: 12px;
+}
+
+footer .copyright a {
+    text-decoration: none;
+    color: white;
+}
+
+footer a:hover,
+footer a:active {
+    color: #ffc107;
+}
+
+#linerobot {
+    width: 150px;
+}
+
+@media (max-width: 768px) {
+    .nav-item {
+        display: none;
+    }
+    .hamberger_menu {
+        display: block;
+    }
+    .hide_menu {
+        display: block;
+    }
+}

@@ -5,6 +5,20 @@ public class Movie_tagVO implements java.io.Serializable{
 	private Integer movie_tag_id;
 	private Integer movie_id;
 	private Integer movie_type_id;
+	private String movie_ch;
+	private String movie_type_ch;
+	public String getMovie_ch() {
+		return movie_ch;
+	}
+	public void setMovie_ch(String movie_ch) {
+		this.movie_ch = movie_ch;
+	}
+	public String getMovie_type_ch() {
+		return movie_type_ch;
+	}
+	public void setMovie_type_ch(String movie_type_ch) {
+		this.movie_type_ch = movie_type_ch;
+	}
 	public Integer getMovie_tag_id() {
 		return movie_tag_id;
 	}

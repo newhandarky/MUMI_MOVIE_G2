@@ -1,15 +1,9 @@
 package web.movie.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +16,6 @@ import org.jboss.jandex.Main;
 
 import web.hall_seat.dao.Hall_SeatDAO;
 import web.movie.entity.MovieVO;
-import web.movie_tag.entity.Movie_tagVO;
 
 public class MovieDAO implements MovieDAO_interface {
 	private static DataSource ds = null;
