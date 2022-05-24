@@ -18,8 +18,7 @@ public interface MemDAO_interface {
 	public List<MemVO> getAll();
 	public MemVO login(String mem_account, String mem_password);
 	public List<MemVO> getSheet(Integer mem_id);
-
-
-//  public List<MemVO> getAll(Map<String, String[]> map); 
+	public int loginCount(String mem_account);
+	public void cleanCount(String mem_account);
 }
 	

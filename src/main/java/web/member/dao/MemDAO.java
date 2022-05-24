@@ -31,16 +31,16 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_address, mem_state, mem_point) "
+			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_address, mem_state, login_count) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, '請輸入地址',1, 0)";
 	
 	private static final String GET_ALL_STMT = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
-			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member order by mem_id";
+			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_state, login_count FROM mumi_member order by mem_id";
 	
 	private static final String GET_ONE_STMT = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
-			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_id = ?";
+			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_state, login_count FROM mumi_member where mem_id = ?";
 	
 	private static final String DELETE = 
 			"DELETE FROM mumi_member where mem_id = ?";
@@ -66,7 +66,13 @@ public class MemDAO implements MemDAO_interface{
 	
 	private static final String GET_ONE_VO = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
-			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_point, mem_state FROM mumi_member where mem_account = ?";
+			+ "mem_password, mem_nickname, mem_pic, mem_register, mem_update, mem_state, login_count FROM mumi_member where mem_account = ?";
+	
+	private static final String LOGIN_COUNT = 
+			"update mumi_member set login_count = login_count + 1 where mem_account = ?";
+	
+	private static final String CLEAN_COUNT = 
+			"update mumi_member set login_count = 0 where mem_account = ?";
 	
 	private static final String GET_SHEET = "SELECT ticket_orders_id, showing_date, showing, movie_ch, hall_name, select_seat_name, ticket_price, buyticket_date, h.hall_id "
 			+ "FROM hall h "
@@ -95,7 +101,7 @@ public class MemDAO implements MemDAO_interface{
 			+ "DESC ;";
 	
 	@Override
-	public void insert(MemVO memVO) {
+	public void insert(MemVO memVO) { // 註冊
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -142,7 +148,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public void update(MemVO memVO) {
+	public void update(MemVO memVO) {  // 修改
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -191,7 +197,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 	
 	
-	public void updateClose(MemVO memVO) {
+	public void updateClose(MemVO memVO) { // 後臺關閉會員權限
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -230,7 +236,7 @@ public class MemDAO implements MemDAO_interface{
 
 	}
 	
-	public void updateOpen(MemVO memVO) {
+	public void updateOpen(MemVO memVO) { //後臺開啟會員權限
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -244,6 +250,8 @@ public class MemDAO implements MemDAO_interface{
 			pstmt.setInt(1, memVO.getMem_id());
 
 			pstmt.executeUpdate();
+			
+			cleanCount(memVO.getMem_account()); // 開啟權限同時清空登入錯誤次數
 
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -273,9 +281,7 @@ public class MemDAO implements MemDAO_interface{
 	
 	
 	@Override
-	public void updateState(Integer mem_id) {
-		// TODO Auto-generated method stub
-		
+	public void updateState(Integer mem_id) { // 判斷會員權限, 開則呼叫關 , 關則開
 		
 		if(findByPrimaryKey(mem_id).getMem_state() == 1) {
 			
@@ -289,7 +295,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public void delete(Integer mem_id) {
+	public void delete(Integer mem_id) { // 刪除, 專題未實作
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -328,7 +334,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 //	@Override
-	public MemVO findByPrimaryKey(Integer mem_id) {
+	public MemVO findByPrimaryKey(Integer mem_id) { // 用PK查詢單一會員
 
 		MemVO memVO = null;
 		Connection con = null;
@@ -359,8 +365,8 @@ public class MemDAO implements MemDAO_interface{
 				memVO.setMem_pic(rs.getBytes("mem_pic"));
 				memVO.setMem_register(rs.getDate("mem_register"));
 				memVO.setMem_update(rs.getTimestamp("mem_update"));
-				memVO.setMem_point(rs.getInt("mem_point"));
 				memVO.setMem_state(rs.getInt("mem_state"));
+				memVO.setLogin_count(rs.getInt("login_count"));
 			}
 
 			// Handle any driver errors
@@ -395,7 +401,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public List<MemVO> getAll() {
+	public List<MemVO> getAll() { // 取得全部會員
 		List<MemVO> list = new ArrayList<MemVO>();
 		MemVO memVO = null;
 
@@ -424,8 +430,8 @@ public class MemDAO implements MemDAO_interface{
 				memVO.setMem_nickname(rs.getString("mem_nickname"));
 				memVO.setMem_pic(rs.getBytes("mem_pic"));
 				memVO.setMem_update(rs.getTimestamp("mem_update"));
-				memVO.setMem_point(rs.getInt("mem_point"));
 				memVO.setMem_state(rs.getInt("mem_state"));
+				memVO.setLogin_count(rs.getInt("login_count"));
 				list.add(memVO); // Store the row in the list
 			}
 
@@ -461,7 +467,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public MemVO checkAccount(String mem_account) {
+	public MemVO checkAccount(String mem_account) { // 判斷註冊時帳號是否重複
 		MemVO memVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -470,10 +476,11 @@ public class MemDAO implements MemDAO_interface{
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_ACCOUNT);  // Anaturis@superrito.com
+			pstmt = con.prepareStatement(GET_ONE_ACCOUNT);  
 			pstmt.setString(1, mem_account);
 			rs = pstmt.executeQuery();
 			
+			// 若是有資料則代表此信箱已經使用過
 			while (rs.next()) {				
 				if(rs.getRow() != 0) {
 					throw new Exception();
@@ -516,7 +523,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public MemVO login(String mem_account, String mem_password) {
+	public MemVO login(String mem_account, String mem_password) { // 登入
 		MemVO memVO = null;
 		
 		Connection con = null;
@@ -572,7 +579,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public MemVO findByAccount(String mem_account) {
+	public MemVO findByAccount(String mem_account) { // 以帳號取得會員資料
 		MemVO memVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -602,8 +609,8 @@ public class MemDAO implements MemDAO_interface{
 				memVO.setMem_pic(rs.getBytes("mem_pic"));
 				memVO.setMem_register(rs.getDate("mem_register"));
 				memVO.setMem_update(rs.getTimestamp("mem_update"));
-				memVO.setMem_point(rs.getInt("mem_point"));
 				memVO.setMem_state(rs.getInt("mem_state"));
+				memVO.setLogin_count(rs.getInt("login_count"));
 			}
 
 			// Handle any driver errors
@@ -638,7 +645,7 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	@Override
-	public void changePWD(String mem_account, String mem_password) {
+	public void changePWD(String mem_account, String mem_password) { // 變更密碼
 		MemVO memVO = findByAccount(mem_account);
 		
 		Connection con = null;
@@ -738,6 +745,87 @@ public class MemDAO implements MemDAO_interface{
 			}
 		}
 		return listSheet;
+	}
+
+	@Override
+	public int loginCount(String mem_account) { // 計算帳號登入時錯誤次數
+		MemVO memVO = findByAccount(mem_account);
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int count = 0;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(LOGIN_COUNT);
+			
+			pstmt.setString(1, memVO.getMem_account());
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return count;
+	}
+	
+	
+	@Override  
+	public void cleanCount(String mem_account) { // 登入成功呼叫此方法清空登入錯誤次數
+		MemVO memVO = findByAccount(mem_account);
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CLEAN_COUNT);
+			
+			pstmt.setString(1, memVO.getMem_account());
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 	
 }

@@ -29,17 +29,15 @@ public class SendEmail extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 	    res.setContentType("text/html; charset=UTF-8");
 		
-		System.out.println("有近來方法");
 		
 		String action = req.getParameter("action");
-		String to = req.getParameter("mem_account");
+		String mem_account = req.getParameter("mem_account"); // 使用者信箱
 		String errMessage;
 		
 		MemDAO dao = new MemDAO();
 		String newPwd = genAuthCode();
 		
 		if("forget".equals(action)) {
-			
 		
 			try {
 				// 設定使用SSL連線至 Gmail smtp Server
@@ -62,25 +60,22 @@ public class SendEmail extends HttpServlet {
 				
 				Message message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(myGmail));
-				message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
+				message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(mem_account));
 				
 				//設定信中的主旨  
 				message.setSubject("請確認你的新帳號密碼");
 				
-				// 更新帳號密碼
-				dao.changePWD(to, newPwd);
+				// 呼叫DAO更新帳號密碼(英數亂數8碼)
+				dao.changePWD(mem_account, newPwd);
 				
 				//設定信中的內容 
 				message.setText("您的新密碼為 : " + newPwd);
 				
 				Transport.send(message);
 				
-				System.out.println("傳送成功!");
-				
 				res.sendRedirect(req.getContextPath() + "/view/index/index.jsp");
 				
 			}catch (MessagingException e){
-				System.out.println("傳送失敗!");
 				e.printStackTrace();
 			}
 		}
@@ -89,7 +84,7 @@ public class SendEmail extends HttpServlet {
 		if ("checkaccount".equals(action)) {
 			
 			try {
-				if (dao.checkAccount(to) == null) {
+				if (dao.checkAccount(mem_account) == null) {
 					errMessage = "查無您的帳號!!";
 				} 
 			} catch (Exception e) {
@@ -100,6 +95,7 @@ public class SendEmail extends HttpServlet {
 
 	}
 	
+	// 隨機產生英數大小寫混和字串
 	public String genAuthCode() {
 		String randomCode = "";
 		String result = "";
