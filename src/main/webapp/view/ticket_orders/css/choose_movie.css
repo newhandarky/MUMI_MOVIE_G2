@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 
@@ -10,16 +9,9 @@
 header {
     width: 100%;
     height: 100px;
-    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
     position: fixed;
     z-index: 5;
-}
-
-header h2 {
-    color: yellow;
-    position: absolute;
-    top: 60px;
-    left: 120px;
 }
 
 
@@ -27,7 +19,7 @@ header h2 {
 
 .team_logo {
     position: absolute;
-    width: 100px;
+    width: 170px;
     left: 10px;
 }
 
@@ -89,12 +81,16 @@ header h2 {
 
 .nav_ul a {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
 .nav_ul li a {
     text-decoration: none;
-    color: yellow;
+    color: white;
+}
+
+.nav_ul a.mumipay {
+    font-size: 12px;
 }
 
 .underheader {
@@ -113,7 +109,7 @@ header h2 {
 }
 
 .hide_menu {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     background-color: gray;
     width: 400px;
@@ -121,7 +117,7 @@ header h2 {
 }
 
 .accordion-button {
-    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .accordion-body {
@@ -147,13 +143,14 @@ header h2 {
 .nav-item ul li a:link,
 .nav-item ul li a:visited {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
 .nav-item ul li:hover {
     background: #555;
 }
 
+.nav-item ul a:hover,
 .nav-item ul li a:hover,
 .nav-item ul li a:active {
     color: rgb(0, 255, 98);
@@ -171,20 +168,14 @@ ul.switchDisplay li {
 /* 背景亮度按鈕 */
 
 #lightbtn {
+    display: inline-block;
     height: 50px;
-    position: relative;
-}
-
-#btn-light {
     position: absolute;
     right: 15px;
     top: 5px;
 }
 
 #btn-dark {
-    position: absolute;
-    right: 15px;
-    top: 5px;
     color: yellow;
 }
 
@@ -202,9 +193,6 @@ ul.switchDisplay li {
 
 
 /* main工作區 */
-.main {
-    text-align: center;
-}
 
 main.-dark {
     background-color: #111111;
@@ -214,147 +202,147 @@ main.-dark {
 main {
     padding-top: 100px;
     width: 100%;
-    height: 100%;
 }
 
-main h1 {
-    text-align: center;
-}
-
-main h1 {
-    text-align: center;
-    font-size: 60px;
-    font-family: "jf open 粉圓 1.1";
-    margin-bottom: 30px;
-}
-
-main h3 {
-    /* text-align: center; */
-    font-size: 36px;
-    font-family: "jf open 粉圓 1.1";
-    position: relative;
-    top: -47px;
-    color: black;
-}
-
-main .hell {
+main .mumipay {
+    max-width: 800px;
+    min-height: 500px;
     margin: 0 auto 100px;
-    width: 90%;
-    height: 100%;
-    background-color: #09203f;
-    border-radius: 30px;
-    padding-top: 30px;
-    position: relative;
-}
-
-
-/* 座位說明欄 */
-
-.hell .seat-info {
-    display: inline-block;
-    width: 40px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 15px 15px 0 0;
-}
-
-.seat-state {
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    border-radius: 15px;
     text-align: center;
+    padding: 0 10px 50px 10px;
 }
 
-.seat-state p {
-    color: white;
-    display: inline-block;
-    font-size: 30px;
-    margin: 0 40px 0 0;
-}
-
-/* 影廳螢幕 */
-
-.hell .screen {
-    height: 50px;
-    width: 700px;
-    margin: 0 auto;
-    /* 將矩形的左下又三邊隱形已達梯形效果 */
-    border-color: #fff transparent transparent transparent;
-    border-style: solid solid solid solid;
-    border-width: 50px;
-}
-
-.hell .seat {
-    display: inline-block;
-    width: 40px;
-    height: 30px;
-    background-color: white;
-    border-radius: 15px 15px 0 0;
-    position: relative;
-    margin: 0 5px 20px 5px;
+.mumipay h2 {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    font-size: 48px;
     font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
 }
 
-.hell .seat:hover {
+.mumipay h3 {
+    margin-bottom: 10px;
+    padding-top: 15px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
+}
+
+h4.hallname {
+    font-size: 30 px;
+    font-weight: bold;
+    font-family: "jf open 粉圓 1.1";
+    margin: 10px auto;
+}
+
+button.showtime {
+    border: 0px;
+    background-color: rgb(194, 121, 231);
+    color: #fbfcdb;
+    margin: 20px 2px 20px;
+    padding: 3px;
+}
+
+div.movieday {
+    display: none;
+}
+
+div.forspan {
+    margin: 30px 2px;
+}
+
+div.movieday.-on {
+    display: block;
+}
+
+div.forspan span {
+    font-size: 30px;
+    padding: 10px;
     cursor: pointer;
 }
 
-.seat p {
-    text-align: center;
-    top: 5px;
-    position: relative;
+div.forspan span.-on {
+    color: black;
+    background-color: rgb(232, 172, 223);
+    transform: scale(1.3, 1.3);
+    transition: all 0.4s ease-out;
+}
+
+button.showtime:hover,
+button.showtime:active {
+    color: black;
+    background-color: rgb(224, 240, 11);
+    transform: scale(1.3, 1.3);
+    transition: all 0.2s ease-out;
+}
+
+button.showtime.-on {
+    color: black;
+    background-color: rgb(224, 240, 11);
+}
+
+.mumipay img {
+    width: 300px;
+}
+
+.form-floating p,
+.form-floating h3 {
+    text-align: left;
     color: black;
 }
 
-/* .seat-row:first-child {
-    margin-left: 85px;
-} */
-
-.seat img {
-    width: 50px;
-}
-.hell .seat-info {
+.moviedate {
+    font-size: 24px;
     display: inline-block;
-    width: 40px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 15px 15px 0 0;
+    margin: 30px 3px 20px;
 }
 
-.seat-info.selected,
-.seat.selected {
-    background-color: lightskyblue;
-}
-.seat-info.used,
-.seat.used {
-    background-color: red;
-}
-/* 走道(直排) */
-
-/* .seat-row :nth-child(2) {
-    margin-right: 50px;
-} */
-
-
-/* 走道(直排) */
-
-/* .seat-row :nth-child(8) {
-    margin-right: 50px;
-} */
-
-
-/* 走道(橫排) */
-
-.aisle {
-    height: 40px;
-}
-
-
-/* 選座位訊息 */
-
-.selected-seats {
-    color: white;
-    text-align: center;
+.container .btn {
+    width: 100%;
     margin-top: 30px;
-    font-size: 40px;
+    justify-content: center;
 }
+
+.form-floating {
+    margin: 10px 0;
+}
+
+main h2 {
+	color: red;
+	text-align: center;
+}
+
+main h3 {
+	color: #2f96ee;
+}
+
+main .img {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+
+main .card {
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+main .card-body {
+    padding: 3px;
+}
+
+main .card-title{
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.back {
+	display: flex;
+	justify-content: center;
+}
+
 
 /* main工作區結束 */
 
@@ -440,3 +428,4 @@ footer a:active {
     .hide_menu {
         display: block;
     }
+}

@@ -34,11 +34,20 @@ $(function() {
     // 漢堡選單側邊攔位
     $(".hamberger_menu").on("click", function() {
         $(".hide_menu").toggleClass("-bye");
-    })
-    
-    // 點選場次變色
-    $(".choose_movie").on("click", function() {
-        $(this).next().attr("name", "movie_id");
-    })
+    });
+	
 	
 });
+
+$(document).on("mouseover", ".choose_movie", function() {
+			$(this).css('cursor', 'pointer');
+			$(this).find("#movie_id").attr("name", "movie_id")
+		});
+		
+$(document).on("mouseout", ".choose_movie", function() {
+			$(this).find("#movie_id").attr("name", "")
+		});
+		
+$(document).on("click", ".choose_movie", function() {
+			$(this).closest("form").submit()
+		});

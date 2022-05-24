@@ -12,12 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import web.employee.entity.EmployeeVO;
 import web.ticket_orders.entity.Ticket_OrdersVO;
 
 public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 
-	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
@@ -82,7 +80,6 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			+ "	ON m.movie_id = t3.movie_id "
 			+ "	) t4 "
 			+ "ON h.hall_id = t4.hall_id;";
-//	private static final String GET_HALL_NAME = "SELECT hall_id, hall_name FROM hall order by hall_id";
 	private static final String GET_ONLINE_MOVIE = "SELECT m.movie_id, movie_rating_id, movie_ch, movie_en, movie_poster "
 			+ "FROM movie m "
 			+ "JOIN ( "
@@ -111,7 +108,6 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			+ "		DESC LIMIT 1 "
 			+ "		) tko "
 			+ "	);";
-//	private static final String GET_HALL_NEW = "SELECT hall_id, hall_name FROM hall ORDER BY hall_update DESC LIMIT 1;";
 	
 	@Override
 	public void addOrders(Ticket_OrdersVO ticket_ordersVO) {
@@ -127,11 +123,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt.setInt(1, ticket_ordersVO.getMem_id());
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -168,11 +162,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -230,11 +222,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 				ticket_ordersVO.setSeat_no(rs.getInt("seat_no"));
 				list.add(ticket_ordersVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -284,11 +274,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 				ticket_ordersVO.setTicket_number(rs.getInt("ticket_number"));
 				list_ticket.add(ticket_ordersVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -337,11 +325,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 				ticket_ordersVO.setTicket_price(rs.getInt("ticket_price"));
 				list_ticket_price.add(ticket_ordersVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -379,12 +365,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(TRANSACTION);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -408,12 +391,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(SAVEPOINT);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -436,14 +416,11 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(CHOOSE_SEAT);
 			pstmt.setString(1, ticket_ordersVO.getSeat_select_state());
 			pstmt.setInt(2, ticket_ordersVO.getMovie_time_id());
-
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -466,14 +443,11 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(SAVE_TO_LIST);
 			pstmt.setString(1, ticket_ordersVO.getSelect_seat_name());
 			pstmt.setInt(2, ticket_ordersVO.getTicket_list_id());
-			
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -493,46 +467,6 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 
 	}
 
-//	@Override
-//	public void update(Hall_SeatVO hall_seatVO) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//
-//		try {
-//
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(UPDATE);
-//
-//			pstmt.setInt(1, hall_seatVO.getSeat_state());
-//			pstmt.setInt(2, hall_seatVO.getSeat_id());
-//			
-//
-//			pstmt.executeUpdate();
-//
-//			// Handle any driver errors
-//		} catch (SQLException se) {
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
-//			// Clean up JDBC resources
-//		} finally {
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//
-//	}
-//
 	@Override
 	public void deleteOrders(Integer mem_id) {
 
@@ -543,16 +477,12 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_ORDERS);
-
 			pstmt.setInt(1, mem_id);
-
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -576,12 +506,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(COMMIT);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -614,12 +541,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(ROOLBACK);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -637,19 +561,14 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			}
 		}
 		
-		
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(TRANSACTION);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -673,12 +592,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt = con.prepareStatement(COMMIT);
 			pstmt.execute();
 			
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -700,16 +616,12 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_ORDERS);
-
 			pstmt.setInt(1, mem_id);
-
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -728,118 +640,6 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 		}
 	}
 	
-	
-//
-//	@Override
-//	public Hall_SeatVO findByPrimaryKey(Integer hall_id) {
-//
-//		Hall_SeatVO hall_seatVO = null;
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		try {
-//
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(GET_ONE_STMT);
-//
-//			pstmt.setInt(1, hall_id);
-//
-//			rs = pstmt.executeQuery();
-//
-//			hall_seatVO = new Hall_SeatVO();
-//			while (rs.next()) {
-//				// empVo 也稱為 Domain objects
-//				hall_seatVO.setSeat_id(rs.getInt("seat_id"));
-//				hall_seatVO.setSeat_state(rs.getInt("seat_state"));
-//				hall_seatVO.setSeat_name(rs.getString("seat_name"));
-//			}
-//
-//			// Handle any driver errors
-//		} catch (SQLException se) {
-//			se.printStackTrace(System.err);
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
-//			// Clean up JDBC resources
-//		} finally {
-//			if (rs != null) {
-//				try {
-//					rs.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//		return hall_seatVO;
-//	}
-//
-//	@Override
-//	public List<Hall_SeatVO> getHall_Name() {
-//		List<Hall_SeatVO> list = new ArrayList<Hall_SeatVO>();
-//		Hall_SeatVO hall_SeatVO = null;
-//
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		try {
-//
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(GET_HALL_NAME);
-//			rs = pstmt.executeQuery();
-//
-//			while (rs.next()) {
-//				hall_SeatVO = new Hall_SeatVO();
-//				hall_SeatVO.setHall_id(rs.getInt("hall_id"));
-//				hall_SeatVO.setHall_name(rs.getString("hall_name"));
-//
-//				list.add(hall_SeatVO); // Store the row in the list
-//			}
-//
-//			// Handle any driver errors
-//		} catch (SQLException se) {
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
-//			// Clean up JDBC resources
-//		} finally {
-//			if (rs != null) {
-//				try {
-//					rs.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//		return list;
-//	}
 	@Override
 	public List<Ticket_OrdersVO> getOnline_Moive() {
 		List<Ticket_OrdersVO> list_online_movie = new ArrayList<Ticket_OrdersVO>();
@@ -856,21 +656,18 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
 				ticket_ordersVO = new Ticket_OrdersVO();
 				ticket_ordersVO.setMovie_id(rs.getInt("movie_id"));
 				ticket_ordersVO.setMovie_rating_id(rs.getInt("movie_rating_id"));
 				ticket_ordersVO.setMovie_ch(rs.getString("movie_ch"));
 				ticket_ordersVO.setMovie_en(rs.getString("movie_en"));
 				ticket_ordersVO.setMovie_poster(rs.getBytes("movie_poster"));
-				list_online_movie.add(ticket_ordersVO); // Store the row in the list
+				list_online_movie.add(ticket_ordersVO);
 			}
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -924,11 +721,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 				ticket_ordersVO.setShowing_date(rs.getDate("showing_date"));
 				list.add(ticket_ordersVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -988,11 +783,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 				ticket_ordersVO.setHall_id(rs.getInt("hall_id"));
 				list_mem_order.add(ticket_ordersVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -1024,11 +817,9 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 			pstmt.execute();
 			
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -1048,96 +839,4 @@ public class Ticket_OrdersDAO implements Ticket_OrdersDAO_interface {
 		
 		return list_mem_order;
 	}
-	
-//	@Override
-//	public void insert_hall(Hall_SeatVO hall_seatVO) {
-//
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//
-//		try {
-//
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(INSERT_HALL);
-//
-//			pstmt.setString(1, hall_seatVO.getHall_name());			
-//
-//			pstmt.executeUpdate();
-//
-//			// Handle any SQL errors
-//		} catch (SQLException se) {
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
-//			// Clean up JDBC resources
-//		} finally {
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//	}
-//	
-//	@Override
-//	public List<Hall_SeatVO> getHall_New() {
-//		List<Hall_SeatVO> list = new ArrayList<Hall_SeatVO>();
-//		Hall_SeatVO hall_SeatVO = null;
-//
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		try {
-//
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(GET_HALL_NEW);
-//			rs = pstmt.executeQuery();
-//
-//			while (rs.next()) {
-//				hall_SeatVO = new Hall_SeatVO();
-//				hall_SeatVO.setHall_id(rs.getInt("hall_id"));
-//				hall_SeatVO.setHall_name(rs.getString("hall_name"));
-//
-//				list.add(hall_SeatVO); // Store the row in the list
-//			}
-//
-//			// Handle any driver errors
-//		} catch (SQLException se) {
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
-//			// Clean up JDBC resources
-//		} finally {
-//			if (rs != null) {
-//				try {
-//					rs.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//		return list;
-//	}
 }

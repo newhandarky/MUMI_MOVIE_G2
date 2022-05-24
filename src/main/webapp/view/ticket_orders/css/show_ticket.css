@@ -241,11 +241,11 @@ table th {
     font-size: 24px;
 }
 
-
-/* table .tableval {
-    text-align: right;
-} */
-
+.container .btn {
+    width: 100%;
+    margin-top: 30px;
+    justify-content: center;
+}
 
 /* main工作區結束 */
 
