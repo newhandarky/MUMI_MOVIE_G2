@@ -25,7 +25,7 @@ public class MemVO implements java.io.Serializable{
 	private String hall_name;
 	private String select_seat_name;
 	private Integer ticket_price;
-	private Date buyticket_date;
+	private Timestamp buyticket_date;
 	
 	
 	
@@ -155,10 +155,10 @@ public class MemVO implements java.io.Serializable{
 	public void setTicket_price(Integer ticket_price) {
 		this.ticket_price = ticket_price;
 	}
-	public Date getBuyticket_date() {
+	public Timestamp getBuyticket_date() {
 		return buyticket_date;
 	}
-	public void setBuyticket_date(Date buyticket_date) {
+	public void setBuyticket_date(Timestamp buyticket_date) {
 		this.buyticket_date = buyticket_date;
 	}
 	

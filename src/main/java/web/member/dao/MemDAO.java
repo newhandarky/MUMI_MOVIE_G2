@@ -705,7 +705,7 @@ public class MemDAO implements MemDAO_interface{
 				memVO.setHall_name(rs.getString("hall_name"));;
 				memVO.setSelect_seat_name(rs.getString("select_seat_name"));
 				memVO.setTicket_price(rs.getInt("ticket_price"));
-				memVO.setBuyticket_date(rs.getDate("buyticket_date"));
+				memVO.setBuyticket_date(rs.getTimestamp("buyticket_date"));
 				listSheet.add(memVO); // Store the row in the list
 			}
 

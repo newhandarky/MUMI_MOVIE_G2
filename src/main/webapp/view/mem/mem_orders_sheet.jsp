@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="web.member.entity.*"%>
 <%@ page import="web.member.dao.*"%>
 <%@ page import="web.member.service.*"%>
@@ -57,7 +58,9 @@ MemVO memVO = (MemVO) session.getAttribute("memVO");
 							data-bs-parent="#accordionFlushExample">
 							<div class="accordion-body">
 								<table class="table">
-									<p>訂票日期 : ${memVO.buyticket_date}</p>
+									<p>訂票日期 : <fmt:formatDate value="${memVO.buyticket_date}"
+           pattern="yyyy-MM-dd HH:mm:ss" /></p>
+									
 									<thead>
 										<tr>
 											<th>放映日期</th>
