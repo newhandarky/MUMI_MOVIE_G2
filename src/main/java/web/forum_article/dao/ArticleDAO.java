@@ -38,7 +38,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 	
 	private static final String INSERT_RE_ARTICLE_ID_STMT = "UPDATE forum_article set re_article_id = ? where article_id = ?";
 	
-	private static final String ADD_ARTICLE_VISIT_COUNT_STMT = "UPDATE forum_article set article_like_num = ? where article_id = ?";
+	private static final String ADD_ARTICLE_VISIT_COUNT_STMT = "UPDATE forum_article set article_visit_count = ? where article_id = ?";
 	
 	private static final String DELETE = "DELETE FROM forum_article where article_id = ?";
 
@@ -46,27 +46,22 @@ public class ArticleDAO implements ArticleDAO_interface {
 			+ "article_pic = ?, article_updated = ?,article_state = ?  where article_id = ?";
 
 	private static final String GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article order by article_updated desc";
+			+ "article_updated, article_visit_count, article_state, re_article_id FROM forum_article order by article_updated desc";
 	
 	private static final String INDEX_GET_ALL_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_updated desc";
+			+ "article_updated, article_visit_count, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_updated desc";
 
 	private static final String GET_HOT_ALL = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_like_num desc limit 3";
+			+ "article_updated, article_visit_count, article_state, re_article_id FROM forum_article where article_state != '會員已刪除' order by article_visit_count desc limit 3";
 	
 	private static final String GET_ONE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article  where article_id = ?";
+			+ "article_updated, article_visit_count, article_state, re_article_id FROM forum_article  where article_id = ?";
 
 	private static final String GET_BOARD_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_board = ? and article_state != '會員已刪除' order by article_updated desc";
+			+ "article_updated, article_visit_count, article_state, re_article_id FROM forum_article where article_board = ? and article_state != '會員已刪除' order by article_updated desc";
 
 	private static final String CHANGE_STATE = "UPDATE forum_article set article_state = ?, article_updated = ? where article_id = ?";
 	
-	private static final String GET_STATE_STMT = "SELECT article_id, mem_id, emp_id, article_board, article_type, article_subject, article_contain, article_pic, article_publish, "
-			+ "article_updated, article_like_num, article_dislike_num, article_state, re_article_id FROM forum_article where article_state = ? order by article_id";
-
-
-
 
 	@Override
 	public void insert(ArticleVO articleVO) {
@@ -171,7 +166,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(ADD_ARTICLE_VISIT_COUNT_STMT);
 
-			pstmt.setInt(1, articleVO.getArticle_like_num());
+			pstmt.setInt(1, articleVO.getArticle_visit_count());
 			pstmt.setInt(2, articleVO.getArticle_id());
 			pstmt.executeUpdate();
 
@@ -355,8 +350,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 				articleVO.setArticle_pic(rs.getBytes("article_pic"));
 				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
 				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
-				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
-				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_visit_count(rs.getInt("article_visit_count"));
 				articleVO.setArticle_state(rs.getString("article_state"));
 				articleVO.setRe_article_id(rs.getInt("re_article_id"));
 
@@ -419,8 +413,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 				articleVO.setArticle_pic(rs.getBytes("article_pic"));
 				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
 				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
-				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
-				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_visit_count(rs.getInt("article_visit_count"));
 				articleVO.setArticle_state(rs.getString("article_state"));
 				articleVO.setRe_article_id(rs.getInt("re_article_id"));
 
@@ -487,8 +480,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 				articleVO.setArticle_pic(rs.getBytes("article_pic"));
 				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
 				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
-				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
-				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_visit_count(rs.getInt("article_visit_count"));
 				articleVO.setArticle_state(rs.getString("article_state"));
 				articleVO.setRe_article_id(rs.getInt("re_article_id"));
 
@@ -554,8 +546,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 				articleVO.setArticle_pic(rs.getBytes("article_pic"));
 				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
 				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
-				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
-				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_visit_count(rs.getInt("article_visit_count"));
 				articleVO.setArticle_state(rs.getString("article_state"));
 				articleVO.setRe_article_id(rs.getInt("re_article_id"));
 				
@@ -635,8 +626,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 				articleVO.setArticle_pic(rs.getBytes("article_pic"));
 				articleVO.setArticle_publish(rs.getTimestamp("article_publish"));
 				articleVO.setArticle_updated(rs.getTimestamp("article_updated"));
-				articleVO.setArticle_like_num(rs.getInt("article_like_num"));
-				articleVO.setArticle_dislike_num(rs.getInt("article_dislike_num"));
+				articleVO.setArticle_visit_count(rs.getInt("article_visit_count"));
 				articleVO.setArticle_state(rs.getString("article_state"));
 				articleVO.setRe_article_id(rs.getInt("re_article_id"));	
 				

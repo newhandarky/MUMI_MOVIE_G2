@@ -33,8 +33,6 @@ function showBoardArticle(url) {
 		                        <td>${e.article_updated}</td>
 		                        <td>
 		                            <p class="badge bg-light text-dark">${e.article_like_num}</p>
-		                            <span>／</span>
-		                            <p class="badge bg-light text-dark">${e.article_dislike_num}</p>
 		                        </td>
 		                        <td>${e.mem_id}</td>
 		                        <td>${e.article_state}</td>

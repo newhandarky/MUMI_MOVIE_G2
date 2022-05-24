@@ -52,7 +52,7 @@ public class GetOneArticleServlet extends HttpServlet {
 			
 			ArticleService articleSvc = new ArticleService();
 			Integer re_article_id;
-			Integer article_like_num;
+			Integer article_visit_count;
 			
 			ArticleVO articleVO = articleSvc.getOneArticle(article_id);
 			
@@ -69,15 +69,15 @@ public class GetOneArticleServlet extends HttpServlet {
 			}
 			
 			// 修改 article_like_num
-			article_like_num = articleVO.getArticle_like_num();
-			if(article_like_num == null) {
-				article_like_num = 0;
+			article_visit_count = articleVO.getArticle_visit_count();
+			if(article_visit_count == null) {
+				article_visit_count = 0;
 			}		
-			System.out.println(article_like_num);
-			article_like_num = Integer.valueOf(article_like_num + 1);
-			System.out.println("article_like_num是什麼?" + article_like_num);
-			articleVO.setArticle_like_num(article_like_num);
-			articleVO = articleSvc.addAricleVisitCount(article_id, article_like_num);
+			System.out.println(article_visit_count);
+			article_visit_count = Integer.valueOf(article_visit_count + 1);
+			System.out.println("article_visit_count是多少?" + article_visit_count);
+			articleVO.setArticle_visit_count(article_visit_count);
+			articleVO = articleSvc.addAricleVisitCount(article_id, article_visit_count);
 			System.out.println("增加到VisitCount的VO?" + articleVO);
 			
 					

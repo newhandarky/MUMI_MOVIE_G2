@@ -48,11 +48,11 @@ public class ArticleService {
 		return articleVO;
 	}
 	
-	public ArticleVO addAricleVisitCount(Integer article_id, Integer article_like_num) {
+	public ArticleVO addAricleVisitCount(Integer article_id, Integer article_visit_count) {
 		ArticleVO articleVO = new ArticleVO();
 		
 		articleVO.setArticle_id(article_id);
-		articleVO.setArticle_like_num(article_like_num);
+		articleVO.setArticle_visit_count(article_visit_count);
 
 		articleDAO.addAricleVisitCount(articleVO);
 		return articleVO;

@@ -14,10 +14,15 @@ public class ArticleVO implements java.io.Serializable {
 	private byte[] article_pic;
 	private Timestamp article_publish;
 	private Timestamp article_updated;
-	private Integer article_like_num;
-	private Integer article_dislike_num;
+	private Integer article_visit_count;
 	private String article_state;
 	private Integer re_article_id;
+	
+	private String report_article_state;
+	
+	private String mem_name;
+	private String mem_nickname;
+	
 	
 	@Override
 	public String toString() {
@@ -25,8 +30,28 @@ public class ArticleVO implements java.io.Serializable {
 				+ article_board + ", article_type=" + article_type + ", article_subject=" + article_subject
 				+ ", article_contain=" + article_contain + ", article_pic=" + Arrays.toString(article_pic)
 				+ ", article_publish=" + article_publish + ", article_updated=" + article_updated
-				+ ", article_like_num=" + article_like_num + ", article_dislike_num=" + article_dislike_num
-				+ ", article_state=" + article_state + ", re_article_id=" + re_article_id + "]";
+				+ ", article_visit_count=" + article_visit_count + ", article_state=" + article_state
+				+ ", re_article_id=" + re_article_id + ", report_article_state=" + report_article_state + ", mem_name="
+				+ mem_name + ", mem_nickname=" + mem_nickname + "]";
+	}
+	
+	public String getReport_article_state() {
+		return report_article_state;
+	}
+	public void setReport_article_state(String report_article_state) {
+		this.report_article_state = report_article_state;
+	}
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+	public String getMem_nickname() {
+		return mem_nickname;
+	}
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
 	}
 	public Integer getArticle_id() {
 		return article_id;
@@ -88,18 +113,13 @@ public class ArticleVO implements java.io.Serializable {
 	public void setArticle_updated(Timestamp article_updated) {
 		this.article_updated = article_updated;
 	}
-	public Integer getArticle_like_num() {
-		return article_like_num;
+	public Integer getArticle_visit_count() {
+		return article_visit_count;
 	}
-	public void setArticle_like_num(Integer article_like_num) {
-		this.article_like_num = article_like_num;
+	public void setArticle_visit_count(Integer article_visit_count) {
+		this.article_visit_count = article_visit_count;
 	}
-	public Integer getArticle_dislike_num() {
-		return article_dislike_num;
-	}
-	public void setArticle_dislike_num(Integer article_dislike_num) {
-		this.article_dislike_num = article_dislike_num;
-	}
+
 	public String getArticle_state() {
 		return article_state;
 	}

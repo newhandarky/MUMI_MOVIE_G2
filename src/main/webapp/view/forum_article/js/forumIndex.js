@@ -1,8 +1,8 @@
 /**
  * 
  */
- 
-let url;
+
+let boardUrl;
 let hotUrl;
 let OneArticleUrl;
 let memInfoUrl;
@@ -21,10 +21,10 @@ function changeBoard(board_num) {
 	tbodyAll.innerHTML = "";
 	$(document).find("#tableAll").attr("style", "display: block");
 	$(document).find(".articleOne").attr("style", "display: none");
-	url = "GetBoardArticleServlet?page=" + board_num;
+	boardUrl = "GetBoardArticleServlet?page=" + board_num;
 	console.log("board_num=" + board_num);
-	console.log("click#boardDiscuss=" + url);
-	showBoardArticle(url);
+	console.log("click#boardDiscuss=" + boardUrl);
+	showBoardArticle(boardUrl);
 }
 
 //     	// 網頁轉換觸發事件
@@ -32,9 +32,7 @@ function changeBoard(board_num) {
 //      	 　　changeBoard(board_num)
 //      	});
 
-// 會員資訊
-
-
+// 顯示會員資訊
 function showMemInfo(memInfoUrl) {
 	fetch(memInfoUrl)
 		.then(resp => resp.json())
@@ -48,7 +46,6 @@ function showMemInfo(memInfoUrl) {
 
 		});
 };
-
 
 // 顯示熱門文章
 function showHotArticle(hotUrl) {
@@ -70,8 +67,8 @@ function showHotArticle(hotUrl) {
 
 
 // 顯示板塊文章
-function showBoardArticle(url) {
-	fetch(url)
+function showBoardArticle(boardUrl) {
+	fetch(boardUrl)
 		.then(resp => resp.json())
 		.then(list => {
 			for (let e of list) {
@@ -88,7 +85,7 @@ function showBoardArticle(url) {
                             <a href="javascript:void(0)" onclick="OneArticleDetail(${e.article_id})">${e.article_subject}</a>
                         </td>
                         <td>
-                            <p class="badge bg-light text-dark">${e.article_like_num}</p>
+                            <p class="badge bg-light text-dark">${e.article_visit_count}</p>
                         </td>
                         <td>${e.article_updated}</td>
                     </tr>`);
@@ -100,7 +97,6 @@ function showBoardArticle(url) {
 function OneArticleDetail(aID) {
 
 	const article = document.querySelector('article');
-
 
 	$(document).find("#tableAll").attr("style", "display: none");
 	OneArticleUrl = "GetOneArticleServlet?article_id=" + aID;
@@ -129,23 +125,33 @@ function OneArticleDetail(aID) {
 								</form>
 								<button id="btn_report" class="btn btn-warning btn-sm" style="float: right">檢舉</button>
 								<div class="report_choose" style="display: none">
-									<p>請選擇檢舉原因: </p>
-								    <div>
-								      <input type="radio" id="reason1" name="report_article_reason" value="檢舉原因1" checked>
-								      <label for="reason1">檢舉原因1</label>
-								    </div>
-								    <div>
-								      <input type="radio" id="reason2" name="report_article_reason" value="檢舉原因2">
-								      <label for="reason1">檢舉原因2</label>
-								    </div>
-								    <div>
-								      <input type="radio" id="reason3" name="report_article_reason" value="檢舉原因3">
-								      <label for="reason1">檢舉原因3</label>
-								    </div>
-								    <div>
-								    	<button id="report_submit" class="btn btn-warning btn-sm" style="float: right">送出</button>
-								    	<button id="report_cancel" class="btn btn-sm" style="float: right">取消</button>
-								    <div>
+									<form action="AddReportServlet" method="post">
+										<p>請選擇檢舉原因: </p>
+											<div>
+												<input type="radio" id="reason1" name="report_article_reason" value="暴雷一時爽，全家XX場" checked>
+										      	<label for="reason1">暴雷一時爽，全家XX場</label>
+										    </div>
+										    <div>
+										      <input type="radio" id="reason2" name="report_article_reason" value="違法或資訊不實">
+										      <label for="reason1">違法或資訊不實</label>
+										    </div>
+										    <div>
+										      <input type="radio" id="reason3" name="report_article_reason" value="暴力、散布仇恨">
+										      <label for="reason1">暴力、散布仇恨</label>
+										    </div>
+										    <div>
+										      <input type="radio" id="reason4" name="report_article_reason" value="有人騷擾、色色!!">
+										      <label for="reason1">有人騷擾、色色!!</label>
+										    </div>
+										    <div>
+										    	<button type="submit" id="report_submit" class="btn btn-warning btn-sm" style="float: right">送出</button>
+										    	<button type="button" id="report_cancel" class="btn btn-sm" style="float: right">取消</button>
+										    </div>
+										    <input type="hidden" name="article_id" value="${detail.article_id}"></input>
+										    <input type="hidden" name="mem_id" value="${detail.mem_id}"></input>
+										    <input type="hidden" name="report_article_state" value="文章已檢舉"></input>
+										    
+									</form>
 								</div>
 								<button id="btn_reply_submit" class="btn btn-success btn-sm" style="float: right">回覆</button>
 								<form action="UpdateArticleServlet" method="post">
@@ -201,10 +207,10 @@ window.addEventListener('load', () => {
 
 	hotUrl = 'GetAllHotArticleServlet';
 
-	if (url == null) {
-		url = 'IndexGetAllArticleServlet'; //網址
+	if (boardUrl == null) {
+		boardUrl = 'IndexGetAllArticleServlet'; //網址
 	}
-	console.log("url=" + url);
+	console.log("url=" + boardUrl);
 	console.log("hotUrl=" + hotUrl);
 
 
@@ -218,7 +224,7 @@ window.addEventListener('load', () => {
 
 
 	showHotArticle(hotUrl);
-	showBoardArticle(url);
+	showBoardArticle(boardUrl);
 	showMemInfo(memInfoUrl);
 
 	console.log("memId02" + memId);
