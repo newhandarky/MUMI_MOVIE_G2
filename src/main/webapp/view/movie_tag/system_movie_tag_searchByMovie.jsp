@@ -225,33 +225,31 @@
 									<th>標籤編號</th>
 									<th>電影名稱</th>
 									<th>分類</th>
-									<th></th>
+<!-- 									<th></th> -->
 								</tr>
 							</thead>
-<%-- 							<%@ include file="page1.file"%> --%>
-							<c:forEach var="movie_tagVO" items="${list}"
-								>
-<%-- 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" --%>
+
+							<c:forEach var="movie_tagVO" items="${list}">
 
 								<tr>
 									<td>${movie_tagVO.movie_tag_id}</td>
 									<td>${movie_tagVO.movie_ch}</td>
 									<td>${movie_tagVO.movie_type_ch}</td>
-									<td>
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
-											style="margin-bottom: 0px;">
-											<input type="submit" value="刪除" class="btn btn-danger">
-											<input type="hidden" name="movie_tag_id"
-												value="${movie_tagVO.movie_tag_id}"> <input
-												type="hidden" name="action" value="delete">
-										</FORM>
-									</td>
+<!-- 									<td> -->
+<!-- 										<FORM METHOD="post" -->
+<%-- 											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet" --%>
+<!-- 											style="margin-bottom: 0px;"> -->
+<!-- 											<input type="submit" value="刪除" class="btn btn-danger"> -->
+<!-- 											<input type="hidden" name="movie_tag_id" -->
+<%-- 												value="${movie_tagVO.movie_tag_id}"> <input --%>
+<!-- 												type="hidden" name="action" value="delete"> -->
+<!-- 										</FORM> -->
+<!-- 									</td> -->
 
 								</tr>
 							</c:forEach>
 						</table>
-<%-- 						<%@ include file="page2.file"%> --%>
+
 
 					</div>
 				</div>

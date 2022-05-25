@@ -95,7 +95,7 @@ $(function(){
 		$('.form-check-input').each(function(){
 			//console.log($(this).attr('value'));
 			console.log($(this).attr('value') % 6 == 0);
-			if($(this).attr('value') % 6 == 0){
+			if($(this).attr('value') % 6 == 4){
 				$(this).closest("div").after("<br>");
 			
 			};

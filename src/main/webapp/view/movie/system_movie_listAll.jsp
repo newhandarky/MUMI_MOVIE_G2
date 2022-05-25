@@ -189,17 +189,15 @@ pageContext.setAttribute("list", list);
 
 		<!-- 主要工作區 -->
 		<div class="main">
-			<h2>電影</h2>
+			<h2>所有電影</h2>
 
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
-
+						<div class="d-grid gap-2 d-flex justify-content-end">
 							<a class="btn btn-secondary" href='system_movie_add.jsp'>新增電影</a>
-							<br> <br>
-
 						</div>
+							<br>
 
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
@@ -216,10 +214,10 @@ pageContext.setAttribute("list", list);
 								<tr>
 									<th>電影編號</th>
 									<th>電影中文名稱</th>
-									<th>電影英文名稱</th>
+<!-- 									<th>電影英文名稱</th> -->
 									<th>電影最後修改時間</th>
 									<th>片長</th>
-									<th>演員</th>
+<!-- 									<th>演員</th> -->
 									<th>導演</th>
 								</tr>
 							</thead>
@@ -230,11 +228,11 @@ pageContext.setAttribute("list", list);
 								<tr>
 									<td>${movieVO.movie_id}</td>
 									<td>${movieVO.movie_ch}</td>
-									<td>${movieVO.movie_en}</td>
+<%-- 									<td>${movieVO.movie_en}</td> --%>
 									<td><fmt:formatDate value="${movieVO.movie_updated_time}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
 									<td>${movieVO.movie_runtime}分鐘</td>
-									<td>${movieVO.casts}</td>
+<%-- 									<td>${movieVO.casts}</td> --%>
 									<td>${movieVO.director}</td>
 
 									<td>
@@ -251,8 +249,8 @@ pageContext.setAttribute("list", list);
 								</tr>
 							</c:forEach>
 						</table>
-						<%@ include file="page2.file"%>
 
+						<%@ include file="page2.file"%>
 					</div>
 				</div>
 			</div>

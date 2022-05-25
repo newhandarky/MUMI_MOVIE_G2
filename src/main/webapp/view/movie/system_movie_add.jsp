@@ -187,12 +187,12 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 			<div class="card">
 				<div class="container">
 					<div col="12">
-						<div class="col-6">
+						<div class="d-grid gap-2 d-flex justify-content-end">
 							<a class="btn btn-secondary" href='system_movie_listAll.jsp'>所有電影</a>
-							<br> <br>
-							<jsp:useBean id="movieSvc" scope="page"
-								class="web.movie.service.MovieService" />
 						</div>
+						<br>
+						<jsp:useBean id="movieSvc" scope="page"
+							class="web.movie.service.MovieService" />
 
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
@@ -203,6 +203,11 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 							</ul>
 						</c:if>
 
+						<jsp:useBean id="releasingSvc" scope="page"
+							class="web.releasing.service.ReleasingService" />
+						<jsp:useBean id="movie_ratingSvc" scope="page"
+							class="web.movie_rating.service.Movie_ratingService" />
+						
 						<form method="post"
 							action="<%=request.getContextPath()%>/view/movie/MovieServlet"
 							name="form1" ENCTYPE="multipart/form-data">
@@ -219,104 +224,102 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 										aria-label="default input example"
 										value="<%=(movieVO == null) ? "MOVIE ENGLISH NAME" : movieVO.getMovie_en()%>">
 								</div>
-								<div class="mb-3 row">
-									<jsp:useBean id="releasingSvc" scope="page"
-										class="web.releasing.service.ReleasingService" />
-									<label class="col-sm-2 col-form-label">電影狀態:</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_state_id" class="form-select">
-											<c:forEach var="ReleasingVO" items="${releasingSvc.all}">
-												<option value="${ReleasingVO.movie_state_id}">
-													${ReleasingVO.movie_state}
-											</c:forEach>
-										</select>
-									</div>
-
-									<jsp:useBean id="movie_ratingSvc" scope="page"
-										class="web.movie_rating.service.Movie_ratingService" />
-									<label class="col-sm-2 col-form-label">電影分級:</label>
-									<div class="col-sm-3">
-										<select size="1" name="movie_rating_id" class="form-select">
-											<c:forEach var="Movie_ratingVO"
-												items="${movie_ratingSvc.all}">
-												<option value="${Movie_ratingVO.movie_rating_id}">
-													${Movie_ratingVO.movie_rating_ch}
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">長度(分鐘)：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" name="movie_runtime"
-											aria-label="default input example"
-											value="<%=(movieVO == null) ? "120" : movieVO.getMovie_runtime()%>">
-									</div>
-									<label class="col-sm-2 col-form-label">上映日期:</label>
-									<div class="col-sm-3">
-										<input class="form-control" id="f_date1" type="date"
-											name="release_date" aria-label="default input example">
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">簡介：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" name="movie_intro"
-											aria-label="default input example"
-											value="<%=(movieVO == null) ? "神作:/?" : movieVO.getMovie_intro()%>">
-									</div>
-									<label class="col-sm-2 col-form-label">演員：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" name="casts"
-											aria-label="default input example"
-											value="<%=(movieVO == null) ? "帥哥、美女" : movieVO.getCasts()%>">
-									</div>
-								</div>
-
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">導演：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" name="director"
-											aria-label="default input example"
-											value="<%=(movieVO == null) ? "帥哥、" : movieVO.getDirector()%>">
-									</div>
-									<label class="col-sm-2 col-form-label">預告：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" name="trailer"
-											aria-label="default input example" 
-											value="<%=(movieVO == null) ? "http://localhost:8080/MUMI_MOVIE/view/movie/MovieServlet" : movieVO.getTrailer()%>">
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label class="col-sm-2 col-form-label">海報：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="file" name="movie_poster"
-											aria-label="default input example">
-									</div>
-									<label class="col-sm-2 col-form-label">輪播海報：</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="file"
-											name="movie_slide_poster" aria-label="default input example">
-									</div>
-								</div>
-
-								<!-- 								<div class="mb-3 row"> -->
-								<!-- 									<label class="col-sm-2 col-form-label">選擇類型：</label> -->
-								<%-- 									<jsp:useBean id="movie_typeSvc" scope="page" --%>
-								<%-- 										class="web.movie_type.service.Movie_typeService" /> --%>
-
-								<!-- 									<div class="col-sm-9"> -->
-								<%-- 										<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}"> --%>
-								<!-- 											<div class="form-check form-check-inline" id="type_num"> -->
-								<!-- 												<input class="form-check-input" type="checkbox" -->
-								<%-- 													value="${Movie_typeVO.movie_type_id}" id="flexCheckDefault" --%>
-								<%-- 													name="movie_type_id"> ${Movie_typeVO.movie_type_ch} --%>
-								<!-- 											</div> -->
-
-								<%-- 										</c:forEach> --%>
-								<!-- 									</div> -->
-								<!-- 								</div> -->
 							</div>
+							<div class="mb-3 row">
+
+								<label class="col-sm-2 col-form-label">電影狀態:</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_state_id" class="form-select">
+										<c:forEach var="ReleasingVO" items="${releasingSvc.all}">
+											<option value="${ReleasingVO.movie_state_id}">
+												${ReleasingVO.movie_state}
+										</c:forEach>
+									</select>
+								</div>
+
+
+								<label class="col-sm-2 col-form-label">電影分級:</label>
+								<div class="col-sm-3">
+									<select size="1" name="movie_rating_id" class="form-select">
+										<c:forEach var="Movie_ratingVO" items="${movie_ratingSvc.all}">
+											<option value="${Movie_ratingVO.movie_rating_id}">
+												${Movie_ratingVO.movie_rating_ch}
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">長度(分鐘)：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="movie_runtime"
+										aria-label="default input example"
+										value="<%=(movieVO == null) ? "120" : movieVO.getMovie_runtime()%>">
+								</div>
+								<label class="col-sm-2 col-form-label">上映日期:</label>
+								<div class="col-sm-3">
+									<input class="form-control" id="f_date1" type="date"
+										name="release_date" aria-label="default input example">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">簡介：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="movie_intro"
+										aria-label="default input example"
+										value="<%=(movieVO == null) ? "神作:/?" : movieVO.getMovie_intro()%>">
+								</div>
+								<label class="col-sm-2 col-form-label">演員：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="casts"
+										aria-label="default input example"
+										value="<%=(movieVO == null) ? "帥哥、美女" : movieVO.getCasts()%>">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">導演：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="director"
+										aria-label="default input example"
+										value="<%=(movieVO == null) ? "帥哥、" : movieVO.getDirector()%>">
+								</div>
+								<label class="col-sm-2 col-form-label">預告：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="text" name="trailer"
+										aria-label="default input example"
+										value="<%=(movieVO == null) ? "http://localhost:8080/MUMI_MOVIE/view/movie/MovieServlet" : movieVO.getTrailer()%>">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-2 col-form-label">海報：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="file" name="movie_poster"
+										aria-label="default input example">
+								</div>
+								<label class="col-sm-2 col-form-label">輪播海報：</label>
+								<div class="col-sm-3">
+									<input class="form-control" type="file"
+										name="movie_slide_poster" aria-label="default input example">
+								</div>
+							</div>
+
+							<!-- 								<div class="mb-3 row"> -->
+							<!-- 									<label class="col-sm-2 col-form-label">選擇類型：</label> -->
+							<%-- 									<jsp:useBean id="movie_typeSvc" scope="page" --%>
+							<%-- 										class="web.movie_type.service.Movie_typeService" /> --%>
+
+							<!-- 									<div class="col-sm-9"> -->
+							<%-- 										<c:forEach var="Movie_typeVO" items="${movie_typeSvc.all}"> --%>
+							<!-- 											<div class="form-check form-check-inline" id="type_num"> -->
+							<!-- 												<input class="form-check-input" type="checkbox" -->
+							<%-- 													value="${Movie_typeVO.movie_type_id}" id="flexCheckDefault" --%>
+							<%-- 													name="movie_type_id"> ${Movie_typeVO.movie_type_ch} --%>
+							<!-- 											</div> -->
+
+							<%-- 										</c:forEach> --%>
+							<!-- 									</div> -->
+							<!-- 								</div> -->
+
 
 
 
@@ -324,10 +327,9 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 
 
 							<br> <input type="hidden" name="action" value="insert">
-							
-							
-							<input
-								type="submit" class="btn btn-primary" value="下一步">
+
+
+							<input type="submit" class="btn btn-primary" value="下一步">
 						</form>
 
 

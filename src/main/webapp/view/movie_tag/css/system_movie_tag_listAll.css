@@ -410,3 +410,18 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
+div.input-group{
+	
+	padding-left: 50px;
+	
+}
+
+.input-group {
+	width :40%;
+	margin: 20px auto 0;
+}
+
+.in-down{
+	width: 25%;	
+	margin: 15px auto 0;
+}
