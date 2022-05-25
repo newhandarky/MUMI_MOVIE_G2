@@ -4,7 +4,7 @@
 }
 
 
-/* 頁首 */
+/* ���� */
 
 header {
     width: 100%;
@@ -31,7 +31,7 @@ header h2 {
 }
 
 
-/* 搜尋欄位 */
+/* ������ */
 
 #search {
     display: inline-block;
@@ -52,7 +52,7 @@ header h2 {
 }
 
 
-/* 導覽選單 */
+/* 撠汗�� */
 
 #navi {
     position: absolute;
@@ -101,7 +101,7 @@ header h2 {
 }
 
 
-/* 漢堡選單 */
+/* 瞍Ｗ�� */
 
 .hamberger_menu {
     position: absolute;
@@ -141,7 +141,7 @@ header h2 {
 }
 
 
-/* 下拉選單 */
+/* 銝�� */
 
 .nav-item ul li a:link,
 .nav-item ul li a:visited {
@@ -167,7 +167,7 @@ ul.switchDisplay li {
 }
 
 
-/* 背景亮度按鈕 */
+/* ��鈭桀漲���� */
 
 #lightbtn {
     height: 50px;
@@ -200,7 +200,7 @@ ul.switchDisplay li {
 }
 
 
-/* main工作區 */
+/* main撌乩�� */
 
 main.-dark {
     background-color: #111111;
@@ -328,18 +328,20 @@ div.stars{
 p.star{
     width: 10%;
     /* float:left; */
+    display:inline;
     margin-top: 10px;
-    position: absolute;
-    left: 5px;
+/*     position: absolute; */
+/*     left: 5px; */
     
 }
 
 i.fa-star{
     color: #ff0;
+    display: inline;
     /* float:left; */
     /* margin-top: 5px; */
-    position: absolute;
-    left: 30px;
+/*     position: absolute; */
+/*     left: 30px; */
     bottom: 5px;
 }
 
@@ -406,7 +408,7 @@ button.btn_info:hover {
 
 
 
-/* main工作區結束 */
+/* main撌乩��蝯�� */
 
 
 /* footer */

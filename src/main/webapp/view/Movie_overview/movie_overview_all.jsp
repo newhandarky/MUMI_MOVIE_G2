@@ -324,41 +324,7 @@ MovieVO svo5 = slist.get(4);
 
 
 
-        <div class="container">
 
-            <div class="row">
-                <div class="col-10 text-left ">
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">電影分類</label>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>請選擇分類</option>
-                            <option value="1">動作片</option>
-                            <option value="2">冒險片</option>
-                            <option value="3">動畫片</option>
-                            <option value="4">懸疑片</option>
-                            <option value="5">科幻片</option>
-                            <option value="6">恐怖片</option>
-                            <option value="7">警匪片</option>
-                            <option value="8">武俠片</option>
-                            <option value="9">倫理片</option>
-                            <option value="10">戰爭片</option>
-                            <option value="11">史詩片</option>
-                        </select>
-                        <label class="input-group-text" for="inputGroupSelect01">電影分級</label>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>請選擇分級</option>
-                            <option value="1">普通級</option>
-                            <option value="2">保護級</option>
-                            <option value="3">輔導12歲級</option>
-                            <option value="2">輔導15歲級</option>
-                            <option value="3">限制級</option>
-                        </select>
-                        <button class="btn btn-outline-secondary" type="button">搜尋</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
 
         <div class="jumbotron">
             <div class="container">
@@ -383,7 +349,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo1.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star">尚未評分</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo1.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
