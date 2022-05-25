@@ -27,7 +27,6 @@ public class LoginHandler extends HttpServlet {
     
 
     // 【取得使用者 帳號(account) 密碼(password)】
-    
     if("logout".equals(action)) {
     	
     	try {
@@ -35,7 +34,6 @@ public class LoginHandler extends HttpServlet {
     		
     		session.invalidate();
 			
-    		
     		res.sendRedirect(req.getContextPath()+"/view/index/index.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception

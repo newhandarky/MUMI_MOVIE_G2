@@ -69,6 +69,9 @@
                         <a href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
                     </li>
                     <li class="nav_li">
+                        <a href="<%=request.getContextPath()%>/view/mem/mem_profiles.jsp">會員資料</a>
+                    </li>
+                    <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
                     </li>
                     <li class="nav_li">
@@ -104,6 +107,9 @@
                         <ul>
                             <li>
                                 <a href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
+                            </li>
+                            <li>
+                                <a href="<%=request.getContextPath()%>/view/mem/mem_profiles.jsp">會員資料</a>
                             </li>
                             <li>
                                 <a href="<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
