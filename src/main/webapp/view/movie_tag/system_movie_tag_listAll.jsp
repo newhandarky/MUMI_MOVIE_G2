@@ -202,19 +202,17 @@ pageContext.setAttribute("list", list);
 				<div class="container">
 					<div col="12">
 						<div class="mb-3 row">
-
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
 								style="margin-bottom: 0px;">
-								<label class="col-sm-2 col-form-label">電影編號：</label>
-								<div class="col-sm-3">
+								<div class="col-sm-3 input-group">
 									<select size="1" name="movie_id" class="form-select ">
 										<c:forEach var="movie_tagVO" items="${movie_tagSvc2.movieCh}">
 											<option value="${movie_tagVO.movie_id}">
 												${movie_tagVO.movie_ch}
 										</c:forEach>
 									</select>
-										<input type="submit" value="搜尋" class="btn btn-danger">
+										<input type="submit" value="搜尋" class="btn btn-success">
 										<input type="hidden" name="action" value="getType_By_Movie">
 								</div>
 							</FORM>
@@ -240,8 +238,8 @@ pageContext.setAttribute("list", list);
 								<tr>
 									<th>標籤編號</th>
 									<th>電影名稱</th>
-									<th>分類編號</th>
-									<th></th>
+									<th>分類</th>
+<!-- 									<th></th> -->
 								</tr>
 							</thead>
 							<%@ include file="page1.file"%>
@@ -252,16 +250,16 @@ pageContext.setAttribute("list", list);
 									<td>${movie_tagVO.movie_tag_id}</td>
 									<td>${movie_tagVO.movie_ch}</td>
 									<td>${movie_tagVO.movie_type_ch}</td>
-									<td>
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet"
-											style="margin-bottom: 0px;">
-											<input type="submit" value="刪除" class="btn btn-danger">
-											<input type="hidden" name="movie_tag_id"
-												value="${movie_tagVO.movie_tag_id}"> <input
-												type="hidden" name="action" value="delete">
-										</FORM>
-									</td>
+<!-- 									<td> -->
+<!-- 										<FORM METHOD="post" -->
+<%-- 											ACTION="<%=request.getContextPath()%>/view/movie_tag/Movie_tagServlet" --%>
+<!-- 											style="margin-bottom: 0px;"> -->
+<!-- 											<input type="submit" value="刪除" class="btn btn-danger"> -->
+<!-- 											<input type="hidden" name="movie_tag_id" -->
+<%-- 												value="${movie_tagVO.movie_tag_id}"> <input --%>
+<!-- 												type="hidden" name="action" value="delete"> -->
+<!-- 										</FORM> -->
+<!-- 									</td> -->
 
 								</tr>
 							</c:forEach>

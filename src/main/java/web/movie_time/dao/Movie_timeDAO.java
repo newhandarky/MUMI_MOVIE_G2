@@ -41,7 +41,7 @@ public class Movie_timeDAO implements Movie_timeDAO_interface {
 	private static final String GET_REPEAT_STMT = "SELECT hall_id, showing, showing_date from movie_time "
 			+ "where hall_id = ? and showing = ? and showing_date = ?";
 	private static final String GET_RELEASING_NOW_STMT = "select movie_id, movie_ch from movie "
-			+ "where movie_state_id = 1 ";
+			+ "where movie_state_id = 21 ";
 	private static final String GET_MOVIE_CH_STMT = "select c.movie_time_id, c.hall_name, d.movie_ch, c.showing, c.showing_date "
 			+ "from (select a.movie_time_id, b.hall_name, a.showing, a.showing_date "
 			+ "from movie_time as a join hall as b " + "where a.hall_id = b.hall_id) as c " + "join "
