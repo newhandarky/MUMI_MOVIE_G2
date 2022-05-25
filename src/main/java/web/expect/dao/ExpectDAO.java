@@ -20,7 +20,22 @@ public class ExpectDAO implements ExpectBean_interface {
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
 
+	
+	public int findExpectTotal(int movie_id) {
+		sessionFactory.getCurrentSession().beginTransaction();
+		Query query = this.getSession().createQuery("select count(e) from ExpectBean e where e.movie_id = :movie_id");
+		query.setParameter("movie_id", movie_id);
+		List list  = query.list();
+		long OB = (Long)list.get(0);
+		int total = (int)OB;
+		sessionFactory.getCurrentSession().getTransaction().commit();
+		return total;
+	} 
+	
+	
+	
 
 	@Override
 	public void insert(int Expect_id, int Mem_id ,int Movie_id ,int Movie_expect) {
@@ -38,7 +53,7 @@ public class ExpectDAO implements ExpectBean_interface {
 
 
 	@Override
-	public List<Object[]> findByMovieID(int movie_id) {
+	public  ExpectBean findByID(int mem_id ,int movie_id) {
 
 //		@SuppressWarnings("unchecked")
 //		NativeQuery<Object[]> query2 = session.createNativeQuery("select * from expect,movie where expect.movie_id = 1");
@@ -51,10 +66,12 @@ public class ExpectDAO implements ExpectBean_interface {
 // 		}
 		sessionFactory.getCurrentSession().beginTransaction();
 		@SuppressWarnings("unchecked")
-		Query query = this.getSession().createQuery("from MovieBean m,ExpectBean e where m.movie_id = :movie_id and e.movie_id = :movie_id ");
+		Query query = this.getSession().createQuery("from ExpectBean e where e.movie_id = :movie_id and e.mem_id = :mem_id ");
 		query.setParameter("movie_id", movie_id);
-		List<Object[]> list = query.list(); 
+		query.setParameter("mem_id", mem_id);
+		List<ExpectBean> list = query.list();
+		ExpectBean eb = list.get(0);
 		sessionFactory.getCurrentSession().getTransaction().commit();
-		return list;
+		return eb;
 	}
 }
