@@ -9,7 +9,6 @@
             <img class="team_logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
         </a>
         
-        
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
             <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
@@ -54,10 +53,7 @@
                 <ul class="nav_ul" id="forum_ul">
                     <a href="#">討論區</a>
                     <li class="nav_li">
-                        <a href="">保留區</a>
-                    </li>
-                    <li >
-                        <a href="">保留區</a>
+                        <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">保留區</a>
                     </li>
                 </ul>
             </div>
@@ -175,13 +171,9 @@
                     <div class="accordion-body">
                         <ul>
                         	<li>
-                                <a href="">保留區</a>
-                            </li>
-                            <li>
-                                <a href="">保留區</a>
+                                <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">保留區</a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
             </div>

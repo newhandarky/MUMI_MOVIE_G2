@@ -278,8 +278,6 @@ public class MemDAO implements MemDAO_interface{
 	}
 	
 	
-	
-	
 	@Override
 	public void updateState(Integer mem_id) { // 判斷會員權限, 開則呼叫關 , 關則開
 		
@@ -702,7 +700,6 @@ public class MemDAO implements MemDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
 
 				memVO = new MemVO();
 				memVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));;
