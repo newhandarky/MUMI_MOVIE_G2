@@ -21,7 +21,7 @@ pageContext.getAttribute("list");
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>MUMI MOVIE 吾映良影 - 訂票系統</title>
 <!-- css檔連結記得修改 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/view/ticket_orders/css/choose_time.css">
@@ -38,31 +38,25 @@ pageContext.getAttribute("list");
 <main>
 	<div class="mumipay">
 		<img src="image/others/mujilogored.png" alt="">
-
-		<form METHOD="post"
-			ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+		<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status"
-						begin="0" end="0">
+					<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status" begin="0" end="0">
 						<div class="col-12">
 							<h2 class="title">您所選擇的電影是 : ${ticket_ordersVO.movie_ch}</h2>
 							<h3>請選擇日期與場次</h3>
 						</div>
 						<div class="col-md-6 col-sm-12">
-							<img src="image/moviestand/1825.jpg" alt="">
+							<img src="DBGifReaderTicketOrders?movie_id=${ticket_ordersVO.movie_id}">
 						</div>
 					</c:forEach>
 					<div class="col-md-6 col-sm-12">
 						<div class="col-12 forspan">
-							<c:forEach var="ticket_ordersVO" items="${list}"
-								varStatus="status">
+							<c:forEach var="ticket_ordersVO" items="${list}" varStatus="status">
 								<c:set var="timeAlreadyExists" value="${false}" />
 								<c:if test="${(status.index - 1) >= 0}">
-									<c:forEach var="previousDate" items="${list}" begin="0"
-										end="${status.index - 1}" varStatus="inner">
-										<c:if
-											test="${ticket_ordersVO.showing_date == previousDate.showing_date}">
+									<c:forEach var="previousDate" items="${list}" begin="0" end="${status.index - 1}" varStatus="inner">
+										<c:if test="${ticket_ordersVO.showing_date == previousDate.showing_date}">
 											<c:set var="timeAlreadyExists" value="${true}" />
 										</c:if>
 									</c:forEach>
@@ -72,18 +66,16 @@ pageContext.getAttribute("list");
 									<span class="day" style="pointer-events: none">${ticket_ordersVO.showing_date}</span>
 								</c:if>
 								<button class="showtime" value="${ticket_ordersVO.showing}"></button>
-								<input id="movie_time_id" type="hidden" name=""
-									value="${ticket_ordersVO.movie_time_id}">
+								<input id="movie_time_id" type="hidden" name="" value="${ticket_ordersVO.movie_time_id}">
 							</c:forEach>
 							<hr>
 						</div>
-						<input id="mem_id" type="hidden" name="mem_id"
-							value="${memVO.mem_id}">
+						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
 					</div>
 					<div class="col-2"></div>
 					<div class="col-8">
-						<select name="ticket_number" class="form-select"
-							aria-label="Default select example">
+						<br> <br>
+						<select name="ticket_number" class="form-select" aria-label="Default select example">
 							<option selected>請選擇張數</option>
 							<option id="ticket_number" value="1">1</option>
 							<option id="ticket_number" value="2">2</option>
@@ -103,15 +95,15 @@ pageContext.getAttribute("list");
 						<input class="btn btn-primary" type="submit" value="前往劃位">
 					</div>
 		</form>
-				<div class="col-4">
-					<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
-						<input type="hidden" name="action" value="delete_orders">
-						<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
-						<button type="submit" class="btn btn-secondary">取消返回</button>
-					</form>
-				</div>
-			</div>
+		<div class="col-4">
+			<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/ticket_orders/Ticket_OrdersServlet">
+				<input type="hidden" name="action" value="delete_orders">
+				<input id="mem_id" type="hidden" name="mem_id" value="${memVO.mem_id}">
+				<button type="submit" class="btn btn-secondary">取消返回</button>
+			</form>
 		</div>
+	</div>
+	</div>
 	</div>
 
 </main>

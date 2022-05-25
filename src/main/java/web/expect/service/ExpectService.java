@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 
 import core.util.HibernateUtil;
 import web.expect.dao.ExpectDAO;
+import web.expect.entity.ExpectBean;
 import web.expect.entity.ExpectBean_interface;
 
 public class ExpectService {
@@ -18,9 +19,12 @@ public class ExpectService {
 		dao.insert(Expect_id,Mem_id,Movie_id,Movie_expect);
 	}
 	
-	public List<Object[]> findMovieAndExpectByID(int movie_id){
-		List<Object[]>list =dao.findByMovieID(movie_id);
-		return list;
+	public ExpectBean findMovieAndExpectByID(int mem_id ,int movie_id){
+		return dao.findByID(mem_id, movie_id);
+	}
+	
+	public int findExceptTotal(int movie_id) {	
+		return dao.findExpectTotal(movie_id);
 	}
 	
 }

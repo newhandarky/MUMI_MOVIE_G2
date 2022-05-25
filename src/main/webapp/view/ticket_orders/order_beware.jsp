@@ -19,7 +19,7 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>MUMI MOVIE 吾映良影 - 訂票系統</title>
 <!-- css檔連結記得修改 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/view/ticket_orders/css/order_beware.css">
@@ -39,14 +39,16 @@ Ticket_OrdersVO ticket_ordersVO = (Ticket_OrdersVO) request.getAttribute("ticket
 			<div class="beware_head">
 				<h2>
 					請注意！吾映良影影城絕不會要求顧客至ATM操作解除分期或補繳金額 <br>
-					請貴賓提高警覺避免受騙吾映良影影城與您一起防範詐騙。
+					請貴賓提高警覺避免受騙吾映良影影城與您一起防範詐騙
 				</h2>
 				<br> <br> <br>
 				<h3>訂票及取票規定</h3>
 				<br> <br>
 				<p>
-					1. 每筆訂票張數以 5 張為限。<br> 2. 請注意此交易金額將於購票步驟完成後，即刻於您的信用卡帳戶進行扣款。<br>
-					3. 完成付款後，請憑「訂票序號」至購票影城進行取票。<br> 4. 票價為NT$250。<br>
+					1. 每筆訂票張數以 5 張為限。<br>
+					2. 請注意此交易金額將於購票步驟完成後，即刻於您的信用卡帳戶進行扣款。<br>
+					3. 完成付款後，請憑「訂票序號」至購票影城進行取票。<br>
+					4. 票價為NT$250。<br>
 				</p>
 			</div>
 		</div>

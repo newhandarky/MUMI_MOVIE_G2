@@ -16,7 +16,6 @@ import web.hall_seat.entity.Hall_SeatVO;
 
 public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 
-	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
@@ -61,11 +60,9 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -98,14 +95,11 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 			pstmt.setInt(1, hall_seatVO.getSeat_state());
 			pstmt.setInt(2, hall_seatVO.getSeat_id());
 			
-
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -140,11 +134,9 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -183,18 +175,15 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 
 			hall_seatVO = new Hall_SeatVO();
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
 				hall_seatVO.setSeat_id(rs.getInt("seat_id"));
 				hall_seatVO.setSeat_state(rs.getInt("seat_state"));
 				hall_seatVO.setSeat_name(rs.getString("seat_name"));
 			}
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace(System.err);
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -241,14 +230,12 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 				hall_SeatVO.setHall_id(rs.getInt("hall_id"));
 				hall_SeatVO.setHall_name(rs.getString("hall_name"));
 
-				list.add(hall_SeatVO); // Store the row in the list
+				list.add(hall_SeatVO);
 			}
 
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -307,11 +294,9 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 				hall_seatVO.setSeat_no(rs.getInt("seat_no"));
 				list.add(hall_seatVO);
 			}
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -353,11 +338,9 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -396,14 +379,11 @@ public class Hall_SeatDAO implements Hall_SeatDAO_interface {
 				hall_SeatVO.setHall_id(rs.getInt("hall_id"));
 				hall_SeatVO.setHall_name(rs.getString("hall_name"));
 
-				list.add(hall_SeatVO); // Store the row in the list
+				list.add(hall_SeatVO);
 			}
-
-			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {

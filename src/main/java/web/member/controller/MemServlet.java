@@ -133,11 +133,9 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				
 				
 				
 				Integer mem_id = new Integer(req.getParameter("mem_id").trim());
@@ -197,7 +195,6 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				
 				
 				Integer mem_gender = new Integer(req.getParameter("mem_gender").trim());
-				System.out.println(mem_gender);
 				
 				MemVO memVO = new MemVO();
 
@@ -241,7 +238,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的memVO物件,存入req
 				
 				
-				String url = "/view/mem/mem_revise.jsp";
+				String url = "/view/mem/mem_profiles.jsp";
 				
 				
 				
@@ -280,9 +277,6 @@ if("updateState".equals(action)) {
 				
 				memSvc.updateState(memVO.getMem_id());	
 				
-//				System.out.println(memSvc.updateState(memVO.getMem_id()));
-				
-					
 		
 				String url = "/view/mem/system_mem_list.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp

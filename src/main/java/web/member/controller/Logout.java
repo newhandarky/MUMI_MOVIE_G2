@@ -27,16 +27,14 @@ public class Logout extends HttpServlet {
 	    		MemVO memVO = (MemVO)session.getAttribute("memVO");
 	    		
 	    		if (memVO==null) {
-	    			System.out.println("尚未登入");
 	    			
 	    			res.sendRedirect(req.getContextPath()+"/view/index/login.jsp");
 				}else {
-					System.out.println("有登入資料");
 					res.sendRedirect(req.getContextPath()+"/view/index/logout.jsp");
 				}
 	    		
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 	  }
 	

@@ -1,19 +1,26 @@
-package web.member.controller;
+package web.ticket_orders.controller;
 
-import java.io.*;
-
-import java.sql.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
-@WebServlet(urlPatterns = {"/view/mem/DBGifReader4"})
-public class DBGifReader4 extends HttpServlet {
+@WebServlet(urlPatterns = {"/view/ticket_orders/DBGifReaderTicketOrders"})
+public class DBGifReaderTicketOrders extends HttpServlet {
 
 	Connection con;
 
@@ -25,14 +32,14 @@ public class DBGifReader4 extends HttpServlet {
 
 		try {
 			Statement stmt = con.createStatement();
-			String mem_id = req.getParameter("mem_id").trim();
+			String movie_id = req.getParameter("movie_id").trim();
 			ResultSet rs = stmt.executeQuery(
 					
 				// SQL 指令					
-				"select mem_pic from MUMI_MOVIE.mumi_member where mem_id =" + mem_id);
+				"SELECT movie_poster FROM movie WHERE movie_id = " + movie_id);
 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mem_pic"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("movie_poster"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
@@ -40,8 +47,7 @@ public class DBGifReader4 extends HttpServlet {
 				}
 				in.close();
 			} else {
-//				res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/view/mem/image/icons/user.png");
+				InputStream in = getServletContext().getResourceAsStream("image/null.gif");
 				byte[] b = new byte[in.available()];
 				in.read(b);
 				out.write(b);
@@ -50,8 +56,7 @@ public class DBGifReader4 extends HttpServlet {
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
-			System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/view/mem/image/icons/user.png");
+			InputStream in = getServletContext().getResourceAsStream("image/null2.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);
@@ -75,7 +80,7 @@ public class DBGifReader4 extends HttpServlet {
 		try {
 			if (con != null) con.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

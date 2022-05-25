@@ -101,12 +101,6 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
 					</tr>
 
 					<tr>
-						<td>電子錢包餘額</td>
-						<td>${memVO.mem_point}</td>
-					</tr>
-
-
-					<tr>
 						<td>帳號狀態</td>
 						<td id="-on" class="memstate${memVO.mem_state}" ></td>
 					</tr>

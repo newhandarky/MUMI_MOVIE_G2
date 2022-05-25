@@ -37,9 +37,6 @@ public class Ticket_OrdersService {
 		return ticket_ordersVO;
 	}
 	
-	public List<Ticket_OrdersVO> getSeat(Integer movie_time_id) {
-		return dao.getSeat(movie_time_id);
-	}
 	
 	public Ticket_OrdersVO choose_Seat(Integer movie_time_id, String seat_select_state, String select_seat_name, Integer ticket_list_id) {
 
@@ -52,6 +49,10 @@ public class Ticket_OrdersService {
 		dao.choose_Seat(ticket_ordersVO);
 
 		return ticket_ordersVO;
+	}
+	
+	public List<Ticket_OrdersVO> getSeat(Integer movie_time_id) {
+		return dao.getSeat(movie_time_id);
 	}
 	
 	public List<Ticket_OrdersVO> getTicket_List_Id_Number(Integer mem_id) {
@@ -69,17 +70,7 @@ public class Ticket_OrdersService {
 	public List<Ticket_OrdersVO> getOnline_Moive() {
 		return dao.getOnline_Moive();
 	}
-//
-//	public Hall_SeatVO updateSeat_State(Integer seat_id, Integer seat_state) {
-//
-//		Hall_SeatVO hall_seatVO = new Hall_SeatVO();
-//		hall_seatVO.setSeat_id(seat_id);
-//		hall_seatVO.setSeat_state(seat_state);
-//		dao.update(hall_seatVO);
-//
-//		return hall_seatVO;
-//	}
-//
+
 	public void deleteOrders(Integer mem_id) {
 		dao.deleteOrders(mem_id);
 	}
@@ -87,34 +78,9 @@ public class Ticket_OrdersService {
 	public void deleteOrdersSeat(Integer mem_id) {
 		dao.deleteOrdersSeat(mem_id);
 	}
-//
-//	public Hall_SeatVO getOneHall_Seat(Integer hall_id) {
-//		return dao.findByPrimaryKey(hall_id);
-//	}
-//
-//	public List<Hall_SeatVO> getHall_Name() {
-//		return dao.getHall_Name();
-//	}
 	
 	public List<Ticket_OrdersVO> getMoive_Id(Integer movie_id) {
 		return dao.getMoive_Id(movie_id);
 	}
 	
-//	public List<Ticket_OrdersVO> getMem_Ticket_Orders_Id(Integer mem_id) {
-//		return dao.getMem_Ticket_Orders_Id(mem_id);
-//	}
-	
-//	public Hall_SeatVO addHall(String hall_name) {
-//
-//		Hall_SeatVO hall_seatVO = new Hall_SeatVO();
-//		
-//		hall_seatVO.setHall_name(hall_name);
-//		dao.insert_hall(hall_seatVO);
-//
-//		return hall_seatVO;
-//	}
-//	
-//	public List<Hall_SeatVO> getHall_New() {
-//		return dao.getHall_New();
-//	}
 }

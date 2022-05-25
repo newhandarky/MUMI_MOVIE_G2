@@ -98,7 +98,7 @@ if($(".memstate1").hasClass("memstate1")){
 }
 
 if($(".memstate0").hasClass("memstate0")){
-	$(".memstate0").text("停用");
+	$(".memstate0").text("暫停使用");
 }
 
 

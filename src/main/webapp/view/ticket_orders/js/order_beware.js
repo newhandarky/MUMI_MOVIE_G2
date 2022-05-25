@@ -75,8 +75,6 @@ $(function() {
 	//進入畫面 走道設置
 	$(document).ready(function() {
 		let row = parseInt($(".hall_row").attr("id"))
-		console.log(row);
-		//      let col = parseInt($(".hall_col").attr("id"))
 		let left = parseInt($(".hall_left").attr("id"))
 		let right = parseInt($(".hall_right").attr("id"))
 		let row_aisle1 = parseInt($(".hall_row_aisle1").attr("id"))

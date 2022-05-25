@@ -261,10 +261,8 @@ pageContext.setAttribute("str3", str3);
 
 
             </div>
-            <div class="col-md-1">
 
-            </div>
-            <div class="col-md-6 info">
+            <div class="col-md-7 info">
                 <span class="h1">${movieVO.movie_ch}</span>
                 <span class="h2"><a href=""
                         style="text-decoration: none;color: black; font-weight: bold;">&nbsp&nbsp前往討論區&nbsp&nbsp</a>
@@ -286,8 +284,8 @@ pageContext.setAttribute("str3", str3);
                     style="font-size: 25px;font-weight: bold;color:gray;">${movieVO.director}</span><br><br>
                 <span style="font-weight: bold;font-size: 25px;margin-right: 30px;">簡介</span>
                 <div style="font-size: 25px;font-weight: bold;color:gray;">${movieVO.movie_intro}</div><br><br><br>
-                <span style="font-weight:bold; font-size:40px ">電影預告</span>
             </div>
+                <span style="text-align: center;font-weight:bold; font-size:40px ">電影預告</span>
             <iframe width="560" height="600" src="${str3}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
