@@ -2,20 +2,23 @@ package web.satisfy.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "satisfy")
+@Table(name = "SATISFY")
 public class SatisfyBean {
 	@Id
-	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "satisfy_id")
 	private int satisfy_id;
-	@Column
+	@Column(name = "mem_id")
 	private int mem_id;
-	@Column
+	@Column(name= "movie_id")
 	private int movie_id;
-	@Column
+	@Column(name = "movie_sati")
 	private int movie_sati;
 	
 	

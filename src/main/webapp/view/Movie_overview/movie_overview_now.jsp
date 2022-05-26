@@ -5,14 +5,29 @@
 <%@ page import="web.movie.dao.*"%>
 <%@ page import="web.movie.entity.*"%>
 <%@ page import="web.movie.service.*"%>
+<%@ page import="web.satisfy.service.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.sql.Timestamp"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="core.util.HibernateUtil"%>
 
 
 <%
 MovieService movieSvc = new MovieService();
+SatisfyService satisfySvc = new SatisfyService(HibernateUtil.getSessionFactory());
 List<MovieVO> list = movieSvc.getByState_id(1);
-pageContext.setAttribute("list", list);
+List<MovieVO> list2 = new ArrayList();
+for(MovieVO mvo : list){
+	String satisfy = satisfySvc.findSatisyAvg(mvo.getMovie_id());
+	if(satisfy == "" || satisfy == null){
+		mvo.setSatisfy("尚未評分");
+		list2.add(mvo);
+	}else{
+		mvo.setSatisfy(satisfy);
+		list2.add(mvo);
+	}
+}
+pageContext.setAttribute("list2", list2);
 
 %>
 
@@ -340,7 +355,7 @@ pageContext.setAttribute("list", list);
         <hr>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-        	<c:forEach var="movieVO" items="${list}">
+        	<c:forEach var="movieVO" items="${list2}">
             <div class="col">
                 <div class="card h-100">
                     <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=${movieVO.movie_id}" class="card-img-top">
@@ -354,7 +369,7 @@ pageContext.setAttribute("list", list);
                     </div>
                     <div class="card-footer">
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star">${movieVO.satisfy}</p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="${movieVO.movie_id}" class="btn_info">電影資訊介紹</button>

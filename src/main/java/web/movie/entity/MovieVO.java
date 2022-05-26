@@ -26,6 +26,23 @@ public class MovieVO implements java.io.Serializable{
 	private Integer expect_total;
 	private Integer sati_total;
 	
+	//新增供設置讀取期望值之屬性用，非SQL欄位
+	private String expect;
+	//新增供設置讀取期望值之屬性用，非SQL欄位
+	private String satisfy;
+	
+	public String getSatisfy() {
+		return satisfy;
+	}
+	public void setSatisfy(String satisfy) {
+		this.satisfy = satisfy;
+	}
+	public String getExpect() {
+		return expect;
+	}
+	public void setExpect(String expect) {
+		this.expect = expect;
+	}
 	public Integer getMovie_id() {
 		return movie_id;
 	}

@@ -87,7 +87,8 @@ public class MovieService {
 	public List<MovieVO> getByState_id(Integer movie_state_id){
 		return dao.getByState_id( movie_state_id);
 	}
-	
+
+
 	
 	
 	

@@ -2,6 +2,8 @@ package web.expect.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,6 +11,7 @@ import javax.persistence.Table;
 @Table(name="EXPECT")
 public class ExpectBean {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="expect_id")
 	private int expect_id;
 	@Column(name="mem_id")
