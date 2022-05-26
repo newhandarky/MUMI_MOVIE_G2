@@ -29,6 +29,7 @@ public class MovieVO implements java.io.Serializable{
 	private Integer movie_tag_id;
 	private String movie_type_ch;
 	
+<<<<<<< HEAD
 	public String getMovie_type_ch() {
 		return movie_type_ch;
 	}
@@ -46,6 +47,24 @@ public class MovieVO implements java.io.Serializable{
 	}
 	public void setMovie_type_id(Integer movie_type_id) {
 		this.movie_type_id = movie_type_id;
+=======
+	//新增供設置讀取期望值之屬性用，非SQL欄位
+	private String expect;
+	//新增供設置讀取期望值之屬性用，非SQL欄位
+	private String satisfy;
+	
+	public String getSatisfy() {
+		return satisfy;
+	}
+	public void setSatisfy(String satisfy) {
+		this.satisfy = satisfy;
+	}
+	public String getExpect() {
+		return expect;
+	}
+	public void setExpect(String expect) {
+		this.expect = expect;
+>>>>>>> Jing
 	}
 	public Integer getMovie_id() {
 		return movie_id;

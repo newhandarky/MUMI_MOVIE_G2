@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.jboss.jandex.Main;
 
 import core.util.HibernateUtil;
 import web.expect.entity.ExpectBean;
@@ -33,21 +34,30 @@ public class ExpectDAO implements ExpectBean_interface {
 		sessionFactory.getCurrentSession().getTransaction().commit();
 		return total;
 	} 
+	public int findLikeTotal(int movie_id) {
+		sessionFactory.getCurrentSession().beginTransaction();
+		Query query = this.getSession().createQuery("select count(e) from ExpectBean e where e.movie_id = :movie_id and e.movie_expect = 1");
+		query.setParameter("movie_id", movie_id);
+		List list  = query.list();
+		long OB = (Long)list.get(0);
+		int total = (int)OB;
+		sessionFactory.getCurrentSession().getTransaction().commit();
+		return total;
+	} 
 	
 	
 	
 
 	@Override
-	public void insert(int Expect_id, int Mem_id ,int Movie_id ,int Movie_expect) {
+	public void insert(int Mem_id ,int Movie_id ,int Movie_expect) {
 
-
+		sessionFactory.getCurrentSession().beginTransaction();
 		ExpectBean insert = new ExpectBean();
-		insert.setExpect_id(Expect_id);
 		insert.setMem_id(Mem_id);
 		insert.setMovie_id(Movie_id);
 		insert.setMovie_expect(Movie_expect);
 		this.getSession().save(insert);
-
+		sessionFactory.getCurrentSession().getTransaction().commit();
 	}
 
 

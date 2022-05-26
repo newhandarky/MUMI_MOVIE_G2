@@ -14,6 +14,7 @@
 <%@ page import="web.movie_type.service.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.sql.Timestamp"%>
+
 <%@ taglib prefix="fn" 
            uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -26,7 +27,8 @@ if(mvo != null){
 	ExpectBean eb = ESC.findMovieAndExpectByID(mvo.getMem_id(), movieVO.getMovie_id());
 	pageContext.setAttribute("check", 1);
 	if(eb != null){
-		pageContext.setAttribute("check2", 0);
+		pageContext.setAttribute("check2", 1);
+		pageContext.setAttribute("memVO",mvo);
 	}
 		
 }else{
@@ -38,7 +40,18 @@ List<String> typelist = (List<String>) request.getAttribute("typelist");
 String str = movieVO.getTrailer();
 String str2 = str.substring(32);
 String str3 = "https://www.youtube.com/embed/"+ str2;
+int expect = 0;
+int total = ESC.findExceptTotal(movieVO.getMovie_id());
+int liketotal = ESC.findLikeTotal(movieVO.getMovie_id());
+if(total == 0){
 
+	pageContext.setAttribute("expect", "尚未評分");
+	
+}else{
+expect = Math.round(liketotal / total *100);
+String str666= "期待度："+ expect + "%";
+pageContext.setAttribute("expect", str666);
+}
 pageContext.setAttribute("typelist", typelist);
 pageContext.setAttribute("movieVO", movieVO);
 pageContext.setAttribute("str3", str3);
@@ -59,7 +72,7 @@ pageContext.setAttribute("str3", str3);
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/Movie_expectview/movie_expectview.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/Movie_expectview/header.css">
     
 
     <style>
@@ -125,7 +138,6 @@ pageContext.setAttribute("str3", str3);
 <body>
 
 
-
     <div>
         <span class="return"><a href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_soon.jsp"
                 style="text-decoration: none;color: black; font-weight: bold;;">&nbsp&nbsp返回即將上映&nbsp&nbsp</a>
@@ -154,7 +166,7 @@ pageContext.setAttribute("str3", str3);
                 <span class="h2"><a href=""
                         style="text-decoration: none;color: black; font-weight: bold;">&nbsp&nbsp前往討論區&nbsp&nbsp</a>
                 </span>
-                <span class="h3">期待度87%</span><br>
+                <span class="h3"><%=pageContext.getAttribute("expect")%></span><br>
                 <span class="h4">${movieVO.movie_en}</span><br><br>
 
                 <span style="font-weight: bold;font-size: 25px;margin-right: 40px;">級別</span><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=${movieVO.movie_rating_id}"
@@ -203,7 +215,19 @@ pageContext.setAttribute("str3", str3);
 					  '看來您真的覺得很可以!',
 					  'success'
 					)
-			$("#likeFrom").submit();
+// 			$("#likeFrom").submit();
+			var xhr = new XMLHttpRequest();
+			var jsonOBJ = {
+					movie_id:`${movieVO.movie_id}`,
+					mem_id:`${memVO.mem_id}`,
+					expect:`1`
+				}
+			xhr.open("post", "<%=request.getContextPath()%>/ExpectServlet", true); //post 告知後端
+			xhr.setRequestHeader("Content-type", "application/json"); //告訴後端是用 JSON 格式
+			var data = JSON.stringify(jsonOBJ); //將物件資料轉成字串
+			xhr.send(data); //送出字串
+			
+			
 		}
 
     })
@@ -227,7 +251,17 @@ pageContext.setAttribute("str3", str3);
 					  '看來您真的覺得不太行!',
 					  'success'
 					)
-			$("#dislikeFrom").submit();
+// 			$("#dislikeFrom").submit();
+					var xhr = new XMLHttpRequest();
+			var jsonOBJ = {
+					movie_id:`${movieVO.movie_id}`,
+					mem_id:`${memVO.mem_id}`,
+					expect:`2`
+				}
+			xhr.open("post", "<%=request.getContextPath()%>/ExpectServlet", true); //post 告知後端
+			xhr.setRequestHeader("Content-type", "application/json"); //告訴後端是用 JSON 格式
+			var data = JSON.stringify(jsonOBJ); //將物件資料轉成字串
+			xhr.send(data); //送出字串
 		}		
     })
 	

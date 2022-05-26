@@ -5,14 +5,37 @@
 <%@ page import="web.movie.dao.*"%>
 <%@ page import="web.movie.entity.*"%>
 <%@ page import="web.movie.service.*"%>
+<%@ page import="web.expect.service.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.sql.Timestamp"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="core.util.HibernateUtil"%>
 
 
 <%
+
+
+ExpectService ESC = new ExpectService(HibernateUtil.getSessionFactory());
 MovieService movieSvc = new MovieService();
 List<MovieVO> list = movieSvc.getByState_id(2);
-pageContext.setAttribute("list", list);
+List<MovieVO> list2 = new ArrayList();
+for(MovieVO movieVO :list){
+	int expect = 0;
+	int total = ESC.findExceptTotal(movieVO.getMovie_id());
+	int liketotal = ESC.findLikeTotal(movieVO.getMovie_id());
+	if(total == 0){
+		movieVO.setExpect("尚未評分");
+		list2.add(movieVO);
+	}else{
+		expect = Math.round(liketotal / total *100);
+		String str666= "期待度："+ expect + "%";
+		movieVO.setExpect(str666);
+		list2.add(movieVO);
+
+	}
+}
+pageContext.setAttribute("list2", list2);
+
 
 %>
 
@@ -340,7 +363,7 @@ pageContext.setAttribute("list", list);
         <hr>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-        	<c:forEach var="movieVO" items="${list}">
+        	<c:forEach var="movieVO" items="${list2}">
             <div class="col">
                 <div class="card h-100">
                     <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=${movieVO.movie_id}" class="card-img-top">
@@ -354,8 +377,8 @@ pageContext.setAttribute("list", list);
                     </div>
                     <div class="card-footer">
                         <div class="stars">
-                            <p class="star">期待度</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star">${movieVO.expect}</p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="${movieVO.movie_id}" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">

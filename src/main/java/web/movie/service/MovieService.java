@@ -130,7 +130,8 @@ public class MovieService {
 	public List<MovieVO> getByState_id(Integer movie_state_id){
 		return dao.getByState_id( movie_state_id);
 	}
-	
+
+
 	
 	public List<MovieVO> getType_New(Integer movie_id){
 		return dao.getMovie_type(movie_id);
