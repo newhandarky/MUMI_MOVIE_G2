@@ -57,6 +57,7 @@ String str3 = "https://www.youtube.com/embed/"+ str2;
 pageContext.setAttribute("typelist", typelist);
 pageContext.setAttribute("movieVO", movieVO);
 pageContext.setAttribute("str3", str3);
+
 %>
 
 
@@ -458,7 +459,7 @@ pageContext.setAttribute("str3", str3);
 			xhr.setRequestHeader("Content-type", "application/json"); //告訴後端是用 JSON 格式
 			var data = JSON.stringify(jsonOBJ); //將物件資料轉成字串
 			xhr.send(data); //送出字串
-			
+			$(this).attr("disabled","true"); 
 			
 		}
 
