@@ -19,6 +19,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/view/info/css/system_editinfo.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/info/css/jquery.fancybox.css">
 
 </head>
 
@@ -149,8 +150,18 @@
 
         <!-- 主要工作區 -->
         <div class="main">
+        
             <h2>MUMI MOVIE 吾映良影</h2>
             <h3>影廳公告編輯頁面</h3>
+        <%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>        
             <div class="setinfo container info-work">
 
                 <form METHOD="post" action="<%=request.getContextPath()%>/view/info/InfoServlet" enctype="multipart/form-data">
@@ -192,16 +203,18 @@
                             <p>公告狀態</p>
                         </div>
                         <div class="col-9">
-                            <select name="infostate" id="">
-                                <option value="0" <%=(infoVO.getInfo_state() == 0)? "selected" : ""%> >已過期</option>
-                                <option value="1" <%=(infoVO.getInfo_state() == 1)? "selected" : ""%> >發佈中</option>
-                            </select>
+                            <select name="info_state" >
+                                <option value="0" ${ infoVO.getInfo_state() == 0 ? "selected" : ""} >已過期</option>
+                                <option value="1" ${ infoVO.getInfo_state() == 1 ? "selected" : ""} >發佈中</option>
+                            </select>             
                         </div>
 
                         <div class="col-3">
-                            <p>公告內文</p>
+                            <p>公告內容</p>
                             <p>公告圖片預覽</p>
                             <img class="showpic" src="DBGifReader4?info_id=${infoVO.info_id}">
+                             <br><br><br><br><br><br><br><br><br>
+                            <img id="hidden-content"  src="DBGifReader4?info_id=${infoVO.info_id}">
                         </div>
                         <div class="col-9">
                             <textarea class="form-control" name="info_des"><%= (infoVO==null)? "" : infoVO.getInfo_des()%></textarea>
@@ -212,6 +225,7 @@
                         <button type="button" class="btn btn-secondary">返回列表</button>
                     </a>
                     <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="info_id" value="${infoVO.info_id}">
                     <button type="submit" class="btn btn-primary">確認送出</button>
 
 
@@ -238,6 +252,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 	<script src="<%=request.getContextPath()%>/view/info/info/js/jquery-3.6.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/view/info/js/system_editinfo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+    <script src="<%=request.getContextPath()%>/view/info/js/jquery.fancybox.js"></script>
+    
+    <script>
+$(document).ready(init);
+
+function init(){
+	$(".showpic").on('click', function() {	  
+		$.fancybox.open({
+		    src  : '#hidden-content',
+		    type : 'inline',
+		    opts : {
+		      afterShow : function( instance, current ) {
+		        console.info('done!');
+	      }
+	    }
+	  });	  
+	});
+}
+</script>
+    
 </body>
 
 </html>

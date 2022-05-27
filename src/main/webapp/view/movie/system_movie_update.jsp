@@ -1,15 +1,16 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="web.movie.dao.*"%>
 <%@ page import="web.movie.entity.*"%>
 <%@ page import="web.movie.service.*"%>
 <%
-MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java (Concroller) ¦s¤JreqªºmovieVOª«¥ó (¥]¬AÀ°¦£¨ú¥XªºmovieVO, ¤]¥]¬A¿é¤J¸ê®Æ¿ù»~®ÉªºmovieVOª«¥ó)
+MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java (Concroller) å­˜å…¥reqçš„movieVOç‰©ä»¶ (åŒ…æ‹¬å¹«å¿™å–å‡ºçš„movieVO, ä¹ŸåŒ…æ‹¬è¼¸å…¥è³‡æ–™éŒ¯èª¤æ™‚çš„movieVOç‰©ä»¶)
 %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>¼v«°«á¥xºŞ²z¨t²Î</title>
+<title>å½±åŸå¾Œå°ç®¡ç†ç³»çµ±</title>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
@@ -19,366 +20,178 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java
 
 </head>
 
-<body>
-	<!-- partial:index.partial.html -->
-	<aside
-		class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left"
-		id="show-side-navigation1">
-		<i class="uil-bars close-aside d-md-none d-lg-none"
-			data-close="show-side-navigation1"></i>
-		<div
-			class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
+<%@ include file="../index/admin_header.jsp"%>
+<!-- ä¸»è¦å·¥ä½œå€ -->
+<div class="main">
+	<h2>ä¿®æ”¹é›»å½±</h2>
 
-			<!-- ¤jÀY·Ó³]©w -->
-			<img class="rounded-pill img-fluid" width="80"
-				src="./IMAGE/icons/clapperboard.png" alt="">
-			<div class="ms-2">
-				<h5 class="fs-6 mb-0">
-					<a class="text-decoration-none" href="#">Tibame¼v«°</a>
-				</h5>
-				<p class="mt-1 mb-0">«á»OºŞ²z¨t²Î</p>
-			</div>
-		</div>
-
-		<div class="search position-relative text-center px-4 py-3 mt-2">
-			<input type="text" class="form-control w-100 border-0 bg-transparent"
-				placeholder="Search here"> <i
-				class="fa fa-search position-absolute d-block fs-6"></i>
-		</div>
-
-
-		<!-- ¥ªÃä°¼ÃäÄæ¥\¯à¦C -->
-		<ul class="categories list-unstyled">
-			<li class="has-dropdown"><i class="uil-estate fa-fw"></i><a
-				href="#"> ·|­ûºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">·|­û¸ê®Æ¬d¸ß</a></li>
-					<li><a href="#">­×§ï·|­û¸ê®Æ</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-folder"></i><a href="#"> File manager</a>
-            </li> -->
-			<li class="has-dropdown"><i class="uil-calendar-alt"></i><a
-				href="#"> ¹q¼vºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¹q¼v¤W¬[</a></li>
-					<li><a href="#">¹q¼v¤U¬[</a></li>
-					<li><a href="#">¦Û°Ê±Æµ{³]©w</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-envelope-download fa-fw"></i><a
-				href="#"> °Ó«~ºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">°Ó«~¤W¬[</a></li>
-					<li><a href="#">°Ó«~¤U¬[</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-shopping-cart-alt"></i><a
-				href="#"> °Q½×°ÏºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¯d¨¥ÀËÁ|¾÷¨î</a></li>
-					<li><a href="#">ipsum dolor</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-bag"></i><a href="#">
-					²¼¨éºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¦Û°Ê±Æµ{</a></li>
-					<li><a href="#">±H«H´£¿ô</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-setting"></i><a href="#">
-					®y¦ìºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¼vÆU®y¦ì³]©w</a></li>
-					<li><a href="#">«O¯d¦ì³]©w</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-chart-pie-alt"></i><a
-				href="#"> ­û¤uºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">­û¤u¬d¸ß</a></li>
-					<li><a href="#">·s¼W­û¤u</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-panel-add"></i><a
-				href="#"> ¨ä¥L</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="admin_login.html">¤Á´«±b¸¹</a></li>
-					<li><a href="admin_login.html">µn¥X</a></li>
-					<li><a href="index.html">¦^¨ì«e¥x­º­¶</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-map-marker"></i><a href="#"> Maps</a>
-            </li> -->
-		</ul>
-	</aside>
-
-	<section id="wrapper">
-		<nav class="navbar navbar-expand-md">
-			<div class="container-fluid mx-2">
-				<div class="navbar-header">
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#toggle-navbar"
-						aria-controls="toggle-navbar" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="uil-bars text-white"></i>
-					</button>
-					<a class="navbar-brand" href="#">¼v«°«á¥xºŞ²z¨t²Î</a>
+	<div class="card">
+		<div class="container">
+			<div class="row g-3" col="12">
+				<div class="col-md-6">
+					<a class="btn btn-secondary" href="system_movie_add.jsp">å›æ–°å¢é é¢</a>
 				</div>
-				<div class="collapse navbar-collapse" id="toggle-navbar">
-					<ul class="navbar-nav ms-auto">
-						<!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Settings
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="#">My account</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">My inbox</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Help</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log out</a></li>
-                            </ul>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-comments-alt"></i><span>23</span></a>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-bell"></i><span>98</span></a>
-                        </li> -->
-						<li class="nav-item"><a class="nav-link" href="#"> <i
-								data-show="show-side-navigation1" class="uil-bars show-side-btn"></i>
-						</a></li>
+				<div class="col-md-6">
+					<a class="btn btn-secondary" href='system_movie_listAll.jsp'>æ‰€æœ‰é›»å½±</a>
+					<jsp:useBean id="movie_Svc" scope="page"
+						class="web.movie.service.MovieService" />
+				</div>
+
+				<%-- éŒ¯èª¤è¡¨åˆ— --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
 					</ul>
-				</div>
-			</div>
-		</nav>
+				</c:if>
 
 
-
-		<!-- ¥D­n¤u§@°Ï -->
-		<div class="main">
-			<h2>­×§ï¹q¼v</h2>
-
-			<div class="card">
-				<div class="container">
-					<div class="row g-3" col="12">
-						<div class="col-md-6">
-							<a class="btn btn-secondary" href="system_movie_add.jsp">¦^·s¼W­¶­±</a>
+				<form method="post"
+					action="<%=request.getContextPath()%>/view/movie/MovieServlet"
+					name="form1" ENCTYPE="multipart/form-data">
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">é›»å½±ç·¨è™Ÿï¼š</label>
+						<div class="col-sm-3">
+							<%=movieVO.getMovie_id()%>
 						</div>
-						<div class="col-md-6">
-							<a class="btn btn-secondary" href='system_movie_listAll.jsp'>©Ò¦³¹q¼v</a>
-							<jsp:useBean id="movie_Svc" scope="page"
-								class="web.movie.service.MovieService" />
-						</div>
-
-						<%-- ¿ù»~ªí¦C --%>
-						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-							<ul>
-								<c:forEach var="message" items="${errorMsgs}">
-									<li style="color: red">${message}</li>
-								</c:forEach>
-							</ul>
-						</c:if>
-
-
-						<form method="post"
-							action="<%=request.getContextPath()%>/view/movie/MovieServlet"
-							name="form1" ENCTYPE="multipart/form-data">
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¹q¼v½s¸¹¡G</label>
-								<div class="col-sm-3">
-									<%=movieVO.getMovie_id()%>
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¹q¼v¤¤¤å¦WºÙ:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_ch"
-										value="<%=movieVO.getMovie_ch()%>"
-										aria-label="default input example">
-								</div>
-								<label class="col-sm-2 col-form-label">¹q¼v­^¤å¦WºÙ:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_en"
-										value="<%=movieVO.getMovie_en()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row"></div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¹q¼vª¬ºA:</label>
-								<div class="col-sm-3">
-									<jsp:useBean id="releasingSvc" scope="page"
-										class="web.releasing.service.ReleasingService" />
-									<select name="movie_state_id" class="form-select">
-										<c:forEach var="ReleasingVO" items="${releasingSvc.all}">
-											<option value="${ReleasingVO.movie_state_id}"
-												${(movieVO.movie_state_id==ReleasingVO.movie_state_id)?'selected':'' }>
-												${ReleasingVO.movie_state}
-										</c:forEach>
-									</select>
-								</div>
-
-								<label class="col-sm-2 col-form-label">¹q¼v¤À¯Å:</label>
-								<div class="col-sm-3">
-									<jsp:useBean id="movie_ratingSvc" scope="page"
-										class="web.movie_rating.service.Movie_ratingService" />
-									<select name="movie_rating_id" class="form-select">
-										<c:forEach var="Movie_ratingVO" items="${movie_ratingSvc.all}">
-											<option value="${Movie_ratingVO.movie_rating_id}"
-												${(movieVO.movie_rating_id==Movie_ratingVO.movie_rating_id)?'selected':'' }>
-												${Movie_ratingVO.movie_rating_ch}
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-
-
-
-
-
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">ªø«×:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_runtime"
-										value="<%=movieVO.getMovie_runtime()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¤W¬M¤é´Á:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="date" name="release_date"
-										value="<%=movieVO.getRelease_date()%>"
-										aria-label="default input example" id="f_date1">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">Â²¤¶:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="movie_intro"
-										value="<%=movieVO.getMovie_intro()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">ºt­û:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="casts"
-										value="<%=movieVO.getCasts()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¾Éºt:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="director"
-										value="<%=movieVO.getDirector()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¹w§i:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" name="trailer"
-										value="<%=movieVO.getTrailer()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">®ü³ø:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="file" name="movie_poster"
-										value="<%=movieVO.getMovie_poster()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">½ü¼½®ü³ø:</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="file"
-										name="movie_slide_poster"
-										value="<%=movieVO.getMovie_slide_poster()%>"
-										aria-label="default input example">
-								</div>
-							</div>
-
-							<img src="DBGifReader?movie_id=${movieVO.movie_id}"> <img
-								src="DBGifReader2?movie_id=${movieVO.movie_id}"> <br>
-							<input type="hidden" name="movie_updated_time">
-							<input type="hidden" name="action" value="update"> 
-
-							<input type="hidden" name="movie_id" value="<%=movieVO.getMovie_id()%>">
-							<input type="submit" class="btn btn-primary" value="¤U¤@¨B">
-						</form>
-
 					</div>
-				</div>
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">é›»å½±ä¸­æ–‡åç¨±:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="movie_ch"
+								value="<%=movieVO.getMovie_ch()%>"
+								aria-label="default input example">
+						</div>
+						<label class="col-sm-2 col-form-label">é›»å½±è‹±æ–‡åç¨±:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="movie_en"
+								value="<%=movieVO.getMovie_en()%>"
+								aria-label="default input example">
+						</div>
+					</div>
+
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">é›»å½±ç‹€æ…‹:</label>
+						<div class="col-sm-3">
+							<jsp:useBean id="releasingSvc" scope="page"
+								class="web.releasing.service.ReleasingService" />
+							<select name="movie_state_id" class="form-select">
+								<c:forEach var="ReleasingVO" items="${releasingSvc.all}">
+									<option value="${ReleasingVO.movie_state_id}"
+										${(movieVO.movie_state_id==ReleasingVO.movie_state_id)?'selected':'' }>
+										${ReleasingVO.movie_state}
+								</c:forEach>
+							</select>
+						</div>
+
+						<label class="col-sm-2 col-form-label">é›»å½±åˆ†ç´š:</label>
+						<div class="col-sm-3">
+							<jsp:useBean id="movie_ratingSvc" scope="page"
+								class="web.movie_rating.service.Movie_ratingService" />
+							<select name="movie_rating_id" class="form-select">
+								<c:forEach var="Movie_ratingVO" items="${movie_ratingSvc.all}">
+									<option value="${Movie_ratingVO.movie_rating_id}"
+										${(movieVO.movie_rating_id==Movie_ratingVO.movie_rating_id)?'selected':'' }>
+										${Movie_ratingVO.movie_rating_ch}
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+
+
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">é•·åº¦:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="movie_runtime"
+								value="<%=movieVO.getMovie_runtime()%>"
+								aria-label="default input example">
+						</div>
+						<label class="col-sm-2 col-form-label">ä¸Šæ˜ æ—¥æœŸ:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="date" name="release_date"
+								value="<%=movieVO.getRelease_date()%>"
+								aria-label="default input example" id="f_date1">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">ç°¡ä»‹:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="movie_intro"
+								value="<%=movieVO.getMovie_intro()%>"
+								aria-label="default input example">
+						</div>
+						<label class="col-sm-2 col-form-label">æ¼”å“¡:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="casts"
+								value="<%=movieVO.getCasts()%>"
+								aria-label="default input example">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">å°æ¼”:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="director"
+								value="<%=movieVO.getDirector()%>"
+								aria-label="default input example">
+						</div>
+						<label class="col-sm-2 col-form-label">é å‘Š:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="trailer"
+								value="<%=movieVO.getTrailer()%>"
+								aria-label="default input example">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">æµ·å ±:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="file" name="movie_poster"
+								value="<%=movieVO.getMovie_poster()%>"
+								aria-label="default input example">
+						</div>
+						<label class="col-sm-2 col-form-label">è¼ªæ’­æµ·å ±:</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="file" name="movie_slide_poster"
+								value="<%=movieVO.getMovie_slide_poster()%>"
+								aria-label="default input example">
+						</div>
+					</div>
+
+					<img src="DBGifReader?movie_id=${movieVO.movie_id}"> <img
+						src="DBGifReader2?movie_id=${movieVO.movie_id}"> <br> <input
+						type="hidden" name="movie_updated_time"> <input
+						type="hidden" name="action" value="update"> <input
+						type="hidden" name="movie_id" value="<%=movieVO.getMovie_id()%>">
+					<input type="submit" class="btn btn-primary" value="ä¸‹ä¸€æ­¥">
+				</form>
+
 			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
+	</div>
+</div>
 
-		<!-- ¤u§@°Ïµ²§ô -->
+<!-- å·¥ä½œå€çµæŸ -->
 
-
-	</section>
-	<!-- partial -->
-	<script
-		src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js'></script>
-	<script
-		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/view/movie/js/system_movie_update.js"></script>
+<footer>
+	<div class="copyright">
+		Copyright Â© 2022 MUMI MOVIE å¾æ˜ è‰¯å½± Co. ä¿ç•™æ‰€æœ‰æ¬Šåˆ©ã€‚ <a href="#">éš±ç§æ”¿ç­–</a> <a
+			href="#">ä½¿ç”¨æ¢æ¬¾</a>
+	</div>
+</footer>
+</section>
+<!-- partial -->
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js'></script>
+<script
+	src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/view/movie/js/system_movie_update.js"></script>
 
 </body>
-<!-- =========================================¥H¤U¬° datetimepicker ¤§¬ÛÃö³]©w========================================== -->
+<!-- =========================================ä»¥ä¸‹ç‚º datetimepicker ä¹‹ç›¸é—œè¨­å®š========================================== -->
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -401,19 +214,19 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java
         $('#f_date1').datetimepicker({
            theme: '',              //theme: 'dark',
  	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+ 	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
  		   value: '<%=movieVO.getRelease_date()%>
 	', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-	//startDate:	            '2017/07/10',  // °_©l¤é
-	//minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-	//maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+	//startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+	//minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
+	//maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
 	});
 
-	// ----------------------------------------------------------¥H¤U¥Î¨Ó±Æ©wµLªk¿ï¾Üªº¤é´Á-----------------------------------------------------------
+	// ----------------------------------------------------------ä»¥ä¸‹ç”¨ä¾†æ’å®šç„¡æ³•é¸æ“‡çš„æ—¥æœŸ-----------------------------------------------------------
 
-	//      1.¥H¤U¬°¬Y¤@¤Ñ¤§«eªº¤é´ÁµLªk¿ï¾Ü
+	//      1.ä»¥ä¸‹ç‚ºæŸä¸€å¤©ä¹‹å‰çš„æ—¥æœŸç„¡æ³•é¸æ“‡
 	//      var somedate1 = new Date('2017-06-15');
 	//      $('#f_date1').datetimepicker({
 	//          beforeShowDay: function(date) {
@@ -426,7 +239,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java
 	//              return [true, ""];
 	//      }});
 
-	//      2.¥H¤U¬°¬Y¤@¤Ñ¤§«áªº¤é´ÁµLªk¿ï¾Ü
+	//      2.ä»¥ä¸‹ç‚ºæŸä¸€å¤©ä¹‹å¾Œçš„æ—¥æœŸç„¡æ³•é¸æ“‡
 	//      var somedate2 = new Date('2017-06-15');
 	//      $('#f_date1').datetimepicker({
 	//          beforeShowDay: function(date) {
@@ -439,7 +252,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO"); //MovieServlet.java
 	//              return [true, ""];
 	//      }});
 
-	//      3.¥H¤U¬°¨â­Ó¤é´Á¤§¥~ªº¤é´ÁµLªk¿ï¾Ü (¤]¥i«ö»İ­n´«¦¨¨ä¥L¤é´Á)
+	//      3.ä»¥ä¸‹ç‚ºå…©å€‹æ—¥æœŸä¹‹å¤–çš„æ—¥æœŸç„¡æ³•é¸æ“‡ (ä¹Ÿå¯æŒ‰éœ€è¦æ›æˆå…¶ä»–æ—¥æœŸ)
 	//      var somedate1 = new Date('2017-06-15');
 	//      var somedate2 = new Date('2017-06-25');
 	//      $('#f_date1').datetimepicker({

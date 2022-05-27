@@ -16,7 +16,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/movie/css/system_movie_add2.css">
+	href="<%=request.getContextPath()%>/view/movie/css/system_movie_update2.css">
 
 </head>
 
@@ -26,7 +26,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 
 
 <div class="main">
-	<h2>新增電影</h2>
+	<h2>修改電影類別</h2>
 	<div class="card">
 		<div class="container">
 			<div col="12">
@@ -34,17 +34,6 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 <!-- 					<a class="btn btn-secondary" href='system_movie_listAll.jsp'>所有電影</a> -->
 					<jsp:useBean id="movieSvc" scope="page"
 						class="web.movie.service.MovieService" />
-				<form method="post"
-					action="<%=request.getContextPath()%>/view/movie/MovieServlet"
-					name="form1">
-
-					<c:forEach var="movieVO" items="${movieSvc.movie_New}" begin="0"
-						end="0">
-						<input type="hidden" name="movie_id" value="${movieVO.movie_id}">
-					</c:forEach>
-					<input type="hidden" name="action" value="delete"> <input
-						type="submit" class="btn btn-secondary" value="取消">
-				</form>
 				</div>
 				<br>
 
@@ -81,7 +70,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 						<input type="hidden" name="movie_id" value="${movieVO.movie_id}">
 					</c:forEach>
 					<br> <input type="hidden" name="action" value="type_insert">
-					<input type="submit" class="btn btn-primary" value="新增">
+					<input type="submit" class="btn btn-primary" value="修改">
 				</form>
 
 			</div>
@@ -92,7 +81,6 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 </div>
 
 <!-- 工作區結束 -->
-
 <footer>
 	<div class="copyright">
 		Copyright © 2022 MUMI MOVIE 吾映良影 Co. 保留所有權利。 <a href="#">隱私政策</a> <a
@@ -109,7 +97,7 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/view/movie/js/system_movie_add2.js"></script>
+	src="<%=request.getContextPath()%>/view/movie/js/system_movie_update2.js"></script>
 
 </body>
 

@@ -5,7 +5,6 @@ import java.util.List;
 import web.employee.dao.EmployeeDAO;
 import web.employee.dao.EmployeeDAO_interface;
 import web.employee.entity.EmployeeVO;
-import web.member.entity.MemVO;
 
 public class EmployeeService {
 
@@ -16,7 +15,7 @@ public class EmployeeService {
 	}
 	
 	public EmployeeVO addEmp(String emp_account, String emp_name, String emp_password, String emp_nickname,
-			String emp_phone, java.sql.Date emp_hiredate) {
+			String emp_phone, java.sql.Date emp_hiredate, Integer emp_state) {
 
 		EmployeeVO employeeVO = new EmployeeVO();
 		
@@ -26,13 +25,15 @@ public class EmployeeService {
 		employeeVO.setEmp_nickname(emp_nickname);
 		employeeVO.setEmp_phone(emp_phone);
 		employeeVO.setEmp_hiredate(emp_hiredate);
+		employeeVO.setEmp_state(emp_state);
+		
 		dao.insert(employeeVO);
 
 		return employeeVO;
 	}
 	
 	public EmployeeVO updateEmp(Integer emp_id, String emp_account, String emp_name, String emp_password, String emp_nickname,
-			String emp_phone, java.sql.Date emp_hiredate) {
+			String emp_phone, java.sql.Date emp_hiredate, Integer emp_state) {
 
 		EmployeeVO employeeVO = new EmployeeVO();
 
@@ -43,25 +44,22 @@ public class EmployeeService {
 		employeeVO.setEmp_nickname(emp_nickname);
 		employeeVO.setEmp_phone(emp_phone);
 		employeeVO.setEmp_hiredate(emp_hiredate);
+		employeeVO.setEmp_state(emp_state);
 		dao.update(employeeVO);
 
 		return employeeVO;
 	}
 	
-//	public void deleteMem(Integer mem_id) {
-//		dao.delete(mem_id);
-//	}
-//
+
 	public EmployeeVO getOneEmployee(Integer emp_id) {
 		return dao.findByPrimaryKey(emp_id);
-	}
-	
-	public EmployeeVO getOneEmpByAccount(String emp_account) {
-		return dao.findByAccount(emp_account);
 	}
 	
 	public List<EmployeeVO> getAll() {
 		return dao.getAll();
 	}
 
+	public EmployeeVO getOneEmpByAccount(String emp_account) {
+		  return dao.findByAccount(emp_account);
+		 }
 }
