@@ -1,11 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="web.movie_rating.dao.*"%>
 <%@ page import="web.movie_rating.entity.*"%>
 <%@ page import="web.movie_rating.service.*"%>
 
-<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%-- æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
 Movie_ratingService movie_ratingSvc = new Movie_ratingService();
@@ -16,7 +17,7 @@ pageContext.setAttribute("list", list);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>¼v«°«á¥xºŞ²z¨t²Î</title>
+<title>å½±åŸå¾Œå°ç®¡ç†ç³»çµ±</title>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
@@ -26,246 +27,89 @@ pageContext.setAttribute("list", list);
 
 </head>
 
-<body>
-	<!-- partial:index.partial.html -->
-	<aside
-		class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left"
-		id="show-side-navigation1">
-		<i class="uil-bars close-aside d-md-none d-lg-none"
-			data-close="show-side-navigation1"></i>
-		<div
-			class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
+<%@ include file="../index/admin_header.jsp"%>
 
-			<!-- ¤jÀY·Ó³]©w -->
-			<img class="rounded-pill img-fluid" width="80"
-				src="./IMAGE/icons/clapperboard.png" alt="">
-			<div class="ms-2">
-				<h5 class="fs-6 mb-0">
-					<a class="text-decoration-none" href="#">Tibame¼v«°</a>
-				</h5>
-				<p class="mt-1 mb-0">«á»OºŞ²z¨t²Î</p>
-			</div>
-		</div>
+<!-- ä¸»è¦å·¥ä½œå€ -->
+<div class="main">
+	<h2>æ‰€æœ‰é›»å½±åˆ†ç´š</h2>
 
-		<div class="search position-relative text-center px-4 py-3 mt-2">
-			<input type="text" class="form-control w-100 border-0 bg-transparent"
-				placeholder="Search here"> <i
-				class="fa fa-search position-absolute d-block fs-6"></i>
-		</div>
-
-
-		<!-- ¥ªÃä°¼ÃäÄæ¥\¯à¦C -->
-		<ul class="categories list-unstyled">
-			<li class="has-dropdown"><i class="uil-estate fa-fw"></i><a
-				href="#"> ·|­ûºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">·|­û¸ê®Æ¬d¸ß</a></li>
-					<li><a href="#">­×§ï·|­û¸ê®Æ</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-folder"></i><a href="#"> File manager</a>
-            </li> -->
-			<li class="has-dropdown"><i class="uil-calendar-alt"></i><a
-				href="#"> ¹q¼vºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¹q¼v¤W¬[</a></li>
-					<li><a href="#">¹q¼v¤U¬[</a></li>
-					<li><a href="#">¦Û°Ê±Æµ{³]©w</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-envelope-download fa-fw"></i><a
-				href="#"> °Ó«~ºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">°Ó«~¤W¬[</a></li>
-					<li><a href="#">°Ó«~¤U¬[</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-shopping-cart-alt"></i><a
-				href="#"> °Q½×°ÏºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¯d¨¥ÀËÁ|¾÷¨î</a></li>
-					<li><a href="#">ipsum dolor</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-bag"></i><a href="#">
-					²¼¨éºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¦Û°Ê±Æµ{</a></li>
-					<li><a href="#">±H«H´£¿ô</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-setting"></i><a href="#">
-					®y¦ìºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¼vÆU®y¦ì³]©w</a></li>
-					<li><a href="#">«O¯d¦ì³]©w</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-chart-pie-alt"></i><a
-				href="#"> ­û¤uºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">­û¤u¬d¸ß</a></li>
-					<li><a href="#">·s¼W­û¤u</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-panel-add"></i><a
-				href="#"> ¨ä¥L</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="admin_login.html">¤Á´«±b¸¹</a></li>
-					<li><a href="admin_login.html">µn¥X</a></li>
-					<li><a href="index.html">¦^¨ì«e¥x­º­¶</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-map-marker"></i><a href="#"> Maps</a>
-            </li> -->
-		</ul>
-	</aside>
-
-	<section id="wrapper">
-		<nav class="navbar navbar-expand-md">
-			<div class="container-fluid mx-2">
-				<div class="navbar-header">
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#toggle-navbar"
-						aria-controls="toggle-navbar" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="uil-bars text-white"></i>
-					</button>
-					<a class="navbar-brand" href="#">¼v«°«á¥xºŞ²z¨t²Î</a>
+	<div class="card">
+		<div class="container">
+			<div col="12">
+				<div class="d-grid gap-2 d-flex justify-content-end">
+					<a class="btn btn-secondary" href='system_movie_rating_add.jsp'>æ–°å¢é›»å½±åˆ†ç´š</a>
 				</div>
-				<div class="collapse navbar-collapse" id="toggle-navbar">
-					<ul class="navbar-nav ms-auto">
-						<!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Settings
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="#">My account</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">My inbox</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Help</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log out</a></li>
-                            </ul>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-comments-alt"></i><span>23</span></a>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-bell"></i><span>98</span></a>
-                        </li> -->
-						<li class="nav-item"><a class="nav-link" href="#"> <i
-								data-show="show-side-navigation1" class="uil-bars show-side-btn"></i>
-						</a></li>
+				<br>
+
+				<%-- éŒ¯èª¤è¡¨åˆ— --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
 					</ul>
-				</div>
+				</c:if>
+
+				<table class="table table-striped table-bordered table-sm">
+					<thead class="table-light">
+						<tr>
+							<th>åˆ†ç´šç·¨è™Ÿ</th>
+							<th>ä¸­æ–‡åˆ†ç´š</th>
+							<th>è‹±æ–‡åˆ†ç´š</th>
+							<th>åˆ†ç´šåœ–</th>
+							<th></th>
+						</tr>
+					</thead>
+					<%@ include file="page1.file"%>
+					<c:forEach var="movie_ratingVO" items="${list}"
+						begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+
+						<tr>
+							<td>${movie_ratingVO.movie_rating_id}</td>
+							<td>${movie_ratingVO.movie_rating_ch}</td>
+							<td>${movie_ratingVO.movie_rating_en}</td>
+							<td><img
+								src="DBGifReader?movie_rating_id=${movie_ratingVO.movie_rating_id}"
+								class="rating_pic"></td>
+							<td class="button">
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/view/movie_rating/Movie_ratingServlet"
+									style="margin-bottom: 0px;">
+									<input type="submit" value="ä¿®æ”¹" class="btn btn-success">
+									<input type="hidden" name="movie_rating_id"
+										value="${movie_ratingVO.movie_rating_id}"> <input
+										type="hidden" name="action" value="getOne_For_Update">
+								</FORM>
+							</td>
+
+						</tr>
+					</c:forEach>
+				</table>
+				<%@ include file="page2.file"%>
+
 			</div>
-		</nav>
-
-
-
-		<!-- ¥D­n¤u§@°Ï -->
-		<div class="main">
-			<h2>¹q¼v¼ĞÅÒ</h2>
-
-			<div class="card">
-				<div class="container">
-					<div col="12">
-						<div class="col-6">
-
-							<a class="btn btn-secondary" href='system_movie_rating_add.jsp'>·s¼W¹q¼v¼ĞÅÒ</a>
-							<br> <br>
-
-						</div>
-
-						<%-- ¿ù»~ªí¦C --%>
-						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-							<ul>
-								<c:forEach var="message" items="${errorMsgs}">
-									<li style="color: red">${message}</li>
-								</c:forEach>
-							</ul>
-						</c:if>
-
-						<table class="table table-striped table-bordered table-sm">
-							<thead class="table-light">
-								<tr>
-									<th>¤À¯Å½s¸¹</th>
-									<th>¤¤¤å¤À¯Å</th>
-									<th>­^¤å¤À¯Å</th>
-									<th>¤À¯Å¹Ï</th>
-									<th></th>
-								</tr>
-							</thead>
-							<%@ include file="page1.file"%>
-							<c:forEach var="movie_ratingVO" items="${list}"
-								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-
-								<tr> 
-									<td>${movie_ratingVO.movie_rating_id}</td>
-									<td>${movie_ratingVO.movie_rating_ch}</td>
-									<td>${movie_ratingVO.movie_rating_en}</td>
-									<td>
-									<img src="DBGifReader?movie_rating_id=${movie_ratingVO.movie_rating_id}" class="rating_pic">
-									</td>
-									<td>
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/view/movie_rating/Movie_ratingServlet"
-											style="margin-bottom: 0px;">
-											<input type="submit" value="­×§ï" class="btn btn-success">
-											<input type="hidden" name="movie_rating_id"
-												value="${movie_ratingVO.movie_rating_id}"> <input
-												type="hidden" name="action" value="getOne_For_Update">
-										</FORM>
-									</td>
-
-								</tr>
-							</c:forEach>
-						</table>
-						<%@ include file="page2.file"%>
-
-					</div>
-				</div>
-			</div>
-
-
-
-
 		</div>
+	</div>
 
-		<!-- ¤u§@°Ïµ²§ô -->
+</div>
 
+<!-- å·¥ä½œå€çµæŸ -->
+<footer>
+	<div class="copyright">
+		Copyright Â© 2022 MUMI MOVIE å¾æ˜ è‰¯å½± Co. ä¿ç•™æ‰€æœ‰æ¬Šåˆ©ã€‚ <a href="#">éš±ç§æ”¿ç­–</a> <a
+			href="#">ä½¿ç”¨æ¢æ¬¾</a>
+	</div>
+</footer>
 
-	</section>
-	<!-- partial -->
-	<script
-		src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js'></script>
-	<script
-		src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
-	<script
-		src="<%=request.getContextPath()%>/view/movie_rating/js/system_movie_rating_listAll.js"></script>
+</section>
+<!-- partial -->
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js'></script>
+<script
+	src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+<script
+	src="<%=request.getContextPath()%>/view/movie_rating/js/system_movie_rating_listAll.js"></script>
 
 </body>
 

@@ -136,7 +136,7 @@ public class Movie_ratingServlet extends HttpServlet {
 				Integer movie_rating_id = new Integer(req.getParameter("movie_rating_id").trim());
 
 				String movie_rating_ch = req.getParameter("movie_rating_ch");
-				String movie_rating_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]+$";
+				String movie_rating_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\\s)]+$";
 				if (movie_rating_ch == null || movie_rating_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文分級: 請勿空白");
 				} else if (!movie_rating_ch.trim().matches(movie_rating_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -144,7 +144,7 @@ public class Movie_ratingServlet extends HttpServlet {
 				}
 
 				String movie_rating_en = req.getParameter("movie_rating_en");
-				String movie_rating_enReg = "^[a-zA-Z0-9_]+$";
+				String movie_rating_enReg = "^[a-zA-Z0-9_\\s]+$";
 				if (movie_rating_en == null || movie_rating_en.trim().length() == 0) {
 					errorMsgs.add("電影英文分級: 請勿空白");
 				} else if (!movie_rating_en.trim().matches(movie_rating_enReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -204,7 +204,7 @@ public class Movie_ratingServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				String movie_rating_ch = req.getParameter("movie_rating_ch");
-				String movie_rating_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]+$";
+				String movie_rating_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\\s)]+$";
 				if (movie_rating_ch == null || movie_rating_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文分級: 請勿空白");
 				} else if (!movie_rating_ch.trim().matches(movie_rating_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -212,7 +212,7 @@ public class Movie_ratingServlet extends HttpServlet {
 				}
 
 				String movie_rating_en = req.getParameter("movie_rating_en");
-				String movie_rating_enReg = "^[a-zA-Z0-9_]+$";
+				String movie_rating_enReg = "^[a-zA-Z0-9_\\s]+$";
 				if (movie_rating_en == null || movie_rating_en.trim().length() == 0) {
 					errorMsgs.add("電影英文分級: 請勿空白");
 				} else if (!movie_rating_en.trim().matches(movie_rating_enReg)) { // 以下練習正則(規)表示式(regular-expression)
