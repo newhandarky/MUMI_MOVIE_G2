@@ -1,7 +1,6 @@
 package web.employee.entity;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class EmployeeVO implements java.io.Serializable{
 	private Integer emp_id;
@@ -12,7 +11,6 @@ public class EmployeeVO implements java.io.Serializable{
 	private String emp_phone;
 	private Date emp_hiredate;
 	private Integer emp_state;
-	
 	
 	public Integer getEmp_id() {
 		return emp_id;
@@ -63,5 +61,4 @@ public class EmployeeVO implements java.io.Serializable{
 		this.emp_state = emp_state;
 	}
 	
-
 }

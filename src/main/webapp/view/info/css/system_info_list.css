@@ -438,8 +438,11 @@ table td {
 	margin:0 auto;
 }
 
-.showtable .infostate0 {
+.showtable .infostate1 {
     background-color: cornflowerblue;
+}
+.showtable .infostate0 {
+    background-color: DarkGray ;
 }
 
 ::-webkit-scrollbar {

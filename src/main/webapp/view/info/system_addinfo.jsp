@@ -149,7 +149,17 @@
         <div class="main">
             <h2>MUMI MOVIE 吾映良影</h2>
             <h3>影廳公告新增頁面</h3>
+        
             <div class="setinfo container info-work">
+            
+            <c:if test="${not empty errorMsgs}">
+				<font style="color:red">請修正以下錯誤:</font>
+				<ul>
+					<c:forEach var="message" items="${errorMsgs}">
+						<li style="color:red">${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
 
                 <form METHOD="post" action="<%=request.getContextPath()%>/view/info/InfoServlet" enctype="multipart/form-data">
                     <div class="row">
@@ -180,24 +190,13 @@
                     <a href="system_info_list.jsp">
                         <button type="button" class="btn btn-secondary">返回列表</button>
                     </a>
+                    <input type="hidden" name="info_id" size="45" value="<%=(infoVO == null) ? "001" : infoVO.getInfo_id()%>" /> 
                     <input type="hidden" name="action" value="insert">
-                    <button type="submit" class="btn btn-primary">確認送出</button>
-
-
-                </form>
-                
-            <c:if test="${not empty errorMsgs}">
-				<font style="color:red">請修正以下錯誤:</font>
-				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color:red">${message}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-            </div>
-
+              		<button type="submit" class="btn btn-primary">確認送出</button>
+               </form>
         </div>
-
+	</div>
+ 
         <!-- 工作區結束 -->
 
 

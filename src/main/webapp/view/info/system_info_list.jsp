@@ -159,12 +159,11 @@
                     <tr>
                         <th>公告編號</th>
                         <th>公告標題</th>
-                        <th>發布日期</th>
-                        <th>發布人</th>
+                        <th>發佈時間</th>
+                        <th>發佈人</th>
                         <th>狀態</th>
                     </tr>
-                    
-                    
+                                     
                     <c:forEach var="infoVO" items="${list}">
 	                    <tr>
 	                        <td>
@@ -175,8 +174,7 @@
 										<button type="submit" class="btn btn-success checkinfo">${infoVO.info_id} </button>		
 									</a>
 		                 	   </form>	
-	                        </td>
-		
+	                        </td>		
 	                        <td>${infoVO.info_title}</td>
 	                        <td>${infoVO.info_date}</td>
 	                        <td>${infoVO.emp_id}</td>
@@ -186,16 +184,9 @@
 
                 </table>
             </div>
-
             <a href="<%=request.getContextPath()%>/view/info/system_addinfo.jsp">
                 <button type="button" class="btn btn-success">新增公告</button>
             </a>
-
-
-
-        </div>
-
-
         </div>
 
         <!-- 工作區結束 -->

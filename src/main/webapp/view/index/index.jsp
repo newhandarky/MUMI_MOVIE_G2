@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="web.info.entity.*"%>
+<%@ page import="web.info.service.*"%>
+<%@ page import="java.util.*"%>
+
+<%
+InfoService infoSvc = new InfoService();
+List<InfoVO> list = infoSvc.getAllPublished();
+pageContext.setAttribute("list", list);
+%>
 
 
 <!DOCTYPE html>
@@ -251,39 +260,31 @@
             <div id="info">
                 <h1 id="info_h1">影城公告</h1>
             </div>
-            <div class="container">
+             <c:forEach var="infoVO" items="${list}" >
+            <div class="container">           
                 <div class="row">
-                    <div class="col-md-5 col-sm-12">
-                        <img id="infopic" src="<%=request.getContextPath()%>/view/index/image/others/f_26003004_1.jpg" alt="">
+                    <div class="col-md-5 col-sm-12">             
+                    	<img class="showpic" src="<%=request.getContextPath()%>/view/info/DBGifReader4?info_id=${infoVO.info_id}">
+<%--                         <img id="infopic" src="<%=request.getContextPath()%>/view/info/DBGifReader4?info_id=1" alt="">	 --%>                        
+<!--                      <h4>【禁止盜錄公告及詳情】</h4> -->
+<!--                         <p class="showinfo">影廳內請勿錄影、照相、錄音。 為避免觸法，從預告片開始到片尾工作人員表結束，燈亮起之前，皆不可拍攝銀幕。 任何未經授權之攝錄行為，已觸犯著作權第91條，最高可處5年有期徒刑。</p>       -->
                     </div>
                     <div class="col-6 info_p">
-                        <h4>【禁止盜錄公告及詳情】</h4>
-                        <p class="showinfo">影廳內請勿錄影、照相、錄音。 為避免觸法，從預告片開始到片尾工作人員表結束，燈亮起之前，皆不可拍攝銀幕。 任何未經授權之攝錄行為，已觸犯著作權第91條，最高可處5年有期徒刑。
-                        </p>
+						<h2 class="showtitle">【${infoVO.info_title}】<br><br></h2>
+                        <h3 class="showinfo">${infoVO.info_des}</h3>
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 info_p">
-                        <h5 class="firstinfo showinfo">MUMI MOVIE 吾映良影絕對不會主動致電要求貴賓操作ATM</h5>
-                        <h4 class="redinfo showinfo">「解除分期 / 補繳金額」</h4>
-                        <h4 class="redinfo showinfo">或其他任何事項</h4>
-                        <h3 class="showinfo">請貴賓提高警覺避免受騙!!</h3>
-                    </div>
-                    <div class="col-md-5 col-sm-12">
-                        <img id="infopic2" src="<%=request.getContextPath()%>/view/index/image/others/sagi2.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
+			</c:forEach>
     </div>
     <h1 id="map_h1">影城位置</h1>
-    <div class="map_rwd">
+    	<div class="map_rwd">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4676870452963!2d121.54106421395167!3d25.052132843720578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abe6b0446815%3A0xf006dde8c27afcc7!2z57ev6IKyVGliYU1l6ZmE6Kit5Y-w5YyX6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1647743247630!5m2!1szh-TW!2stw"
             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
+    	</div>
+			<img class="showpic" src="<%=request.getContextPath()%>/view/index/image/others/安心觀影-1920x1080-2.jpeg">		
+        </div>
+   
 
 <%@ include file="footer.jsp" %>
 
