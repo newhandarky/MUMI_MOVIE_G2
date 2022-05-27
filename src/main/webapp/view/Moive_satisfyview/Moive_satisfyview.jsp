@@ -1,4 +1,6 @@
 <%@page import="antlr.StringUtils"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="core.util.HibernateUtil"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,7 +9,10 @@
 <%@ page import="web.movie_tag.entity.*"%>
 <%@ page import="web.movie_type.entity.*"%>
 <%@ page import="web.movie.entity.*"%>
+<%@ page import="web.member.entity.*"%>
+<%@ page import="web.satisfy.entity.*"%>
 <%@ page import="web.movie_type.service.*"%>
+<%@ page import="web.satisfy.service.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.sql.Timestamp"%>
 <%@ taglib prefix="fn" 
@@ -16,6 +21,34 @@
 <%
 
 MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
+SatisfyService ESC = new SatisfyService(HibernateUtil.getSessionFactory());
+String satisfy = ESC.findSatisyAvg(movieVO.getMovie_id());
+if(satisfy == "" || satisfy == null){
+	movieVO.setSatisfy("尚未評分");
+}else{
+ movieVO.setSatisfy(satisfy);
+}
+MemVO mvo = (MemVO)session.getAttribute("memVO");
+if(mvo != null){
+	SatisfyBean sb = ESC.findMovieAndSatisfyByID(mvo.getMem_id(), movieVO.getMovie_id());
+	pageContext.setAttribute("check", 1);
+	if(sb != null){
+		pageContext.setAttribute("check2", 1);
+		pageContext.setAttribute("memVO",mvo);
+	}
+		
+}else{
+	pageContext.setAttribute("check", 0);
+	pageContext.setAttribute("check2", 0);
+
+}
+
+
+
+
+
+
+
 List<String> typelist = (List<String>) request.getAttribute("typelist");
 String str = movieVO.getTrailer();
 String str2 = str.substring(32);
@@ -24,6 +57,7 @@ String str3 = "https://www.youtube.com/embed/"+ str2;
 pageContext.setAttribute("typelist", typelist);
 pageContext.setAttribute("movieVO", movieVO);
 pageContext.setAttribute("str3", str3);
+
 %>
 
 
@@ -105,6 +139,7 @@ pageContext.setAttribute("str3", str3);
 
     <script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -251,7 +286,7 @@ pageContext.setAttribute("str3", str3);
                     </div>
                     <div class="star-submit">
                         <form method="get" action="" name="form1" class="many-star">
-                            <input type="submit" class="btn btn-outline-dark btn-sm" value="送出評分">
+                            <button id="sabtn" type="button" class="btn btn-outline-dark btn-sm" >送出評分</button>
                             <input type="hidden" name="satisfy" class="satisfy">
                         </form>
                     </div>
@@ -267,7 +302,7 @@ pageContext.setAttribute("str3", str3);
                 <span class="h2"><a href=""
                         style="text-decoration: none;color: black; font-weight: bold;">&nbsp&nbsp前往討論區&nbsp&nbsp</a>
                 </span>
-                <span class="h3">滿意度: 87%</span><br>
+                <span class="h3">滿意度：${movieVO.satisfy}<img width="50px" src="<%=request.getContextPath() %>/view/Moive_satisfyview/star.jpg"></span><br>
                 <span class="h4">${movieVO.movie_en}</span><br><br>
 
                 <span style="font-weight: bold;font-size: 25px;margin-right: 40px;">級別</span><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=${movieVO.movie_rating_id}"
@@ -371,7 +406,66 @@ pageContext.setAttribute("str3", str3);
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="<%=request.getContextPath() %>/view/Moive_satisfyview/movie_satisfy_view.js"></script>
+	<script>
+	var current_star;
+	$("div.star_block").on("click", "span.star", function(e){
+	    current_star = parseInt($(this).attr("data-star"));
+	    $("form.many-star").children("input.satisfy").attr("value", current_star);
+	    $(this).closest("div.star_block").find("span.star").each(function(i, item){
+	        
+	      if( parseInt($(this).attr("data-star")) <= current_star ){
+	        $(this).addClass("-on");
+	      }else{
+	        $(this).removeClass("-on");
+	      }
 
+	      
+	    });
+	  
+	  });
+	
+	
+	
+	
+	var check = ${check};
+	var check2 = ${check2};
+	var satisfy = current_star;
+	console.log(satisfy);
+	$("#sabtn").on('click',function(){
+        if( check == null || check == 0){
+            Swal.fire({
+            	  icon: 'error',
+            	  title: '啊啦啦',
+            	  text: '看來您還沒有登入會員!',
+        })}else if( check2 != 0){
+             Swal.fire({
+            	  icon: 'error',
+            	  title: '哎呀呀',
+            	  text: '您已經評分過啦!',
+
+        })}else{
+			Swal.fire(
+					  '成功送出!',
+					  '您的評分已經送出!',
+					  'success'
+					)
+			var xhr = new XMLHttpRequest();
+			var jsonOBJ = {
+					movie_id:`${movieVO.movie_id}`,
+					mem_id:`${memVO.mem_id}`,
+					satisfy: current_star
+				}
+			xhr.open("post", "<%=request.getContextPath()%>/SatisfyServlet", true); //post 告知後端
+			xhr.setRequestHeader("Content-type", "application/json"); //告訴後端是用 JSON 格式
+			var data = JSON.stringify(jsonOBJ); //將物件資料轉成字串
+			xhr.send(data); //送出字串
+			$(this).attr("disabled","true"); 
+			
+		}
+
+    })
+	
+	</script>
 </body>
 
 </html>
