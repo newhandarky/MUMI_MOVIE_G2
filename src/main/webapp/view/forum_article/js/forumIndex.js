@@ -10,6 +10,7 @@ let memId;
 let mem_mail;
 
 const tbodyAll = document.querySelector('#boardAll');
+const article = document.querySelector('article');
 const checkSession = document.querySelector('.checksession');
 const submitcCheck = document.querySelector('#submitcCheck');
 const mem_nickname = document.querySelector('#mem_nickname');
@@ -58,7 +59,7 @@ function showHotArticle(hotUrl) {
             			<div class="feature col">
             				<img src="ShowPicServlet?article_id=${h.article_id}" class="img-fluid col-md-4 col-sea">
             				<h2>${h.article_subject}</h2>
-            				<a href="#" class="icon-link">點我看更多^^</a>
+            				<a href="javascript:void(0)" onclick="OneArticleDetail(${h.article_id})">點我看更多^^</a>
             			</div>	
             		`)
 			}
@@ -96,8 +97,7 @@ function showBoardArticle(boardUrl) {
 // 顯示單一文章內容 
 function OneArticleDetail(aID) {
 
-	const article = document.querySelector('article');
-
+	
 	$(document).find("#tableAll").attr("style", "display: none");
 	OneArticleUrl = "GetOneArticleServlet?article_id=" + aID;
 	console.log("顯示單一文章內容的URL=" + OneArticleUrl);
