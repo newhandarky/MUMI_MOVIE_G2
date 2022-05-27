@@ -33,7 +33,7 @@
                     
                     <%-- 錯誤表列 --%>
 					<c:if test="${not empty errorMsgs}">
-						<ul>
+						<ul style="padding: 0;">
 							<c:forEach var="message" items="${errorMsgs}">
 								<li style="list-style:none">
 									<p style="color:red">${message}</p>  

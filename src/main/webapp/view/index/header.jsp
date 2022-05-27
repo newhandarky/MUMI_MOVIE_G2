@@ -25,17 +25,17 @@
         <nav id="navi">
 
 
-            <div class="nav-item">
+            <div class="nav-item"> 
                 <ul class="nav_ul" id="movie_ul">
                     <a href="#">電影資訊</a>
                     <li class="nav_li">
-                        <a href="#">電影總覽</a>
+                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#">現正熱映</a>
+                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_now.jsp">現正熱映</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#">即將上映</a>
+                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_soon.jsp">即將上映</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                 <ul class="nav_ul" id="forum_ul">
                     <a href="#">討論區</a>
                     <li class="nav_li">
-                        <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">保留區</a>
+                        <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
                     </li>
                 </ul>
             </div>
@@ -131,13 +131,13 @@
                     <div class="accordion-body">
                         <ul>
                         	<li class="nav_li">
-		                        <a href="#">電影總攬</a>
+		                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總攬</a>
 		                    </li>
                             <li>
-                                <a href="">現正熱映</a>
+                                <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_now.jsp">現正熱映</a>
                             </li>
                             <li>
-                                <a href="">即將上映</a>
+                                <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_soon.jsp">即將上映</a>
                             </li>
                         </ul>
 
@@ -171,7 +171,7 @@
                     <div class="accordion-body">
                         <ul>
                         	<li>
-                                <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">保留區</a>
+                                <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
                             </li>
                         </ul>
                     </div>
