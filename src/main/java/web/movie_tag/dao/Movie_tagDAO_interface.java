@@ -14,5 +14,6 @@ public interface Movie_tagDAO_interface {
 	public List<Movie_tagVO> getAllCh();
 	public List<Movie_tagVO> getMovieCh();
 	public List<Movie_tagVO> getTagByMovie(Integer movie_id);
+	public List<Movie_tagVO> findBYMovieID(Integer movie_id);
 	
 }
