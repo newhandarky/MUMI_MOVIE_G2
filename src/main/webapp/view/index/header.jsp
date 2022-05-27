@@ -74,7 +74,7 @@
                         <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                     </li>
                     <li class="nav_li">
-                        <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
+                        <a style="font-size: 14px" href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession">登入/登出</a>
                     </li>
                 </ul>
             </div>
@@ -114,7 +114,7 @@
                                 <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                             </li>
                             <li>
-								<a href="#" class="checksession" >登入/登出</a>
+								<a href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession" >登入/登出</a>
                             </li>
                         </ul>
 
@@ -131,7 +131,7 @@
                     <div class="accordion-body">
                         <ul>
                         	<li class="nav_li">
-		                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總攬</a>
+		                        <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
 		                    </li>
                             <li>
                                 <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_now.jsp">現正熱映</a>

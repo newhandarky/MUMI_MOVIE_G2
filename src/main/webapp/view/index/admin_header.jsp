@@ -30,65 +30,49 @@
             <li class="has-dropdown">
                 <a href="#"> 會員管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="system_info_list.html">會員資料列表</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/mem/system_info_list.jsp">會員資料列表</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 電影管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">電影上架</a></li>
-                    <li><a href="#">電影下架</a></li>
-                    <li><a href="#">自動排程設定</a></li>
-                </ul>
-            </li>
-            <li class="has-dropdown">
-                <a href="#"> 商品管理</a>
-                <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">商品上架</a></li>
-                    <li><a href="#">商品下架</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/movie/system_movie_add.jsp">編輯電影</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/movie_time/system_movie_time_add.jsp">編輯電影場次</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/releasing/system_releasing_add.jsp">編輯電影狀態</a></li>
+                	<li><a href="<%=request.getContextPath()%>/view/movie_rating/system_movie_rating_add.jsp">編輯電影分級</a></li>
+                	<li><a href="<%=request.getContextPath()%>view/movie_type/system_movie_type_add.jsp">編輯電影分類</a></li>
+                	<li><a href="<%=request.getContextPath()%>/view/movie_tag/system_movie_tag_listAll.jsp">編輯電影標籤</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 討論區管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">留言檢舉機制</a></li>
-                </ul>
-            </li>
-            <li class="has-dropdown">
-                <a href="#"> 票券管理</a>
-                <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">自動排程</a></li>
-                    <li><a href="#">寄信提醒</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/forum_article/AdminForumIndex.html">討論區管理</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 座位管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">影廳座位設定</a></li>
-                    <li><a href="#">保留位設定</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/hall_seat/system_hall_seat.jsp">影廳座位設定</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 員工管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">員工查詢</a></li>
-                    <li><a href="#">新增員工</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/employee/system_employee_list.jsp">員工管理</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 公告管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="#">公告</a></li>
-                    <li><a href="#">登出</a></li>
-                    <li><a href="#">回到前台首頁</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/info/system_info_list.jsp">公告管理</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
                 <a href="#"> 其他</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="admin_login.html">切換帳號</a></li>
-                    <li><a href="admin_login.html">登出</a></li>
-                    <li><a href="index.html">回到前台首頁</a></li>
+                    <li><a href="">登出</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/index/index.jsp">回到前台首頁</a></li>
                 </ul>
             </li>
         </ul>
@@ -101,7 +85,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <i class="uil-bars text-white"></i>
         </button>
-                    <a class="navbar-brand" href="#">影城後台管理系統</a>
+                    <a class="navbar-brand" href="<%=request.getContextPath()%>/view/index/admin_index.jsp">影城後台管理系統</a>
                 </div>
                 <div class="collapse navbar-collapse" id="toggle-navbar">
                     <ul class="navbar-nav ms-auto">

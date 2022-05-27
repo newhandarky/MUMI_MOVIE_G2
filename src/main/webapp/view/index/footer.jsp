@@ -9,13 +9,13 @@
                     <h5>服務</h5>
                     <ul>
                         <li>
-                            <a href="#">電影導覽</a>
+                            <a href="<%=request.getContextPath()%>/view/index/login.jsp">會員登入</a>
                         </li>
                         <li>
-                            <a href="#">快速訂票</a>
+                            <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
                         </li>
                         <li>
-                            <a href="#">討論區</a>
+                            <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
                         </li>
                     </ul>
                 </div>
@@ -23,38 +23,38 @@
                     <h5>幫助</h5>
                     <ul>
                         <li>
-                            <a href="#">導覽</a>
+                            <a href="#">網站地圖</a>
                         </li>
                         <li>
-                            <a href="#">FAQ</a>
+                            <a href="#">ER Model</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col col-md-3 col-sm-6">
                     <h5>關注我們</h5>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/1FvkVquqoKRgwpjlaPAfuDpjvcCElwwgF?usp=sharing"> 張志鵬</a>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/1FvkVquqoKRgwpjlaPAfuDpjvcCElwwgF?usp=sharing"> 張志鵬</a>
                         <p>會員系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/1Hu3MXljw2mPs8y4uqIq2coDHt4OiEwLV?usp=sharing">郭家榮</a>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/1Hu3MXljw2mPs8y4uqIq2coDHt4OiEwLV?usp=sharing">郭家榮</a>
                         <p>討論區</p>
                     </span>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/143UhfMZr6X_sGmmouBIsc_2DskIW7vHH">蕭仲威</a>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/143UhfMZr6X_sGmmouBIsc_2DskIW7vHH">蕭仲威</a>
                         <p>電影系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/1sixqrgkXZrUoEDbod4Wi2mygZyp2dl0i?usp=sharing">吳宗哲</a>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/1sixqrgkXZrUoEDbod4Wi2mygZyp2dl0i?usp=sharing">吳宗哲</a>
                         <p>影廳系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/14u0F868uYrXT8pDRCgaNoy9M3Rep6ji6?usp=sharing">徐浩鈞</a>
-                        <p>訂票系統</p>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/14u0F868uYrXT8pDRCgaNoy9M3Rep6ji6?usp=sharing">徐浩鈞</a>
+                        <p>公告系統</p>
                     </span>
                     <span class="focus_us">
-                        <a href="https://drive.google.com/drive/folders/1dJ3kpYDJpT8bTvJQEKBN8G5JJ5Vr8Xh5">陳鏡</a>
-                        <p>電影時刻表</p>
+                        <a target="_blank" href="https://drive.google.com/drive/folders/1dJ3kpYDJpT8bTvJQEKBN8G5JJ5Vr8Xh5">陳鏡</a>
+                        <p>聊天室系統</p>
                     </span>
                 </div>
                 <div class="col col-md-3 col-sm-6">
