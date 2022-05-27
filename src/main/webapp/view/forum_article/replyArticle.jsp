@@ -92,7 +92,7 @@ try {
 						type="hidden" name="article_publish"> <input type="hidden"
 						name="article_state" value="會員已發表文章">
 					<button type="submit" style="float: right" class="btn btn-success">送出</button>
-					<button style="float: right" class="btn btn-secondary">取消</button>
+<!-- 					<button type="button" style="float: right" class="btn btn-secondary">取消</button> -->
 
 				</div>
 			</form>

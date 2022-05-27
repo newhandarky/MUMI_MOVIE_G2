@@ -98,7 +98,7 @@ try {
 						type="hidden" name="article_state" value="會員已發表文章"> <input
 						type="hidden" name="action" value="insert">
 					<button type="submit" style="float: right" class="btn btn-success">送出</button>
-					<button style="float: right" class="btn btn-secondary">取消</button>
+<!-- 					<button id="cancelpost" type="button" style="float: right" class="btn btn-secondary">取消</button> -->
 
 
 				</div>
@@ -109,6 +109,7 @@ try {
 
 
 </body>
+
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="<%=request.getContextPath()%>/view/forum_article/js/postArticle.js"></script>

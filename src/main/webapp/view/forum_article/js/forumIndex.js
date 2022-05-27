@@ -74,7 +74,7 @@ function showBoardArticle(boardUrl) {
 			for (let e of list) {
 				const tbodyAll = document.querySelector('#boardAll');
 				tbodyAll.insertAdjacentHTML('beforeend', `
-                    <tr>
+                    <tr style="text-align: center;">
                         <td>
                             <p class="badge bg-light text-dark">${e.article_board}<br><span>【${e.article_type}】</span></p>
                         </td>

@@ -1,3 +1,10 @@
+.container {
+	padding: 0px;
+	font-family: "cwTeXYen", sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+}
+
 /* 檢舉內文 */
 .report_choose{
     position: fixed; top: 100px; left: 20%; transform: translate(-120px, 0px); width: 500px;
