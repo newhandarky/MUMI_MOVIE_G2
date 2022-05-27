@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row row-cols-2">
                 <div class="col col-md-3 col-sm-6">
-                    <h5>服務</h5>
+                    <h5>服務項目</h5>
                     <ul>
                         <li>
                             <a href="<%=request.getContextPath()%>/view/index/login.jsp">會員登入</a>
@@ -17,16 +17,25 @@
                         <li>
                             <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
                         </li>
+                        <li>
+                            <a href="<%=request.getContextPath()%>/view/index/mumi_movie_map.jsp">網站地圖</a>
+                        </li>
+                        <li>
+                            <a href="<%=request.getContextPath()%>/view/index/ermodel.jsp">ER Model</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col col-md-3 col-sm-6">
-                    <h5>幫助</h5>
+                    <h5>工商專區</h5>
                     <ul>
-                        <li>
-                            <a href="#">網站地圖</a>
+                    	<li>
+                    		<p style="margin:0;color:white;">TGA101第一組</p>
+                            <a target="_blank" href="http://35.229.209.41:80/mether/metherIndex.jsp">MetHer網紅廠商媒合平台</a>
                         </li>
                         <li>
-                            <a href="#">ER Model</a>
+                        <hr>
+                        	<p style="margin:0;color:white;">TGA101第三組</p>
+                            <a target="_blank" href="#">Adopet寵物領養平台</a>
                         </li>
                     </ul>
                 </div>
