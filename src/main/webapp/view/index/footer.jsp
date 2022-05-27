@@ -15,7 +15,7 @@
                             <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
                         </li>
                         <li>
-                            <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
+                            <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
                         </li>
                     </ul>
                 </div>
