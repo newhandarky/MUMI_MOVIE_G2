@@ -175,7 +175,7 @@ public class MovieServlet extends HttpServlet {
 				Integer movie_id = new Integer(req.getParameter("movie_id").trim());
 
 				String movie_ch = req.getParameter("movie_ch");
-				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\s)]+$";
+				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\\s)]+$";
 				if (movie_ch == null || movie_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文名稱: 請勿空白");
 				} else if (!movie_ch.trim().matches(movie_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -344,7 +344,7 @@ public class MovieServlet extends HttpServlet {
 //				}
 
 				String movie_ch = req.getParameter("movie_ch");
-				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\s:)]+$";
+				String movie_chReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_\\s:)]+$";
 				if (movie_ch == null || movie_ch.trim().length() == 0) {
 					errorMsgs.add("電影中文名稱: 請勿空白");
 				} else if (!movie_ch.trim().matches(movie_chReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -533,18 +533,16 @@ public class MovieServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				Integer movie_id = new Integer(req.getParameter("movie_id"));
-				System.out.println("111");
+
 				/*************************** 2.開始刪除資料 ***************************************/
 				MovieService movieSvc = new MovieService();
 				movieSvc.deleteType(movie_id);
 
-				System.out.println("222");
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/view/movie/system_movie_add2.jsp";
+				String url = "/view/movie/system_movie_update2.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
-				System.out.println("333");
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());

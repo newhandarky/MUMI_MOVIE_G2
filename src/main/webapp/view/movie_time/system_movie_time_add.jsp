@@ -1,11 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="web.movie_type.dao.*"%>
 <%@ page import="web.movie_type.entity.*"%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>¼v«°«á¥xºŞ²z¨t²Î</title>
+<title>å½±åŸå¾Œå°ç®¡ç†ç³»çµ±</title>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
@@ -15,180 +16,22 @@
 
 </head>
 
-<body>
-	<!-- partial:index.partial.html -->
-	<aside
-		class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left"
-		id="show-side-navigation1">
-		<i class="uil-bars close-aside d-md-none d-lg-none"
-			data-close="show-side-navigation1"></i>
-		<div
-			class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
-
-			<!-- ¤jÀY·Ó³]©w -->
-			<img class="rounded-pill img-fluid" width="80"
-				src="./IMAGE/icons/clapperboard.png" alt="">
-			<div class="ms-2">
-				<h5 class="fs-6 mb-0">
-					<a class="text-decoration-none" href="#">Tibame¼v«°</a>
-				</h5>
-				<p class="mt-1 mb-0">«á»OºŞ²z¨t²Î</p>
-			</div>
-		</div>
-
-		<div class="search position-relative text-center px-4 py-3 mt-2">
-			<input type="text" class="form-control w-100 border-0 bg-transparent"
-				placeholder="Search here"> <i
-				class="fa fa-search position-absolute d-block fs-6"></i>
-		</div>
-
-
-		<!-- ¥ªÃä°¼ÃäÄæ¥\¯à¦C -->
-		<ul class="categories list-unstyled">
-			<li class="has-dropdown"><i class="uil-estate fa-fw"></i><a
-				href="#"> ·|­ûºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">·|­û¸ê®Æ¬d¸ß</a></li>
-					<li><a href="#">­×§ï·|­û¸ê®Æ</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-folder"></i><a href="#"> File manager</a>
-            </li> -->
-			<li class="has-dropdown"><i class="uil-calendar-alt"></i><a
-				href="#"> ¹q¼vºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¹q¼v¤W¬[</a></li>
-					<li><a href="#">¹q¼v¤U¬[</a></li>
-					<li><a href="#">¦Û°Ê±Æµ{³]©w</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-envelope-download fa-fw"></i><a
-				href="#"> °Ó«~ºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">°Ó«~¤W¬[</a></li>
-					<li><a href="#">°Ó«~¤U¬[</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-shopping-cart-alt"></i><a
-				href="#"> °Q½×°ÏºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¯d¨¥ÀËÁ|¾÷¨î</a></li>
-					<li><a href="#">ipsum dolor</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-bag"></i><a href="#">
-					²¼¨éºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¦Û°Ê±Æµ{</a></li>
-					<li><a href="#">±H«H´£¿ô</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-setting"></i><a href="#">
-					®y¦ìºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">¼vÆU®y¦ì³]©w</a></li>
-					<li><a href="#">«O¯d¦ì³]©w</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-chart-pie-alt"></i><a
-				href="#"> ­û¤uºŞ²z</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="#">­û¤u¬d¸ß</a></li>
-					<li><a href="#">·s¼W­û¤u</a></li>
-					<li><a href="#">dolor ipsum</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<li class="has-dropdown"><i class="uil-panel-add"></i><a
-				href="#"> ¨ä¥L</a>
-				<ul class="sidebar-dropdown list-unstyled">
-					<li><a href="admin_login.html">¤Á´«±b¸¹</a></li>
-					<li><a href="admin_login.html">µn¥X</a></li>
-					<li><a href="index.html">¦^¨ì«e¥x­º­¶</a></li>
-					<li><a href="#">amet consectetur</a></li>
-					<li><a href="#">ipsum dolor sit</a></li>
-				</ul></li>
-			<!-- <li class="">
-                <i class="uil-map-marker"></i><a href="#"> Maps</a>
-            </li> -->
-		</ul>
-	</aside>
-
-	<section id="wrapper">
-		<nav class="navbar navbar-expand-md">
-			<div class="container-fluid mx-2">
-				<div class="navbar-header">
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#toggle-navbar"
-						aria-controls="toggle-navbar" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="uil-bars text-white"></i>
-					</button>
-					<a class="navbar-brand" href="#">¼v«°«á¥xºŞ²z¨t²Î</a>
-				</div>
-				<div class="collapse navbar-collapse" id="toggle-navbar">
-					<ul class="navbar-nav ms-auto">
-						<!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Settings
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="#">My account</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">My inbox</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Help</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log out</a></li>
-                            </ul>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-comments-alt"></i><span>23</span></a>
-                        </li> -->
-						<!-- <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="uil-bell"></i><span>98</span></a>
-                        </li> -->
-						<li class="nav-item"><a class="nav-link" href="#"> <i
-								data-show="show-side-navigation1" class="uil-bars show-side-btn"></i>
-						</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-
-
-		<!-- ¥D­n¤u§@°Ï -->
+<%@ include file="../index/admin_header.jsp"%>
+		<!-- ä¸»è¦å·¥ä½œå€ -->
 
 
 		<div class="main">
-			<h2>·s¼W¹q¼v³õ¦¸</h2>
+			<h2>æ–°å¢é›»å½±å ´æ¬¡</h2>
 			<div class="card">
 				<div class="container">
 					<div col="12">
 						<div class="d-grid gap-2 d-flex justify-content-end">
-							<a class="btn btn-secondary" href='system_movie_time_listAll.jsp'>©Ò¦³¹q¼v®É¨è¸ê®Æ</a>
+							<a class="btn btn-secondary" href='system_movie_time_listAll.jsp'>æ‰€æœ‰é›»å½±æ™‚åˆ»è³‡æ–™</a>
 						</div>
 						<br>
 
 						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+							<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 							<ul>
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
@@ -208,12 +51,12 @@
 
 
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¼½©ñ¤é´Á:</label>
+								<label class="col-sm-2 col-form-label">æ’­æ”¾æ—¥æœŸ:</label>
 								<div class="col-sm-3">
 									<input class="form-control" id="f_date1" type="date"
 										name="showing_date" aria-label="default input example">
 								</div>
-								<label class="col-sm-2 col-form-label">¼vÆU:</label>
+								<label class="col-sm-2 col-form-label">å½±å»³:</label>
 								<div class="col-sm-3">
 									<select size="1" name="hall_id" class="form-select">
 										<c:forEach var="Movie_timeVO"
@@ -228,10 +71,10 @@
 
 
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label">¹q¼v¦WºÙ:</label>
+								<label class="col-sm-2 col-form-label">é›»å½±åç¨±:</label>
 								<div class="col-sm-3">
 									<select size="1" name="movie_id" class="form-select">
-										<option value="0">µL</option>
+										<option value="0">ç„¡</option>
 										<c:forEach var="Movie_timeVO"
 											items="${movie_timeSvc.releasingNowCh}">
 											<option value="${Movie_timeVO.movie_id}">
@@ -239,7 +82,7 @@
 										</c:forEach>
 									</select>
 								</div>
-								<label class="col-sm-2 col-form-label">³õ¦¸:</label>
+								<label class="col-sm-2 col-form-label">å ´æ¬¡:</label>
 								<div class="col-sm-3">
 									<!-- 									<select size="1" name="showing" class="form-select" disabled> -->
 									<!-- 										<option value="1" selected>06:00</option> -->
@@ -257,10 +100,10 @@
 					</div>
 					<div class="mb-3 row">
 
-						<label class="col-sm-2 col-form-label">¹q¼v¦WºÙ:</label>
+						<label class="col-sm-2 col-form-label">é›»å½±åç¨±:</label>
 						<div class="col-sm-3">
 							<select size="1" name="movie_id" class="form-select">
-								<option value="0">µL</option>
+								<option value="0">ç„¡</option>
 								<c:forEach var="Movie_timeVO"
 									items="${movie_timeSvc.releasingNowCh}">
 									<option value="${Movie_timeVO.movie_id}">
@@ -268,7 +111,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<label class="col-sm-2 col-form-label">³õ¦¸:</label>
+						<label class="col-sm-2 col-form-label">å ´æ¬¡:</label>
 						<div class="col-sm-3">
 							<!-- 							<select size="1" name="showing" class="form-select" disabled> -->
 							<!-- 								<option value="1">06:00</option> -->
@@ -283,10 +126,10 @@
 					</div>
 					<div class="mb-3 row">
 
-						<label class="col-sm-2 col-form-label">¹q¼v¦WºÙ:</label>
+						<label class="col-sm-2 col-form-label">é›»å½±åç¨±:</label>
 						<div class="col-sm-3">
 							<select size="1" name="movie_id" class="form-select">
-								<option value="0">µL</option>
+								<option value="0">ç„¡</option>
 								<c:forEach var="Movie_timeVO"
 									items="${movie_timeSvc.releasingNowCh}">
 									<option value="${Movie_timeVO.movie_id}">
@@ -295,7 +138,7 @@
 							</select>
 						</div>
 
-						<label class="col-sm-2 col-form-label">³õ¦¸:</label>
+						<label class="col-sm-2 col-form-label">å ´æ¬¡:</label>
 						<div class="col-sm-3">
 							<!-- 							<select size="1" name="showing" class="form-select"  disabled> -->
 							<!-- 								<option value="1">06:00</option> -->
@@ -310,10 +153,10 @@
 					</div>
 					<div class="mb-3 row">
 
-						<label class="col-sm-2 col-form-label">¹q¼v¦WºÙ:</label>
+						<label class="col-sm-2 col-form-label">é›»å½±åç¨±:</label>
 						<div class="col-sm-3">
 							<select size="1" name="movie_id" class="form-select">
-								<option value="0">µL</option>
+								<option value="0">ç„¡</option>
 								<c:forEach var="Movie_timeVO"
 									items="${movie_timeSvc.releasingNowCh}">
 									<option value="${Movie_timeVO.movie_id}">
@@ -322,7 +165,7 @@
 							</select>
 						</div>
 
-						<label class="col-sm-2 col-form-label">³õ¦¸:</label>
+						<label class="col-sm-2 col-form-label">å ´æ¬¡:</label>
 						<div class="col-sm-3">
 							<!-- 							<select size="1" name="showing" class="form-select"  disabled> -->
 							<!-- 								<option value="1">06:00</option> -->
@@ -337,10 +180,10 @@
 					</div>
 					<div class="mb-3 row">
 
-						<label class="col-sm-2 col-form-label">¹q¼v¦WºÙ:</label>
+						<label class="col-sm-2 col-form-label">é›»å½±åç¨±:</label>
 						<div class="col-sm-3">
 							<select size="1" name="movie_id" class="form-select">
-								<option value="0">µL</option>
+								<option value="0">ç„¡</option>
 								<c:forEach var="Movie_timeVO"
 									items="${movie_timeSvc.releasingNowCh}">
 									<option value="${Movie_timeVO.movie_id}">
@@ -348,7 +191,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<label class="col-sm-2 col-form-label">³õ¦¸:</label>
+						<label class="col-sm-2 col-form-label">å ´æ¬¡:</label>
 						<div class="col-sm-3">
 							<!-- 							<select size="1" name="showing" class="form-select" > -->
 							<!-- 							<input type="hidden" name="showing" value="5"> -->
@@ -366,43 +209,21 @@
 
 					<input type="hidden" name="action" value="insert"> <input
 						type="hidden" name="action2" value="ifHad"> <input
-						type="submit" class="btn btn-primary" value="·s¼W">
+						type="submit" class="btn btn-primary" value="æ–°å¢">
 					</form>
-
-
-
-
-
 
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 
-		<!-- ¤u§@°Ïµ²§ô -->
-
+		<!-- å·¥ä½œå€çµæŸ -->
+		<footer>
+			<div class="copyright">
+				Copyright Â© 2022 MUMI MOVIE å¾æ˜ è‰¯å½± Co. ä¿ç•™æ‰€æœ‰æ¬Šåˆ©ã€‚ <a href="#">éš±ç§æ”¿ç­–</a> <a
+					href="#">ä½¿ç”¨æ¢æ¬¾</a>
+			</div>
+		</footer>
 
 	</section>
 	<!-- partial -->

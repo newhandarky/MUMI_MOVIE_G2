@@ -87,20 +87,26 @@ document.querySelector('.sidebar .close-aside').addEventListener('click', functi
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
-if($(".time1").hasClass("time1")){
- $(".time1").attr("value", "06:00")
-}
-if($(".time2").hasClass("time2")){
- $(".time2").attr("value", "09:30")
-}
-if($(".time3").hasClass("time3")){
- $(".time3").attr("value", "13:00")
-}
-if($(".time4").hasClass("time4")){
- $(".time4").attr("value", "16:30")
-}
-if($(".time5").hasClass("time5")){
- $(".time5").attr("value", "20:00")
-}
+
+$(function(){
+
+	$(document).ready(function(){
+			
+		$('.form-check-input').each(function(){
+			//console.log($(this).attr('value'));
+			console.log($(this).attr('value') % 6 == 0);
+			if($(this).attr('value') % 6 == 4){
+				$(this).closest("div").after("<br>");
+			
+			};
+		
+		
+		})
+
+	})
+
+
+
+})
 
 

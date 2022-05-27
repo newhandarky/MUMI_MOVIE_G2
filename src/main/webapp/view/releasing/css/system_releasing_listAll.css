@@ -265,12 +265,6 @@ body {
     color: #ffc107
 }
 
-
-/** --------------------------------
-    -- Please don't do that in real-world projects!
-    -- overwrite Bootstrap variables instead.
--------------------------------- */
-
 .navbar {
     background-color: var(--navbar-bg-color) !important;
     border: none !important;
@@ -384,6 +378,103 @@ body {
     .navbar .navbar-toggle:hover {
         background-color: transparent !important
     }
+    i.show-side-btn {
+        display: none;
+    }
+}
+
+div.main {
+    text-align: center;
+    min-height: 850px;
+}
+
+.title-h5 {
+    color: white;
+}
+
+.img-logo {
+    width: 100px;
+}
+
+.showtable {
+	min-height: 1000px;
+}
+.showtable h2 {
+    color: white;
+    font-size: 60px;
+    margin: 30px auto;
+}
+
+.showtable {
+	position: relative;
+}
+
+.showtable table {
+    margin: 50px 100px;
+}
+
+#search{
+	color:black;
+}
+
+.showtable table,
+.showtable th,
+.showtable td {
+    border: 1px solid white;
+    color: white;
+    font-size: 24px;
+    overflow: auto;
+    white-space: nowrap;
+	text-align: center;
+}
+
+::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3c3f58;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.change-state {
+    margin: 30px auto;
+}
+
+a.alink{
+	text-decoration: none;
+    color: orange;
+}
+
+.showtable .memstate0 {
+    background-color: cornflowerblue;
+}
+
+/* footer */
+
+footer {
+	margin-top:50px;
+	position: fixed;
+}
+
+footer .copyright {
+    width: 100%;
+    background-color: #6f6486;
+	position: fixed;
+	bottom:0;
+	text-align: center;
+    color: white;
+    font-size: 12px;
+}
+
+footer a {
+    text-decoration: none;
+    color: orange;
 }
 
 
@@ -409,4 +500,13 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+td.button{
+	text-align: center;
+}
+
+.input-group {
+	width :40%;
+	margin: 20px auto 0;
 }
