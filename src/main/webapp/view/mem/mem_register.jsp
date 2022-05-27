@@ -34,7 +34,7 @@
             <%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color:red">請修正以下錯誤:</font>
-				<ul>
+				<ul style="padding: 0;">
 					<c:forEach var="message" items="${errorMsgs}">
 						<li style="list-style:none">
 							<p style="color:red">${message}</p>  
@@ -48,7 +48,7 @@
 	              <div class="container">
 	                  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
 	                      <div class="form-floating ">
-	                          <input type="email" class="form-control" id="floatingMail" name="mem_account" placeholder="電子信箱" value="<%= (memVO==null)? "" : memVO.getMem_account()%>">
+	                          <input type="email" class="form-control" id="floatingMail" name="mem_account" placeholder="電子信箱" value="<%= (memVO==null)? "" : "" %>">
 	                          <label for="floatingMail">電子信箱(帳號)</label>
 	                      </div>
 	                      <div class="form-floating ">

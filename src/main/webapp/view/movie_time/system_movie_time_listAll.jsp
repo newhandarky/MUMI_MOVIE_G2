@@ -187,7 +187,7 @@ pageContext.setAttribute("list", list);
 
 		<!-- 主要工作區 -->
 		<div class="main">
-			<h2>電影分類</h2>
+			<h2>電影時刻</h2>
 
 			<div class="card">
 				<div class="container">

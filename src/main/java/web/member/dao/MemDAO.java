@@ -31,8 +31,8 @@ public class MemDAO implements MemDAO_interface{
 	}
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_address, mem_state, login_count) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, '請輸入地址',1, 0)";
+			"INSERT INTO mumi_member (mem_account, mem_name, mem_phone, mem_password, mem_nickname, mem_register, mem_pic, mem_birthday, mem_address, mem_state, login_count) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, '1970-01-01', '請輸入地址', 1, 0)";
 	
 	private static final String GET_ALL_STMT = 
 			"SELECT mem_id, mem_account, mem_name, mem_phone, mem_birthday, mem_gender, mem_address, "
@@ -278,8 +278,6 @@ public class MemDAO implements MemDAO_interface{
 	}
 	
 	
-	
-	
 	@Override
 	public void updateState(Integer mem_id) { // 判斷會員權限, 開則呼叫關 , 關則開
 		
@@ -494,8 +492,7 @@ public class MemDAO implements MemDAO_interface{
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} catch (Exception e) {
-			throw new RuntimeException("此帳號已有人使用"
-					+ e.getMessage());
+			throw new RuntimeException("此帳號已有人使用");
 		} finally {
 			if (rs != null) {
 				try {
@@ -702,7 +699,6 @@ public class MemDAO implements MemDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
 
 				memVO = new MemVO();
 				memVO.setTicket_orders_id(rs.getInt("ticket_orders_id"));;

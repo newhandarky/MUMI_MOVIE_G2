@@ -33,7 +33,7 @@ public class MemServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-if ("getOne_For_Display".equals(action)) { // 來自system_mem_list.jsp的請求
+		if ("getOne_For_Display".equals(action)) { // 來自system_mem_list.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -93,7 +93,7 @@ if ("getOne_For_Display".equals(action)) { // 來自system_mem_list.jsp的請求
 			}
 		}
 
-if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -105,7 +105,6 @@ if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 				/*************************** 1.接收請求參數 ****************************************/
 				Integer mem_id = new Integer(req.getParameter("mem_id"));
 
-				
 				/*************************** 2.開始查詢資料 ****************************************/
 				MemService memSvc = new MemService();
 				MemVO memVO = memSvc.getOneMem(mem_id);
@@ -124,19 +123,16 @@ if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 			}
 		}
 
-if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-	
+		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 			
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				
 				
 				Integer mem_id = new Integer(req.getParameter("mem_id").trim());
 			
@@ -180,7 +176,6 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				} 
 				
 				// 圖片與修改日期
-
 				Date mem_birthday ;
 				try {
 					mem_birthday = Date.valueOf(req.getParameter("mem_birthday").trim());
@@ -218,7 +213,6 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的memVO物件,也存入req
 					
-					
 					RequestDispatcher failureView = req.getRequestDispatcher("/view/mem/mem_revise.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -234,12 +228,9 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				memVO = memSvc.getOneMem(mem_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				
-				
 				req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的memVO物件,存入req
 				
-				
 				String url = "/view/mem/mem_profiles.jsp";
-				
 				
 				
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
@@ -258,7 +249,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 		
 		
 		
-if("updateState".equals(action)) {
+		if("updateState".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -290,12 +281,11 @@ if("updateState".equals(action)) {
 		}				
 		
 
-if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-
 
 			req.setAttribute("errorMsgs", errorMsgs);
 

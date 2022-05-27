@@ -1,4 +1,4 @@
-package web.movie.dao;
+		package web.movie.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +36,7 @@ public class MovieDAO implements MovieDAO_interface {
 			+ "casts, director, trailer, expect_num, sati_num, movie_likes, expect_total, sati_total FROM MOVIE where movie_id = ?";
 	private static final String DELETE = "DELETE FROM MOVIE where movie_id = ?";
 	private static final String UPDATE = "UPDATE MOVIE set movie_state_id=?, movie_rating_id=?, movie_ch=?, movie_en=?, movie_runtime=?, release_date=?, movie_poster=?, movie_slide_poster=?, movie_intro=?, casts=?, director=?, trailer=?, movie_updated_time=?  where movie_id = ?";
-<<<<<<< HEAD
+
 	private static final String INSERT_TYPE = "INSERT INTO movie_tag (movie_id, movie_type_id) " + "VALUES (?, ?)";
 	private static final String GET_NEWONE_STMT = "SELECT movie_id FROM movie order by movie_id desc";
 	private static final String GET_TYPE_STMT = "select movie_tag_id, movie_id, movie_type_id from movie_tag where movie_id = ?";
@@ -156,10 +156,10 @@ public class MovieDAO implements MovieDAO_interface {
 		return list;
 
 	}
-=======
+
 	private static final String GET_BY_STATE_ID_STMT = "SELECT movie_id, movie_state_id, movie_rating_id, emp_id, movie_updated_time, movie_ch, movie_en, movie_runtime, release_date, movie_poster, movie_slide_poster, movie_intro, "
 			+ "casts, director, trailer, expect_num, sati_num, movie_likes, expect_total, sati_total FROM MOVIE where movie_state_id=? order by release_date desc";
->>>>>>> Jing
+
 
 	@Override
 	public void insert(MovieVO movieVO) {
@@ -472,11 +472,11 @@ public class MovieDAO implements MovieDAO_interface {
 		}
 		return list;
 	}
-<<<<<<< HEAD
-=======
 
-	public static byte[] pic(String pic1) {
->>>>>>> Jing
+
+
+//	public static byte[] pic(String pic1) {
+
 
 //	public static byte[] pic(String pic1) {
 //
@@ -531,10 +531,6 @@ public class MovieDAO implements MovieDAO_interface {
 				}
 			}
 		}
-<<<<<<< HEAD
-=======
-		return null;
->>>>>>> Jing
 
 	}
 	

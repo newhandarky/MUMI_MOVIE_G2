@@ -16,5 +16,6 @@
 
         <mapping class="web.expect.entity.ExpectBean"/>
         <mapping class="web.expect.entity.MovieBean"/>
+        <mapping class="web.satisfy.entity.SatisfyBean"/>
     </session-factory>
 </hibernate-configuration>

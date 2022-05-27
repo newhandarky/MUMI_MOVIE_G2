@@ -36,9 +36,7 @@ public class MemService {
 	public MemVO updateMem(Integer mem_id, String mem_name, String mem_phone, String mem_address, String mem_password, 
 			String mem_nickname, Date mem_birthday, byte[] mem_pic, Integer mem_gender) { 
 		
-	
 		MemVO memVO = new MemVO();
-
 		
 		memVO.setMem_id(mem_id);
 		memVO.setMem_name(mem_name);
@@ -52,7 +50,6 @@ public class MemService {
 
 		dao.update(memVO);
 		
-
 		return memVO;
 	}
 	

@@ -1,28 +1,21 @@
-package web.expect.controller;
+package web.satisfy.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import core.util.HibernateUtil;
-import web.expect.entity.ExpectVO;
 import web.expect.service.ExpectService;
-import web.movie.dao.MovieDAO;
-import web.movie.entity.MovieVO;
-import web.movie.service.MovieService;
+import web.satisfy.entity.SatisfyVO;
 import web.satisfy.service.SatisfyService;
 
-@WebServlet("/ExpectServlet")
-public class ExpectServlet extends HttpServlet  {
+@WebServlet("/SatisfyServlet")
+public class SatisfyServlet extends HttpServlet  {
 	private static final long serialVersionUID = 1L;
        
 	private ExpectService expectService;
@@ -44,12 +37,15 @@ public class ExpectServlet extends HttpServlet  {
 		request.setCharacterEncoding("UTF-8");
 		Gson gson = new Gson();
 		
-		ExpectVO evo = gson.fromJson(request.getReader(), ExpectVO.class);
-//		int total = expectService.findExceptTotal(evo.getMovie_id());
+		SatisfyVO svo = gson.fromJson(request.getReader(), SatisfyVO.class);
+		System.out.println(svo);
+//		int total = expectService.findExceptTotal(svo.getMovie_id());
 //		System.out.println("total=" + total);
-//		int liketotal = expectService.findLikeTotal(evo.getMovie_id());
+//		int liketotal = expectService.findLikeTotal(svo.getMovie_id());
 //		System.out.println("liketotal=" +liketotal);
-		expectService.addExpect(evo.getMem_id(), evo.getMovie_id(), evo.getExpect());
+		
+		
+		satisfyService.addSatisfy(svo.getMem_id(), svo.getMovie_id(), svo.getSatisfy());
 
 
 	}

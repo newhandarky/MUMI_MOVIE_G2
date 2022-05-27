@@ -15,8 +15,8 @@ public class ExpectService {
 		dao = new ExpectDAO(sessionFactory) ;
 	}
 	
-	public void addExpect(int Expect_id, int Mem_id ,int Movie_id ,int Movie_expect) {
-		dao.insert(Expect_id,Mem_id,Movie_id,Movie_expect);
+	public void addExpect(int Mem_id ,int Movie_id ,int Movie_expect) {
+		dao.insert(Mem_id,Movie_id,Movie_expect);
 	}
 	
 	public ExpectBean findMovieAndExpectByID(int mem_id ,int movie_id){
@@ -27,4 +27,7 @@ public class ExpectService {
 		return dao.findExpectTotal(movie_id);
 	}
 	
+	public int findLikeTotal(int movie_id) {
+	return dao.findLikeTotal(movie_id);
+	}
 }

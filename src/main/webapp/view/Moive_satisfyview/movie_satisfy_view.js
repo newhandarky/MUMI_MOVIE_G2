@@ -51,19 +51,3 @@ $(function () {
 
 });
 
-$("div.star_block").on("click", "span.star", function(e){
-
-    let current_star = parseInt($(this).attr("data-star"));
-    $("form.many-star").children("input.satisfy").attr("value", current_star);
-    $(this).closest("div.star_block").find("span.star").each(function(i, item){
-        
-      if( parseInt($(this).attr("data-star")) <= current_star ){
-        $(this).addClass("-on");
-      }else{
-        $(this).removeClass("-on");
-      }
-
-      
-    });
-  
-  });

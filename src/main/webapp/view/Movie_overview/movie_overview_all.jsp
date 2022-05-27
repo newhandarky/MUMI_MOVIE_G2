@@ -5,24 +5,63 @@
 <%@ page import="web.movie.dao.*"%>
 <%@ page import="web.movie.entity.*"%>
 <%@ page import="web.movie.service.*"%>
+<%@ page import="web.expect.service.*"%>
+<%@ page import="web.satisfy.service.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.sql.Timestamp"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="core.util.HibernateUtil"%>
 
 
 <%
 MovieService movieSvc = new MovieService();
+SatisfyService SSC = new SatisfyService(HibernateUtil.getSessionFactory());
 List<MovieVO> list = movieSvc.getByState_id(1);
-MovieVO vo1 = list.get(0);
-MovieVO vo2 = list.get(1);
-MovieVO vo3 = list.get(2);
-MovieVO vo4 = list.get(3);
-MovieVO vo5 = list.get(4);
+List<MovieVO> list2 = new ArrayList();
+
+for(MovieVO mvo : list){
+	String satisfy = SSC.findSatisyAvg(mvo.getMovie_id());
+	if(satisfy == "" || satisfy == null){
+		mvo.setSatisfy("尚未評分");
+		list2.add(mvo);
+	}else{
+		mvo.setSatisfy(satisfy);
+		list2.add(mvo);
+	}
+}
+
+
+MovieVO vo1 = list2.get(0);
+MovieVO vo2 = list2.get(1);
+MovieVO vo3 = list2.get(2);
+MovieVO vo4 = list2.get(3);
+MovieVO vo5 = list2.get(4);
+
+
+
+ExpectService ESC = new ExpectService(HibernateUtil.getSessionFactory());
 List<MovieVO> slist = movieSvc.getByState_id(2);
-MovieVO svo1 = slist.get(0);
-MovieVO svo2 = slist.get(1);
-MovieVO svo3 = slist.get(2);
-MovieVO svo4 = slist.get(3);
-MovieVO svo5 = slist.get(4);
+List<MovieVO> slist2 = new ArrayList();
+for(MovieVO movieVO : slist){
+	int expect = 0;
+	int total = ESC.findExceptTotal(movieVO.getMovie_id());
+	int liketotal = ESC.findLikeTotal(movieVO.getMovie_id());
+	if(total == 0){
+		movieVO.setExpect("尚未評分");
+		slist2.add(movieVO);
+	}else{
+		expect = Math.round(liketotal / total *100);
+		String str666= "期待度："+ expect + "%";
+		movieVO.setExpect(str666);
+		slist2.add(movieVO);
+
+	}
+}
+MovieVO svo1 = slist2.get(0);
+MovieVO svo2 = slist2.get(1);
+MovieVO svo3 = slist2.get(2);
+MovieVO svo4 = slist2.get(3);
+MovieVO svo5 = slist2.get(4);
 %>
 
 <!DOCTYPE html>
@@ -349,7 +388,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo1.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">尚未評分</p>
+                            <p class="star"><%=vo1.getSatisfy()%></p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo1.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
@@ -366,7 +405,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo2.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star"><%=vo2.getSatisfy()%></p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                              <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo2.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
@@ -382,7 +421,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo3.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star"><%=vo3.getSatisfy()%></p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                              <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo3.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
@@ -398,7 +437,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo4.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star"><%=vo4.getSatisfy()%></p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                              <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo4.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
@@ -414,7 +453,7 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=vo5.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">4.5</p>
+                            <p class="star"><%=vo5.getSatisfy()%></p>
                             <i class="fa fa-star" aria-hidden="true"></i>
                              <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=vo5.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
@@ -456,8 +495,8 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=svo1.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star"><%=svo1.getExpect()%></p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=svo1.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">
@@ -473,8 +512,8 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=svo2.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star"><%=svo2.getExpect()%></p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=svo2.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">
@@ -489,8 +528,8 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=svo3.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star"><%=svo3.getExpect()%></p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=svo3.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">
@@ -505,8 +544,8 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=svo4.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star"><%=svo4.getExpect()%></p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=svo4.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">
@@ -521,8 +560,8 @@ MovieVO svo5 = slist.get(4);
                         </div>
                         <p class="en_title"><%=svo5.getMovie_en()%></p>
                         <div class="stars">
-                            <p class="star">45%</p>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <p class="star"><%=svo5.getExpect()%></p>
+<!--                             <i class="fa fa-star" aria-hidden="true"></i> -->
                             <form method="post" action="<%=request.getContextPath() %>/MovieOverViewServlet">
                             	<button type="submit" name="movie_id" value="<%=svo5.getMovie_id()%>" class="btn_info">電影資訊介紹</button>
                             	<input type="hidden" name="soon" value="soon">
