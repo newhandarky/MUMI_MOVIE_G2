@@ -53,7 +53,7 @@
                 <ul class="nav_ul" id="forum_ul">
                     <a href="#">討論區</a>
                     <li class="nav_li">
-                        <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
+                        <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
                     </li>
                 </ul>
             </div>
@@ -171,7 +171,7 @@
                     <div class="accordion-body">
                         <ul>
                         	<li>
-                                <a href="http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/ForumIndex.html">討論區</a>
+                                <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
                             </li>
                         </ul>
                     </div>
