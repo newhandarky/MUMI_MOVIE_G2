@@ -30,7 +30,7 @@
             <li class="has-dropdown">
                 <a href="#"> 會員管理</a>
                 <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="<%=request.getContextPath()%>/view/mem/system_info_list.jsp">會員資料列表</a></li>
+                    <li><a href="<%=request.getContextPath()%>/view/mem/system_mem_list.jsp">會員資料列表</a></li>
                 </ul>
             </li>
             <li class="has-dropdown">
