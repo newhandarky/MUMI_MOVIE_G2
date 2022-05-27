@@ -56,6 +56,7 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 			+ "	from movie_tag as a join movie_type as b "
 			+ "	where a.movie_type_id = b.movie_type_id) as d "
 			+ "	where c.movie_tag_id = d.movie_tag_id and movie_id = ?";
+	private static final String FIND_BY_MOVIE_ID = "select * from movie_tag where movie_id =?";
 	
 	
 	
@@ -417,8 +418,7 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 			while (rs.next()) {
 				movie_tagVO = new Movie_tagVO();
 				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
-				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));
-				
+				movie_tagVO.setMovie_ch(rs.getString("movie_ch"));		
 				list.add(movie_tagVO);
 			}
 
@@ -448,13 +448,61 @@ public class Movie_tagDAO implements Movie_tagDAO_interface{
 				}
 			}
 		}
-
-		return list;
-		
-		
+		return list;	
 	}
-	
-	
-	
-	
+
+	@Override
+	public List<Movie_tagVO> findBYMovieID(Integer movie_id) {
+		List<Movie_tagVO> list = new ArrayList<Movie_tagVO>();
+		Movie_tagVO movie_tagVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_MOVIE_ID);
+
+			pstmt.setInt(1, movie_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				movie_tagVO = new Movie_tagVO();
+				movie_tagVO.setMovie_tag_id(rs.getInt("movie_tag_id"));
+				movie_tagVO.setMovie_id(rs.getInt("movie_id"));
+				movie_tagVO.setMovie_type_id(rs.getInt("movie_type_id"));
+				list.add(movie_tagVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 }
