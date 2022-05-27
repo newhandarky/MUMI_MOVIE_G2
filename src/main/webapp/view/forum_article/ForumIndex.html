@@ -8,47 +8,27 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <link rel="stylesheet" href="css/index.css">
 
-
-<style>
-/* 檢舉內文 */
-.report_choose{
-    position: fixed; top: 100px; left: 20%; transform: translate(-120px, 0px); width: 500px;
-    padding: 10px; 
-    border: 1px solid #888888;
-    background-color: #eeeeee; 
-    box-shadow: 0px 0px 10px #000000;
-
-}
-
-
-</style>
-
-
 </head>
 
+
 <body>
-	    <header>
+    <header>
         <!-- 專題LOGO -->
-        <a class="link_index" href="#">
-            <img class="team_logo" src="image/others/mujilogo.png" alt="">
+        <a class="link_index" href="../index/index.jsp">
+            <img class="team_logo" src="../index/image/others/mujilogo.png" alt="">
         </a>
         
         
         <!-- 背景亮度按鈕 -->
         <div id="lightbtn">
-            <!-- 搜尋欄位 -->
-            <input id="search" type="text">
-            <a id="a_loupe" href="#">
-                <img id="loupe" src="image/icons/loupe.png" alt="">
-            </a>
             <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
                 <span>
-                    <img id="sun" class="sunmoon" src="image/icons/sun.png" alt="">
+                    <img id="sun" class="sunmoon" src="../index/image/icons/sun.png" alt="">
                 </span>
             </button>
             <button type="button" class="btn btn-dark btn-ln -off" id="btn-dark">Dark
                 <span>
-                    <img id="moon" class="sunmoon -off" src="image/icons/crescent-moon.png" alt="">
+                    <img id="moon" class="sunmoon -off" src="../index/image/icons/crescent-moon.png" alt="">
                 </span>
             </button>
         </div>
@@ -59,16 +39,13 @@
                 <ul class="nav_ul" id="movie_ul">
                     <a href="#">電影資訊</a>
                     <li class="nav_li">
+                        <a href="#">電影總覽</a>
+                    </li>
+                    <li class="nav_li">
                         <a href="#">現正熱映</a>
                     </li>
                     <li class="nav_li">
                         <a href="#">即將上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">二輪上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">歷史上映</a>
                     </li>
                 </ul>
             </div>
@@ -77,13 +54,7 @@
                 <ul class="nav_ul" id="ticket_ul">
                     <a href="#">訂票系統</a>
                     <li class="nav_li">
-                        <a href="#">快速購票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">預售票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="hell_seat_4dxA.html">確認劃位</a>
+                        <a href="../ticket_orders/order_beware.jsp">確認劃位</a>
                     </li>
                 </ul>
             </div>
@@ -101,34 +72,22 @@
             </div>
 
             <div class="nav-item">
-                <ul class="nav_ul" id="goods_ul">
-                    <a href="#">電影商城</a>
-                    <li class="nav_li">
-                        <a href="#">餐飲類別</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">周邊商品</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-item">
                 <ul class="nav_ul" id="member_ul">
                     <a href="#">會員專區</a>
                     <li class="nav_li">
-                        <a href="#">註冊會員</a>
+                        <a href="../mem/mem_register.jsp">註冊會員</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#">修改資料</a>
+                        <a href="../mem/mem_profiles.jsp">會員資料</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#">歷史消費</a>
+                        <a href="../mem/mem_revise.jsp">修改資料</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#" class="mumipay">MUMIPAY</a>
+                        <a href="../mem/check_order_beware.jsp">歷史消費</a>
                     </li>
                     <li class="nav_li">
-                        <a href="#" class="checksession">登入/登出</a>
+                        <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
                     </li>
                 </ul>
             </div>
@@ -136,7 +95,7 @@
 
         <!-- 漢堡選單按鈕 -->
         <div class="">
-            <a href="#"><img src="image/icons/movie.png" alt="" class="hamberger_menu"></a>
+            <a href="#"><img src="../index/image/icons/movie.png" alt="" class="hamberger_menu"></a>
         </div>
 
     </header>
@@ -156,23 +115,21 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="#<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
+                                <a href="../mem/mem_register.jsp">註冊會員</a>
                             </li>
                             <li>
-                                <a href="#<%=request.getContextPath()%>/view/mem/mem_revise.jsp">修改資料</a>
+                                <a href="../mem/mem_profiles.jsp">會員資料</a>
                             </li>
                             <li>
-                                <a href="#mem_shopping_sheet.html">歷史消費</a>
-                            </li>
-                            <li class="nav_li">
-                                <a href="#mem_mumipay.html">MUMIPAY</a>
+                                <a href="../mem/mem_revise.jsp">修改資料</a>
                             </li>
                             <li>
-								<a style="font-size: 14px" href="#" class="checksession" >登入/登出</a>
+                                <a href="../mem/check_order_beware.jsp">歷史消費</a>
+                            </li>
+                            <li>
+								<a href="#" class="checksession" >登入/登出</a>
                             </li>
                         </ul>
-                        
-                        
 
                     </div>
                 </div>
@@ -186,17 +143,14 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul>
+                        	<li class="nav_li">
+		                        <a href="#">電影總攬</a>
+		                    </li>
                             <li>
                                 <a href="">現正熱映</a>
                             </li>
                             <li>
                                 <a href="">即將上映</a>
-                            </li>
-                            <li>
-                                <a href="">二輪上映</a>
-                            </li>
-                            <li>
-                                <a href="">歷史上映</a>
                             </li>
                         </ul>
 
@@ -213,13 +167,7 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <a href="">快速購票</a>
-                            </li>
-                            <li>
-                                <a href="">預售票</a>
-                            </li>
-                            <li>
-                                <a href="hell_seat_4dxA.html">確認劃位</a>
+                                <a href="../ticket_orders/order_beware.jsp">確認劃位</a>
                             </li>
                         </ul>
 
@@ -236,38 +184,24 @@
                     <div class="accordion-body">
                         <ul>
                         	<li>
-                                <a href="">保留區</a>
-                            </li>
-                            <li>
-                                <a href="">保留區</a>
+                                <a href="">討論區</a>
                             </li>
                         </ul>
 
                     </div>
                 </div>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        電影商城
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>
-                                <a href="">餐飲類別</a>
-                            </li>
-                            <li>
-                                <a href="">周邊商品</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-     
+    
+    <div class="hiddenform" style="display:none;">
+    	<form id="submitcheck" action="#" method="post">
+        	<input type="hidden" name="action" value="logout">
+            <button type="submit" id="btn-primary" class="btn btn-primary">確定登出</button>
+        </form>
+    </div>
+
+
 	<!-- 熱門文章 -->
 	<div class="container px-4 py-5" id="featured-3">
 		<h5 class="pb-2 border-bottom">熱門文章</h5>
@@ -287,7 +221,6 @@
 					<li class="nav-item"><a href="ForumIndex.html" class="nav-link">全部文章</a></li>
 					<li class="nav-item"><a href="javascript:void(0)" id="boardDiscuss" class="nav-link" onclick="changeBoard(1)">綜合討論</a></li>
 					<li class="nav-item"><a href="javascript:void(0)" id="boardMovie" class="nav-link" onclick="changeBoard(2)">電影心得</a></li>
-					<li class="nav-item"><a href="javascript:void(0)" id="boardBuy" class="nav-link" onclick="changeBoard(3)">商城購物</a></li>
 					<li class="nav-item"><a href="javascript:void(0)" id="boardTheater" class="nav-link" onclick="changeBoard(4)">影城討論</a></li>
 				</ul>
 				<br>
@@ -320,7 +253,7 @@
 				<div class="position-sticky" style="top: 20%; border: 1px solid;">
 					<div id="mem_info" class="p-4 mb-3 bg-light rounded" style="border: 1px solid;">
 						<p class="mb-0" id="mem_mail"></p>
-						<p class="mb-0" id="mem_name"></p>
+						<p class="mb-0">Hello!<br><span id="mem_nickname"></span></p>
 					</div>
 
 					<div class="p-4" style="border: 1px solid;">
@@ -348,9 +281,6 @@
                         </li>
                         <li>
                             <a href="#">討論區</a>
-                        </li>
-                        <li>
-                            <a href="#">周邊商城</a>
                         </li>
                     </ul>
                 </div>
@@ -397,7 +327,7 @@
                     <ul>
                         <li>
                             <span>
-                                <img id="linerobot" src="image/others/robot.png" alt="">
+                                <img id="linerobot" src="<%=request.getContextPath()%>/view/index/image/others/robot.png" alt="">
                             </span>
                         </li>
                     </ul>
@@ -411,6 +341,7 @@
             <a href="#">使用條款</a>
         </div>
     </footer>
+	
     
     <div class="hiddenform" style="display:none;">
     	<form id="submitcheck" action="member/Logout" method="post">
@@ -424,8 +355,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/forumIndex.js"></script>
+	
+	<script>
+	    window.onload=function(){
+	        $(".checksession").on("click", function() {
+	            $("#submitcheck").submit();
+	        });
+	    }
+    </script>
     
-
 </body>
 
 </html>

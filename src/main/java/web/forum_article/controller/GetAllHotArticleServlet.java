@@ -16,9 +16,6 @@ import com.google.gson.GsonBuilder;
 import web.forum_article.entity.ArticleVO;
 import web.forum_article.service.ArticleService;
 
-/**
- * Servlet implementation class GetAllHotArticleServlet
- */
 @WebServlet(urlPatterns = {"/view/forum_article/GetAllHotArticleServlet"})
 public class GetAllHotArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,9 +29,6 @@ public class GetAllHotArticleServlet extends HttpServlet {
 		
 		//呼叫方法回傳到view
 		List<ArticleVO> list = articleSvc.getHotAll();
-		
-		System.out.println("有執行getHotAll()查詢");
-		System.out.println("這是getHotAll()的list:" + list);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String getHotAllList = gson.toJson(list);

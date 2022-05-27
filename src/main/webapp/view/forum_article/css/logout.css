@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* main工作區 */
+
+main {
+    width: 100%;
+    margin: 0 auto;
+    position: absolute; /* ★ */
+    top: 50%; /* ★ */
+    transform: translateY(-50%); /* ★ */
+
+}
+
+main .register {
+    max-width: 600px;
+    margin: 0 auto;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    border-radius: 15px;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.register .logo {
+    text-align: center;
+    height: 150px;
+    border-radius: 15px;
+}
+
+.logo img {
+    margin-top: 30px;
+    width: 300px;
+}
+
+.register h2 {
+    margin-top: 50px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.register p {
+    margin: 10px auto;
+}
+
+.topp {
+    padding-top: 10px;
+}
+
+.underp {
+    padding-bottom: 20px;
+}
+
+.btn-primary{
+	margin-bottom: 30px;
+}
+
+
+/* main工作區結束 */
+
+@media (max-width: 768px) {
+    .nav-item {
+        display: none;
+    }
+    .hamberger_menu {
+        display: block;
+    }
+    .hide_menu {
+        display: block;
+    }
+}

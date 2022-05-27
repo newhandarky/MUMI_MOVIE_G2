@@ -50,21 +50,14 @@ public class GetBoardArticleServlet extends HttpServlet {
 			case 2:
 				article_board = "電影心得";
 				break;
-			case 3:
-				article_board = "商城購物";
-				break;
 			case 4:
 				article_board = "影城討論";
 				break;
 			}
-			
-			System.out.println(article_board);
-			
+						
 			ArticleService articleSvc = new ArticleService();
 			List<ArticleVO> list = articleSvc.getOneBoardArticle(article_board);
-
-			System.out.println("這是getBoardArticle的list=" + list);
-			
+		
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 			String BoardArticle = gson.toJson(list);
 			PrintWriter out = response.getWriter();

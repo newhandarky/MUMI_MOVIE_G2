@@ -12,11 +12,11 @@ let mem_mail;
 const tbodyAll = document.querySelector('#boardAll');
 const checkSession = document.querySelector('.checksession');
 const submitcCheck = document.querySelector('#submitcCheck');
-const mem_name = document.querySelector('#mem_name');
+const mem_nickname = document.querySelector('#mem_nickname');
 
 // 轉換板塊文章
 function changeBoard(board_num) {
-	history.pushState(null, null, "http://localhost:8080/test/view/forum_article/page=" + board_num);
+	history.pushState(null, null, "http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/page=" + board_num);
 
 	tbodyAll.innerHTML = "";
 	$(document).find("#tableAll").attr("style", "display: block");
@@ -37,7 +37,7 @@ function showMemInfo(memInfoUrl) {
 	fetch(memInfoUrl)
 		.then(resp => resp.json())
 		.then(memInfo => {
-			mem_name.textContent = memInfo.mem_name;
+			mem_nickname.textContent = memInfo.mem_nickname;
 			var mem_data_obj = {
 				memId: memInfo.mem_id,
 			};

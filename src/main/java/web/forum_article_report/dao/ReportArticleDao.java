@@ -16,5 +16,7 @@ public interface ReportArticleDao {
 	
 	public List<ReportArticle> indexGetAll();
 	
+	public ReportArticle findByPrimaryKey(Integer report_article_id);
+	
 	public void changeReportState(ReportArticle reportArticle);
 }

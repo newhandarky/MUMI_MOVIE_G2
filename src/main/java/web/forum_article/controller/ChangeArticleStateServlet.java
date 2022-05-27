@@ -23,6 +23,7 @@ public class ChangeArticleStateServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		String url = "";
 
 		try {
 
@@ -53,41 +54,40 @@ public class ChangeArticleStateServlet extends HttpServlet {
 			String article_state = articleVO.getArticle_state();
 			if (temp2 == 0) {
 				article_state = "會員已刪除";
+				url = request.getContextPath() + "/view/forum_article/ForumIndex.html";
 			}
-			System.out.println(article_state);
+			
+			if (temp2 == 1) {
+				article_state = "管理員已刪除";
+				url = request.getContextPath() + "/view/forum_article/AdminForumIndex.html";
+			}
 			
 			articleVO.setArticle_id(article_id);
 			articleVO.setArticle_updated(article_updated);
 			articleVO.setArticle_state(article_state);
-			// 修改資料
-
-			articleVO = articleSvc.changeArticleState(article_id, article_updated, article_state);
-			System.out.println("updateArticle()有執行到"); // 除錯
 			
+			// 修改資料
+			articleVO = articleSvc.changeArticleState(article_id, article_updated, article_state);		
 			articleVO = articleSvc.getOneArticle(article_id);
 
 			// 修改完成，準備轉交
 			request.setAttribute("articleVO", articleVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			System.out.println("修改完成的VO=" + articleVO);
 
-			String url = request.getContextPath() + "/view/forum_article/ForumIndex.html";
-//				RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交
-//				successView.forward(request, response);
+			
 			response.sendRedirect(url);
 
 		} catch (Exception e) {
 			e.getMessage();
-			String url = request.getContextPath() + "/view/forum_article/ForumIndex.html";
+			url = request.getContextPath() + "/view/forum_article/ForumIndex.html";
 			response.sendRedirect(url);
-//			RequestDispatcher failureView = request.getRequestDispatcher("/view/forum_article/ForumIndex.html");
-//			failureView.forward(request, response);
+
 		}
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

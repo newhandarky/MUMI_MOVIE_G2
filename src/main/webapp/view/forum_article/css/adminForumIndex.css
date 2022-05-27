@@ -1,16 +1,25 @@
-/* 文章內文 */
-.articleContain{
-    position: fixed; z-index: 99999; top: 100px; left: 50%; transform: translate(-120px, 0px); width: 500px;
-    padding: 10px; 
-    border: 1px solid #888888;
-    background-color: #eeeeee; 
-    box-shadow: 0px 0px 10px #000000;
-/*     display: none; */
+body {
+	text-align: center;
 }
 
-.close_contain{
+/* 文章內文 */
+.articleContain {
+	position: fixed;
+	z-index: 99999;
+	top: 100px;
+	left: 50%;
+	transform: translate(-120px, 0px);
+	width: 500px;
+	padding: 10px;
+	border: 1px solid #888888;
+	background-color: #eeeeee;
+	box-shadow: 0px 0px 10px #000000;
+	/*     display: none; */
+}
+
+.close_contain {
 	position: absolute;
 	top: 0px;
 	right: 5px;
-	cursor:pointer; /*cursor游標pointer指針:改變鼠標*/
+	cursor: pointer; /*cursor游標pointer指針:改變鼠標*/
 }

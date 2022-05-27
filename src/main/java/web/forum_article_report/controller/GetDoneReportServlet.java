@@ -1,4 +1,4 @@
-package web.forum_article.controller;
+package web.forum_article_report.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import web.forum_article.entity.ArticleVO;
-import web.forum_article.service.ArticleService;
+import web.forum_article_report.entity.ReportArticle;
+import web.forum_article_report.service.ReportArticleService;
 
-@WebServlet(urlPatterns = { "/view/forum_article/GetAllArticleServlet" })
-public class GetAllArticleServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/view/forum_article/GetDeneReportServlet" })
+public class GetDoneReportServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 
@@ -27,10 +27,10 @@ public class GetAllArticleServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		ArticleService articleSvc = new ArticleService();
+		ReportArticleService reportArticleSvc = new ReportArticleService();
 		
 		//呼叫方法回傳到view
-		List<ArticleVO> list = articleSvc.getAll();
+		List<ReportArticle> list = reportArticleSvc.indexGetAll();
 		
 		System.out.println("有執行getAll()查詢");
 		System.out.println("這是getAll()的list:" + list);
@@ -44,7 +44,7 @@ public class GetAllArticleServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
