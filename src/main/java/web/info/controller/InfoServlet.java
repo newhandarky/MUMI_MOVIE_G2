@@ -168,8 +168,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 		
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("infoVO", infoVO); // 含有輸入格式錯誤的infoVO物件,也存入req
-					
+					req.setAttribute("infoVO", infoVO); // 含有輸入格式錯誤的infoVO物件,也存入req	
 					
 					RequestDispatcher failureView = req.getRequestDispatcher("/view/info/system_info_list.jsp");
 					failureView.forward(req, res);
@@ -177,21 +176,13 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				}
 		
 				/*************************** 2.開始修改資料 *****************************************/
-				InfoService infoSvc = new InfoService();
-				
-				infoSvc.updateInfo(info_id, info_title, info_pic, info_des, info_state);
-				
+				InfoService infoSvc = new InfoService();				
+				infoSvc.updateInfo(info_id, info_title, info_pic, info_des, info_state);				
 				infoVO = infoSvc.getOneInfo(info_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				
-				
+						
 				req.setAttribute("infoVO", infoVO); // 資料庫update成功後,正確的的infoVO物件,存入req
-				
-				
-				String url = "/view/info/system_info_list.jsp";
-				
-				
-				
+				String url = "/view/info/system_info_list.jsp";			
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 		
@@ -268,10 +259,5 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				failureView.forward(req, res);
 			}
 		}
-	
-	
-	
-	
-	}
-	
+	}	
 }

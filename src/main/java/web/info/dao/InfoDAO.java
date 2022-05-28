@@ -32,8 +32,10 @@ public class InfoDAO implements InfoDAO_interface{
 	}
 	
 	
-	private static final String INSERT_STMT = 
-			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (2, ?, ?, ?, NOW(), 0)";
+		private static final String INSERT_STMT = 
+			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (80023, ?, ?, ?, NOW(), 0)";
+		private static final String GET_ALL_PUBLISHED_STMT = 
+			"SELECT info_id, emp_id, info_title, info_pic, info_des, info_date, info_state FROM information WHERE info_state = 1 order by info_id";
 		private static final String GET_ALL_STMT = 
 			"SELECT info_id, emp_id, info_title, info_pic, info_des, info_date, info_state FROM information order by info_id";
 		private static final String GET_ONE_STMT = 
@@ -54,11 +56,9 @@ public class InfoDAO implements InfoDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-//			pstmt.setInt(1, infoVO.getEmp_id());
 			pstmt.setString(1, infoVO.getInfo_title());
 			pstmt.setBytes(2, infoVO.getInfo_pic());
 			pstmt.setString(3, infoVO.getInfo_des());
-//			pstmt.setInt(5, infoVO.getInfo_state());
 			
 
 			pstmt.executeUpdate();
@@ -224,6 +224,66 @@ public class InfoDAO implements InfoDAO_interface{
 		}
 		return infoVO;
 	}
+	
+	@Override
+	public List<InfoVO> getAllPublished() {
+		List<InfoVO> list = new ArrayList<InfoVO>();
+		InfoVO infoVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_PUBLISHED_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				
+				infoVO = new InfoVO();
+				infoVO.setInfo_id(rs.getInt("info_id"));;
+				infoVO.setEmp_id(rs.getInt("emp_id"));
+				infoVO.setInfo_title(rs.getString("info_title"));
+				infoVO.setInfo_pic(rs.getBytes("info_pic"));
+				infoVO.setInfo_des(rs.getString("info_des"));
+				infoVO.setInfo_date(rs.getTimestamp("info_date"));
+				infoVO.setInfo_state(rs.getInt("info_state"));
+				list.add(infoVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	@Override
 	public List<InfoVO> getAll() {
@@ -285,5 +345,4 @@ public class InfoDAO implements InfoDAO_interface{
 		return list;
 	}
 	
-
 }
