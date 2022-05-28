@@ -392,6 +392,17 @@ body {
 
 /* main撌乩�� */
 
+b{
+	color:white;
+}
+
+.showtable .empstate1 {
+    background-color: SteelBlue ;
+}
+.showtable .empstate0 {
+    background-color: LightCoral ;
+}
+
 div.main {
     text-align: center;
     min-height: 850px;

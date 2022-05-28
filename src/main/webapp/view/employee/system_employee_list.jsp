@@ -18,7 +18,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>影城後台管理系統 - 會員查詢系統</title>
+<title>影城後台管理系統 - 員工查詢系統</title>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet'
@@ -139,45 +139,60 @@
 		<div class="main">
 
 			<div class="showtable table-responsive">
-				<h2>會員資料列表</h2>
+				<h2>員工資料列表</h2>
 
+		<c:if test="${not empty errorMsgs}">
+			<font style="color:red">請修正以下錯誤:</font>
+				<ul>
+				    <c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+					</c:forEach>
+				</ul>
+		</c:if>
 
 
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/employee/EmployeeServlet">
-					<p class="search-p">搜尋會員 :</p>
-					<input id="search" type="search" name="emp_id"> 
+					<p class="search-p">請輸入員工編號 :</p>
+					<input id="search" type="search" name="emp_id" value="${employeeVO.emp_id}"> 
 					<input type="hidden" name="action" value="getOne_For_Display">
 					<button type="submit" class="btn btn-primary">查詢</button>
 				</form>
 
-
-
-				<table class="table">
+<table class="table">
 					<tr>
 						<th>員工編號</th>
 						<th>員工帳號</th>
 						<th>員工姓名</th>
+						<th>在職/離職</th>
+						<th>修改資料</th>
 					</tr>
-					<%@ include file="page1.file" %> 
-					<c:forEach var="employeeVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+					<%@ include file="page1.file"%>
+					<c:forEach var="employeeVO" items="${list}" begin="<%=pageIndex%>"
+						end="<%=pageIndex+rowsPerPage-1%>">
 						<tr>
-							<td>
-								<form METHOD="post" ACTION="<%=request.getContextPath()%>/view/employee/EmployeeServlet">
-									<input  type="hidden" name="emp_id" value="${employeeVO.emp_id}"> 
-									<input type="hidden" name="action" value="getOne_For_Display">
-									<a href="<%=request.getContextPath()%>/view/employee/system_employee_data.jsp">
-										<button type="submit" class="btn btn-success">${employeeVO.emp_id} </button>										
-									</a>
-								</form>
-							</td>
+							<td>${employeeVO.emp_id}</td>
 							<td>${employeeVO.emp_account}</td>
 							<td>${employeeVO.emp_name}</td>
+							<td class="empstate${employeeVO.emp_state}"></td>
+							<td>
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/view/employee/EmployeeServlet" style="margin-bottom: 0px;">
+									<input type="hidden" name="emp_id" value="${employeeVO.emp_id}">
+									<input type="hidden" name="action" value="getOne_For_Update">
+									<button type="submit" class="btn btn-primary">修改</button>
+								</FORM>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
-				</div>
-				</div>
-				<%@ include file="page2.file" %>
+
+		<%@ include file="page2.file"%>
+			
+			</div>
+			 <a href="system_employee_add.jsp">
+                        <button type="button" class="btn btn btn-info btn-lg" >新增員工</button>
+                    </a>			
+		</div>
 
 
 				<!-- 工作區結束 -->

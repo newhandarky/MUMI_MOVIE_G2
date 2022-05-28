@@ -178,7 +178,7 @@
                             <p>公告標題</p>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control" name="info_title" value="<%= (infoVO==null)? "會員姓名" : infoVO.getInfo_title()%>">
+                            <input type="text" class="form-control" name="info_title" value="<%= (infoVO==null)? "" : infoVO.getInfo_title()%>">
                         </div>
 
                         <div class="col-3">
@@ -196,7 +196,7 @@
                             <p>發佈人</p>
                         </div>
                         <div class="col-9">
-                            <input class="form-control" type="text" name="${infoVO.getEmp_id()}" disabled>
+                            <input class="form-control" type="text" value="${infoVO.getEmp_id()}" disabled>
                         </div>
 
                         <div class="col-3">

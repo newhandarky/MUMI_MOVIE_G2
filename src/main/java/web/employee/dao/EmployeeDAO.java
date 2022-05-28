@@ -28,17 +28,17 @@ public class EmployeeDAO implements EmployeeDAO_interface{
 		}
 	}
 	
-	private static final String INSERT = "INSERT INTO employeetest (emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL = "SELECT emp_id,emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state FROM employeetest order by emp_id";
-	private static final String GET_ONE = "SELECT emp_id,emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state FROM employeetest where emp_id = ?";
+	private static final String INSERT = "INSERT INTO employee (emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private static final String GET_ALL = "SELECT emp_id,emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state FROM employee order by emp_id";
+	private static final String GET_ONE = "SELECT emp_id,emp_account,emp_name,emp_password,emp_nickname,emp_phone,emp_hiredate,emp_state FROM employee where emp_id = ?";
 //	private static final String DELETE = "DELETE FROM emp_list where emp_id = ?";
-	private static final String UPDATE = "UPDATE employeetest set emp_account=?, emp_name=?, emp_password=?, emp_nickname=?, emp_phone=?, emp_hiredate=?,emp_state=? where emp_id = ?";
+	private static final String UPDATE = "UPDATE employee set emp_account=?, emp_name=?, emp_password=?, emp_nickname=?, emp_phone=?, emp_hiredate=?,emp_state=? where emp_id = ?";
 	
 	private static final String GET_ONE_VO = "SELECT emp_id, emp_account, emp_name, emp_password, emp_nickname, "
-	           + "emp_phone, emp_hiredate, emp_state FROM employeetest where emp_account = ?";
+	           + "emp_phone, emp_hiredate, emp_state FROM employee where emp_account = ?";
 	
 	private static final String LOGIN = 
-			"select emp_id from employeetest where emp_account = ? and emp_password = ?";
+			"select emp_id from employee where emp_account = ? and emp_password = ?";
 	
 	
 	

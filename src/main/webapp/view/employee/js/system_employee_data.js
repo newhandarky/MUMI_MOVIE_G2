@@ -162,5 +162,12 @@ if($("#mem_gender").hasClass("0")){
 	$("td#mem_gender").text("女");
 }
 
+if($(".empstate1").hasClass("empstate1")){
+	$(".empstate1").text("在職中");
+}
+
+if($(".empstate0").hasClass("empstate0")){
+	$(".empstate0").text("已離職");
+}
 
 
