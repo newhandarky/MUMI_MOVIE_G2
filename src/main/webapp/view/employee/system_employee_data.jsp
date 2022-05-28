@@ -174,13 +174,8 @@
 					</tr>
 
 					<tr>
-						<td>帳號密碼</td>
-						<td>${employeeVO.emp_password}</td>
-					</tr>
-
-					<tr>
-						<td>註冊日期</td>
-						<td>${employeeVO.emp_hiredate}</td>
+						<td>在職/離職</td>
+						<td class="empstate${employeeVO.emp_state}"></td>
 					</tr>
 
 				</table>
@@ -189,8 +184,9 @@
 					<button type="button" class="btn btn-secondary">返回員工列表</button>
 				</a>
 					<input type="hidden" name="emp_id" value="<%=employeeVO.getEmp_id()%>">
-					<input type="hidden" name="action" value="getOne_For_Update">
-					<button type="submit" class="btn btn-primary" value="送出修改">修改此員工狀態</button>							
+					<input type="hidden" name="emp_state" value="<%=employeeVO.getEmp_state()%>">
+					<input type="hidden" name="action" value="getOne_For_Update">			
+					<!-- 				<button type="submit" class="btn btn-primary" value="送出修改">修改此員工狀態</button>							 -->			
 				</div>
 				</form>
 			</div>

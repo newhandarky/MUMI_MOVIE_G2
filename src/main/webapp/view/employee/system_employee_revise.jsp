@@ -191,8 +191,17 @@
 					<tr>
 						<td>雇用日期</td>
 						<td>
-							<input class="form-control" type="date" name="emp_hiredate" id="updateHiredate">
+							<input class="form-control" type="date" name="emp_hiredate" value="<%= (employeeVO==null)? "雇用日期" : employeeVO.getEmp_hiredate()%>">
 						</td>
+					</tr>
+					<tr>	
+						<td>在職/離職</td>
+						<td>
+                            <select name="emp_state" >
+                                <option value="0" ${ employeeVO.getEmp_state() == 0 ? "selected" : ""} >已離職</option>
+                                <option value="1" ${ employeeVO.getEmp_state() == 1 ? "selected" : ""} >在職中</option>
+                            </select>             
+                        </td>
 					</tr>
 
 				</table>

@@ -190,8 +190,8 @@
                     <a href="system_info_list.jsp">
                         <button type="button" class="btn btn-secondary">返回列表</button>
                     </a>
-                    <input type="hidden" name="info_id" size="45" value="<%=(infoVO == null) ? "001" : infoVO.getInfo_id()%>" /> 
                     <input type="hidden" name="action" value="insert">
+                    <input type="hidden" name="info_id" size="45" value="<%=(infoVO == null) ? "001" : infoVO.getInfo_id()%>" /> 
               		<button type="submit" class="btn btn-primary">確認送出</button>
                </form>
         </div>

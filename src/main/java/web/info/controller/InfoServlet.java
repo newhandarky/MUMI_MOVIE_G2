@@ -170,7 +170,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("infoVO", infoVO); // 含有輸入格式錯誤的infoVO物件,也存入req	
 					
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/info/system_info_list.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/info/system_editinfo.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -232,7 +232,7 @@ if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("infoVO", infoVO); // 含有輸入格式錯誤的infoVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/view/info/system_info_list.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/view/info/system_addinfo.jsp");
 					failureView.forward(req, res);
 					return;
 				}

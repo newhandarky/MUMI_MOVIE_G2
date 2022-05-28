@@ -33,7 +33,7 @@ public class InfoDAO implements InfoDAO_interface{
 	
 	
 		private static final String INSERT_STMT = 
-			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (80023, ?, ?, ?, NOW(), 0)";
+			"INSERT INTO information (emp_id, info_title, info_pic, info_des, info_date, info_state) VALUES (80003, ?, ?, ?, NOW(), 0)";
 		private static final String GET_ALL_PUBLISHED_STMT = 
 			"SELECT info_id, emp_id, info_title, info_pic, info_des, info_date, info_state FROM information WHERE info_state = 1 order by info_id";
 		private static final String GET_ALL_STMT = 
@@ -304,7 +304,7 @@ public class InfoDAO implements InfoDAO_interface{
 
 				
 				infoVO = new InfoVO();
-				infoVO.setInfo_id(rs.getInt("info_id"));;
+				infoVO.setInfo_id(rs.getInt("info_id"));
 				infoVO.setEmp_id(rs.getInt("emp_id"));
 				infoVO.setInfo_title(rs.getString("info_title"));
 				infoVO.setInfo_pic(rs.getBytes("info_pic"));
@@ -344,5 +344,5 @@ public class InfoDAO implements InfoDAO_interface{
 		}
 		return list;
 	}
-	
+
 }

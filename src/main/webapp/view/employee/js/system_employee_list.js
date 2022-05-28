@@ -98,3 +98,10 @@ if($(".memstate1").hasClass("memstate1")){
 if($(".memstate0").hasClass("memstate0")){
 	$(".memstate0").text("停用");
 }
+if($(".empstate1").hasClass("empstate1")){
+	$(".empstate1").text("在職中");
+}
+
+if($(".empstate0").hasClass("empstate0")){
+	$(".empstate0").text("已離職");
+}
