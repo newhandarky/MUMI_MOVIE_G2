@@ -184,75 +184,7 @@ pageContext.setAttribute("list", list);
 
     <!-- 主要內容區 -->
     <div id="mainouter" class="mainouter">
-        <main class="container" id="mainapp">
-            <div class="row" id="app2">
-
-                <div class="col-lg-5 col-md-12">
-                    <div class="row">
-
-                        <div id="fastbuy">
-                            <h3>快速購票</h3>
-                            <div>
-                                <img id="movieicon" src="<%=request.getContextPath()%>/view/index/image/icons/movie-camera.png" alt="">
-                                <select name="fastmovie" id="moviebar">
-                                    <option class="moviebar" value="0" name="fastmovie">請選擇影片</option>
-                                    <option class="moviebar" value="1" name="fastmovie">咒術迴戰</option>
-                                    <option class="moviebar" value="2" name="fastmovie">蝙蝠俠</option>
-                                    <option class="moviebar" value="3" name="fastmovie">阿修羅</option>
-                                    <option class="moviebar" value="4" name="fastmovie">超吉任務</option>
-                                    <option class="moviebar" value="5" name="fastmovie">黑光行動</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <img id="dateicon" src="<%=request.getContextPath()%>/view/index/image/icons/deadline.png" alt="">
-                                <input id="moviedate" type="date">
-                            </div>
-
-                            <div>
-                                <img id="timeicon" src="<%=request.getContextPath()%>/view/index/image/icons/back-in-time.png" alt="">
-                                <select name="fastmovietime" id="movietimebar">
-                                    <option value="1" name="fastmovie">請選擇場次</option>
-                                    <option value="2" name="fastmovie">09:30 - 11:30</option>
-                                    <option value="3" name="fastmovie">12:00 - 14:00</option>
-                                    <option value="4" name="fastmovie">14:30 - 16:30</option>
-                                    <option value="5" name="fastmovie">17:00 - 19:00</option>
-                                    <option value="6" name="fastmovie">19:30 - 21:30</option>
-                                    <option value="6" name="fastmovie">22:00 - 00:00</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <img id="peopleicon" src="<%=request.getContextPath()%>/view/index/image/icons/group.png" alt="">
-                                <select name="fastmoviepeople" id="moviepeoplebar">
-                                    <option value="1" name="fastmovie">請選擇人數</option>
-                                    <option value="2" name="fastmovie">1</option>
-                                    <option value="3" name="fastmovie">2</option>
-                                    <option value="4" name="fastmovie">3</option>
-                                    <option value="5" name="fastmovie">4</option>
-                                    <option value="6" name="fastmovie">5</option>
-                                </select>
-                            </div>
-                            <div id="fastbtn">
-                                <span>
-                                    <a href="#">前往訂票</a>
-                                </span>
-                                <span>
-                                    <a href="#">查看資訊</a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class='embed-container col-lg-7' id="youtube_in">
-                    <div class="embed-in">
-                        <iframe src='https://www.youtube.com/embed//39qGk7E6OuY' frameborder='0' allowfullscreen></iframe>
-                    </div>
-                </div>
-
-            </div>
-        </main>
+        
 
         <!-- 公告 -->
         <div class="info">
@@ -276,15 +208,22 @@ pageContext.setAttribute("list", list);
                 </div>
             </div>
 			</c:forEach>
+		</div> 
     </div>
-    <h1 id="map_h1">影城位置</h1>
-    	<div class="map_rwd">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4676870452963!2d121.54106421395167!3d25.052132843720578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abe6b0446815%3A0xf006dde8c27afcc7!2z57ev6IKyVGliYU1l6ZmE6Kit5Y-w5YyX6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1647743247630!5m2!1szh-TW!2stw"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    	</div>
-			<img class="showpic" src="<%=request.getContextPath()%>/view/index/image/others/安心觀影-1920x1080-2.jpeg">		
+    
+    <div class="container">
+        <div class="row">
+			<img class="showinfopic" src="<%=request.getContextPath()%>/view/index/image/others/iamangry.jpg">		                
         </div>
-   
+    </div>
+	        
+    <h1 id="map_h1">影城位置</h1>
+   	<div class="map_rwd">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4676870452963!2d121.54106421395167!3d25.052132843720578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abe6b0446815%3A0xf006dde8c27afcc7!2z57ev6IKyVGliYU1l6ZmE6Kit5Y-w5YyX6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1647743247630!5m2!1szh-TW!2stw"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> 
+    </div> 
+        
+        
 
 <%@ include file="footer.jsp" %>
 

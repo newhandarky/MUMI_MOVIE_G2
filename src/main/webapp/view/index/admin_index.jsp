@@ -22,7 +22,6 @@
 
         <!-- 主要工作區 -->
         <div class="main">
-            <h2>${empVO.emp_id}</h2>
 
 
 

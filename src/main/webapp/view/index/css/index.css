@@ -427,14 +427,22 @@ span.mrs_12 {
     color: yellow;
 }
 
-#infopic {
-    width: 100%;
+.lastinfodiv{
+	width: 100%;
 }
 
-#infopic2 {
+.showinfopic{
+	width: 100%;
+}
+
+.showinfopic img{
+	width: 100%;
+}
+img .showpic {
     width: 100%;
     margin-top: 20px;
 }
+
 
 .info .info_p {
     text-align: center;
