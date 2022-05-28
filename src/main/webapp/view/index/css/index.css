@@ -438,7 +438,7 @@ span.mrs_12 {
 .showinfopic img{
 	width: 100%;
 }
-img .showpic {
+img.showpic {
     width: 100%;
     margin-top: 20px;
 }
@@ -469,6 +469,10 @@ img .showpic {
 
 .info .firstinfo {
     margin-top: 30px;
+}
+
+.info .showtitle{
+	min-width:300px;
 }
 
 

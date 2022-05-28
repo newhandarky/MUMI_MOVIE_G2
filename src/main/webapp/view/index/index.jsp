@@ -192,22 +192,19 @@ pageContext.setAttribute("list", list);
             <div id="info">
                 <h1 id="info_h1">影城公告</h1>
             </div>
-             <c:forEach var="infoVO" items="${list}" >
             <div class="container">           
                 <div class="row">
+             <c:forEach var="infoVO" items="${list}" >
                     <div class="col-md-5 col-sm-12">             
                     	<img class="showpic" src="<%=request.getContextPath()%>/view/info/DBGifReader4?info_id=${infoVO.info_id}">
-<%--                         <img id="infopic" src="<%=request.getContextPath()%>/view/info/DBGifReader4?info_id=1" alt="">	 --%>                        
-<!--                      <h4>【禁止盜錄公告及詳情】</h4> -->
-<!--                         <p class="showinfo">影廳內請勿錄影、照相、錄音。 為避免觸法，從預告片開始到片尾工作人員表結束，燈亮起之前，皆不可拍攝銀幕。 任何未經授權之攝錄行為，已觸犯著作權第91條，最高可處5年有期徒刑。</p>       -->
                     </div>
                     <div class="col-6 info_p">
 						<h2 class="showtitle">【${infoVO.info_title}】<br><br></h2>
                         <h3 class="showinfo">${infoVO.info_des}</h3>
                     </div>
+			</c:forEach>
                 </div>
             </div>
-			</c:forEach>
 		</div> 
     </div>
     
