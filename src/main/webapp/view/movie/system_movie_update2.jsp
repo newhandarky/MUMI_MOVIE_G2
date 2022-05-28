@@ -65,10 +65,9 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 							</c:forEach>
 						</div>
 					</div>
-					<c:forEach var="movieVO" items="${movieSvc.movie_New}" begin="0"
-						end="0">
+<%-- 					<c:forEach var="movieVO" items="${movieSvc.all}"> --%>
 						<input type="hidden" name="movie_id" value="${movieVO.movie_id}">
-					</c:forEach>
+<%-- 					</c:forEach> --%>
 					<br> <input type="hidden" name="action" value="type_insert">
 					<input type="submit" class="btn btn-primary" value="修改">
 				</form>
