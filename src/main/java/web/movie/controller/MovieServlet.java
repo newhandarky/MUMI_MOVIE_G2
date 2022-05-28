@@ -477,7 +477,7 @@ public class MovieServlet extends HttpServlet {
 					movieVO = new MovieVO();
 					movieVO.setMovie_id(movie_id);
 					movieVO.setMovie_type_id(Integer.parseInt(movie_type_id[i]));
-
+					
 					/*************************** 2.開始新增資料 *****************************************/
 					MovieService movieSvc = new MovieService();
 					movieVO = movieSvc.insertType(movie_id, Integer.parseInt(movie_type_id[i]));
@@ -539,6 +539,9 @@ public class MovieServlet extends HttpServlet {
 				movieSvc.deleteType(movie_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				MovieVO movieVO = movieSvc.getOneMovie(movie_id);
+				req.setAttribute("movieVO", movieVO);
+				
 				String url = "/view/movie/system_movie_update2.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
