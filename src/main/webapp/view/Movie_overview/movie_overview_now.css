@@ -9,7 +9,7 @@
 header {
     width: 100%;
     height: 100px;
-    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
     position: fixed;
     z-index: 5;
 }
@@ -26,7 +26,7 @@ header h2 {
 
 .team_logo {
     position: absolute;
-    width: 100px;
+    width: 170px;
     left: 10px;
 }
 
@@ -88,16 +88,16 @@ header h2 {
 
 .nav_ul a {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
 .nav_ul li a {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
-.underheader {
-    height: 100px;
+.nav_ul a.mumipay {
+    font-size: 12px;
 }
 
 
@@ -146,13 +146,14 @@ header h2 {
 .nav-item ul li a:link,
 .nav-item ul li a:visited {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
 .nav-item ul li:hover {
     background: #555;
 }
 
+.nav-item ul a:hover,
 .nav-item ul li a:hover,
 .nav-item ul li a:active {
     color: rgb(0, 255, 98);
@@ -170,20 +171,14 @@ ul.switchDisplay li {
 /* 背景亮度按鈕 */
 
 #lightbtn {
+    display: inline-block;
     height: 50px;
-    position: relative;
-}
-
-#btn-light {
     position: absolute;
     right: 15px;
     top: 5px;
 }
 
 #btn-dark {
-    position: absolute;
-    right: 15px;
-    top: 5px;
     color: yellow;
 }
 
@@ -403,6 +398,23 @@ footer ul li a {
     text-decoration: none;
     color: antiquewhite;
     font-size: 14px;
+}
+
+.focus_us {
+    display: block;
+    text-align: left;
+}
+
+.focus_us p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: white;
+}
+
+.focus_us a {
+    text-decoration: none;
+    color: antiquewhite;
+    margin-left: 30px;
 }
 
 #ft_icons span img {
