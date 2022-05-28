@@ -35,7 +35,7 @@
                         <li>
                         <hr>
                         	<p style="margin:0;color:white;">TGA101第三組</p>
-                            <a target="_blank" href="#">Adopet寵物領養平台</a>
+                            <a target="_blank" href="http://35.189.185.149:8081/Adopets/views/catInfo/My_home.jsp">Adopet寵物領養平台</a>
                         </li>
                     </ul>
                 </div>
