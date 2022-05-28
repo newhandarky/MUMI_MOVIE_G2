@@ -55,18 +55,5 @@ public class InfoVO implements java.io.Serializable{
 	public void setInfo_state(Integer info_state) {
 		this.info_state = info_state;
 	}
-//	public Timestamp getInfo_update() {
-//		return info_update;
-//	}
-//	public void setInfo_update(Timestamp info_update) {
-//		this.info_update = info_update;
-//	}
-//	public Integer getEditor_id() {
-//		return editor_id;
-//	}
-//	public void setEditor_id(Integer editor_id) {
-//		this.editor_id = editor_id;
-//	}
-	
-		
+
 }

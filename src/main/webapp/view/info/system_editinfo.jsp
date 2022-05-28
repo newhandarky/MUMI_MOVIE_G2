@@ -6,8 +6,8 @@
 <%@ page import="java.sql.*"%>
 
 <%
-	InfoVO infoVO = (InfoVO) request.getAttribute("infoVO");	
-%>   
+	InfoVO infoVO = (InfoVO) request.getAttribute("infoVO");
+%>
 
 
 <!DOCTYPE html>

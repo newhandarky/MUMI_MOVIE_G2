@@ -52,6 +52,10 @@ public class InfoService {
 		return dao.findByPrimaryKey(info_id);
 	}
 	
+	public List<InfoVO> getAllPublished() {
+		return dao.getAllPublished();
+	}
+	
 	public List<InfoVO> getAll() {
 		return dao.getAll();
 	}
