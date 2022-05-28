@@ -40,7 +40,7 @@
                     <li><a href="<%=request.getContextPath()%>/view/movie_time/system_movie_time_add.jsp">編輯電影場次</a></li>
                     <li><a href="<%=request.getContextPath()%>/view/releasing/system_releasing_add.jsp">編輯電影狀態</a></li>
                 	<li><a href="<%=request.getContextPath()%>/view/movie_rating/system_movie_rating_add.jsp">編輯電影分級</a></li>
-                	<li><a href="<%=request.getContextPath()%>view/movie_type/system_movie_type_add.jsp">編輯電影分類</a></li>
+                	<li><a href="<%=request.getContextPath()%>/view/movie_type/system_movie_type_add.jsp">編輯電影分類</a></li>
                 	<li><a href="<%=request.getContextPath()%>/view/movie_tag/system_movie_tag_listAll.jsp">編輯電影標籤</a></li>
                 </ul>
             </li>
