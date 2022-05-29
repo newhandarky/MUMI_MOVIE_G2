@@ -26,7 +26,7 @@ public class Logout extends HttpServlet {
 	    		HttpSession session = req.getSession();
 	    		MemVO memVO = (MemVO)session.getAttribute("memVO");
 	    		
-	    		if (memVO==null) {
+	    		if (memVO.getMem_account().equals("")) {
 	    			
 	    			res.sendRedirect(req.getContextPath()+"/view/index/login.jsp");
 				}else {

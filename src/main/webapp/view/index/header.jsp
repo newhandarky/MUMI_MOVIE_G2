@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="javax.servlet.http.HttpSession"%>
 
 <body>
     <header>
@@ -117,9 +117,12 @@
                             <li>
                                 <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                             </li>
-                            <li>
-								<a href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession" >登入/登出</a>
-                            </li>
+                            <li class="nav_li">
+		                        <a href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession">會員登入</a>
+		                    </li>
+		                    <li class="nav_li">
+		                        <a href="<%=request.getContextPath()%>/view/index/logout.jsp" class="checksession">會員登出</a>
+		                    </li>
                         </ul>
 
                     </div>
@@ -183,6 +186,21 @@
             </div>
         </div>
     </div>
+    
+    <div class="hiddenform" style="display:none;">
+    	<form id="submitcheck" action="<%=request.getContextPath()%>/member/Logout" method="post">
+        	<input type="hidden" name="action" value="logout">
+            <input type="submit" id="btn-primary" class="btn btn-primary">確定登出</button>
+        </form>
+    </div>
+    
+    <script>
+	    window.onload=function(){
+	        $(".checksession").on("click", function() {
+	            $("#submitcheck").submit();
+	        });
+	    }
+    </script>
     
     
     
