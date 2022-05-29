@@ -64,7 +64,7 @@
 				<div class="comtainer" style="width: 700px">
 					<div>
 						<p>
-							會員編號: <span id="post_mem_id"><%=articleVO.getMem_id()%></span>
+							會員編號: <span id="post_mem_id"></span>
 						</p>
 					</div>
 					<select size="1" name="article_board" id="choose-board" class="form-floating">
@@ -89,7 +89,7 @@
 					<div class="form-floating">
 						<input type="text" name="article_subject" size="80" maxlength="20" value="<%=articleVO.getArticle_subject()%>">
 						<p></p>
-						<textarea id="summernote" name="article_contain" value="<%=articleVO.getArticle_contain()%>"></textarea>
+						<textarea id="summernote" name="article_contain"></textarea>
 					</div>
 
 					<input type="hidden" name="action" value="update">
@@ -105,30 +105,7 @@
 	</main>
 </body>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('#summernote').summernote({
-			placeholder : '請輸入文字',
-			tabsize : 2,
-			width : 700,
-			height : 300, // set editor height
-			minHeight : null, // set minimum height of editor
-			maxHeight : null, // set maximum height of editor
-			focus : true, // set focus to editable area after initializing summernote
-			toolbar : [
-				['style', ['style']],
-				['font', ['bold', 'underline', 'clear']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['table', ['table']],
-				['insert', ['link', 'picture', 'video']],
-				// ['view', ['fullscreen', 'codeview', 'help']]
-			]								
-		});
-	});
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="<%=request.getContextPath()%>/view/forum_article/js/updateArticle.js"></script>
 
 </html>

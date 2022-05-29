@@ -76,8 +76,8 @@ try {
 						<option value="" selected id="article_type_el"></option>
 					</select>
 					<div class="form-floating">
-						<label for="p_file">文章封面圖:</label> <br> <input
-							name="article_pic" type="file" id="p_file">
+						<label for="p_file">文章封面圖:</label> <br>
+						<input name="article_pic" type="file" id="p_file">
 					</div>
 					<div class="form-floating">
 						<h4>
@@ -85,12 +85,11 @@ try {
 						</h4>
 						<textarea id="summernote" name="article_contain"></textarea>
 					</div>
-					<input type="hidden" id="re_article_id" name="re_article_id"
-						value=""> <input type="hidden" id="post_mem_id_el"
-						name="mem_id" value=""> <input type="hidden"
-						id="article_subject_el" name="article_subject" value=""> <input
-						type="hidden" name="article_publish"> <input type="hidden"
-						name="article_state" value="會員已發表文章">
+					<input type="hidden" id="re_article_id" name="re_article_id" value="">
+					<input type="hidden" id="post_mem_id_el" name="mem_id" value="">
+					<input type="hidden" id="article_subject_el" name="article_subject" value="">
+					<input type="hidden" name="article_publish">
+					<input type="hidden" name="article_state" value="會員已發表文章">
 					<button type="submit" style="float: right" class="btn btn-success">送出</button>
 <!-- 					<button type="button" style="float: right" class="btn btn-secondary">取消</button> -->
 
@@ -99,8 +98,7 @@ try {
 		</div>
 	</main>
 </body>
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="<%=request.getContextPath()%>/view/forum_article/js/replyArticle.js"></script>
 
 

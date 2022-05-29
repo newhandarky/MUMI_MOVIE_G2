@@ -17,7 +17,7 @@ const mem_nickname = document.querySelector('#mem_nickname');
 
 // 轉換板塊文章
 function changeBoard(board_num) {
-	history.pushState(null, null, "http://localhost:8080/MUMI_MOVIE_G2/view/forum_article/page=" + board_num);
+//	history.pushState(null, null, "http://35.221.208.108:8080/MUMI_MOVIE/view/forum_article/page=" + board_num);
 
 	tbodyAll.innerHTML = "";
 	$(document).find("#tableAll").attr("style", "display: block");
@@ -97,7 +97,7 @@ function showBoardArticle(boardUrl) {
 // 顯示單一文章內容 
 function OneArticleDetail(aID) {
 
-	
+	article.innerHTML = "";
 	$(document).find("#tableAll").attr("style", "display: none");
 	OneArticleUrl = "GetOneArticleServlet?article_id=" + aID;
 	console.log("顯示單一文章內容的URL=" + OneArticleUrl);
@@ -157,7 +157,7 @@ function OneArticleDetail(aID) {
 								<form action="UpdateArticleServlet" method="post">
 									<input type="hidden" name="article_id" value="${detail.article_id}"></input>
 									<input type="hidden" name="action" value="getOne_For_Update"></input>								
-									<button type="submit" class="btn btn-primary btn-sm" style="float: right">修改</button>
+									<button id="btn_update" type="submit" class="btn btn-primary btn-sm" style="float: right">修改</button>
 								</form>
 							</div>`);
 
@@ -169,13 +169,32 @@ function OneArticleDetail(aID) {
 					re_article_board: detail.article_board,
 					re_article_type: detail.article_type,
 					re_article_bord: detail.article_bord,
-					re_article_id: detail.re_article_id
+					re_article_id: detail.re_article_id,
+					re_article_contain: detail.article_contain
 				};
 
 				console.log(data_obj);
 				sessionStorage.setItem("reply_data", JSON.stringify(data_obj));
 				location.href = "replyArticle.jsp";
 			});
+			
+			// 修改文章預存資料
+			var btn_update_data = document.querySelector("#btn_update");
+			btn_update_data.addEventListener("click", function() {
+				var data_obj = {
+					update_article_subject: detail.article_subject,
+					update_article_board: detail.article_board,
+					update_article_type: detail.article_type,
+					update_article_bord: detail.article_bord,
+					update_article_id: detail.re_article_id,
+					update_article_contain: detail.article_contain
+				};
+
+
+				sessionStorage.setItem("update_data", JSON.stringify(data_obj));
+			});
+			
+			
 		});
 }
 
@@ -195,13 +214,13 @@ function updateArticle(aID) {
 	var update_url = "UpdateArticleServlet?article_id=" + aID;
 	console.log("修改文章的URL=" + update_url);
 	fetch(update_url);
+	
 }
 
 // 網頁load後顯示全部文章
 window.addEventListener('load', () => {
 
 	checkSession.addEventListener("click", function() {
-		console.log("XXXXX");
 		document.querySelector('#submitcCheck').submit();
 	});
 
