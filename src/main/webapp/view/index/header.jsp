@@ -28,7 +28,7 @@
 
             <div class="nav-item"> 
                 <ul class="nav_ul" id="movie_ul">
-                    <a href="#">電影資訊</a>
+                    <a href="#" class="closelink">電影資訊</a>
                     <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
                     </li>
@@ -43,7 +43,7 @@
 
             <div class="nav-item">
                 <ul class="nav_ul" id="ticket_ul">
-                    <a href="#">訂票系統</a>
+                    <a href="#" class="closelink">訂票系統</a>
                     <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/ticket_orders/order_beware.jsp">確認劃位</a>
                     </li>
@@ -52,7 +52,7 @@
 
             <div class="nav-item">
                 <ul class="nav_ul" id="forum_ul">
-                    <a href="#">討論區</a>
+                    <a href="#" class="closelink">討論區</a>
                     <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
                     </li>
@@ -61,7 +61,7 @@
 
             <div class="nav-item">
                 <ul class="nav_ul" id="member_ul">
-                    <a href="#">會員專區</a>
+                    <a href="#" class="closelink">會員專區</a>
                     <li class="nav_li">
                         <a href="<%=request.getContextPath()%>/view/mem/mem_register.jsp">註冊會員</a>
                     </li>
@@ -199,7 +199,12 @@
 	        $(".checksession").on("click", function() {
 	            $("#submitcheck").submit();
 	        });
+			// 停止導覽列的標頭預設行為
+		    $(".closelink").on("click", function(e) {
+		    	e.preventDefault();
+		    });
 	    }
+	    
     </script>
     
     

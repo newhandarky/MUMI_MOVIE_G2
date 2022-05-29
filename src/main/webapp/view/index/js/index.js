@@ -98,9 +98,9 @@ $(function() {
     });
 
     // 停止導覽列的標頭預設行為
-    // $(".nav_ul").on("click", function(e) {
-    //     e.preventDefault();
-    // });
+    //$(".nav_ul").on("click", function(e) {
+    //	e.preventDefault();
+    //});
 
     $("#a_loupe").on("click", function(event) {
         event.preventDefault();
