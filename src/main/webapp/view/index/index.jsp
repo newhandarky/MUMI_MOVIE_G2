@@ -27,54 +27,22 @@ pageContext.setAttribute("list", list);
 
 <%
 MovieService movieSvc = new MovieService();
-SatisfyService SSC = new SatisfyService(HibernateUtil.getSessionFactory());
 List<MovieVO> list1 = movieSvc.getByState_id(21);
-List<MovieVO> list2 = new ArrayList();
-
-for(MovieVO mvo : list1){
-	String satisfy = SSC.findSatisyAvg(mvo.getMovie_id());
-	if(satisfy == "" || satisfy == null){
-		mvo.setSatisfy("尚未評分");
-		list2.add(mvo);
-	}else{
-		mvo.setSatisfy(satisfy);
-		list2.add(mvo);
-	}
-}
-
-
-MovieVO vo1 = list2.get(0);
-MovieVO vo2 = list2.get(1);
-MovieVO vo3 = list2.get(2);
-MovieVO vo4 = list2.get(3);
-MovieVO vo5 = list2.get(4);
+MovieVO vo1 = list1.get(0);
+MovieVO vo2 = list1.get(1);
+MovieVO vo3 = list1.get(2);
+MovieVO vo4 = list1.get(3);
+MovieVO vo5 = list1.get(4);
 // MovieVO vo6 = list2.get(5);
 
 
-
-ExpectService ESC = new ExpectService(HibernateUtil.getSessionFactory());
 List<MovieVO> slist = movieSvc.getByState_id(22);
-List<MovieVO> slist2 = new ArrayList();
-for(MovieVO movieVO : slist){
-	int expect = 0;
-	int total = ESC.findExceptTotal(movieVO.getMovie_id());
-	int liketotal = ESC.findLikeTotal(movieVO.getMovie_id());
-	if(total == 0){
-		movieVO.setExpect("尚未評分");
-		slist2.add(movieVO);
-	}else{
-		expect = Math.round(liketotal / total *100);
-		String str666= "期待度："+ expect + "%";
-		movieVO.setExpect(str666);
-		slist2.add(movieVO);
 
-	}
-}
-MovieVO svo1 = slist2.get(0);
-MovieVO svo2 = slist2.get(1);
-MovieVO svo3 = slist2.get(2);
-MovieVO svo4 = slist2.get(3);
-MovieVO svo5 = slist2.get(4);
+MovieVO svo1 = slist.get(0);
+MovieVO svo2 = slist.get(1);
+MovieVO svo3 = slist.get(2);
+MovieVO svo4 = slist.get(3);
+MovieVO svo5 = slist.get(4);
 // MovieVO svo6 = slist2.get(5);
 %>
 
