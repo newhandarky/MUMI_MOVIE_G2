@@ -29,11 +29,11 @@ public class InfoService {
 		return infoVO;
 	}
 	
-	public InfoVO updateInfo(Integer emp_id, String info_title, byte[] info_pic, String info_des, Integer info_state) { 
+	public InfoVO updateInfo(Integer info_id, String info_title, byte[] info_pic, String info_des, Integer info_state) { 
 		
 		InfoVO infoVO = new InfoVO();
 
-		infoVO.setEmp_id(emp_id);
+		infoVO.setInfo_id(info_id);
 		infoVO.setInfo_title(info_title);
 		infoVO.setInfo_pic(info_pic);
 		infoVO.setInfo_des(info_des);
