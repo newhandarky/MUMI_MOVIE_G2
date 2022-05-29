@@ -10,8 +10,6 @@ public class InfoVO implements java.io.Serializable{
 	private String info_des;
 	private Timestamp info_date;
 	private Integer info_state;
-//	private Timestamp info_update;
-//	private Integer editor_id;
 	
 	public Integer getInfo_id() {
 		return info_id;
@@ -55,5 +53,4 @@ public class InfoVO implements java.io.Serializable{
 	public void setInfo_state(Integer info_state) {
 		this.info_state = info_state;
 	}
-
 }

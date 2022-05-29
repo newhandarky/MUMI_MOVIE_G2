@@ -176,11 +176,13 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				}
 		
 				/*************************** 2.開始修改資料 *****************************************/
-				InfoService infoSvc = new InfoService();				
-				infoSvc.updateInfo(info_id, info_title, info_pic, info_des, info_state);				
+				System.out.println("準備修改資料");
+				InfoService infoSvc = new InfoService();
+				infoSvc.updateInfo(info_id, info_title, info_pic, info_des, info_state);	
+				System.out.println("為啥呢");
 				infoVO = infoSvc.getOneInfo(info_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-						
+				
 				req.setAttribute("infoVO", infoVO); // 資料庫update成功後,正確的的infoVO物件,存入req
 				String url = "/view/info/system_info_list.jsp";			
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
