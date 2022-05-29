@@ -89,7 +89,7 @@
                         <a href="../mem/check_order_beware.jsp">歷史消費</a>
                     </li>
                     <li class="nav_li">
-                        <a style="font-size: 14px" href="#" class="checksession">登入/登出</a>
+                        <a style="font-size: 14px" href="../index/login.jsp" class="checksession">登入/登出</a>
                     </li>
                 </ul>
             </div>
@@ -129,7 +129,7 @@
                                 <a href="../mem/check_order_beware.jsp">歷史消費</a>
                             </li>
                             <li>
-								<a href="#" class="checksession" >登入/登出</a>
+								<a href="../index/login.jsp" class="checksession" >登入/登出</a>
                             </li>
                         </ul>
 
@@ -197,7 +197,7 @@
     </div>
     
     <div class="hiddenform" style="display:none;">
-    	<form id="submitcheck" action="#" method="post">
+    	<form id="submitcheck" action="Logout" method="post">
         	<input type="hidden" name="action" value="logout">
             <button type="submit" id="btn-primary" class="btn btn-primary">確定登出</button>
         </form>
@@ -273,19 +273,19 @@
                     <h5>服務項目</h5>
                     <ul>
                         <li>
-                            <a href="<%=request.getContextPath()%>/view/index/login.jsp">會員登入</a>
+                            <a href="../index/login.jsp">會員登入</a>
                         </li>
                         <li>
-                            <a href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview_all.jsp">電影總覽</a>
+                            <a href="../Movie_overview/movie_overview_all.jsp">電影總覽</a>
                         </li>
                         <li>
-                            <a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html">討論區</a>
+                            <a href="../forum_article/ForumIndex.html">討論區</a>
                         </li>
                         <li>
-                            <a href="<%=request.getContextPath()%>/view/index/mumi_movie_map.jsp">網站地圖</a>
+                            <a href="../index/mumi_movie_map.jsp">網站地圖</a>
                         </li>
                         <li>
-                            <a href="<%=request.getContextPath()%>/view/index/ermodel.jsp">ER Model</a>
+                            <a href="../index/ermodel.jsp">ER Model</a>
                         </li>
                     </ul>
                 </div>

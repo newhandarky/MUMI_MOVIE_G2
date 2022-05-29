@@ -6,7 +6,7 @@
 header {
     width: 100%;
     height: 100px;
-    /* background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
+/*     background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
     background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
     position: fixed;
     z-index: 5;
@@ -427,14 +427,22 @@ span.mrs_12 {
     color: yellow;
 }
 
-#infopic {
-    width: 100%;
+.lastinfodiv{
+	width: 100%;
 }
 
-#infopic2 {
+.showinfopic{
+	width: 100%;
+}
+
+.showinfopic img{
+	width: 100%;
+}
+img.showpic {
     width: 100%;
     margin-top: 20px;
 }
+
 
 .info .info_p {
     text-align: center;
@@ -461,6 +469,10 @@ span.mrs_12 {
 
 .info .firstinfo {
     margin-top: 30px;
+}
+
+.info .showtitle{
+	min-width:300px;
 }
 
 
