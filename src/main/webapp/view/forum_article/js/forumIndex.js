@@ -17,21 +17,20 @@ const mem_nickname = document.querySelector('#mem_nickname');
 
 // 轉換板塊文章
 function changeBoard(board_num) {
-//	history.pushState(null, null, "http://35.221.208.108:8080/MUMI_MOVIE/view/forum_article/page=" + board_num);
 
 	tbodyAll.innerHTML = "";
 	$(document).find("#tableAll").attr("style", "display: block");
 	$(document).find(".articleOne").attr("style", "display: none");
-	boardUrl = "GetBoardArticleServlet?page=" + board_num;
-	console.log("board_num=" + board_num);
-	console.log("click#boardDiscuss=" + boardUrl);
+	
+	if (board_num != 0){
+		boardUrl = "GetBoardArticleServlet?page=" + board_num;
+	} else {
+		boardUrl = "IndexGetAllArticleServlet";
+	}
 	showBoardArticle(boardUrl);
+	
 }
 
-//     	// 網頁轉換觸發事件
-//     	window.addEventListener('popstate', () => {  
-//      	 　　changeBoard(board_num)
-//      	});
 
 // 顯示會員資訊
 function showMemInfo(memInfoUrl) {
@@ -229,9 +228,6 @@ window.addEventListener('load', () => {
 	if (boardUrl == null) {
 		boardUrl = 'IndexGetAllArticleServlet'; //網址
 	}
-	console.log("url=" + boardUrl);
-	console.log("hotUrl=" + hotUrl);
-
 
 	// 取出sessionStorage資料
 	var storage_data = JSON.parse(sessionStorage.getItem("login_data"));
