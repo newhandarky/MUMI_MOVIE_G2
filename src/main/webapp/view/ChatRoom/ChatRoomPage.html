@@ -14,7 +14,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
 * {
@@ -72,14 +74,14 @@
 </style>
 </head>
 
-<body onload="connect();" onunload="disconnect();">
+<body onload="connect();getCookie('nickname')" onunload="disconnect();">
 	<div class="container">
 		<div id="messagesArea">
 			<!-- <p>安妮雅 : <img src="./an/anyabanzai1.png" width="100px" alt=""></p> -->
 		</div>
 		<div class="panel input-area">
 			<input id="userName" class="text-field" type="text"
-				placeholder="請輸入姓名" /> <input id="message" class="text-field"
+				placeholder="請輸入姓名" disabled="disabled" /> <input id="message" class="text-field"
 				type="text" placeholder="請輸入訊息"
 				onkeydown="if (event.keyCode == 13) sendMessage();" />
 			<!-- <input type="button" id="connect" class="button" value="Connect" onclick="connect();" /> 
@@ -195,9 +197,9 @@
 			}
 		};
 
-		webSocket.onclose = function (event) {
-			updateStatus("段開");
-		};
+// 		webSocket.onclose = function (event) {
+// 			updateStatus("段開");
+// 		};
 	}
 
 	var inputUserName = document.getElementById("userName");
@@ -261,7 +263,15 @@
 			}
 		}
 	}
-
+	function getCookie(name) {
+		  const value = `; ${document.cookie}`;
+		  const parts = value.split(`; ${name}=`);
+		  const nickname = parts.pop().split(';').shift();
+		  $("#userName").attr('placeholder',nickname)
+		  console.log($("#userName"))
+		  
+		  console.log(nickname)
+		}
 
 </script>
 
