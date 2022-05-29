@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<<<<<<< HEAD
+
 <%@ page import="web.info.entity.*"%>
 <%@ page import="web.info.service.*"%>
 <%@ page import="java.util.*"%>
@@ -10,7 +10,7 @@ InfoService infoSvc = new InfoService();
 List<InfoVO> list = infoSvc.getAllPublished();
 pageContext.setAttribute("list", list);
 %>
-=======
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="web.movie.dao.*"%>
@@ -22,16 +22,16 @@ pageContext.setAttribute("list", list);
 <%@ page import="java.sql.Timestamp"%>
 <%@page import="org.hibernate.Session"%>
 <%@page import="core.util.HibernateUtil"%>
->>>>>>> Jing
+
 
 
 <%
 MovieService movieSvc = new MovieService();
 SatisfyService SSC = new SatisfyService(HibernateUtil.getSessionFactory());
-List<MovieVO> list = movieSvc.getByState_id(1);
+List<MovieVO> list1 = movieSvc.getByState_id(1);
 List<MovieVO> list2 = new ArrayList();
 
-for(MovieVO mvo : list){
+for(MovieVO mvo : list1){
 	String satisfy = SSC.findSatisyAvg(mvo.getMovie_id());
 	if(satisfy == "" || satisfy == null){
 		mvo.setSatisfy("尚未評分");
