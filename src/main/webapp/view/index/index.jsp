@@ -29,6 +29,8 @@ pageContext.setAttribute("list", list);
 
 <%@ include file="header.jsp" %>
 
+
+
     <!-- 電影輪播 -->
     <div id="picouter">
         <div id="app">
