@@ -83,7 +83,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- JS檔連結記得修改 -->
     <script src="<%=request.getContextPath()%>/view/index/js/login.js"></script>
-     <script>
+    
+    <script>
      var btn_login_data = document.querySelector("#btn_primary");
      var account_data = document.querySelector("#floatingAccount");
      btn_login_data.addEventListener("click", function () {
@@ -95,6 +96,7 @@
      });
     
     </script>
+     
 </body>
 
 </html>

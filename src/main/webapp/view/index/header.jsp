@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <body>
     <header>
         <!-- 專題LOGO -->
@@ -74,7 +75,10 @@
                         <a href="<%=request.getContextPath()%>/view/mem/check_order_beware.jsp">歷史消費</a>
                     </li>
                     <li class="nav_li">
-                        <a style="font-size: 14px" href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession">登入/登出</a>
+                        <a href="<%=request.getContextPath()%>/view/index/login.jsp" class="checksession">會員登入</a>
+                    </li>
+                    <li class="nav_li">
+                        <a href="<%=request.getContextPath()%>/view/index/logout.jsp" class="checksession">會員登出</a>
                     </li>
                 </ul>
             </div>
@@ -180,18 +184,5 @@
         </div>
     </div>
     
-    <div class="hiddenform" style="display:none;">
-    	<form id="submitcheck" action="<%=request.getContextPath()%>/member/Logout" method="post">
-        	<input type="hidden" name="action" value="logout">
-            <button type="submit" id="btn-primary" class="btn btn-primary">確定登出</button>
-        </form>
-    </div>
     
-    <script>
-	    window.onload=function(){
-	        $(".checksession").on("click", function() {
-	            $("#submitcheck").submit();
-	        });
-	    }
-    </script>
     
