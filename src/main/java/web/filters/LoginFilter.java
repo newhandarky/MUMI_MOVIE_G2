@@ -22,7 +22,7 @@ import web.member.service.MemService;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(
-		urlPatterns = {"/view/mem/mem_revise.jsp", "/view/ticket_orders/order_beware.jsp" ,"/view/forum_article/ForumIndex.html", "/view/mem/mem_profiles.jsp"}
+		urlPatterns = {"/view/mem/mem_revise.jsp", "/view/ticket_orders/order_beware.jsp" ,"/view/forum_article/ForumIndex.html", "/view/mem/mem_profiles.jsp", "/view/ChatRoom/ChatRoomPage.html"}
 )
 public class LoginFilter implements Filter {
 
