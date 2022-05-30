@@ -64,14 +64,6 @@ pageContext.setAttribute("str3", str3);
 
 %>
 
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 

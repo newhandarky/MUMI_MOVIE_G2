@@ -33,28 +33,6 @@ header .hide_item_out {
 }
 
 
-/* 搜尋欄位 */
-
-#search {
-    display: inline-block;
-    position: absolute;
-    right: 130px;
-    top: 12px;
-    background-color: rgb(182, 212, 223);
-    border-radius: 15px;
-    /* outline-style: none; */
-    border: 0px;
-    width: 150px;
-}
-
-#loupe {
-    position: absolute;
-    width: 20px;
-    right: 140px;
-    top: 14px;
-}
-
-
 /* 導覽選單 */
 
 #navi {

@@ -420,6 +420,7 @@ footer h5 {
     font-weight: bold;
     text-align: left;
     padding-left: 30px;
+    color: white;
 }
 
 footer ul {
@@ -454,18 +455,6 @@ footer ul li a {
     margin-left: 30px;
 }
 
-#ft_icons span img {
-    width: 30px;
-}
-
-#ft_icons {
-    text-align: left;
-}
-
-#ft_icons a {
-    text-decoration: none;
-}
-
 footer .copyright {
     background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
     bottom: 0;
@@ -479,8 +468,8 @@ footer .copyright a {
     color: white;
 }
 
-footer .copyright a:hover,
-footer .copyright a:active {
+footer a:hover,
+footer a:active {
     color: #ffc107;
 }
 
