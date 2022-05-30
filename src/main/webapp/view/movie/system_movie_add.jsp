@@ -58,13 +58,13 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="movie_ch"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "電影中文名稱" : movieVO.getMovie_ch()%>">
+										value="<%=(movieVO == null) ? "哈比人" : movieVO.getMovie_ch()%>">
 								</div>
 								<label class="col-sm-2 col-form-label">電影英文名稱:</label>
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="movie_en"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "MOVIE ENGLISH NAME" : movieVO.getMovie_en()%>">
+										value="<%=(movieVO == null) ? "HAPPY MAN" : movieVO.getMovie_en()%>">
 								</div>
 							</div>
 							<div class="mb-3 row">
@@ -108,13 +108,13 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="movie_intro"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "神作:/?" : movieVO.getMovie_intro()%>">
+										value="<%=(movieVO == null) ? "很多哈比人" : movieVO.getMovie_intro()%>">
 								</div>
 								<label class="col-sm-2 col-form-label">演員：</label>
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="casts"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "帥哥、美女" : movieVO.getCasts()%>">
+										value="<%=(movieVO == null) ? "七個小矮人" : movieVO.getCasts()%>">
 								</div>
 							</div>
 
@@ -123,13 +123,13 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="director"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "帥哥、" : movieVO.getDirector()%>">
+										value="<%=(movieVO == null) ? "彼得傑克森" : movieVO.getDirector()%>">
 								</div>
 								<label class="col-sm-2 col-form-label">預告：</label>
 								<div class="col-sm-3">
 									<input class="form-control" type="text" name="trailer"
 										aria-label="default input example"
-										value="<%=(movieVO == null) ? "http://localhost:8080/MUMI_MOVIE/view/movie/MovieServlet" : movieVO.getTrailer()%>">
+										value="<%=(movieVO == null) ? "http://35.221.208.108:8080/MUMI_MOVIE/view/movie/system_movie_listAll.jsp" : movieVO.getTrailer()%>">
 								</div>
 							</div>
 							<div class="mb-3 row">
