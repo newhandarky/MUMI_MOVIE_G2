@@ -28,7 +28,7 @@ pageContext.setAttribute("list", list);
 <%
 MovieService movieSvc = new MovieService();
 SatisfyService SSC = new SatisfyService(HibernateUtil.getSessionFactory());
-List<MovieVO> list1 = movieSvc.getByState_id(1);
+List<MovieVO> list1 = movieSvc.getByState_id(21);
 
 MovieVO vo1 = list1.get(0);
 MovieVO vo2 = list1.get(1);
@@ -40,7 +40,7 @@ MovieVO vo6 = list1.get(5);
 
 
 
-List<MovieVO> slist = movieSvc.getByState_id(2);
+List<MovieVO> slist = movieSvc.getByState_id(22);
 
 MovieVO svo1 = slist.get(0);
 MovieVO svo2 = slist.get(1);
