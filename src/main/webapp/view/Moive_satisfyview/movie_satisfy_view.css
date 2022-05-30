@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-/* 頁首 */
+/* ���� */
 
 header {
     width: 100%;
@@ -14,7 +14,7 @@ header {
 }
 
 
-/* 搜尋欄位 */
+/* ������ */
 
 #search {
     display: inline-block;
@@ -35,7 +35,7 @@ header {
 }
 
 
-/* 導覽選單 */
+/* 撠汗�� */
 
 #navi {
     position: absolute;
@@ -80,7 +80,7 @@ header {
 }
 
 
-/* 下拉選單 */
+/* 銝�� */
 
 .nav-item ul li a:link,
 .nav-item ul li a:visited {
@@ -106,7 +106,7 @@ ul.switchDisplay li {
 }
 
 
-/* 背景亮度按鈕 */
+/* ��鈭桀漲���� */
 
 #lightbtn {
     height: 50px;
@@ -140,6 +140,8 @@ ul.switchDisplay li {
 
 /* footer */
 
+/* footer */
+
 footer {
     width: 100%;
     background-image: linear-gradient(to top, #537895 100%, #09203f 0%);
@@ -167,6 +169,23 @@ footer ul li a {
     text-decoration: none;
     color: antiquewhite;
     font-size: 14px;
+}
+
+.focus_us {
+    display: block;
+    text-align: left;
+}
+
+.focus_us p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: white;
+}
+
+.focus_us a {
+    text-decoration: none;
+    color: antiquewhite;
+    margin-left: 30px;
 }
 
 #ft_icons span img {
@@ -203,7 +222,7 @@ footer .copyright a:active {
     width: 150px;
 }
 
-/* ===== 重要性的星號 ===== */
+/* ===== ����抒���� ===== */
 div.sati{
     margin-top: 20px;
    

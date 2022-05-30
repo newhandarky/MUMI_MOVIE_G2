@@ -78,7 +78,7 @@ pageContext.setAttribute("str3", str3);
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <link rel="stylesheet" href="<%=request.getContextPath()%>/view/index/css/index.css">
+      <link rel="stylesheet" href="<%=request.getContextPath()%>/view/Movie_overview/movie_overview.css">
     
 
     <style>
@@ -199,7 +199,7 @@ pageContext.setAttribute("str3", str3);
 
 
 <%@ include file="/view/index/footer.jsp" %>
-
+<script src="<%=request.getContextPath() %>/view/Movie_overview/movie_overview.js"></script>
 	<script>
 	var check = ${check};
 	var check2 = ${check2};
