@@ -55,8 +55,6 @@
 	                <a href="<%=request.getContextPath()%>/view/index/admin_index.jsp">
 	                    <button type="submit" class="btn btn-primary btn_login" id="btn_login">登入</button>
 	                </a>
-	                <button type="button" class="btn btn-secondary btn_forget" id="btn_forget">忘記密碼</button>
-	
 	            </div>
 	    	</form>
         </div>

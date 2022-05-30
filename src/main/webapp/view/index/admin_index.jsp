@@ -22,9 +22,13 @@
 
         <!-- 主要工作區 -->
         <div class="main">
-
-
-
+			<div class="container">
+				<div class="row">
+					<div class="biglogoarea">
+						<img class="biglogo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
+					</div>	
+				</div>	
+			</div>	
 
 
 

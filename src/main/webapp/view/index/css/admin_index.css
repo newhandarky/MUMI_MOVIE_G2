@@ -409,6 +409,15 @@ body {
     width: 100px;
 }
 
+.biglogoarea{
+	width:80%;
+	margin:30px auto;
+}
+
+.biglogo{
+	width:100%
+}
+
 ::-webkit-scrollbar {
     background: transparent;
     width: 5px;
