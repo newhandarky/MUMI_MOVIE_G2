@@ -182,7 +182,7 @@ pageContext.setAttribute("str3", str3);
 
             <div class="col-md-7 info">
                 <span class="h1">${movieVO.movie_ch}</span>
-                <span class="h2"><a href=""
+                <span class="h2"><a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html"
                         style="text-decoration: none;color: black; font-weight: bold;">&nbsp&nbsp前往討論區&nbsp&nbsp</a>
                 </span>
                 <span class="h3">滿意度：${movieVO.satisfy}<img width="50px" src="<%=request.getContextPath() %>/view/Moive_satisfyview/star.jpg"></span><br>

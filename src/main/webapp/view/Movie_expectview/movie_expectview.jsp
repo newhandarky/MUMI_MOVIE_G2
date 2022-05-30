@@ -170,7 +170,7 @@ pageContext.setAttribute("str3", str3);
        
             <div class="col-md-7 info">
                 <span class="h1">${movieVO.movie_ch}</span>
-                <span class="h2"><a href=""
+                <span class="h2"><a href="<%=request.getContextPath()%>/view/forum_article/ForumIndex.html"
                         style="text-decoration: none;color: black; font-weight: bold;">&nbsp&nbsp前往討論區&nbsp&nbsp</a>
                 </span>
                 <span class="h3"><%=pageContext.getAttribute("expect")%></span><br>
