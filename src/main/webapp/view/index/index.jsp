@@ -249,12 +249,7 @@ MovieVO svo6 = slist.get(5);
 		</div> 
     </div>
     
-    <div class="container">
-        <div class="row">
-			<img class="showinfopic" src="<%=request.getContextPath()%>/view/index/image/others/iamangry.jpg">		                
-        </div>
-    </div>
-	        
+
     <h1 id="map_h1">影城位置</h1>
    	<div class="map_rwd">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4676870452963!2d121.54106421395167!3d25.052132843720578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abe6b0446815%3A0xf006dde8c27afcc7!2z57ev6IKyVGliYU1l6ZmE6Kit5Y-w5YyX6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1647743247630!5m2!1szh-TW!2stw"

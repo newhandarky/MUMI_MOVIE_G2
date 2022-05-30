@@ -65,13 +65,15 @@
                     <li><a href="<%=request.getContextPath()%>/view/info/system_info_list.jsp">公告管理</a></li>
                 </ul>
             </li>
-            <li class="has-dropdown">
-                <a href="#"> 其他</a>
-                <ul class="sidebar-dropdown list-unstyled">
-                    <li><a href="">登出</a></li>
-                    <li><a href="<%=request.getContextPath()%>/view/index/index.jsp">回到前台首頁</a></li>
-                </ul>
-            </li>
+           <li class="has-dropdown"><a href="#"> 其他</a>
+			    <ul class="sidebar-dropdown list-unstyled">
+				     <li><form action="<%=request.getContextPath()%>/view/employee/LoginHandler" method="post"></form>
+				      <input type="hidden" name="action" value="logout">
+				      <a href="<%=request.getContextPath()%>/view/employee/admin_logout.jsp">登出</a></li>
+				     <li><a href="<%=request.getContextPath()%>/view/index/admin_index.jsp">返回後台首頁</a></li>
+				     <li><a href="<%=request.getContextPath()%>/view/index/index.jsp">回到前台首頁</a></li>
+				    </ul>
+			 </li>
         </ul>
     </aside>
 
