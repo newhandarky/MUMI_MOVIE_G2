@@ -19,22 +19,28 @@
            uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
-
+MemVO mvo;
 MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 ExpectService ESC = new ExpectService(HibernateUtil.getSessionFactory());
-MemVO mvo = (MemVO)session.getAttribute("memVO");
+try{mvo = (MemVO)session.getAttribute("memVO");
+}catch(Exception e){
+	mvo = null;
+}
+
 if(mvo != null){
 	ExpectBean eb = ESC.findMovieAndExpectByID(mvo.getMem_id(), movieVO.getMovie_id());
 	pageContext.setAttribute("check", 1);
 	if(eb != null){
 		pageContext.setAttribute("check2", 1);
 		pageContext.setAttribute("memVO",mvo);
+	}else{
+		pageContext.setAttribute("check2", 0);
+		pageContext.setAttribute("memVO",mvo);
 	}
 		
 }else{
 	pageContext.setAttribute("check", 0);
 	pageContext.setAttribute("check2", 0);
-
 }
 List<String> typelist = (List<String>) request.getAttribute("typelist");
 String str = movieVO.getTrailer();
@@ -72,7 +78,7 @@ pageContext.setAttribute("str3", str3);
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/view/Movie_expectview/header.css">
+     <link rel="stylesheet" href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.css">
     
 
     <style>
@@ -137,6 +143,7 @@ pageContext.setAttribute("str3", str3);
 
 <body>
 
+<%@ include file="/view/index/header.jsp" %>
 
     <div>
         <span class="return"><a href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_soon.jsp"

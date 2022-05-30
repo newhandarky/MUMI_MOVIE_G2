@@ -15,7 +15,7 @@
 <%
 MovieService movieSvc = new MovieService();
 SatisfyService satisfySvc = new SatisfyService(HibernateUtil.getSessionFactory());
-List<MovieVO> list = movieSvc.getByState_id(1);
+List<MovieVO> list = movieSvc.getByState_id(21);
 List<MovieVO> list2 = new ArrayList();
 for(MovieVO mvo : list){
 	String satisfy = satisfySvc.findSatisyAvg(mvo.getMovie_id());
@@ -63,6 +63,9 @@ pageContext.setAttribute("list2", list2);
     <main>
 
 
+
+
+
         <div class="container">
 
             <div class="row">
@@ -74,6 +77,7 @@ pageContext.setAttribute("list2", list2);
                 </div>
             </div>
         </div>
+        
         
 
 
