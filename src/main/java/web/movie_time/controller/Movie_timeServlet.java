@@ -106,7 +106,7 @@ public class Movie_timeServlet extends HttpServlet {
 				Movie_timeVO movie_timeVO = movie_timeSvc.getOneMovie_time(movie_time_id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				System.out.println(movie_timeVO);
+			
 				req.setAttribute("movie_timeVO", movie_timeVO); // 資料庫取出的movie_timeVO物件,存入req
 				
 				String url = "/view/movie_time/system_movie_time_update.jsp";
@@ -187,7 +187,7 @@ public class Movie_timeServlet extends HttpServlet {
 
 				for (int i = 0; i < showing.length; i++) {
 					java.sql.Date showing_date = java.sql.Date.valueOf(req.getParameter("showing_date").trim());
-					System.out.println(showing_date);
+			
 					Integer hall_id = new Integer(req.getParameter("hall_id"));
 
 					movie_timeVO = new Movie_timeVO();
@@ -218,6 +218,7 @@ public class Movie_timeServlet extends HttpServlet {
 								RequestDispatcher failureView = req
 										.getRequestDispatcher("/view/movie_time/system_movie_time_add.jsp");
 								failureView.forward(req, res);
+								return;
 								
 							}else {
 
