@@ -4,6 +4,7 @@
 <body>
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+        <a href="<%=request.getContextPath()%>/view/index/admin_index.jsp" style="text-decoration: none">
         <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
             <!-- 影城LOGO -->
             <img class="img-logo" src="<%=request.getContextPath()%>/view/index/image/others/mujilogo.png" alt="">
@@ -19,6 +20,7 @@
                 </h5>
             </div>
         </div>
+        </a>
 
         <div class="search position-relative text-center px-4 py-3 mt-2">
             <input type="text" class="form-control w-100 border-0 bg-transparent" placeholder="Search here">
