@@ -24,14 +24,6 @@
 	<div class="main">
 		<div class="hall">
 			<div class="seat-state">
-				<div class="seat-info"></div>
-				<p>可選</p>
-				<div class="seat-info selected"></div>
-				<p>您的座位</p>
-				<div class="seat-info used"></div>
-				<p>已使用</p>
-				<div class="seat-info hold"></div>
-				<p>保留位</p>
 			</div>
 
 			<div class="screen">
