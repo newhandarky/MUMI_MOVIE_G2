@@ -21,12 +21,6 @@
             </div>
         </div>
         </a>
-
-        <div class="search position-relative text-center px-4 py-3 mt-2">
-            <input type="text" class="form-control w-100 border-0 bg-transparent" placeholder="Search here">
-            <i class="fa fa-search position-absolute d-block fs-6"></i>
-        </div>
-
         <!-- 左邊側邊欄功能列 -->
         <ul class="categories list-unstyled">
             <li class="has-dropdown">
