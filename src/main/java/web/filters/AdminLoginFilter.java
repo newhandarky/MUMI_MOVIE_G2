@@ -18,7 +18,8 @@ import web.employee.entity.*;
 @WebFilter(
 		urlPatterns = {"/view/index/admin_index.jsp", "/view/employee/system_employee_list.jsp", "/view/employee/system_employee_add.jsp",
 				"/view/employee/system_employee_revise.jsp", "/view/info/system_addinfo.jsp", "/view/info/system_editinfo.jsp", "/view/info/system_info_list.jsp"
-				,"/view/employee/system_mem_list.jsp"}
+				,"/view/employee/system_mem_list.jsp", "/view/ticket_orders/order_beware.jsp", "/view/movie/system_movie_add.jsp", "/view/forum_article/AdminForumIndex.html",
+				"/view/hall_seat/system_hall_seat.jsp"}
 )
 public class AdminLoginFilter implements Filter {
 
