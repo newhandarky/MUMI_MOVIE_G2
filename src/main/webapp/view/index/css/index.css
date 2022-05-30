@@ -31,7 +31,7 @@ header .hide_item_out {
 }
 
 
-/* æœå°‹æ¬„ä½ */
+/* ·j´MÄæ¦ì */
 
 #search {
     display: inline-block;
@@ -52,7 +52,7 @@ header .hide_item_out {
 }
 
 
-/* å°è¦½é¸å–® */
+/* ¾ÉÄı¿ï³æ */
 
 #navi {
     position: absolute;
@@ -101,7 +101,7 @@ header .hide_item_out {
 }
 
 
-/* æ¼¢å ¡é¸å–® */
+/* º~³ù¿ï³æ */
 
 .hamberger_menu {
     position: absolute;
@@ -141,7 +141,7 @@ header .hide_item_out {
 }
 
 
-/* ä¸‹æ‹‰é¸å–® */
+/* ¤U©Ô¿ï³æ */
 
 .nav-item ul li a:link,
 .nav-item ul li a:visited {
@@ -168,7 +168,7 @@ ul.switchDisplay li {
 }
 
 
-/* è¼ªæ’­èƒŒæ™¯ */
+/* ½ü¼½­I´º */
 
 .picouter.-dark {
     background-color: #111111;
@@ -185,7 +185,7 @@ ul.switchDisplay li {
 }
 
 
-/* èƒŒæ™¯äº®åº¦æŒ‰éˆ• */
+/* ­I´º«G«×«ö¶s */
 
 #lightbtn {
     display: inline-block;
@@ -212,7 +212,7 @@ ul.switchDisplay li {
 }
 
 
-/* é›»å½±å€ */
+/* ¹q¼v°Ï */
 
 #movies {
     min-height: 400px;
@@ -224,7 +224,7 @@ ul.switchDisplay li {
 }
 
 
-/* æ”¾å¤§é–å®šåœ¨ç•¶å‰å€åŸŸ */
+/* ©ñ¤jÂê©w¦b·í«e°Ï°ì */
 
 .card-img-top {
     height: 250px;
@@ -276,7 +276,7 @@ iframe.-show {
 }
 
 
-/* å¿«é€Ÿè³¼ç¥¨ */
+/* §Ö³tÁÊ²¼ */
 
 #app2.row {
     max-height: 450px;
@@ -300,7 +300,7 @@ iframe.-show {
 }
 
 
-/* å¿«é€Ÿè³¼ç¥¨icon */
+/* §Ö³tÁÊ²¼icon */
 
 #movieicon {
     width: 20px;
@@ -365,7 +365,7 @@ iframe.-show {
 }
 
 
-/* youtubeåµŒå…¥ */
+/* youtube´O¤J */
 
 .embed-container {
     position: relative;
@@ -414,7 +414,7 @@ span.mrs_12 {
 }
 
 
-/* å½±åŸå…¬å‘Š */
+/* ¼v«°¤½§i */
 
 #info_h1 {
     text-align: center;
@@ -476,7 +476,7 @@ img.showpic {
 }
 
 
-/* Googleåœ°åœ– */
+/* Google¦a¹Ï */
 
 #map_h1 {
     text-align: center;
@@ -583,7 +583,7 @@ footer a:active {
 }
 
 
-/* RWDèª¿æ•´ */
+/* RWD½Õ¾ã */
 
 @media (max-width: 768px) {
     .info .info_p .showinfo,

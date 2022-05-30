@@ -27,23 +27,27 @@ pageContext.setAttribute("list", list);
 
 <%
 MovieService movieSvc = new MovieService();
-List<MovieVO> list1 = movieSvc.getByState_id(21);
+SatisfyService SSC = new SatisfyService(HibernateUtil.getSessionFactory());
+List<MovieVO> list1 = movieSvc.getByState_id(1);
+
 MovieVO vo1 = list1.get(0);
 MovieVO vo2 = list1.get(1);
 MovieVO vo3 = list1.get(2);
 MovieVO vo4 = list1.get(3);
 MovieVO vo5 = list1.get(4);
-// MovieVO vo6 = list2.get(5);
+MovieVO vo6 = list1.get(5);
 
 
-List<MovieVO> slist = movieSvc.getByState_id(22);
+
+
+List<MovieVO> slist = movieSvc.getByState_id(2);
 
 MovieVO svo1 = slist.get(0);
 MovieVO svo2 = slist.get(1);
 MovieVO svo3 = slist.get(2);
 MovieVO svo4 = slist.get(3);
 MovieVO svo5 = slist.get(4);
-// MovieVO svo6 = slist2.get(5);
+MovieVO svo6 = slist.get(5);
 %>
 
 <!DOCTYPE html>
@@ -59,6 +63,12 @@ MovieVO svo5 = slist.get(4);
     	  rel="stylesheet" 
     	  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
     	  crossorigin="anonymous">
+   	<style>
+   		body{
+	background-image: url("<%=request.getContextPath() %>/view/Movie_overview/MUMI.png");
+
+	}
+   	</style>
 </head>
 
 <%@ include file="header.jsp" %>
@@ -77,21 +87,21 @@ MovieVO svo5 = slist.get(4);
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
                 </div>
-                <div class="carousel-inner">
+                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader2?movie_id=<%=vo1.getMovie_id()%>" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/JUJUTSU KAISEN ZERO_Poster_TW_1450x608.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader2?movie_id=<%=vo2.getMovie_id()%>" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/60fe5d79c7bfb570c4b41fffb1468e3c.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader2?movie_id=<%=vo3.getMovie_id()%>" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/3d24f9cb36fb47d89b4be3bc1614ea2a.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader2?movie_id=<%=vo4.getMovie_id()%>" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/8ad709b813e49f42da3809a494f1f0fc.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader2?movie_id=<%=vo5.getMovie_id()%>" class="d-block w-100" alt="...">
+                        <img src="<%=request.getContextPath()%>/view/index/image/carousel/27ca24800b7dbfbbe67f6279deb4bb89.jpg" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -116,39 +126,39 @@ MovieVO svo5 = slist.get(4);
             <div class="row" id="div_now">
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo1.getMovie_id()%>" class="card-img-top" alt="...">
+                       <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo1.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo1.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                             <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo1.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo2.getMovie_id()%>" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo2.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo2.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                             <p class="card-text"><%=vo2.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo2.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo3.getMovie_id()%>" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo3.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo3.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_18.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=vo3.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo3.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo4.getMovie_id()%>" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo4.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo4.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_6.png" class="mrs" alt=""></p>
+                             <p class="card-text"><%=vo4.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo4.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo5.getMovie_id()%>" class="card-img-top" alt="...">
+                        <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo5.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo5.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
                             <p class="card-text"><%=vo5.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo5.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
@@ -156,9 +166,9 @@ MovieVO svo5 = slist.get(4);
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo1.getMovie_id()%>" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=vo6.getMovie_id()%>&now=now" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=vo6.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text"><%=vo1.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo1.getMovie_rating_id()%>" class="mrs" alt=""></p>
+                            <p class="card-text"><%=vo6.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=vo6.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
@@ -166,49 +176,49 @@ MovieVO svo5 = slist.get(4);
             <div class="row -off" id="div_cs">
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/Fortress_Poster_TW (1).jpg" class="card-img-top" alt="...">
+                        <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo1.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo1.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">終極堡壘<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo1.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo1.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/hideandseekPOSTER.jpg" class="card-img-top" alt="...">
+                        <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo2.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo2.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">詭迷藏<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_18.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo2.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo2.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/IdaRed_180x270_Poster.jpg" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo3.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo3.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">劫獄救援<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_15.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo3.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo3.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/KBW5d0AM3mVAOKbP0PJh-1280x1827.jpg" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo4.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo4.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">秘境探險<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_0.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo4.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo4.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/LostIllusions_180x270_Poster.jpg" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo5.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo5.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">巴黎夢想家<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_12.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo5.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo5.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>
                 <div class="col col-lg-4 col-xl-2">
                     <div class="card" style="width: 10rem;">
-                        <img src="<%=request.getContextPath()%>/view/index/image/moviestand/sonic.jpg" class="card-img-top" alt="...">
+                         <a href="<%=request.getContextPath() %>/MovieOverViewServlet?movie_id=<%=svo6.getMovie_id()%>&soon=soon" title="測試超連結"> <img src="<%=request.getContextPath() %>/view/movie/DBGifReader?movie_id=<%=svo6.getMovie_id()%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
-                            <p class="card-text">音速小子2<img src="<%=request.getContextPath()%>/view/index/image/icons/mrs_6.png" class="mrs" alt=""></p>
+                            <p class="card-text"><%=svo6.getMovie_ch()%><img src="<%=request.getContextPath() %>/view/movie_rating/DBGifReader?movie_rating_id=<%=svo6.getMovie_rating_id()%>" class="mrs" alt=""></p>
                         </div>
                     </div>
                 </div>

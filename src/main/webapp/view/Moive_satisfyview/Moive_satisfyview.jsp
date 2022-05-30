@@ -28,12 +28,20 @@ if(satisfy == "" || satisfy == null){
 }else{
  movieVO.setSatisfy(satisfy);
 }
-MemVO mvo = (MemVO)session.getAttribute("memVO");
+MemVO mvo;
+try{mvo = (MemVO)session.getAttribute("memVO");
+}catch(Exception e){
+	mvo = null;
+}
+
 if(mvo != null){
 	SatisfyBean sb = ESC.findMovieAndSatisfyByID(mvo.getMem_id(), movieVO.getMovie_id());
 	pageContext.setAttribute("check", 1);
 	if(sb != null){
 		pageContext.setAttribute("check2", 1);
+		pageContext.setAttribute("memVO",mvo);
+	}else{
+		pageContext.setAttribute("check2", 0);
 		pageContext.setAttribute("memVO",mvo);
 	}
 		
@@ -80,7 +88,7 @@ pageContext.setAttribute("str3", str3);
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/view/Moive_satisfyview/movie_satisfy_view.css">
+     <link rel="stylesheet" href="<%=request.getContextPath() %>/view/Movie_overview/movie_overview_now.css">
 
     <style>
         body {
@@ -144,118 +152,7 @@ pageContext.setAttribute("str3", str3);
 
 <body>
     <!-- 頁首 -->
-    <header>
-        <!-- 背景亮度按鈕 -->
-        <div id="lightbtn">
-            <!-- 搜尋欄位 -->
-            <input id="search" type="text">
-            <a id="a_loupe" href="#">
-                <img id="loupe" src="./IMAGE/icons/loupe.png" alt="">
-            </a>
-            <button type="button" class="btn btn-success btn-ln" id="btn-light">Light
-                <span>
-                    <img id="sun" class="sunmoon" src="./IMAGE/icons/sun.png" alt="">
-                </span>
-            </button>
-            <button type="button" class="btn btn-dark btn-ln -off" id="btn-dark">Dark
-                <span>
-                    <img id="moon" class="sunmoon -off" src="./IMAGE/icons/crescent-moon.png" alt="">
-                </span>
-            </button>
-        </div>
-
-        <!-- 功能導覽列 -->
-        <nav id="navi">
-
-
-            <div class="nav-item">
-
-                <ul class="nav_ul" id="movie_ul">
-                    <a href="#">電影資訊</a>
-                    <li class="nav_li">
-                        <a href="#">現正熱映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">即將上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">二輪上映</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">歷史上映</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-item">
-
-                <ul class="nav_ul" id="ticket_ul">
-                    <a href="#">訂票系統</a>
-                    <li class="nav_li">
-                        <a href="#">快速購票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">預售票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">讓票</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">確認劃位</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-item">
-
-                <ul class="nav_ul" id="forum_ul">
-                    <a href="#">討論區</a>
-
-                    <!--    有需要再新增 
-                        <li class="nav_li">
-                        <a href="#">討論區1</a>
-                    
-                    -->
-                </ul>
-            </div>
-
-            <div class="nav-item">
-
-                <ul class="nav_ul" id="goods_ul">
-                    <a href="#">電影商城</a>
-                    <li class="nav_li">
-                        <a href="#">餐飲類別</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">周邊商品</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-item">
-
-                <ul class="nav_ul" id="member_ul">
-                    <a href="#">會員登入</a>
-                    <li class="nav_li">
-                        <a href="#">會員登入</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">註冊會員</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">修改資料</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">歷史消費</a>
-                    </li>
-                    <li class="nav_li">
-                        <a href="#">會員登出</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-    </header>
+    <%@ include file="/view/index/header.jsp" %>
 
     <!-- Main content -->
     <div>

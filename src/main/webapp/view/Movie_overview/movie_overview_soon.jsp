@@ -17,7 +17,7 @@
 
 ExpectService ESC = new ExpectService(HibernateUtil.getSessionFactory());
 MovieService movieSvc = new MovieService();
-List<MovieVO> list = movieSvc.getByState_id(2);
+List<MovieVO> list = movieSvc.getByState_id(22);
 List<MovieVO> list2 = new ArrayList();
 for(MovieVO movieVO :list){
 	int expect = 0;

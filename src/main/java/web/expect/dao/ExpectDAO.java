@@ -74,14 +74,18 @@ public class ExpectDAO implements ExpectBean_interface {
 // 			}
 // 			System.out.println();
 // 		}
-		sessionFactory.getCurrentSession().beginTransaction();
-		@SuppressWarnings("unchecked")
-		Query query = this.getSession().createQuery("from ExpectBean e where e.movie_id = :movie_id and e.mem_id = :mem_id ");
-		query.setParameter("movie_id", movie_id);
-		query.setParameter("mem_id", mem_id);
-		List<ExpectBean> list = query.list();
-		ExpectBean eb = list.get(0);
-		sessionFactory.getCurrentSession().getTransaction().commit();
-		return eb;
+		try{sessionFactory.getCurrentSession().beginTransaction();
+			@SuppressWarnings("unchecked")
+			Query query = this.getSession().createQuery("from ExpectBean e where e.movie_id = :movie_id and e.mem_id = :mem_id ");
+			query.setParameter("movie_id", movie_id);
+			query.setParameter("mem_id", mem_id);
+			List<ExpectBean> list = query.list();
+			ExpectBean eb = list.get(0);
+			sessionFactory.getCurrentSession().getTransaction().commit();
+			return eb;
+		}catch(Exception e) {
+		sessionFactory.getCurrentSession().getTransaction().rollback();
+		return null;
+		}
 	}
 }

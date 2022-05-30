@@ -57,30 +57,38 @@ public class SatisfyDAO implements SatisfyBean_interface{
 // 			}
 // 			System.out.println();
 // 		}
-		sessionFactory.getCurrentSession().beginTransaction();
-		@SuppressWarnings("unchecked")
-		Query query = this.getSession().createQuery("from SatisfyBean e where e.movie_id = :movie_id and e.mem_id = :mem_id ");
-		query.setParameter("movie_id", movie_id);
-		query.setParameter("mem_id", mem_id);
-		List<SatisfyBean> list = query.list();
-		SatisfyBean sb = list.get(0);
-		sessionFactory.getCurrentSession().getTransaction().commit();
-		return sb;
+		try{sessionFactory.getCurrentSession().beginTransaction();
+			@SuppressWarnings("unchecked")
+			Query query = this.getSession().createQuery("from SatisfyBean e where e.movie_id = :movie_id and e.mem_id = :mem_id ");
+			query.setParameter("movie_id", movie_id);
+			query.setParameter("mem_id", mem_id);
+			List<SatisfyBean> list = query.list();
+			SatisfyBean sb = list.get(0);
+			sessionFactory.getCurrentSession().getTransaction().commit();
+			return sb;
+			}catch(Exception e) {
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			return null;
+			}
 	}
 	
 	
 	public String findSatifyAvg(int movie_id) {
-		sessionFactory.getCurrentSession().beginTransaction();
-		Query query = this.getSession().createQuery("SELECT avg(s.movie_sati) FROM SatisfyBean s where s.movie_id = :movie_id");
-		query.setParameter("movie_id", movie_id);
-		List list  = query.list();
-		double OB = (Double)list.get(0);
+			sessionFactory.getCurrentSession().beginTransaction();
+		try{Query query = this.getSession().createQuery("SELECT avg(s.movie_sati) FROM SatisfyBean s where s.movie_id = :movie_id");
+			query.setParameter("movie_id", movie_id);
+			List list  = query.list();
+			double OB = (Double)list.get(0);
 
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(1); 
+			NumberFormat nf = NumberFormat.getInstance();
+			nf.setMaximumFractionDigits(1); 
 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-		return nf.format(OB);
+			sessionFactory.getCurrentSession().getTransaction().commit();
+			return nf.format(OB);
+		}catch(Exception e) {
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			return "";
+		}
 	} 
 
 }
