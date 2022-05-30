@@ -117,6 +117,7 @@
 </body>
 
 <script>
+	var nickname;
 	var MyPoint = "/MumiChat/mumi";
 	var host = window.location.host;
 	var path = window.location.pathname;
@@ -206,29 +207,29 @@
 	inputUserName.focus();
 	function sendMessage() {
 // 		console.log(webSocket);
-// 		var userName = inputUserName.value.trim();
-// 		if (userName === "") {
-// 			alert("Input a user name");
-// 			inputUserName.focus();
-// 			return;
-// 		}
+		var userName = nickname;
+		if (userName === "") {
+			alert("Input a user name");
+			inputUserName.focus();
+			return;
+		}
 
 		var inputMessage = document.getElementById("message");
 		var message = inputMessage.value.trim();
 
-// 		if (message === "") {
-// 			alert("Input a message");
-// 			inputMessage.focus();
-// 		} else {
+		if (message === "") {
+			alert("Input a message");
+			inputMessage.focus();
+		} else {
 			var jsonObj = {
 				"type": "chat",
-				"userName": nickname,
+				"userName": userName,
 				"message": message
 			};
 			webSocket.send(JSON.stringify(jsonObj));
 			inputMessage.value = "";
 			inputMessage.focus();
-// 		}
+		}
 	}
 
 	function disconnect() {
@@ -247,26 +248,26 @@
 		document.getElementById('modal-body').insertAdjacentHTML('beforeend', html)
 		document.getElementById(`anyabanzai${i}`).onclick = function () {
 			var userName = nickname;
-// 			if (userName === "") {
-// 				alert("請輸入聊天名稱");
-// 				document.getElementById('modalclose').click();
-// 				inputUserName.focus();
-// 			} else {
+			if (userName === "") {
+				alert("請輸入聊天名稱");
+				document.getElementById('modalclose').click();
+				inputUserName.focus();
+			} else {
 				var jsonObj = {
 					"type":"chat",
-					"userName": nickname,
+					"userName": userName,
 					"message": str
-// 				};
+				};
 				console.log(jsonObj)
 				webSocket.send(JSON.stringify(jsonObj));
 				document.getElementById('modalclose').click();
-// 			}
+			}
 		}
 	}
 	function getCookie(name) {
 		  const value = `; ${document.cookie}`;
 		  const parts = value.split(`; ${name}=`);
-		  const nickname = parts.pop().split(';').shift();
+		  nickname = parts.pop().split(';').shift();
 		  $("#userName").attr('placeholder',nickname)
 		  console.log($("#userName"))
 		  
