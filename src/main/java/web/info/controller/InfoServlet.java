@@ -179,7 +179,6 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				System.out.println("準備修改資料");
 				InfoService infoSvc = new InfoService();
 				infoSvc.updateInfo(info_id, info_title, info_pic, info_des, info_state);	
-				System.out.println("為啥呢");
 				infoVO = infoSvc.getOneInfo(info_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				
