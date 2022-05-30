@@ -253,3 +253,30 @@ footer a:active {
         display: block;
     }
 }
+
+div.sati{
+    margin-top: 20px;
+   
+}
+div.sati-text{
+    display: inline;
+    font-size: 30px;
+}
+div.star_block{
+    margin-left: 40px;
+    display: inline;
+    width: 400px;
+    
+}
+div.star-submit{
+    margin-left: 15px;
+    display: inline-block;
+}
+div.star_block > span.star{
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 3px;
+}
+div.star_block > span.star.-on{
+    color: yellow;
+}
