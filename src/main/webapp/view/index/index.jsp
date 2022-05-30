@@ -63,12 +63,7 @@ MovieVO svo6 = slist.get(5);
     	  rel="stylesheet" 
     	  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
     	  crossorigin="anonymous">
-   	<style>
-   		body{
-	background-image: url("<%=request.getContextPath() %>/view/Movie_overview/MUMI.png");
 
-	}
-   	</style>
 </head>
 
 <%@ include file="header.jsp" %>
