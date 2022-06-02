@@ -33,7 +33,7 @@ public class DBGifReader extends HttpServlet {
 //				InputStream in = new BufferedInputStream(rs.getBinaryStream("image"));
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("movie_poster"));
 				if (in.available() == -1) {
-					InputStream on = getServletContext().getResourceAsStream("/NoData/none2.jpg");
+					InputStream on = getServletContext().getResourceAsStream("/view/movie/images/none3.jpg");
 					byte[] b = new byte[in.available()];
 					on.read(b);
 					out.write(b);
@@ -47,7 +47,7 @@ public class DBGifReader extends HttpServlet {
 				in.close();
 			} else {
 //				res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/NoData/none2.jpg");
+				InputStream in = getServletContext().getResourceAsStream("/view/movie/images/none3.jpg");
 				byte[] b = new byte[in.available()];
 				in.read(b);
 				out.write(b);
@@ -58,7 +58,7 @@ public class DBGifReader extends HttpServlet {
 			con.close();
 		} catch (Exception e) {
 //			System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/NoData/none2.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/view/movie/images/none3.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);
