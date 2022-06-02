@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @WebServlet(urlPatterns = {"/view/ticket_orders/DBGifReaderTicketOrders"})
 public class DBGifReaderTicketOrders extends HttpServlet {
 
-	Connection con;
+//	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -31,6 +31,10 @@ public class DBGifReaderTicketOrders extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
+			Connection con = ds.getConnection();
+			
 			Statement stmt = con.createStatement();
 			String movie_id = req.getParameter("movie_id").trim();
 			ResultSet rs = stmt.executeQuery(
@@ -64,24 +68,24 @@ public class DBGifReaderTicketOrders extends HttpServlet {
 		}
 	}
 
-	public void init() throws ServletException {
-		try {
-			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/mumiMovie");     	
-			con = ds.getConnection();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void destroy() {
-		try {
-			if (con != null) con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void init() throws ServletException {
+//		try {
+//			Context ctx = new javax.naming.InitialContext();
+//			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/mumiMovie");     	
+//			con = ds.getConnection();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	public void destroy() {
+//		try {
+//			if (con != null) con.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 }
