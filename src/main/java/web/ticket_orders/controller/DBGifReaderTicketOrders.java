@@ -59,6 +59,7 @@ public class DBGifReaderTicketOrders extends HttpServlet {
 			}
 			rs.close();
 			stmt.close();
+			con.close();
 		} catch (Exception e) {
 			InputStream in = getServletContext().getResourceAsStream("image/null2.jpg");
 			byte[] b = new byte[in.available()];
