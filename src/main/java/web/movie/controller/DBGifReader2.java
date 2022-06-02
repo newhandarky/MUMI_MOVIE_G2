@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 public class DBGifReader2 extends HttpServlet {
 
-	Connection con;
+//	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -22,6 +22,9 @@ public class DBGifReader2 extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
+			Connection con = ds.getConnection();
 			Statement stmt = con.createStatement();
 			String movie_id = req.getParameter("movie_id").trim();
 
@@ -54,6 +57,7 @@ public class DBGifReader2 extends HttpServlet {
 			}
 			rs.close();
 			stmt.close();
+			con.close();
 		} catch (Exception e) {
 //			System.out.println(e);
 			InputStream in = getServletContext().getResourceAsStream("/NoData/none2.jpg");
@@ -64,25 +68,25 @@ public class DBGifReader2 extends HttpServlet {
 		}
 	}
 
-	public void init() throws ServletException {
-		try {
-			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
-			con = ds.getConnection();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void init() throws ServletException {
+//		try {
+//			Context ctx = new javax.naming.InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
+//			con = ds.getConnection();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-	public void destroy() {
-		try {
-			if (con != null)
-				con.close();
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-	}
+//	public void destroy() {
+//		try {
+//			if (con != null)
+//				con.close();
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//		}
+//	}
 
 }

@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @WebServlet(urlPatterns = {"/view/movie/DBGifReader"})
 public class DBGifReader extends HttpServlet {
 
-	Connection con;
+//	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -21,6 +21,9 @@ public class DBGifReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
+			Connection con = ds.getConnection();
 			Statement stmt = con.createStatement();
 			String movie_id = req.getParameter("movie_id").trim();
 			ResultSet rs = stmt.executeQuery("select movie_poster from movie where movie_id =" + movie_id);
@@ -52,6 +55,7 @@ public class DBGifReader extends HttpServlet {
 			}
 			rs.close();
 			stmt.close();
+			con.close();
 		} catch (Exception e) {
 //			System.out.println(e);
 			InputStream in = getServletContext().getResourceAsStream("/NoData/none2.jpg");
@@ -62,25 +66,25 @@ public class DBGifReader extends HttpServlet {
 		}
 	}
 
-	public void init() throws ServletException {
-		try {
-			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
-			con = ds.getConnection();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void destroy() {
-		try {
-			if (con != null)
-				con.close();
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-	}
+//	public void init() throws ServletException {
+//		try {
+//			Context ctx = new javax.naming.InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mumiMovie");
+//			con = ds.getConnection();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	public void destroy() {
+//		try {
+//			if (con != null)
+//				con.close();
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//		}
+//	}
 
 }
